@@ -1,0 +1,389 @@
+2006-04-18  Richard Dale  <rdale@foton.es>
+
+	* The Smoke library generated code now builds on Windows
+
+2005-10-05  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* The QByteArray class is included in the Smoke lib
+	* Fixed bug where the definition of a Null struct on one line
+	  in QString confused the parser
+
+2005-02-17  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Added a '--qt4' option to parse Qt 4 headers
+
+2005-02-06  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* The KWin class was bracketed with '#ifdef Q_OS_UNIX.. #endif', and was being skipped
+	  by kalyptus. Fixes a problem reported by Ian Monroe.
+
+	CCMAIL: ian.monroe@gmail.com
+
+2004-10-02  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+ * Fixed problem where a call to super in java QWidet.polish() caused a loop
+ * DCOPArg and DCOPReply are ignored for java bindings generation
+
+2004-09-10  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+ * Fixed Smoke library generation for KDE 3.1
+
+2004-09-05  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+ * Removed forward declarations for classes embedded in method return types.
+   For instance:
+         virtual class View *createView ( QWidget *parent, const char *name = 0 ) = 0;
+         virtual QPtrList<class View> views () const = 0;
+ * Added kate as a KDE include header subdirectory
+
+
+2004-09-05  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+ * Added kontact to the expected KDE header subdirectory names
+ * Fixed a bug in the code generation for this method:
+
+     virtual QValueList<Kontact::Plugin*> pluginList() const = 0;
+
+   It was being incorrectly treated as a pointer type, because it contained as asterisk.
+
+2004-08-19  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+ * A namespace such as KIO:: can be spread over several header files, the source
+   names are now kept in a property list so that all the includes can be generated.
+
+2004-07-26  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+ * QMap and QPair template types such as 'QMap<QCString, DCOPRef>' with an 
+   embedded comma, were not being correctly normalised. A space was left in 
+   the smoke type.
+
+2004-07-25  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+ * When the Smoke code for accessing an enum was generated, it was assuming
+   that the enum was in the same source file as the class. This doesn't work
+   for namespaces like KIO:: where enums can be spread over several source
+   files.
+ * The solution is to add a source file property to each enum, and when the
+   accessor code for the enum is generated a suitable include can be added.
+ * Fixes problem reported by Luca Perossa
+
+	CCMAIL: kde-bindings@kde.org
+
+2004-07-07  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* After discussion with Germain Garand, QChars have been returned to 
+	  the Smoke runtime as first class members.
+
+2004-07-07  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* The QChar class is now treated as a primitive type just like QString.
+
+2004-06-30  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Added DCOPRef to the Smoke runtime. But the various template methods for send(), call() and callExt() 
+	  need to be reimplemented in the scripting language.
+
+2004-06-29  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Java methods now generated for qCompress and qUncompress methods - Michal Ceresna
+	  reported that the methods missing from the QtJava api.
+	  
+2004-06-25  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Reinstated the KMultiTabBarTab and KMultiTabBarButton classes in the Smoke runtime
+	* It makes more sense to fix the parser to handle arg types starting with
+	'class '. They are now stripped off and ignored.
+
+2004-06-24  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Removed KMultiTabBarTab and KMultiTabBarButton from the Smoke runtime
+	* Added an instance variable '_smokeObject' to generated C# Kimono classes
+
+2004-06-09  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* New flags were added for Smoke methods - mf_internal and mf_copyctor.
+	  This allows copy constructors which are only used internally by the ruby
+	  or perl runtime, to be excluded from the standard api.
+
+2004-06-07  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Added patch from Michal Ceresna to fix code generation for QImage.bits() and
+	  QImage.colorTable()
+	* Fixed bug reported by Maik Schulz caused by unwanted KListViewItem copy constructor.
+	  An 'enhancement' was added for KDE 3.2 - for any class which didn't have a copy 
+	  constructor, but which could still be copied, a copy constructor was generated.
+	  Unfortunately this had unforseen consequences, such as messing up KListView logic,
+	  hence they're no longer generated.
+
+2004-05-27  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* The methods QPainter::pos() and QFontInfo::font() are skipped for
+	  Qt2 embedded as they don't link to the ARM version of Qt/E
+	* Thanks to Fabien Renaud for testing QtJava/E on an ARM box
+
+2004-05-25  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Added the correct macro expansion for Q_OBJECT with Qt/E 2.3.x
+	* kalyptus can now generate the SMOKE library for Qt Embedded
+
+2004-05-22  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* More tweaks to the QtJava Embedded code generation.
+	  The code now compiles without error, links and runs..
+	* However, the Qt framebuffer emulator plasters the KDE desktop in
+	  lurid green and doesn't seem to have a way of accepting mouse
+	  input. How do you get mouse events into a named pipe that it reads?
+
+2004-05-21  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Added code generation for Qt/Embedded 2.3.4 with a '--qte' option to 
+	  be used in conjunction with the '-fjni' option.
+	* Example usage - this command will parse the Qt embedded headers in 
+	  directory 'test', and generate the .java and .cpp files in the same dir:
+	    $ kalyptus -fjni -dtest --globspace --qte test/*.h
+
+2004-05-20  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* The java '-fjni' option now generates correct java code with Qt/E 2.3.4
+	* KMainWindow.toolBar() and KMainWindow.menuBar() rename ktoolBar() and
+	  kmenuBar(). This is because java doesn't have covariant return types
+	  and the methods with the same names in QMainWindow return a QToolBar
+	  and QMenuBar, rather than their KDE equivalent subclasses.
+
+2004-05-19  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Namespaces were being omitted from the SMOKE runtime, and so methods
+	  such as the ones in KStdAction were missing. They are now included and
+	  appear to be ordinary classes containing static methods.
+	    For example, in ruby:
+		quit = KDE::StdAction.quit( self, SLOT("quit()"), actionCollection() )
+
+2004-04-26  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Now only 55 Qt C# warnings, too much use of the 'new' inheritance directive
+	  though.
+
+2004-04-26  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Reduced the number of compiler warnings for C# Dispose() methods. Now down to
+	  'only' 130 warnings for the Qt classes
+
+2004-04-13  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* When a class includes equality operator overloading, an implementation of 
+	  GetHashCode() is generated (along with Equals() too) to avoid compiler warnings.
+	* If a method was originally inherited via C++ MI, but is now copied from the superclass
+	  to the current class in C# instead, then it isn't labelled with a 'new' modifier
+
+2004-04-12  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Kimono C# code generation improvements
+	    - Added the 'out' modifier for args which are references to mutable primitive types
+	    - Improved doc comment to C# xml comment translation, with <remarks> tags bracketing 
+	      the body of the comment
+	    - Enum types are only given a 'E_' prefix if they clash with a C# method name after
+	      the first character has been uppercased
+
+2004-03-26  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Removed quite a few compiler warnings from the C# code generated by -fkimono
+	  - A lot of warnings about virtual methods not needing the 'new' keyword fixed
+	  - If you define operator==, but not operator!= you get a warning. 
+	    A smarter compiler might be able to work one out from the other?
+	    But added a corresponding 'operator!=' always.
+	  - If you define operator== or operator!=, you get a warning for not defining 
+	    GetHashCode(). There must be some sort of logic in that, but not fixed yet.
+	 
+2004-03-25  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Removed obsolete C and Objective-C code generation options
+
+2004-03-19  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* 'KDE Integrates Mono'; added -fkimono option to generate C# bindings
+	* It doens't use the Qt C bindings, like Qt# but the Smoke lib instead
+	* To generate the code and review the api, edit kdebindings/smoke/kde/generate.pl.in
+	  and change '-fsmoke' to '-fkimono'. Then configure kdebindings with the
+	  '--with-smoke=kde' option. The sources will be generated in smoke/kde.
+	* It uses custom real proxies as AOP style interceptors, one per instance
+	  and a static interceptor per class.
+	  - Every method call in the api is forwarded to SmokeInvocation.Invoke()
+	    via the proxies, and is effectively a pointcut.
+	  - In Invoke() the method call will be looked up dynamically from the Smoke runtime
+	  - The arguments are marsalled from C# to C++ on the Smoke::Stack, and the method
+	    invoked.
+	* The KDE doc comments are converted to C# xml style tags (eg KApplication.cs)
+	* Problems
+	  - A small fix was need for RealProxies with Mono 0.30. DotGnu doesn't have
+	    RealProxies/remoting yet.
+	  - It should be possible to use ContextBoundObjects and custom ContextAttributes
+	    as described here, but they aren't implemented in Mono yet.
+		http://msdn.microsoft.com/msdnmag/issues/03/03/ContextsinNET/
+	  - In interfaces the 'ref' keyword can't be used
+	  - Doesn't use event handlers as delegates like Qt#, they are just overriden
+	    like normal virtual methods
+	  - Many compiler warnings about 'new virtual' not being needed. Some work needed
+	    to only add new to overriden ones.
+
+2004-02-17  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Aligned the forthcoming KDE 3.3 dynamic proxy/SMOKE library based java 
+	  code generation with the current 3.2 JNI based ones (-fjava vs. -fjni).
+
+2004-01-28  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* When two methods differed only in 'constness', it wasn't possible to
+	  resolve which to call from ruby. For example:
+		KProgress* progressBar();
+		const KProgress* progressBar() const;
+	  So only the const variant is generated in the Smoke runtime.
+
+2004-01-05  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* When a java method needed to be renamed, because in the type signature 
+	  only the return type differed in C++, when that isn't allowed in java,
+	  the JNI function name was not using the new name.
+	* Fixed error in JNI function names when the C++ method had an underscore.
+
+
+2003-12-29  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Fixed a problem with parsing one line namespace declarations
+	* Added support for the QT_WORKSPACE_WINDOWMODE macro, to solve build problem
+	* Added some more primitive type definitions such as KIO::filesize_t
+
+2003-12-23  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Added a '-fjni' option to generate code for the current KDE 3.2 JNI based java
+	  bindings The '-fjava' option generates code for the forthcoming Dynamic
+	  Proxy/Smoke library based java bindings in KDE 3.3.
+	* The Qt and KDE bindings just checked in were generated by changing the kalyptus 
+	  option '-fsmoke' to '-fjni' in kdebindings/smoke/kde/generate.pl.in. Then
+	  configure kdebindings with '--enable-smoke=kde' option to generate the .cpp
+	  and .java sources. The .h files are generated by using javah on the compiled
+	  java .class files.
+
+2003-11-29  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Fixed parsing of casts inside enums in kfileitem.h:
+	      enum { Unknown = (mode_t) - 1 };
+	  Hmm, not sure what that's up to anyway..
+	* Added a special Source property to method nodes in QGlobalSpace.
+	  In java, this allows Qt friend methods to be grouped under the
+	  Qt.java class, and KDE ones under KDE.java according to which 
+	  source file they originated from.
+
+2003-11-05  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Fixed parsing default argument values cast to a numeric literal, eg:
+	    mode_t mode = (mode_t)-1
+	* Excluded a couple of structs from kparts/browserextension
+
+2003-11-04  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* KDE MI has some diamond shaped cycles, such as for the children of
+	  KXMLGUIClient. When the code for casts to all the parents of a class
+	  was generated in the Smoke runtime, this meant there were some 
+	  duplicate entries in the switch statement. Duplicates now removed.
+
+
+2003-10-11  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Avoid generating wrappers for private classes with 'Private',
+	  'Impl' or 'Internal' in the name. Other unneeded classes also
+	  dropped. 
+
+2003-10-08  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Added SmokeKDE namespace class code generation
+	  - Fixed bug in kalyptus where it couldn't detect the end of a namespace
+	  - resolveType() in kalyptusDataDict.pm now looks in parent namespace for symbols
+	  - Namespace enclosed class code generation added to kalyptusCxxToSmoke.pm 
+
+2003-09-16  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Added various parser and code generation fixes so that a libsmokekde.so
+	  can be generated from the kdelibs headers.
+
+2003-08-30  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Applied Germain Garand's patch to no longer rename operator methods 
+	  in the QGlobalSpace pseudo class
+
+2003-08-21  Alexander Kellett  <lypanov@kde.org>
+
+	* Added .kidl generation option (dcopidl replacement)
+	* Handled of several new constructs in the parsing:
+	*    k_dcop: / k_dcop_signals: / K_DCOP:
+	* Use STDERR not STDOUT thus removing need for temporary file
+
+2003-08-21  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Added missing getClassLoader() call to Proxy constructor
+
+2003-08-21  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Rewritten java code generation for a Dynamic Proxy based SMOKE adaptor version of QtJava.
+	* Based on David Faure's SMOKE generation code in the '-fsmoke' option.
+
+2003-08-11  Richard Dale  <Richard_Dale@tipitina.demon.co.uk>
+
+	* Removed old SWIG style ruby generation option
+
+2003-08-09  Alexander Kellett  <lypanov@kde.org>
+
+	* Parse static friend operator methods and place into a pseudo class (for smoke)
+
+2002-06-03  David Faure  <faure@kde.org>
+
+	* The Smoke generation is in good shape. Removed old PerlPig and PerlQK
+	modules.
+
+2002-04-23  Richard Dale <duke@tipitina.demon.co.uk>
+
+	* Added patch from David Faure to correctly handle nested struct
+         or class names in perl .pig generation
+
+2002-03-15  Richard Dale <duke@tipitina.demon.co.uk>
+	* Added C# P/Invoke bindings generation option from Adam Treat
+2002-02-10  Richard Dale <duke@tipitina.demon.co.uk>
+	* Improved C destructor code generation
+	* QCanvasItemList mapped onto java.util.ArrayList
+	* 'bool *' type converted to java 'boolean[]' type.
+2002-02-03  Richard Dale <duke@tipitina.demon.co.uk>
+ 	
+	* More fixes to .pig generation from Germain. Perl porting now 
+         motoring 24*7...
+2002-02-02  Richard Dale <duke@tipitina.demon.co.uk>
+	* Various improvements to Perl .pig generation from Germain Garand
+2002-01-31  Richard Dale <duke@tipitina.demon.co.uk>
+	* Fixed bug in code generation for NULL default arguments
+	* Added some new KDE 3 types
+2002-01-26  Richard Dale <duke@tipitina.demon.co.uk>
+	* Perl .pig generation improved
+2002-01-25  Richard Dale <duke@tipitina.demon.co.uk>
+	* Added '-fperl' option to autogenerate .pig (Perl Interface 
+         Generator) files, suitable for generating Ashley Winters' PerlQt/KDEQt 
+         bindings
+2002-01-23  Richard Dale <duke@tipitina.demon.co.uk>
+	* Made dispose() public, added isDisposed() after SWT.
+2002-01-23  Richard Dale <duke@tipitina.demon.co.uk>
+	* Added generation of dispose() methods, to allow large resources,
+         such as pixmaps, to be freed before finalize() is called.
+2002-01-20  Richard Dale <duke@tipitina.demon.co.uk>
+	* Ruby bindings generation - initial checkin.
+2002-01-04  Richard Dale <duke@tipitina.demon.co.uk>
+	* Fixed bug in parsing decimal point in default argument values
+2001-12-29  Richard Dale <duke@tipitina.demon.co.uk
+	* JNI event handling methods are now generated.
+	* Some additions for KDevelop types. 
+	* Removed assumption that a class ending in '..Interface' should always 
+         be a java interface.
+2001-12-17  Richard Dale <duke@tipitina.demon.co.uk
+	* Improved code generation for String f'ns with default arguments.
+	* An implementation is no longer generated for classes which are
+         just interfaces.
+2001-12-03  Richard Dale <duke@tipitina.demon.co.uk
+	* Added new KDE 3 data types
+	* Improved code generation for classes defined within namespaces
+

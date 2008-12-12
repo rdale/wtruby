@@ -1,0 +1,92 @@
+
+KALYPTUS -- C, Objective-C and Java bindings generator
+
+Version 0.9
+
+KALYPTUS creates language bindings for Qt and KDE C++ libraries
+directly from the headers. Documentation embedded in special doc
+comments in the source is translated to an appropriate format for
+the target language.
+
+REQUIREMENTS
+
+You need perl 5.005 or greater to run kalyptus.
+
+HOWTO
+
+If you are running this straight from CVS, you will need to run 
+
+	make -f Makefile.cvs
+
+before building.
+
+This should install kalyptus:
+
+./configure; make; make install
+
+CREDITS
+-------
+
+Richard Dale - kdoc adaption, C/Objective-C/Java code generation.
+
+Sirtaj Singh Kang for writing the original kdoc utility (kalyptus was
+derived from kdoc).
+
+Copyright(C) 2001, Lost Highway Ltd
+
+------
+
+Copyright(C) 1999, Sirtaj Singh Kang <taj@kde.org>
+Distributed under the GPL.
+
+NOTES ON USING THE CONVERTER
+----------------------------
+
+JAVA
+----
+
+Here are some of the shell commands that were used in the conversion process:
+
+Remove any Q_OVERRIDE macros from the Qt headers, and remove EXPORT_DOCKCLASS from the
+KDE headers
+
+# Generate Java and C++ sources. Copy all the target headers to directory 'test/tmp'
+kalyptus -fjava test/tmp/*.h test/tmp/dom/*.h test/tmp/kio/*.h test/tmp/kdeprint/*.h \
+   test/tmp/kjs/*.h test/tmp/kparts/*.h test/tmp/kdesu/*.h test/ktextedit/*.h test/tmp/libkmid/*.h
+
+# Shorten generated filenames
+mv DOM__Node.cpp DOMNode.cpp
+mv DOM__Node.java DOMNode.java
+mv DOM__Document.cpp DOMDocument.cpp
+mv DOM__Document.java DOMDocument.java
+for FILE in *__* ; do
+ NAME=`echo $FILE | sed -e 's/^.*__//'`;
+ echo $NAME;
+ mv $FILE $NAME;
+done
+mv SlaveInterface.cpp Slave.cpp
+mv SlaveInterface.java Slave.java
+
+# Edit and Compile the generated java
+cd kdejava/koala/org/kde/koala
+make
+
+# Build C++ JNI .h header files
+cd qtjava/javalib/org/kde/qt
+for FILE in *.class ; do NAME=`echo $FILE | sed 's/.class//'`; echo $NAME; javah  -classpath '../../..' org.kde.qt.$NAME ; done
+for FILE in org_kde* ; do NAME=`echo $FILE | sed -e 's/org_kde_qt_//'`; echo $NAME; mv $FILE $NAME; done
+
+cd kdejava/koala/org/kde/koala
+for FILE in *.class ; do NAME=`echo $FILE | sed 's/.class//'`; echo $NAME; javah  -classpath '../../..:../../../../../qtjava/javalib/qtjava.jar' org.kde.koala.$NAME ; done
+for FILE in org_kde* ; do NAME=`echo $FILE | sed -e 's/org_kde_koala_//'`; echo $NAME; mv $FILE $NAME; done
+# Copy headers to kdejava/koala/kdejava
+
+# Check that  the JNI .h function names match the .cpp ones
+cd kdejava/koala/org/kde/koala
+grep ^Java_ *.cpp | sed -e 's/^[^:]*:\([^(]*\).*/\1/'  | grep -v '[/]' | sort | uniq > cpp.fns
+grep Java_ *.h | awk '{ print $4 }' |  grep -v '[/]' | sort | uniq > h.fns
+kompare h.fns cpp.fns
+# Reconcile and fix any differences
+
+# Edit and compile the generated .cpp and .h files with KDevelop
+

@@ -1,0 +1,21 @@
+Dependencies
+------------
+
+- ruby 1.8 or greater
+- cmake 2.4.6 or greater
+- Wt 2.1.5 or greater
+- boost 1.35 or greater
+
+Configure flags needed
+----------------------
+
+In order to build just wtruby: 
+
+Copy the CMakeLists.txt.qtruby file to QCMakeLists.txt, and follow the 
+instructions in the file. 
+
+Optionally give cmake and install prefix like this:
+cmake -DCMAKE_INSTALL_PREFIX=/opt/kde4
+
+Then type 'make'
+

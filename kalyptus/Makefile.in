@@ -1,0 +1,53 @@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+perl = @perl@
+install = @INSTALL@
+bin = kalyptus
+pm = kdocUtil.pm kdocAstUtil.pm kdocParseDoc.pm kdocLib.pm \
+	Ast.pm kalyptusDataDict.pm kalyptusCxxToC.pm \
+	kalyptusCxxToObjc.pm kalyptusCxxToJava.pm \
+	kalyptusCxxToSmoke.pm kalyptusCxxToCSharp.pm \
+	Iter.pm
+pmextra =
+bindir = ${exec_prefix}/bin
+pmdir = ${prefix}/share/kalyptus
+srcdocdir= .
+VERSION=@Version@
+
+all: kalyptus.local
+
+kalyptus.local: @srcdir@/kalyptus
+	cp @srcdir@/kalyptus kalyptus.local
+	perl -npi -e 's%^#\!.*$$%#!'${perl}' -I'${pmdir}'%g;' kalyptus.local
+	perl -npi -e 's#\$$Version\\\$$#'"${VERSION}"'#g;' kalyptus.local
+
+install: all
+	${install} -d $(DESTDIR)${bindir}
+	${install} -m 755 kalyptus.local $(DESTDIR)${bindir}/kalyptus
+	${install} -d $(DESTDIR)${pmdir}
+	for file in ${pm} ${pmextra}; do \
+		${install} -m 644 @srcdir@/$$file $(DESTDIR)${pmdir}; \
+	done
+
+uninstall:
+	(cd $(DESTDIR)${bindir} && rm -f ${bin})
+	(cd $(DESTDIR)${pmdir} && rm -f ${pm})
+	-rmdir $(DESTDIR)${bindir}
+	-rmdir $(DESTDIR)${pmdir}
+
+clean:
+	rm -f kalyptus.local
+
+distclean: clean
+	rm -f Makefile config.status config.log config.cache perlbin
+
+srcdoc:
+	pod2html --flush --title KALYPTUS $(bin) $(pm) \
+		 --outfile $(srcdocdir)/kalyptus-doc.html
+tags:
+	perltags kalyptus *.pm
+
+check:
+	@for dir in $(bin) $(pm); do \
+		echo "** Checking: $$dir"; \
+		perl -wc $$dir; done

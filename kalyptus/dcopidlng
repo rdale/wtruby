@@ -1,0 +1,12 @@
+#!/bin/sh
+if [[ -z $KALYPTUS || ! -d $KALYPTUS ]]
+then 
+   echo "Please set enviroment variable KALYPTUS to point to your kdebindings/kaltyptus checkout directory"
+   exit
+fi
+perl -I$KALYPTUS $KALYPTUS/kalyptus $2 --allow_k_dcop_accessors -f dcopidl $1 2>/tmp/dcopidlng.stderr.$$
+if [[ $? -ne 0 ]]
+then
+   cat /tmp/dcopidlng.stderr.$$
+fi
+rm /tmp/dcopidlng.stderr.$$

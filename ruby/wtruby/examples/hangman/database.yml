@@ -1,0 +1,5 @@
+adapter: postgresql
+database: hangman
+username: rdale
+password: sic
+host: localhost

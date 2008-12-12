@@ -1,0 +1,7 @@
+Add more target languages, such as PHP and Pascal
+
+Use a perl parser generator to define the grammar for
+    C++ method arguments.
+
+Write documentation for a how to on bindings generation.
+

@@ -1,0 +1,17 @@
+#!/bin/sh
+
+test -f perlbin && rm perlbin
+
+for p in `echo $PATH | tr ":" " "`
+do
+	if [ -x $p/perl ]
+	then
+		if $p/perl -e 'require 5.000;' 
+		then
+			echo $p/perl > perlbin
+			exit 0
+		fi
+	fi
+	
+done
+exit 1

@@ -1,0 +1,2 @@
+boost/signals/connection.hpp
+boost/signals/trackable.hpp
