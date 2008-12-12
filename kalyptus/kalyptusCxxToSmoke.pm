@@ -438,7 +438,6 @@ sub preParseClass
 			|| $className eq 'QMutex'
 			|| $className eq 'QMutexLocker'
 			|| $className eq 'QObjectData'
-			|| $className eq 'QPainterPath::Element'
 			|| $className eq 'QProxyModel'
 			|| $className eq 'QReadLocker'
 			|| $className eq 'QReadWriteLock'
@@ -713,11 +712,6 @@ sub preParseClass
 			|| ($className eq 'Wt::Ext::ToolBar' and $name eq 'jsAfterPanelRendered')
 			|| ($className eq 'Wt::Ext::Widget' and $name eq 'bindEventHandler')
 			|| ($className eq 'Wt::Ext::Widget' and $name eq 'createMixed')
-
-			# These methods need to be special cased as native methods, so don't 
-			# include them in the wt smoke lib
-			|| ($className eq 'Wt::WModelIndex' and $name eq 'internalHashId')
-			|| ($className eq 'Wt::WAbstractItemModel' and $name eq 'createIndex' and $m->{ParamList}[2]->{ArgType} =~ /Digest/)
 
 			|| ($className eq 'KTextEditor::Range' and $name =~ /operator/)
 			|| ($className eq 'KTextEditor::Range' and $name eq 'boundaryOnColumn')
@@ -2988,11 +2982,11 @@ retry:
     }
     print OUT "    ${libname}_Smoke = new Smoke(\n";
     print OUT "        \"${libname}\",\n";
-    print OUT "        ${libname}_classes, ".int($#moduleclasslist+1).",\n";
+    print OUT "        ${libname}_classes, ".int($#moduleclasslist).",\n";
     print OUT "        ${libname}_methods, $methodCount,\n";
-    print OUT "        ${libname}_methodMaps, $methodMapCount,\n";
+    print OUT "        ${libname}_methodMaps, ".int($methodMapCount-1).",\n";
     print OUT "        ${libname}_methodNames, $methodNameCount,\n";
-    print OUT "        ${libname}_types, $typeCount,\n";
+    print OUT "        ${libname}_types, ".int($typeCount-1).",\n";
     print OUT "        ${libname}_inheritanceList,\n";
     print OUT "        ${libname}_argumentList,\n";
     print OUT "        ${libname}_ambiguousMethodList,\n";

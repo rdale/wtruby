@@ -290,7 +290,7 @@ public:
 		    NullModuleIndex.smoke = 0;
 		    NullModuleIndex.index = 0;
 
-		    for (Index i = 1; i < numClasses; ++i) {
+		    for (Index i = 1; i <= numClasses; ++i) {
 			if (!classes[i].external)
 			    classMap[className(i)] = this;
 		    }
@@ -319,52 +319,54 @@ public:
     }
 
     inline Index idType(const char *t) {
-	if(!t) return 0;
-	Index imax = numTypes;
-	Index imin = 0;
-	Index icur = -1;
-	int icmp = -1;
+        Index imax = numTypes;
+        Index imin = 1;
+        Index icur = -1;
+        int icmp = -1;
 
-	while(imax >= imin) {
-	    icur = (imin + imax) / 2;
-	    if(icur > 0)
-		icmp = strcmp(types[icur].name, t);
-	    else
-		icmp = -1;
-	    if(!icmp) break;
-	    if(icmp > 0)
-		imax = icur - 1;
-	    else
-		imin = icur + 1;
-	}
+        while (imax >= imin) {
+            icur = (imin + imax) / 2;
+            icmp = strcmp(types[icur].name, t);
+            if (icmp == 0) {
+                return icur;
+            }
 
-	return (!icmp) ? icur : 0;
+            if (icmp > 0) {
+                imax = icur - 1;
+            } else {
+                imin = icur + 1;
+            }
+        }
+
+        return 0;
     }
 
     inline ModuleIndex idClass(const char *c, bool external = false) {
-	if(!c) return NullModuleIndex;
-	Index imax = numClasses;
-	Index imin = 0;
-	Index icur = -1;
-	int icmp = -1;
+        Index imax = numClasses;
+        Index imin = 1;
+        Index icur = -1;
+        int icmp = -1;
 
-	while(imax >= imin) {
-	    icur = (imin + imax) / 2;
-	    if(icur > 0)
-		icmp = strcmp(classes[icur].className, c);
-	    else
-		icmp = -1;
-	    if(!icmp) break;
-	    if(icmp > 0)
-		imax = icur - 1;
-	    else
-		imin = icur + 1;
-	}
+        while (imax >= imin) {
+            icur = (imin + imax) / 2;
+            icmp = strcmp(classes[icur].className, c);
+            if (icmp == 0) {
+                if (classes[icur].external && !external) {
+                    return NullModuleIndex;
+                } else {
+                    ModuleIndex ret = { this, icur };
+                    return ret;
+                }
+            }
 
-	Index idx = (!icmp) ? icur : 0;
-	if (idx && classes[idx].external && !external) idx = 0;
-	ModuleIndex ret = { (idx) ? this : 0, idx };
-	return ret;
+            if (icmp > 0) {
+                imax = icur - 1;
+            } else {
+                imin = icur + 1;
+            }
+        }
+
+        return NullModuleIndex;
     }
 
     inline ModuleIndex findClass(const char *c) {
@@ -374,23 +376,27 @@ public:
     }
 
     inline ModuleIndex idMethodName(const char *m) {
-	if(!m) return NullModuleIndex;
-	Index imax = numMethodNames;
-	Index imin = 0;
-	Index icur = -1;
-	int icmp = -1;
-	while(imax >= imin) {
-	    icur = (imin + imax) / 2;
-	    icmp = strcmp(methodNames[icur], m);
-	    if(!icmp) break;
-	    if(icmp > 0)
-		imax = icur - 1;
-	    else
-		imin = icur + 1;
-	}
+        Index imax = numMethodNames;
+        Index imin = 1;
+        Index icur = -1;
+        int icmp = -1;
 
-	ModuleIndex ret = { (!icmp) ? this : 0, (!icmp) ? icur : 0 };
-	return ret;
+        while (imax >= imin) {
+            icur = (imin + imax) / 2;
+            icmp = strcmp(methodNames[icur], m);
+            if (icmp == 0) {
+                ModuleIndex ret = { this, icur };
+                return ret;
+            }
+
+            if (icmp > 0) {
+                imax = icur - 1;
+            } else {
+                imin = icur + 1;
+            }
+        }
+
+        return NullModuleIndex;
     }
 
     inline ModuleIndex findMethodName(const char *c, const char *m) {
@@ -412,25 +418,30 @@ public:
     }
 
     inline ModuleIndex idMethod(Index c, Index name) {
-	Index imax = numMethodMaps;
-	Index imin = 0;
-	Index icur = -1;
-	int icmp = -1;
-	while(imax >= imin) {
-	    icur = (imin + imax) / 2;
-	    icmp = leg(methodMaps[icur].classId, c);
-	    if(!icmp) {
-		icmp = leg(methodMaps[icur].name, name);
-		if(!icmp) break;
-	    }
-	    if(icmp > 0)
-		imax = icur - 1;
-	    else
-		imin = icur + 1;
-	}
+        Index imax = numMethodMaps;
+        Index imin = 1;
+        Index icur = -1;
+        int icmp = -1;
 
-	ModuleIndex ret = { (!icmp) ? this : 0, (!icmp) ? icur : 0 };
-	return ret;
+        while (imax >= imin) {
+            icur = (imin + imax) / 2;
+            icmp = leg(methodMaps[icur].classId, c);
+            if (icmp == 0) {
+                icmp = leg(methodMaps[icur].name, name);
+                if (icmp == 0) {
+                    ModuleIndex ret = { this, icur };
+                    return ret;
+                }
+            }
+
+            if (icmp > 0) {
+                imax = icur - 1;
+            } else {
+                imin = icur + 1;
+            }
+        }
+
+        return NullModuleIndex;
     }
 
     inline ModuleIndex findMethod(ModuleIndex c, ModuleIndex name) {
