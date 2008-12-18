@@ -359,6 +359,7 @@ sub preParseClass
 {
 	my( $classNode ) = @_;
 	my $className = join( "::", kdocAstUtil::heritage($classNode) );
+print("$className\n");
 	if (	$classNode->{Deprecated} 
 			|| $classNode->{NodeType} eq 'union' 
 			|| $#{$classNode->{Kids}} < 0
@@ -703,6 +704,9 @@ sub preParseClass
 			|| ($className eq 'Wt::WStatelessSlot' and $name eq 'implementsMethod')
 			|| ($className eq 'Wt' and $name eq 'WRun')
 			|| ($className eq 'Wt::WServer' and $name eq 'addEntryPoint')
+			|| ($className eq 'Wt::WModelIndex' and $name eq 'internalHashId')
+			|| ($className eq 'Wt::WAbstractItemModel' and $name eq 'createIndex'
+                && $m->{ParamList}[2]->{ArgType} !~ /void/)
 			|| ($className =~ /^Wt::/ and $name eq 'createDomElement')
 
 			# added by Koen: these use stringstream now, but are not public API anyway
@@ -853,6 +857,8 @@ sub preParseClass
 				|| ($className eq 'Wt::WText' and $name eq 'XHTMLFormatting')
 				|| ($className eq 'Wt::WText' and $name eq 'XHTMLUnsafeFormatting')
 				|| ($className eq 'Wt::WText' and $name eq 'PlainFormatting')
+				|| ($className eq 'Wt::WTreeView' and $name eq 'collapsed')
+				|| ($className eq 'Wt::WTreeView' and $name eq 'expanded')
 				|| ($className eq 'Wt::WApplication' and $name eq 'requestTooLarge')
 				|| ($className eq 'Wt::WAbstractItemModel' and $name eq 'dataChanged')
 
@@ -2024,6 +2030,7 @@ sub applyTypeDef($)
 # Register type ($1) into %allTypes if not already there
 sub registerType($$) {
     my $type = shift;
+    print "registerType: $type\n";
     #print "registerType: $type\n" if ($debug);
 
     $type =~ s/\s+const$//; # for 'char* const'
@@ -2082,7 +2089,7 @@ sub registerType($$) {
     # In the first phase we only create entries into allTypes.
     # The values (indexes) are calculated afterwards, once the list is full.
     $allTypes{$type}{index} = -1;
-    #print STDERR "Register $type. Realtype: $realType\n" if($debug);
+    print STDERR "Register $type. Realtype: $realType\n" if($debug);
 }
 
 # Get type from %allTypes

@@ -2853,7 +2853,7 @@ sub resolveTypeInternal($$$)
 
 	my $contextClassName = join( "::", kdocAstUtil::heritage($contextClass) );
 
-	#print "resolveTypeInternal type:'$argType' context:'$contextClassName' ($contextClass)\n";
+    # print "resolveTypeInternal type:'$argType' context:'$contextClassName' ($contextClass)\n";
 
 	# 'A' resolves to 'A' in context 'A' ;)  (i.e. classname itself)
 	return $contextClassName if ( $argType eq $contextClass->{astNodeName}
@@ -2874,15 +2874,17 @@ sub resolveTypeInternal($$$)
 
 	my $found;
 
-	# Look in the heritage outer lexical scopes, and try for each one
-	Iter::Heritage( $contextClass,
-		   sub {
-		     my ( $outer, $name, $type, $template ) = @_;
-		     unless ($found) {
-			$found = resolveTypeInternal( $argType, $outer, $rootnode );
-		     }
-		   }
-		 );
+    # Look in the heritage outer lexical scopes, and try for each one
+    # (Iter::Heritage goes from outer --> inner scopes)
+    Iter::Heritage( $contextClass,
+        sub {
+            my ( $outer, $name, $type, $template ) = @_;
+
+            # Give precedence to a match with the innermost scope
+            my $result = resolveTypeInternal( $argType, $outer, $rootnode );
+            $found = $result if $result;
+        }
+    );
 
 	# Then look at ancestors, and try for each one
 	Iter::Ancestors( $contextClass, $rootnode, undef, undef,
@@ -3003,8 +3005,9 @@ sub resolveTypeInHierarchy($$$)
 
 sub resolveType {
 	my ( $argType, $contextClass, $rootnode, $r ) = @_;
+
 	$argType = resolveTypeInHierarchy( $argType, $contextClass, $rootnode );
-	
+
 	my $prefix = $argType =~ s/^const\s+// ? 'const ' : '';
 	my $suffix = $argType =~ s/\s*([\&\*]+)$// ? $1 : '';
 	$argType =~ s/\s+$//;
