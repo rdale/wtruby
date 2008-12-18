@@ -359,7 +359,6 @@ sub preParseClass
 {
 	my( $classNode ) = @_;
 	my $className = join( "::", kdocAstUtil::heritage($classNode) );
-print("$className\n");
 	if (	$classNode->{Deprecated} 
 			|| $classNode->{NodeType} eq 'union' 
 			|| $#{$classNode->{Kids}} < 0
@@ -2030,7 +2029,6 @@ sub applyTypeDef($)
 # Register type ($1) into %allTypes if not already there
 sub registerType($$) {
     my $type = shift;
-    print "registerType: $type\n";
     #print "registerType: $type\n" if ($debug);
 
     $type =~ s/\s+const$//; # for 'char* const'
