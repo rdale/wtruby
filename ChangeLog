@@ -1,2 +1,9 @@
+2008-12-18 Richard Dale <richard.j.dale@gmail.com>
+* Added Ruby 1.9 compatible RSTRING handling
+
+2008-12-14 Richard Dale <richard.j.dale@gmail.com>
+* Added Wt::WModelIndex.internalPointer() and 
+Wt::WAbstractItemModel.createIndex() methods
+
 2008-12-12 Richard Dale <richard.j.dale@gmail.com>
 * Updated the smoke.h header with improved binary chop code

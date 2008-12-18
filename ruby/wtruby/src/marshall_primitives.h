@@ -235,7 +235,7 @@ unsigned char* ruby_to_primitive<unsigned char *>(VALUE rv)
     if(rv == Qnil)
         return 0;
     
-    int len = RSTRING(rv)->len;
+    int len = RSTRING_LEN(rv);
     char* mem = (char*) malloc(len+1);
     memcpy(mem, StringValuePtr(rv), len);
     mem[len] ='\0';

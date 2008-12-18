@@ -578,7 +578,7 @@ static void marshall_StdCharVector(Marshall *m) {
         std::vector<char> * s = new std::vector<char>();
         if( *(m->var()) != Qnil) {
             VALUE str = *(m->var());
-            s->insert(s->end(), RSTRING(str)->ptr, RSTRING(str)->ptr + RSTRING(str)->len);
+            s->insert(s->end(), RSTRING_PTR(str), RSTRING_PTR(str) + RSTRING_LEN(str));
         }
 
         m->item().s_voidp = s;

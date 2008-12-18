@@ -22,6 +22,8 @@
 #include <Wt/WEnvironment>
 #include <Wt/WEvent>
 #include <Wt/WApplication>
+#include <Wt/WModelIndex>
+#include <Wt/WAbstractItemModel>
 
 #include <smoke/smoke.h>
 #include <smoke/wt_smoke.h>
@@ -498,7 +500,7 @@ wt_std_ostream_write(VALUE self, VALUE data)
 {
     std::ostream * s = 0;
     Data_Get_Struct(self, std::ostream, s);
-    s->write(RSTRING(data)->ptr, RSTRING(data)->len);
+    s->write(RSTRING_PTR(data), RSTRING_LEN(data));
     return self;
 }
 
@@ -509,6 +511,54 @@ wt_std_ostream_flush(VALUE self)
     Data_Get_Struct(self, std::ostream, s);
     s->flush();
     return self;
+}
+
+static VALUE
+wabstractitemmodel_createindex(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 2 || argc == 3) {
+        smokeruby_object * o = value_obj_info(self);
+        Smoke::ModuleIndex nameId = o->smoke->idMethodName("createIndex$$$");
+        Smoke::ModuleIndex meth = o->smoke->findMethod(wt_Smoke->findClass("Wt::WAbstractItemModel"), nameId);
+        Smoke::Index i = meth.smoke->methodMaps[meth.index].method;
+        i = -i;     // turn into ambiguousMethodList index
+        while (o->smoke->ambiguousMethodList[i] != 0) {
+            if (    strcmp( o->smoke->types[o->smoke->argumentList[o->smoke->methods[o->smoke->ambiguousMethodList[i]].args + 2]].name,
+                            "void*" ) == 0 )
+            {
+                Smoke::Method &m = o->smoke->methods[o->smoke->ambiguousMethodList[i]];
+                Smoke::ClassFn fn = o->smoke->classes[m.classId].classFn;
+                Smoke::StackItem stack[4];
+                stack[1].s_int = NUM2INT(argv[0]);
+                stack[2].s_int = NUM2INT(argv[1]);
+                if (argc == 2) {
+                    stack[3].s_voidp = (void*) Qnil;
+                } else {
+                    stack[3].s_voidp = (void*) argv[2];
+                }
+                (*fn)(m.method, o->ptr, stack);
+                smokeruby_object  * result = alloc_smokeruby_object(    true, 
+                                                                        o->smoke, 
+                                                                        o->smoke->idClass("Wt::WModelIndex").index, 
+                                                                        stack[0].s_voidp );
+
+                return set_obj_info("Wt::WModelIndex", result);
+            }
+
+            i++;
+        }
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+wmodelindex_internalpointer(VALUE self)
+{
+    smokeruby_object *o = value_obj_info(self);
+    Wt::WModelIndex * index = static_cast<Wt::WModelIndex *>(o->ptr);
+    void * ptr = index->internalPointer();
+    return ptr != 0 ? (VALUE) ptr : Qnil;
 }
 
 // --------------- Ruby C functions for Wt::_internal.* helpers  ----------------
@@ -828,6 +878,12 @@ create_wt_class(VALUE /*self*/, VALUE package_value, VALUE module_value)
         rb_define_singleton_method(klass, "new", (VALUE (*) (...)) new_boost_any, -1);
         rb_define_method(klass, "value", (VALUE (*) (...)) boost_any_value, 0);
         rb_define_method(klass, "name", (VALUE (*) (...)) boost_any_name, 0);
+    } else if (packageName == "Wt::WAbstractItemModel") {
+        rb_define_method(klass, "createIndex", (VALUE (*) (...)) wabstractitemmodel_createindex, -1);
+        rb_define_method(klass, "create_index", (VALUE (*) (...)) wabstractitemmodel_createindex, -1);
+    } else if (packageName == "Wt::WModelIndex") {
+        rb_define_method(klass, "internalPointer", (VALUE (*) (...)) wmodelindex_internalpointer, 0);
+        rb_define_method(klass, "internal_pointer", (VALUE (*) (...)) wmodelindex_internalpointer, 0);
     }
 
     free((void *) package);

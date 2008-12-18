@@ -28,6 +28,19 @@
 
 #define WTRUBY_VERSION "0.0.1"
 
+#if !defined RSTRING_LEN
+#define RSTRING_LEN(a) RSTRING(a)->len
+#endif
+#if !defined RSTRING_PTR
+#define RSTRING_PTR(a) RSTRING(a)->ptr
+#endif
+#if !defined RARRAY_LEN
+#define RARRAY_LEN(a) RARRAY(a)->len
+#endif
+#if !defined RARRAY_PTR
+#define RARRAY_PTR(a) RARRAY(a)->ptr
+#endif
+
 #ifdef WIN32
   #define WTRUBY_IMPORT __declspec(dllimport)
   #define WTRUBY_EXPORT __declspec(dllexport)
