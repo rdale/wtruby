@@ -3,6 +3,9 @@
 initializing the binding for the new instance. This caused a crash when the
 destructor for the instance tried to make a callback withthe null binding. 
 * Added a std::vector<Wt::WStandardItem*> marshaller
+* If a set method setXXX() already existed for an instance variable XXX, then
+the type of the variable wasn't being registed, and smoke code generation 
+failed
 
 2008-12-18 Richard Dale <richard.j.dale@gmail.com>
 * Added Ruby 1.9 compatible RSTRING handling

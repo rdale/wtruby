@@ -856,8 +856,6 @@ sub preParseClass
 				|| ($className eq 'Wt::WText' and $name eq 'XHTMLFormatting')
 				|| ($className eq 'Wt::WText' and $name eq 'XHTMLUnsafeFormatting')
 				|| ($className eq 'Wt::WText' and $name eq 'PlainFormatting')
-				|| ($className eq 'Wt::WTreeView' and $name eq 'collapsed')
-				|| ($className eq 'Wt::WTreeView' and $name eq 'expanded')
 				|| ($className eq 'Wt::WApplication' and $name eq 'requestTooLarge')
 				|| ($className eq 'Wt::WAbstractItemModel' and $name eq 'dataChanged')
 
@@ -871,6 +869,7 @@ sub preParseClass
 		}
 
 		$m->{Type} = kalyptusDataDict::resolveType($m->{Type}, $classNode, $rootnode);
+
 	    my $varType = $m->{Type};
 		$varType =~ s/const\s+(.*)\s*&/$1/;
 		$varType =~ s/^\s*//;
@@ -898,6 +897,9 @@ sub preParseClass
 				$setMethod = "set$ch$2";
 			}
 
+			# Register the type
+			registerType( $varType ); #unless (defined $excludeClasses{$className});
+
 			# preParseClass() can be called twice on the same class, and so don't bother
 			# adding a setter twice.
 			my $method = kdocAstUtil::findRef( $classNode, $setMethod );
@@ -918,9 +920,6 @@ sub preParseClass
 
 			kdocAstUtil::attachChild( $classNode, $node );
 			$node->AddProp( "Access", "public" );
-
-			# Register the type
-			registerType( $varType ); #unless (defined $excludeClasses{$className});
 		} else {
 			$m->{NodeType} = 'deleted';
 		}
