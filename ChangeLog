@@ -1,3 +1,8 @@
+2008-12-19  Richard Dale  <richard.j.dale@gmail.com>
+* When the construct_copy() function was used to copy an instance, it wasn't
+initializing the binding for the new instance. This caused a crash when the
+destructor for the instance tried to make a callback withthe null binding. 
+
 2008-12-18 Richard Dale <richard.j.dale@gmail.com>
 * Added Ruby 1.9 compatible RSTRING handling
 * Update the wt_header_list with the Wt 2.2.2 headers and tweak the smoke lib

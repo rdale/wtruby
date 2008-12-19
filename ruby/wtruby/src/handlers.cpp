@@ -312,8 +312,8 @@ construct_copy(smokeruby_object *o)
     Smoke::ModuleIndex ccMeth = o->smoke->findMethod(classIdx, ccId);
 
     if (ccMeth.index == 0) {
-    	delete[] ccArg;
-    	return 0;
+        delete[] ccArg;
+        return 0;
     }
     Smoke::Index method = ccMeth.smoke->methodMaps[ccMeth.index].method;
     if (method > 0) {
@@ -346,6 +346,12 @@ construct_copy(smokeruby_object *o)
     args[1].s_voidp = o->ptr;
     Smoke::ClassFn fn = o->smoke->classes[o->classId].classFn;
     (*fn)(o->smoke->methods[ccMeth.index].method, 0, args);
+
+    // Initialize the binding for the new instance
+    Smoke::StackItem s[2];
+    s[1].s_voidp = Wt::Ruby::modules[o->smoke].binding;
+    (*fn)(0, args[0].s_voidp, s);
+
     return args[0].s_voidp;
 }
 
