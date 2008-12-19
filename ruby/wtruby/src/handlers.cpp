@@ -26,6 +26,7 @@
 #include <Wt/WPointF>
 #include <Wt/WRectF>
 #include <Wt/WSignal>
+#include <Wt/WStandardItem>
 #include <Wt/WString>
 #include <Wt/WTable>
 #include <Wt/WTreeNode>
@@ -992,6 +993,7 @@ DEF_SIGNAL_MARSHALLER( JSignalInt, Wt::Ruby::jsignal_int_class, "Wt::EventSignal
 DEF_LIST_MARSHALLER( WWidgetVector, std::vector<Wt::WWidget*>, Wt::WWidget )
 DEF_LIST_MARSHALLER( WAbstractAreaVector, std::vector<Wt::WAbstractArea*>, Wt::WAbstractArea )
 DEF_LIST_MARSHALLER( WMenuItemVector, std::vector<Wt::WMenuItem*>, Wt::WMenuItem )
+DEF_LIST_MARSHALLER( WStandardItemVector, std::vector<Wt::WStandardItem*>, Wt::WStandardItem )
 DEF_LIST_MARSHALLER( WTreeNodeVector, std::vector<Wt::WTreeNode*>, Wt::WTreeNode )
 // DEF_LIST_MARSHALLER( DomElementVector, std::vector<Wt::DomElement*>, Wt::DomElement )
 DEF_LIST_MARSHALLER( WObjectVector, std::vector<Wt::WObject*>, Wt::WObject )
@@ -1082,6 +1084,8 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "std::vector<Wt::WAbstractArea*>", marshall_WAbstractAreaVector },
     { "std::vector<Wt::WMenuItem*>&", marshall_WMenuItemVector },
     { "std::vector<Wt::WTreeNode*>&", marshall_WTreeNodeVector },
+    { "std::vector<Wt::WStandardItem*>", marshall_WStandardItemVector },
+    { "std::vector<Wt::WStandardItem*>&", marshall_WStandardItemVector },
 //    { "std::vector<Wt::DomElement*>&", marshall_DomElementVector },
     { "std::vector<Wt::WObject*>&", marshall_WObjectVector },
     { "std::vector<Wt::Chart::WDataSeries>&", marshall_ChartWDataSeriesVector },
