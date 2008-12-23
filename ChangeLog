@@ -1,10 +1,15 @@
-2008-12-19  Richard Dale  <richard.j.dale@gmail.com>
+2008-12-23 Richard Dale <richard.j.dale@gmail.com>
+* Added an implementation of stateless slots. Example usage:
+
+    implementStateless(:showIcon1, :undoShowIcon1)
+
+2008-12-19 Richard Dale <richard.j.dale@gmail.com>
 * When the construct_copy() function was used to copy an instance, it wasn't
 initializing the binding for the new instance. This caused a crash when the
 destructor for the instance tried to make a callback withthe null binding. 
 * Added a std::vector<Wt::WStandardItem*> marshaller
 * If a set method setXXX() already existed for an instance variable XXX, then
-the type of the variable wasn't being registed, and smoke code generation 
+the type of the variable wasn't being registered, and smoke code generation 
 failed
 
 2008-12-18 Richard Dale <richard.j.dale@gmail.com>

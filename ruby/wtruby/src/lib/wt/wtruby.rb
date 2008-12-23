@@ -1781,6 +1781,36 @@ module Wt
     return WStaticModelView.new(method, target, parent)
   end
 
+  class RubyStatelessSlot    
+    AutoLearnStateless  = 0
+    PreLearnStateless   = 1
+    JavaScriptSpecified = 2
+
+    attr_accessor :method, :target, :undoMethod, :jscript, :learned
+
+    def initialize(obj, method, opt = nil)
+      @target = obj
+      @method = method
+      if opt.nil? || opt.kind_of?(Symbol)
+         @undoMethod = opt
+         @learned = false
+      else
+         @jscript = opt
+         @learned = true
+      end
+    end
+
+    def type
+      if @method.nil?
+        return JavaScriptSpecified
+      elsif @undoMethod.nil?
+        return AutoLearnStateless
+      else
+        return PreLearnStateless
+      end
+    end
+  end
+
   # Provides a mutable numeric class for passing to methods with
   # C++ 'int*' or 'int&' arg types
   class Integer

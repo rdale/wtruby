@@ -33,12 +33,25 @@ namespace Wt {
 
 class SlotInvocation : public Wt::WObject {
 public:
-    SlotInvocation(Wt::WObject * parent, VALUE target, VALUE method) 
-        : Wt::WObject(parent), target_(target), method_(method)
+    SlotInvocation(Wt::WObject * parent, VALUE target, VALUE method, VALUE undoMethod = Qnil) 
+        : Wt::WObject(parent), target_(target), method_(method), undoMethod_(undoMethod)
     {
     }
 
     virtual ~SlotInvocation() {
+    }
+
+    void undo() {
+        if (Wt::Ruby::do_debug & wtdb_calls) {
+            VALUE target_name = rb_funcall(target_, rb_intern("to_s"), 0);
+            VALUE method_name = rb_funcall(undoMethod_, rb_intern("to_s"), 0);
+
+            printf( "SlotInvocation::undo() calling %s#%s\n", 
+                    StringValuePtr(target_name), 
+                    StringValuePtr(method_name) );
+        }
+        
+        rb_funcall(target_, SYM2ID(undoMethod_), 0);
     }
 
     void invoke() {
@@ -178,6 +191,7 @@ public:
 private:
     VALUE target_;
     VALUE method_;
+    VALUE undoMethod_;
 };
 
 template <class T> 
@@ -295,19 +309,87 @@ static void signal_emit1(VALUE self, VALUE arg1) {
     sig->emit(*(static_cast<A1 *>(a1->ptr)));
 }
 
-  }
-}
-
 static VALUE
 eventsignal_void_connect(int argc, VALUE * argv, VALUE self)
 {
     if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
-        Wt::Ruby::signal_connect< Wt::EventSignal<void> >(self, argv[0]);
+        VALUE target = rb_ary_entry(argv[0], 0);
+        VALUE method = rb_ary_entry(argv[0], 1);
+        SlotInvocation * invocation = 0;
+        VALUE stateless_slot = rb_funcall(target, rb_intern("isStateless"), 1, method);
+
+        if (stateless_slot != Qnil) {
+            VALUE undoMethod = rb_funcall(stateless_slot, rb_intern("undoMethod"), 0);
+            invocation = new SlotInvocation(    SlotInvocation::toWObject(target), 
+                                                target, 
+                                                method,
+                                                undoMethod );
+            if (undoMethod != Qnil) {
+                invocation->implementStateless(&SlotInvocation::invoke, &SlotInvocation::undo);
+            } else {
+                invocation->implementStateless(&SlotInvocation::invoke);
+            }
+        } else {
+            invocation = new SlotInvocation(    SlotInvocation::toWObject(target), 
+                                                target, 
+                                                method );
+        }
+
+        smokeruby_object * o = value_obj_info(self);
+        if (o == 0 || o->ptr == 0) {
+            return rb_call_super(argc, argv);
+        }
+
+        Wt::EventSignal<void> * sig = static_cast<Wt::EventSignal<void>*>(o->ptr);
+        sig->connect(SLOT(invocation, SlotInvocation::invoke));
         return self;
     }
 
     return rb_call_super(argc, argv);
 }
+
+  }
+}
+
+/*
+static VALUE
+eventsignal_void_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        VALUE target = rb_ary_entry(argv[0], 0);
+        VALUE method = rb_ary_entry(argv[0], 1);
+
+        smokeruby_object * o = value_obj_info(self);
+        if (o == 0 || o->ptr == 0) {
+            return rb_call_super(argc, argv);
+        }
+
+        VALUE statelessSlot = rb_funcall(target, rb_intern("isStateless"), 1, method);
+
+        Wt::Ruby::SlotInvocation * invocation = 0;
+
+        if (statelessSlot != Qnil) {
+            VALUE undoMethod = rb_funcall(statelessSlot, rb_intern("undoMethod"), 0);
+            invocation = new Wt::Ruby::SlotInvocation(  Wt::Ruby::SlotInvocation::toWObject(target), 
+                                                        target, 
+                                                        method,
+                                                        undoMethod );
+            invocation->implementStateless( &Wt::Ruby::SlotInvocation::invoke, 
+                                            &Wt::Ruby::SlotInvocation::undo );
+        } else {
+            invocation = new Wt::Ruby::SlotInvocation(  Wt::Ruby::SlotInvocation::toWObject(target), 
+                                                        target, 
+                                                        method );
+        }
+
+        Wt::EventSignal<void> * sig = static_cast<Wt::EventSignal<void>*>(o->ptr);
+        sig->connect(SLOT(invocation, Wt::Ruby::SlotInvocation::invoke));
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+*/
 
 static VALUE
 eventsignal_void_emit(VALUE self)
@@ -868,7 +950,7 @@ void
 define_eventsignals(VALUE klass)
 {
     Wt::Ruby::eventsignal_void_class = rb_define_class_under(Wt::Ruby::wt_module, "EventSignalVoid", klass);
-    rb_define_method(Wt::Ruby::eventsignal_void_class, "connect", (VALUE (*) (...)) eventsignal_void_connect, -1);
+    rb_define_method(Wt::Ruby::eventsignal_void_class, "connect", (VALUE (*) (...)) Wt::Ruby::eventsignal_void_connect, -1);
     rb_define_method(Wt::Ruby::eventsignal_void_class, "emit", (VALUE (*) (...)) eventsignal_void_emit, 0);
 
     Wt::Ruby::eventsignal_wkey_event_class = rb_define_class_under(Wt::Ruby::wt_module, "EventSignalWKeyEvent", klass);

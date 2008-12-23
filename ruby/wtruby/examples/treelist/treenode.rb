@@ -60,8 +60,8 @@ class TreeNode < Wt::WCompositeWidget
     @childNodes = []
     @labelIcon = labelIcon
     # pre-learned stateless implementations ...
-#    implementStateless(TreeNode::expand, TreeNode::undoExpand)
-#    implementStateless(TreeNode::collapse, TreeNode::undoCollapse)
+    implementStateless(:expand, :undoExpand)
+    implementStateless(:collapse, :undoCollapse)
 
     @imageLine = ["icons/line-middle.gif", "icons/line-last.gif"]
     @imagePlus = ["icons/nav-plus-line-middle.gif", "icons/nav-plus-line-last.gif"]
@@ -69,8 +69,8 @@ class TreeNode < Wt::WCompositeWidget
 
     # ... or auto-learned stateless implementations
     # which do not need undo functions
-    #implementStateless(&TreeNode::expand)
-    #implementStateless(&TreeNode::collapse)
+    #implementStateless(:expand)
+    #implementStateless(:collapse)
   
     setImplementation(@layout = Wt::WTable.new)
   

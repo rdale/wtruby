@@ -36,8 +36,8 @@ class IconPair < Wt::WCompositeWidget
     @icon2Clicked = @icon2.clicked
     setImplementation(@impl)
 
-#    implementStateless(IconPair::showIcon1, IconPair::undoShowIcon1)
-#    implementStateless(IconPair::showIcon2, IconPair::undoShowIcon2)
+    implementStateless(:showIcon1, :undoShowIcon1)
+    implementStateless(:showIcon2, :undoShowIcon2)
 
     setInline(true)
 

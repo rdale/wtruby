@@ -44,6 +44,8 @@ namespace Wt {
   namespace Ruby {
     typedef std::map<std::string, Smoke::ModuleIndex *> MethodCache;
     MethodCache methcache;
+
+    static VALUE ruby_stateless_slot_class;
   }
 }
 
@@ -561,6 +563,36 @@ wmodelindex_internalpointer(VALUE self)
     return ptr != 0 ? (VALUE) ptr : Qnil;
 }
 
+static VALUE
+wobject_implementstateless(int argc, VALUE * argv, VALUE self)
+{
+    VALUE stateless_slots = rb_funcall(self, rb_intern("stateless_slots"), 0);
+    if (stateless_slots == Qnil) {
+        stateless_slots = rb_hash_new();
+        rb_funcall(self, rb_intern("stateless_slots="), 1, stateless_slots);
+    }
+
+    VALUE stateless_slot = Qnil;
+
+    if (argc == 1 && TYPE(argv[0]) == T_SYMBOL) {
+        stateless_slot = rb_funcall(Wt::Ruby::ruby_stateless_slot_class, rb_intern("new"), 2, self, argv[0]);
+    } else if (argc == 2 && TYPE(argv[0]) == T_SYMBOL && TYPE(argv[1]) == T_SYMBOL) {
+        stateless_slot = rb_funcall(Wt::Ruby::ruby_stateless_slot_class, rb_intern("new"), 3, self, argv[0], argv[1]);
+    } else {
+        return rb_call_super(argc, argv);
+    }
+
+    rb_hash_aset(stateless_slots, argv[0], stateless_slot);
+    return self;
+}
+
+static VALUE
+wobject_isstateless(VALUE self, VALUE method)
+{
+    VALUE stateless_slots = rb_funcall(self, rb_intern("stateless_slots"), 0);
+    return rb_hash_aref(stateless_slots, method);
+}
+
 // --------------- Ruby C functions for Wt::_internal.* helpers  ----------------
 
 
@@ -886,6 +918,14 @@ create_wt_class(VALUE /*self*/, VALUE package_value, VALUE module_value)
         rb_define_method(klass, "internal_pointer", (VALUE (*) (...)) wmodelindex_internalpointer, 0);
     }
 
+    if (wt_Smoke->isDerivedFromByName(package, "Wt::WObject")) {
+        rb_define_method(klass, "implementStateless", (VALUE (*) (...)) wobject_implementstateless, -1);
+        rb_define_method(klass, "implement_stateless", (VALUE (*) (...)) wobject_implementstateless, -1);
+        rb_define_method(klass, "isStateless", (VALUE (*) (...)) wobject_isstateless, 1);
+        rb_define_attr(klass, "stateless_slots", 1, 1);
+
+    }
+
     free((void *) package);
     return klass;
 }
@@ -932,6 +972,7 @@ Init_wt()
     Wt::Ruby::wt_chart_module = rb_define_module_under(Wt::Ruby::wt_module, "Chart");
     Wt::Ruby::wt_base_class = rb_define_class_under(Wt::Ruby::wt_module, "Base", rb_cObject);
     Wt::Ruby::moduleindex_class = rb_define_class_under(Wt::Ruby::wt_internal_module, "ModuleIndex", rb_cObject);
+    Wt::Ruby::ruby_stateless_slot_class = rb_define_class_under(Wt::Ruby::wt_module, "RubyStatelessSlot", rb_cObject);
 
     Wt::Ruby::wt_boost_module = rb_define_module("Boost");
     VALUE wt_boost_signals_module = rb_define_module_under(Wt::Ruby::wt_boost_module, "Signals");
