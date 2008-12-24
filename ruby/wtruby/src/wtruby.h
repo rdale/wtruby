@@ -113,7 +113,7 @@ extern WTRUBY_EXPORT Modules modules;
 extern WTRUBY_EXPORT ClassCache classcache;
 
 // Maps from an int id to classname in Ruby
-extern WTRUBY_EXPORT ClassnameMap classnameMap;
+extern WTRUBY_EXPORT ClassnameMap IdToClassNameMap;
 
 extern WTRUBY_EXPORT std::vector<Smoke*> smokeList;
 extern WTRUBY_EXPORT int smokeListIndexOf(Smoke * s);

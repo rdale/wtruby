@@ -57,7 +57,7 @@ typedef std::map<void *, VALUE *> PointerMap;
 Modules         modules;
 PointerMap      pointerMap;
 ClassCache      classcache;
-ClassnameMap    classnameMap;
+ClassnameMap    IdToClassNameMap;
 
 std::vector<Smoke*> smokeList;
 
@@ -245,7 +245,7 @@ Binding::callMethod(Smoke::Index method, void *ptr, Smoke::Stack args, bool /*is
 char *
 Binding::className(Smoke::Index classId) {
     Smoke::ModuleIndex mi = { smoke, classId };
-    return (char *) (classnameMap[mi])->c_str();
+    return (char *) (IdToClassNameMap[mi])->c_str();
 }
 
   }

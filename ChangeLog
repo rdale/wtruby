@@ -1,5 +1,6 @@
 2008-12-24 Richard Dale <richard.j.dale@gmail.com>
 * Added an ancestors() method for the Wt:: classes
+* Rename classnameMap as IdToClassNameMap to be consist with QtRuby
 
 2008-12-23 Richard Dale <richard.j.dale@gmail.com>
 * Added an implementation of stateless slots. Example usage:

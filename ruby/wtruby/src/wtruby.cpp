@@ -699,7 +699,7 @@ insert_pclassid(VALUE self, VALUE p_value, VALUE mi_value)
     int smokeidx = NUM2INT(rb_funcall(mi_value, rb_intern("smoke"), 0));
     Smoke::ModuleIndex mi = { Wt::Ruby::smokeList[smokeidx], ix };
     Wt::Ruby::classcache[std::string(p)] = new Smoke::ModuleIndex(mi);
-    Wt::Ruby::classnameMap[mi] = new std::string(p);
+    Wt::Ruby::IdToClassNameMap[mi] = new std::string(p);
     return self;
 }
 
@@ -709,7 +709,7 @@ classid2name(VALUE /*self*/, VALUE mi_value)
     int ix = NUM2INT(rb_funcall(mi_value, rb_intern("index"), 0));
     int smokeidx = NUM2INT(rb_funcall(mi_value, rb_intern("smoke"), 0));
     Smoke::ModuleIndex mi = { Wt::Ruby::smokeList[smokeidx], ix };
-    return rb_str_new2(Wt::Ruby::classnameMap[mi]->c_str());
+    return rb_str_new2(Wt::Ruby::IdToClassNameMap[mi]->c_str());
 }
 
 static VALUE
