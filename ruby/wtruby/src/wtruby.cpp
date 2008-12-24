@@ -704,6 +704,15 @@ insert_pclassid(VALUE self, VALUE p_value, VALUE mi_value)
 }
 
 static VALUE
+classid2name(VALUE /*self*/, VALUE mi_value)
+{
+    int ix = NUM2INT(rb_funcall(mi_value, rb_intern("index"), 0));
+    int smokeidx = NUM2INT(rb_funcall(mi_value, rb_intern("smoke"), 0));
+    Smoke::ModuleIndex mi = { Wt::Ruby::smokeList[smokeidx], ix };
+    return rb_str_new2(Wt::Ruby::classnameMap[mi]->c_str());
+}
+
+static VALUE
 find_pclassid(VALUE /*self*/, VALUE p_value)
 {
     char *p = StringValuePtr(p_value);
@@ -1007,6 +1016,7 @@ Init_wt()
     rb_define_module_function(Wt::Ruby::wt_internal_module, "classIsa", (VALUE (*) (...)) classIsa, 2);
     rb_define_module_function(Wt::Ruby::wt_internal_module, "isEnum", (VALUE (*) (...)) isEnum, 1);
     rb_define_module_function(Wt::Ruby::wt_internal_module, "insert_pclassid", (VALUE (*) (...)) insert_pclassid, 2);
+    rb_define_module_function(Wt::Ruby::wt_internal_module, "classid2name", (VALUE (*) (...)) classid2name, 1);
     rb_define_module_function(Wt::Ruby::wt_internal_module, "find_pclassid", (VALUE (*) (...)) find_pclassid, 1);
     rb_define_module_function(Wt::Ruby::wt_internal_module, "get_value_type", (VALUE (*) (...)) get_value_type, 1);
     rb_define_module_function(Wt::Ruby::wt_internal_module, "mapObject", (VALUE (*) (...)) mapObject, 1);

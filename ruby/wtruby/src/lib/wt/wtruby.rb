@@ -132,6 +132,27 @@ module Wt
       end
     end
 
+    def self.ancestors
+      klass = self
+      classid = nil
+      loop do
+        classid = Wt::Internal::find_pclassid(klass.name)
+        break if classid.index
+  
+        klass = klass.superclass
+        if klass.nil?
+          return super
+        end
+      end
+
+      klasses = super
+      klasses.delete(Wt::Base)
+      klasses.delete(self)
+      ids = []
+      Wt::Internal::getAllParents(classid, ids)
+      return [self] + ids.map {|id| Wt::Internal.find_class(Wt::Internal.classid2name(id))} + klasses
+    end
+
 
     def methods(regular=true)
       if !regular
