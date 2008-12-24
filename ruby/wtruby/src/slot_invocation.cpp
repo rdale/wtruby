@@ -316,10 +316,10 @@ eventsignal_void_connect(int argc, VALUE * argv, VALUE self)
         VALUE target = rb_ary_entry(argv[0], 0);
         VALUE method = rb_ary_entry(argv[0], 1);
         SlotInvocation * invocation = 0;
-        VALUE stateless_slot = rb_funcall(target, rb_intern("isStateless"), 1, method);
+        VALUE statelessSlot = rb_funcall(target, rb_intern("isStateless"), 1, method);
 
-        if (stateless_slot != Qnil) {
-            VALUE undoMethod = rb_funcall(stateless_slot, rb_intern("undoMethod"), 0);
+        if (statelessSlot != Qnil) {
+            VALUE undoMethod = rb_funcall(statelessSlot, rb_intern("undoMethod"), 0);
             invocation = new SlotInvocation(    SlotInvocation::toWObject(target), 
                                                 target, 
                                                 method,
