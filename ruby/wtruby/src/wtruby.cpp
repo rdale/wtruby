@@ -589,8 +589,11 @@ wobject_implementstateless(int argc, VALUE * argv, VALUE self)
 static VALUE
 wobject_isstateless(VALUE self, VALUE method)
 {
-    VALUE stateless_slots = rb_funcall(self, rb_intern("stateless_slots"), 0);
-    return rb_hash_aref(stateless_slots, method);
+    VALUE statelessSlots = rb_funcall(self, rb_intern("stateless_slots"), 0);
+    if (statelessSlots == Qnil) {
+        return Qnil;
+    }
+    return rb_hash_aref(statelessSlots, method);
 }
 
 // --------------- Ruby C functions for Wt::_internal.* helpers  ----------------
