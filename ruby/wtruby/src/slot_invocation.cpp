@@ -309,6 +309,12 @@ static void signal_emit1(VALUE self, VALUE arg1) {
     sig->emit(*(static_cast<A1 *>(a1->ptr)));
 }
 
+/*
+ * When an EventSignal is connected to a slot with arity zero, then check for
+ * whether the target ruby slot is stateless. If so, set the slot for the 
+ * SlotInvocation::invoke(), and optionally the undo() call, as stateless with
+ * implementStateless().
+ */
 template <class S>
 static void eventsignal_connect(VALUE self, VALUE args)
 {
