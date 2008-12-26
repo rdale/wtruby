@@ -101,11 +101,10 @@ class DemoTreeList < Wt::WContainerWidget
     numMaps = @testMap.childNodes.size
   
     if numMaps > 0
-      int c = rand % numMaps
+      c = rand % numMaps
   
       child = @testMap.childNodes[c]
       @testMap.removeChildNode(child)
-      delete child
   
       if numMaps == 1
         @removeMapButton.disable
@@ -140,7 +139,7 @@ end
 
 Wt::WRun(ARGV) do |env|
   app = Wt::WApplication.new(env)
-  DemoTreeList.new(app.root)
+  @demo = DemoTreeList.new(app.root)
 
   #
   # The look & feel of the tree node is configured using a CSS style sheet.

@@ -123,7 +123,7 @@ class TreeNode < Wt::WCompositeWidget
   end
 
   def removeChildNode(node)
-    @childNodes.delete(find(node))
+    @childNodes.delete(node)
     node.parentNode = nil
     @expandedContent.removeWidget(node)
     childNodesChanged

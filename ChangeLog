@@ -2,6 +2,7 @@
 * Stateless slots cannot have any arguments, however they can be connected to
 signals which have arguments. So when an EventSignal is connected to a slot
 with arity zero then check for whether the slot is stateless.
+* Fixed some bugs in the treelist example.
 
 2008-12-24 Richard Dale <richard.j.dale@gmail.com>
 * Added an ancestors() method for the Wt:: classes
