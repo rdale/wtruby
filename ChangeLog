@@ -13,6 +13,8 @@ development or production environment. For instance, in wt.rb:
       require 'wthttp'
     end
 
+* Removed redundant copies for the Ext javascript code
+
 2008-12-26 Richard Dale <richard.j.dale@gmail.com>
 * Stateless slots cannot have any arguments, however they can be connected to
 signals which have arguments. So when an EventSignal is connected to a slot
