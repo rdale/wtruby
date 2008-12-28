@@ -964,7 +964,7 @@ set_wtruby_embedded_wrapped(VALUE /*self*/, VALUE yn)
 
 static Wt::Ruby::Binding binding;
 
-WTRUBY_EXPORT void
+static void
 Init_wt()
 {
     if (wt_Smoke == 0) {
@@ -1043,6 +1043,18 @@ Init_wt()
 
     // Do package initialization
     rb_funcall(Wt::Ruby::wt_internal_module, rb_intern("init_all_classes"), 0);
+}
+
+WTRUBY_EXPORT void
+Init_wthttp()
+{
+    Init_wt();
+}
+
+WTRUBY_EXPORT void
+Init_wtfcgi()
+{
+    Init_wt();
 }
 
 }

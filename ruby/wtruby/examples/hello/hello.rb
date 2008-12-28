@@ -30,7 +30,7 @@ class HelloApplication < Wt::WApplication
     end
 
     button = Wt::WPushButton.new("Greet me.", root) do |b| # create a button
-      b.setMargin(Wt::WLength.new(5), Wt::Left)                             # add 5 pixels margin 
+      b.setMargin(Wt::WLength.new(5), Wt::Left)            # add 5 pixels margin 
     end
 
     root.addWidget(Wt::WBreak.new)                         # insert a line break

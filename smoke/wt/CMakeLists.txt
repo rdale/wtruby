@@ -86,8 +86,7 @@ add_library(smokewt SHARED ${smokewt_LIB_SRCS})
 
 target_link_libraries(  smokewt 
                         ${Boost_LIBRARIES} 
-                        ${Wt_LIBRARY}
-                        ${Wt_HTTP_LIBRARY} )
+                        ${Wt_LIBRARY} )
 
 set_target_properties(smokewt PROPERTIES VERSION 1.0.0 SOVERSION 1)
 

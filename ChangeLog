@@ -1,3 +1,18 @@
+2008-12-28 Richard Dale <richard.j.dale@gmail.com>
+* Instead of a single 'wt' ruby extension linked against libwthttp, build two
+ruby extensions 'wthttp' and 'wtfcgi' linked against the http and fcgi 
+connectors respectively. 
+* Wt::Ruby programs, such as the examples, could still have require 'wt' 
+statements, and they could be set up to actually pull in either the 'wthttp'
+or 'wtfcgi' extension according to whether they are to be used in a 
+development or production environment. For instance, in wt.rb:
+
+    if ENV['WT_ENV'] == 'production'
+      require 'wtfcgi'
+    elsif ENV['WT_ENV'] == 'development'
+      require 'wthttp'
+    end
+
 2008-12-26 Richard Dale <richard.j.dale@gmail.com>
 * Stateless slots cannot have any arguments, however they can be connected to
 signals which have arguments. So when an EventSignal is connected to a slot

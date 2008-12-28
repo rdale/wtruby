@@ -28,16 +28,17 @@ set(    wt_LIB_SRCS
 set ( CMAKE_CXX_FLAGS -fexceptions )
 
 add_library(wtrubyshared SHARED ${wtrubyshared_LIB_SRCS})
-add_library(wt MODULE ${wt_LIB_SRCS})
+add_library(wtrubyhttp MODULE ${wt_LIB_SRCS})
+add_library(wtrubyfcgi MODULE ${wt_LIB_SRCS})
 
 target_link_libraries(  wtrubyshared 
                         ${RUBY_LIBRARY} 
                         ${Boost_LIBRARIES} 
                         ${Wt_LIBRARY} 
-                        ${Wt_HTTP_LIBRARY} 
+#                        ${Wt_HTTP_LIBRARY} 
                         smokewt )
 
-target_link_libraries(  wt 
+target_link_libraries(  wtrubyhttp 
                         ${RUBY_LIBRARY} 
                         ${Boost_LIBRARIES} 
                         ${Wt_LIBRARY} 
@@ -45,11 +46,21 @@ target_link_libraries(  wt
                         wtrubyshared 
                         smokewt )
 
-set_target_properties(wt PROPERTIES PREFIX "")
+target_link_libraries(  wtrubyfcgi
+                        ${RUBY_LIBRARY} 
+                        ${Boost_LIBRARIES} 
+                        ${Wt_LIBRARY} 
+                        wtfcgi 
+                        wtrubyshared 
+                        smokewt )
+
+set_target_properties(wtrubyhttp PROPERTIES PREFIX "" OUTPUT_NAME wthttp)
+set_target_properties(wtrubyfcgi PROPERTIES PREFIX "" OUTPUT_NAME wtfcgi)
 set_target_properties(wtrubyshared PROPERTIES VERSION 1.0.0 SOVERSION 1)
 
 install(TARGETS wtrubyshared LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX} )
-install(TARGETS wt DESTINATION ${CUSTOM_RUBY_SITE_ARCH_DIR})
+install(TARGETS wtrubyhttp DESTINATION ${CUSTOM_RUBY_SITE_ARCH_DIR})
+install(TARGETS wtrubyfcgi DESTINATION ${CUSTOM_RUBY_SITE_ARCH_DIR})
 
 # kate: space-indent on; indent-width 4; replace-tabs on; mixed-indent off;
 
