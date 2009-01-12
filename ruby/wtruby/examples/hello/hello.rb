@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 =begin
  Copyright (C) 2006 Wim Dumon, Koen Deforche
 
