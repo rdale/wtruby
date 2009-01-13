@@ -61,6 +61,7 @@ set_target_properties(wtrubyshared PROPERTIES VERSION 1.0.0 SOVERSION 1)
 install(TARGETS wtrubyshared LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/lib${LIB_SUFFIX} )
 install(TARGETS wtrubyhttp DESTINATION ${CUSTOM_RUBY_SITE_ARCH_DIR})
 install(TARGETS wtrubyfcgi DESTINATION ${CUSTOM_RUBY_SITE_ARCH_DIR})
+install(FILES wt.rb DESTINATION ${CUSTOM_RUBY_SITE_LIB_DIR})
 
 # kate: space-indent on; indent-width 4; replace-tabs on; mixed-indent off;
 
