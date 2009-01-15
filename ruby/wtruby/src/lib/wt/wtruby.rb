@@ -511,6 +511,8 @@ module Wt
     def initialize(*args)
       if args.size == 1 && args[0].class.name == "Date"
         return super(args[0].year, args[0].month, args[0].day)
+      elsif args.size == 1 && args[0].class.name == "Time"
+        return super(args[0].year, args[0].month, args[0].day)
       else
         return super(*args)
       end

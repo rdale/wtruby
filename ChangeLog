@@ -1,3 +1,7 @@
+2009-01-15 Richard Dale <richard.j.dale@gmail.com>
+* Allow Ruby Date and Time instances to be passed to the Wt::WDate and 
+Boost::Any constructors
+
 2009-01-11 Richard Dale <richard.j.dale@gmail.com>
 * Added a wt.rb file that is installed and will pull in either 'wthttp' or the
 'wtfcgi' extensions according to the value of the 'WT_ENV' environment variable

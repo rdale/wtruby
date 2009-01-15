@@ -46,6 +46,7 @@ namespace Wt {
     MethodCache methcache;
 
     static VALUE ruby_stateless_slot_class;
+    static VALUE wt_wdate_class;
   }
 }
 
@@ -430,16 +431,24 @@ static VALUE
 new_boost_any(int argc, VALUE * argv, VALUE klass)
 {
     if (argc == 1) {
+        VALUE arg = argv[0];
         boost::any * v = 0;
 
-        if (TYPE(argv[0]) == T_STRING) {
-            v = new boost::any(Wt::WString(StringValuePtr(argv[0])));
-        } else if (TYPE(argv[0]) == T_FIXNUM) {
-            v = new boost::any(NUM2INT(argv[0]));
-        } else if (TYPE(argv[0]) == T_FLOAT) {
-            v = new boost::any(NUM2DBL(argv[0]));
-        } else if (TYPE(argv[0]) == T_DATA) {
-            smokeruby_object * o = value_obj_info(argv[0]);
+        // Allow Boost::Any to be constructed from Ruby Date or Time
+        if (    std::strcmp(rb_obj_classname(arg), "Time") == 0
+                || std::strcmp(rb_obj_classname(arg), "Date") == 0 ) 
+        {
+            arg = rb_funcall(Wt::Ruby::wt_wdate_class, rb_intern("new"), 1, arg);
+        }
+
+        if (TYPE(arg) == T_STRING) {
+            v = new boost::any(Wt::WString(StringValuePtr(arg)));
+        } else if (TYPE(arg) == T_FIXNUM) {
+            v = new boost::any(NUM2INT(arg));
+        } else if (TYPE(arg) == T_FLOAT) {
+            v = new boost::any(NUM2DBL(arg));
+        } else if (TYPE(arg) == T_DATA) {
+            smokeruby_object * o = value_obj_info(arg);
             if (o != 0 && o->ptr != 0) {
                 if (std::strcmp(wt_Smoke->classes[o->classId].className, "Wt::WDate") == 0) {
                     v = new boost::any(*(static_cast<Wt::WDate *>(o->ptr)));
@@ -985,6 +994,7 @@ Init_wt()
     Wt::Ruby::wt_base_class = rb_define_class_under(Wt::Ruby::wt_module, "Base", rb_cObject);
     Wt::Ruby::moduleindex_class = rb_define_class_under(Wt::Ruby::wt_internal_module, "ModuleIndex", rb_cObject);
     Wt::Ruby::ruby_stateless_slot_class = rb_define_class_under(Wt::Ruby::wt_module, "RubyStatelessSlot", rb_cObject);
+    Wt::Ruby::wt_wdate_class = rb_define_class_under(Wt::Ruby::wt_module, "WDate", Wt::Ruby::wt_base_class);
 
     Wt::Ruby::wt_boost_module = rb_define_module("Boost");
     VALUE wt_boost_signals_module = rb_define_module_under(Wt::Ruby::wt_boost_module, "Signals");
