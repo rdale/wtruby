@@ -1,0 +1,53 @@
+From the Wt websit at http://www.webtoolkit.eu/wt
+
+"Wt (pronounced 'witty') is a C++ library and application server for developing
+and deploying web applications. It is not a 'framework', which enforces a way of
+programming, but a library.
+
+The API is widget-centric, and inspired by existing C++ Graphical User Interface
+(GUI) APIs. To the developer, it offers complete abstraction of any web-specific
+implementation details, including event handling and graphics support"
+
+The Wt::Ruby bindings provide the same widget based api for Ruby programmers. It
+is based on the well proven QtRuby code and could be described as a 'QtRuby for
+web programming'.
+
+Here is a simple 'hello world' program that shows how a complete web application
+can be coded in a single source file 'hello.rb'.
+
+#!/usr/bin/ruby
+require 'wt'
+
+class HelloApplication < Wt::WApplication
+  def initialize(env)
+    super(env)
+    setTitle("Hello world")
+    root.addWidget(Wt::WText.new("Your name, please ? "))
+    @nameEdit = Wt::WLineEdit.new(root) do |e|
+      e.setFocus
+    end
+    button = Wt::WPushButton.new("Greet me.", root) do |b|
+      b.setMargin(Wt::WLength.new(5), Wt::Left) 
+    end
+    root.addWidget(Wt::WBreak.new)
+    @greeting = Wt::WText.new(root)
+    button.clicked.connect(SLOT(self, :greet))
+    @nameEdit.enterPressed.connect(SLOT(self, :greet))
+  end
+
+  def greet
+    @greeting.text = "Hello there, " + @nameEdit.text
+  end
+end
+
+Wt::WRun(ARGV) do |env|
+  HelloApplication.new(env)
+end
+
+During development this program can be run from the command line, where it will
+run as a self contained web server:
+
+$ ./hello.rb -- --docroot `pwd` --http-address localhost --http-port 4000
+
+A release version can be run under Apache2 via the FastGCG interface with
+no change to the source.
