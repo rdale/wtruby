@@ -1,4 +1,4 @@
-From the Wt websit at http://www.webtoolkit.eu/wt
+From the Wt website at http://www.webtoolkit.eu/wt
 
 "Wt (pronounced 'witty') is a C++ library and application server for developing
 and deploying web applications. It is not a 'framework', which enforces a way of
@@ -44,10 +44,10 @@ Wt::WRun(ARGV) do |env|
   HelloApplication.new(env)
 end
 
-During development this program can be run from the command line, where it will
-run as a self contained web server:
+During development this program can be started from the command line, where it
+will run as a self contained web server:
 
 $ ./hello.rb -- --docroot `pwd` --http-address localhost --http-port 4000
 
-A release version can be run under Apache2 via the FastGCG interface with
+A release version can be run under Apache2 via the FastGCI interface with
 no change to the source.
