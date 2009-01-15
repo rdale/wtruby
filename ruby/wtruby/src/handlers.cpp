@@ -139,11 +139,7 @@ smokeruby_mark(void * p)
     if (o->ptr && o->allocated) {
         if (o->smoke->isDerivedFromByName(className, "Wt::WObject")) {
             Wt::WObject * wobject = (Wt::WObject *) o->smoke->cast(o->ptr, o->classId, o->smoke->idClass("Wt::WObject").index);
-            // Only mark the WObject tree if the current item doesn't have a parent.
-            // This avoids marking parts of a tree more than once.
-            if (wobject->parent() == 0) {
-                mark_wobject_children(wobject);
-            }
+            mark_wobject_children(wobject);
         }
 
         if (o->smoke->isDerivedFromByName(className, "Wt::WWebWidget")) {
@@ -220,9 +216,7 @@ smokeruby_mark(void * p)
                     rb_gc_mark(obj);
                 }
             }
-
         }
-
     }
 }
 

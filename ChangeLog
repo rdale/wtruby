@@ -1,6 +1,8 @@
 2009-01-15 Richard Dale <richard.j.dale@gmail.com>
 * Allow Ruby Date and Time instances to be passed to the Wt::WDate and 
 Boost::Any constructors
+* Remove the optimization in the mark function to only traverse the tree of 
+children of WObjects which don't have parents and always traverse instead.
 
 2009-01-11 Richard Dale <richard.j.dale@gmail.com>
 * Added a wt.rb file that is installed and will pull in either 'wthttp' or the
