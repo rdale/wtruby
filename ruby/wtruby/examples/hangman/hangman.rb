@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 #
 # Copyright (C) 2005 Wim Dumon
 #

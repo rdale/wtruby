@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 #
 # Copyright (C) 2006 Koen Deforche
 #

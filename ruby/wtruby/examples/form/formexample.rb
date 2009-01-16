@@ -1,3 +1,5 @@
+#!/usr/bin/ruby
+
 =begin
  Copyright (C) 2008 Emweb bvba, Kessel-Lo, Belgium.
 

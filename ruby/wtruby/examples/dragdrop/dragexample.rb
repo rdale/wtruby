@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 # dragexample Drag and Drop example
 require 'wt'
 require 'character.rb'
