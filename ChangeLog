@@ -1,3 +1,7 @@
+2009-01-16 Richard Dale <richard.j.dale@gmail.com>
+* Removed the simplechat example as it only works with the multi-threaded 
+version of libwthttp, which can't be used with Wt::Ruby
+
 2009-01-15 Richard Dale <richard.j.dale@gmail.com>
 * Allow Ruby Date and Time instances to be passed to the Wt::WDate and 
 Boost::Any constructors
