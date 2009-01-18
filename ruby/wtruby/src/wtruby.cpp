@@ -1012,8 +1012,8 @@ create_wt_class(VALUE /*self*/, VALUE package_value, VALUE module_value)
     VALUE klass = module_value;
     std::string packageName(package);
 
-    unsigned int p1 = packageName.find("::", strlen(moduleName));
-    unsigned int p2 = 0;
+    std::size_t p1 = packageName.find("::", strlen(moduleName));
+    std::size_t p2 = 0;
     while (p1 != std::string::npos) {
         p1 += strlen("::");
         p2 = packageName.find("::", p1);
