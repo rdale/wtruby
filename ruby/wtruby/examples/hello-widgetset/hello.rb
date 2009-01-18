@@ -33,11 +33,11 @@ class HelloApplication < Wt::WApplication
       #
       top = root
     else
-     #
-     # In WidgetSet mode, we create and bind containers to existing
-     # divs in the web page. In self example, we create a single div
-     # whose DOM id was passed as a request argument.
-     #
+      #
+      # In WidgetSet mode, we create and bind containers to existing
+      # divs in the web page. In self example, we create a single div
+      # whose DOM id was passed as a request argument.
+      #
       top = Wt::WContainerWidget.new
       bindWidget(top, env.getArgument("div")[0])
     end

@@ -14,6 +14,9 @@ the WServer methods
 correponding to the ones in the WConfig.h header
 * Don't repeat the code to convert from ARGV to argc/argv and add a utility
 function args2argv()
+* Added patch from Koen Deforche to fix a looping on startup problem. Thanks
+for the patch, but I'm not sure why only certain users are affected.
+* Added the treeview example
 
 2009-01-16 Richard Dale <richard.j.dale@gmail.com>
 * Removed the simplechat example as it only works with the multi-threaded 
