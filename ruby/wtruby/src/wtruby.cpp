@@ -952,6 +952,12 @@ create_wt_class(VALUE /*self*/, VALUE package_value, VALUE module_value)
 }
 
 static VALUE
+wt_version(VALUE /*self*/)
+{
+    return rb_str_new2(WT_VERSION_STR);
+}
+
+static VALUE
 wtruby_version(VALUE /*self*/)
 {
     return rb_str_new2(WTRUBY_VERSION);
@@ -1047,6 +1053,7 @@ Init_wt()
     rb_define_module_function(Wt::Ruby::wt_internal_module, "application_terminated=", (VALUE (*) (...)) set_application_terminated, 1);
 
     rb_define_module_function(Wt::Ruby::wt_module, "WRun", (VALUE (*) (...)) wt_wrun, 1);
+    rb_define_module_function(Wt::Ruby::wt_module, "wt_version", (VALUE (*) (...)) wt_version, 0);
     rb_define_module_function(Wt::Ruby::wt_module, "wtruby_version", (VALUE (*) (...)) wtruby_version, 0);
 
     rb_require("wt/wtruby.rb");

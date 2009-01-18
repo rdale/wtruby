@@ -1,3 +1,6 @@
+2009-01-18 Richard Dale <richard.j.dale@gmail.com>
+* Added a Wt::wt_version to return the version string of the Wt lib being used
+
 2009-01-16 Richard Dale <richard.j.dale@gmail.com>
 * Removed the simplechat example as it only works with the multi-threaded 
 version of libwthttp, which can't be used with Wt::Ruby
