@@ -401,6 +401,28 @@ createApplication(const Wt::WEnvironment& env)
     }
 }
 
+// A block passed to Wt::WServer::addEntryPoint(), which is run by createWidgetSet()
+static VALUE widgetSetInitializer = Qnil;
+
+static Wt::WApplication *
+createWidgetSet(const Wt::WEnvironment& env)
+{
+    smokeruby_object *  e = alloc_smokeruby_object( false, 
+                                                    wt_Smoke, 
+                                                    wt_Smoke->idClass("Wt::WEnvironment").index, 
+                                                    (void *) &env );
+    VALUE environment = set_obj_info("Wt::WEnvironment", e);
+    VALUE result = rb_funcall(widgetSetInitializer, rb_intern("call"), 1, environment);
+    smokeruby_object * r = value_obj_info(result);
+
+    if (r == 0 || r->ptr == 0 || r->classId != wt_Smoke->idClass("Wt::WApplication").index) {
+        rb_raise(rb_eRuntimeError, "Wt::WServer entry point didn't return a Wt::WApplication");
+        return 0;
+    } else {
+        return static_cast<Wt::WApplication*>(r->ptr);
+    }
+}
+
 static VALUE
 wt_wrun(VALUE klass, VALUE args)
 {
@@ -427,6 +449,101 @@ wt_wrun(VALUE klass, VALUE args)
     return Qnil;
 }
 
+static VALUE
+wserver_addentrypoint(int argc, VALUE * argv, VALUE self)
+{
+    if (rb_block_given_p() && argc > 0) {
+        smokeruby_object *o = value_obj_info(self);
+        Wt::WServer * server = static_cast<Wt::WServer *>(o->ptr);
+
+        if (NUM2INT(rb_funcall(argv[0], rb_intern("to_i"), 0)) == Wt::WServer::Application) {
+            applicationInitializer = rb_block_proc();
+            if (argc > 1) {
+                server->addEntryPoint(Wt::WServer::Application, createApplication, std::string(StringValuePtr(argv[1])));
+            } else {
+                server->addEntryPoint(Wt::WServer::Application, createApplication);
+            }
+        } else if (NUM2INT(rb_funcall(argv[0], rb_intern("to_i"), 0)) == Wt::WServer::WidgetSet) {
+            widgetSetInitializer = rb_block_proc();
+            if (argc > 1) {
+                server->addEntryPoint(Wt::WServer::WidgetSet, createWidgetSet, std::string(StringValuePtr(argv[1])));
+            } else {
+                server->addEntryPoint(Wt::WServer::WidgetSet, createWidgetSet);
+            }
+        }
+    }
+
+    return Qnil;
+}
+
+static VALUE
+wserver_setserverconfiguration(VALUE self, VALUE args, VALUE serverConfigurationFile)
+{
+    smokeruby_object *o = value_obj_info(self);
+    Wt::WServer * server = static_cast<Wt::WServer *>(o->ptr);
+
+    int argc = RARRAY(args)->len + 1;
+    char ** argv = new char *[argc];
+
+    VALUE program_name = rb_gv_get("$0");
+    char * arg = StringValuePtr(program_name);
+    argv[0] = new char[strlen(arg) + 1];
+    strcpy(argv[0], arg);
+
+    for (long i = 0; i < RARRAY(args)->len; i++) {
+        VALUE item = rb_ary_entry(args, i);
+        arg = StringValuePtr(item);
+        argv[i + 1] = new char[strlen(arg) + 1];
+        strcpy(argv[i + 1], arg);
+    }
+
+    try {
+        server->setServerConfiguration(argc, argv, std::string(StringValuePtr(serverConfigurationFile)));
+    } catch (Wt::WServer::Exception& e) {
+        printf("%s\n", e.what());
+    } catch (std::exception& e) {
+        printf("exception: %s\n", e.what());
+    }
+
+    return Qnil;
+}
+
+// Any C++ exceptions thrown need to be translated to Ruby ones
+static VALUE 
+wserver_start(VALUE self)
+{
+    smokeruby_object *o = value_obj_info(self);
+    Wt::WServer * server = static_cast<Wt::WServer *>(o->ptr);
+
+    try {
+        if (server->start()) {
+            return Qtrue;
+        }
+    } catch (Wt::WServer::Exception& e) {
+        printf("%s\n", e.what());
+        return Qfalse;
+    } catch (std::exception& e) {
+        printf("exception: %s\n", e.what());
+        return Qfalse;
+    }
+}
+
+static VALUE 
+wserver_stop(VALUE self)
+{
+    smokeruby_object *o = value_obj_info(self);
+    Wt::WServer * server = static_cast<Wt::WServer *>(o->ptr);
+
+    try {
+        server->stop();
+    } catch (Wt::WServer::Exception& e) {
+        printf("%s\n", e.what());
+    } catch (std::exception& e) {
+        printf("exception: %s\n", e.what());
+    }
+
+    return Qnil;
+}
 static VALUE
 new_boost_any(int argc, VALUE * argv, VALUE klass)
 {
@@ -937,6 +1054,13 @@ create_wt_class(VALUE /*self*/, VALUE package_value, VALUE module_value)
     } else if (packageName == "Wt::WModelIndex") {
         rb_define_method(klass, "internalPointer", (VALUE (*) (...)) wmodelindex_internalpointer, 0);
         rb_define_method(klass, "internal_pointer", (VALUE (*) (...)) wmodelindex_internalpointer, 0);
+    } else if (packageName == "Wt::WServer") {
+        rb_define_method(klass, "addEntryPoint", (VALUE (*) (...)) wserver_addentrypoint, -1);
+        rb_define_method(klass, "add_entry_point", (VALUE (*) (...)) wserver_addentrypoint, -1);
+        rb_define_method(klass, "setServerConfiguration", (VALUE (*) (...)) wserver_setserverconfiguration, 2);
+        rb_define_method(klass, "set_server_configuration", (VALUE (*) (...)) wserver_setserverconfiguration, 2);
+        rb_define_method(klass, "start", (VALUE (*) (...)) wserver_start, 0);
+        rb_define_method(klass, "stop", (VALUE (*) (...)) wserver_stop, 0);
     }
 
     if (wt_Smoke->isDerivedFromByName(package, "Wt::WObject")) {
@@ -1053,8 +1177,12 @@ Init_wt()
     rb_define_module_function(Wt::Ruby::wt_internal_module, "application_terminated=", (VALUE (*) (...)) set_application_terminated, 1);
 
     rb_define_module_function(Wt::Ruby::wt_module, "WRun", (VALUE (*) (...)) wt_wrun, 1);
+
     rb_define_module_function(Wt::Ruby::wt_module, "wt_version", (VALUE (*) (...)) wt_version, 0);
     rb_define_module_function(Wt::Ruby::wt_module, "wtruby_version", (VALUE (*) (...)) wtruby_version, 0);
+    rb_define_global_const("WTHTTP_CONFIGURATION", rb_str_new2(WTHTTP_CONFIGURATION));
+    rb_define_global_const("RUNDIR", rb_str_new2(RUNDIR));
+    rb_define_global_const("WT_CONFIG_XML", rb_str_new2(WT_CONFIG_XML));
 
     rb_require("wt/wtruby.rb");
 

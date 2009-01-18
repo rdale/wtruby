@@ -1,6 +1,17 @@
 2009-01-18 Richard Dale <richard.j.dale@gmail.com>
 * Added a Wt::wt_version to return the version string of the Wt lib being used
 * Raise the version string of Wt::Ruby to 0.9.0
+* Added Wt::WServer.setEntryPoint() method that can be passed a Ruby block
+like this:
+
+    server.addEntryPoint(Wt::WServer::Application) do |env|
+      HelloApplication.new(env, false)
+    end
+Some more work needs to be done to translate C++ exceptions to Ruby ones for
+the WServer methods
+* Added the hello-widgetset example
+* Added WTHTTP_CONFIGURATION, RUNDIR and WT_CONFIG_XML top level constants
+correponding to the ones in the WConfig.h header
 
 2009-01-16 Richard Dale <richard.j.dale@gmail.com>
 * Removed the simplechat example as it only works with the multi-threaded 
