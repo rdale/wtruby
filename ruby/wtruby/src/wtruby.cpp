@@ -401,6 +401,28 @@ createApplication(const Wt::WEnvironment& env)
     }
 }
 
+// Convert a Ruby ARGV array to a C style argc/argv one
+static char **
+args2argv(VALUE args, int& argc)
+{
+    argc = RARRAY(args)->len + 1;
+    char ** argv = new char *[argc];
+
+    VALUE program_name = rb_gv_get("$0");
+    char * arg = StringValuePtr(program_name);
+    argv[0] = new char[strlen(arg) + 1];
+    strcpy(argv[0], arg);
+
+    for (long i = 0; i < RARRAY(args)->len; i++) {
+        VALUE item = rb_ary_entry(args, i);
+        arg = StringValuePtr(item);
+        argv[i + 1] = new char[strlen(arg) + 1];
+        strcpy(argv[i + 1], arg);
+    }
+
+    return argv;
+}
+
 // A block passed to Wt::WServer::addEntryPoint(), which is run by createWidgetSet()
 static VALUE widgetSetInitializer = Qnil;
 
@@ -430,21 +452,8 @@ wt_wrun(VALUE klass, VALUE args)
         applicationInitializer = rb_block_proc();
     }
 
-    int argc = RARRAY(args)->len + 1;
-    char ** argv = new char *[argc];
-
-    VALUE program_name = rb_gv_get("$0");
-    char * arg = StringValuePtr(program_name);
-    argv[0] = new char[strlen(arg) + 1];
-    strcpy(argv[0], arg);
-
-    for (long i = 0; i < RARRAY(args)->len; i++) {
-        VALUE item = rb_ary_entry(args, i);
-        arg = StringValuePtr(item);
-        argv[i + 1] = new char[strlen(arg) + 1];
-        strcpy(argv[i + 1], arg);
-    }
-
+    int argc = 0;
+    char ** argv = args2argv(args, argc);
     Wt::WRun(argc, argv, &createApplication);
     return Qnil;
 }
@@ -482,20 +491,8 @@ wserver_setserverconfiguration(VALUE self, VALUE args, VALUE serverConfiguration
     smokeruby_object *o = value_obj_info(self);
     Wt::WServer * server = static_cast<Wt::WServer *>(o->ptr);
 
-    int argc = RARRAY(args)->len + 1;
-    char ** argv = new char *[argc];
-
-    VALUE program_name = rb_gv_get("$0");
-    char * arg = StringValuePtr(program_name);
-    argv[0] = new char[strlen(arg) + 1];
-    strcpy(argv[0], arg);
-
-    for (long i = 0; i < RARRAY(args)->len; i++) {
-        VALUE item = rb_ary_entry(args, i);
-        arg = StringValuePtr(item);
-        argv[i + 1] = new char[strlen(arg) + 1];
-        strcpy(argv[i + 1], arg);
-    }
+    int argc = 0;
+    char ** argv = args2argv(args, argc);
 
     try {
         server->setServerConfiguration(argc, argv, std::string(StringValuePtr(serverConfigurationFile)));

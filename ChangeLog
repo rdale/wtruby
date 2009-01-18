@@ -12,6 +12,8 @@ the WServer methods
 * Added the hello-widgetset example
 * Added WTHTTP_CONFIGURATION, RUNDIR and WT_CONFIG_XML top level constants
 correponding to the ones in the WConfig.h header
+* Don't repeat the code to convert from ARGV to argc/argv and add a utility
+function args2argv()
 
 2009-01-16 Richard Dale <richard.j.dale@gmail.com>
 * Removed the simplechat example as it only works with the multi-threaded 
