@@ -1,5 +1,6 @@
 2009-01-18 Richard Dale <richard.j.dale@gmail.com>
 * Added a Wt::wt_version to return the version string of the Wt lib being used
+* Raise the version string of Wt::Ruby to 0.9.0
 
 2009-01-16 Richard Dale <richard.j.dale@gmail.com>
 * Removed the simplechat example as it only works with the multi-threaded 
