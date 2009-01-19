@@ -497,9 +497,9 @@ wserver_setserverconfiguration(VALUE self, VALUE args, VALUE serverConfiguration
     try {
         server->setServerConfiguration(argc, argv, std::string(StringValuePtr(serverConfigurationFile)));
     } catch (Wt::WServer::Exception& e) {
-        printf("%s\n", e.what());
+        rb_raise(rb_eRuntimeError, e.what());
     } catch (std::exception& e) {
-        printf("exception: %s\n", e.what());
+        rb_raise(rb_eRuntimeError, e.what());
     }
 
     return Qnil;
@@ -517,12 +517,12 @@ wserver_start(VALUE self)
             return Qtrue;
         }
     } catch (Wt::WServer::Exception& e) {
-        printf("%s\n", e.what());
-        return Qfalse;
+        rb_raise(rb_eRuntimeError, e.what());
     } catch (std::exception& e) {
-        printf("exception: %s\n", e.what());
-        return Qfalse;
+        rb_raise(rb_eRuntimeError, e.what());
     }
+
+    return Qfalse;
 }
 
 static VALUE 
@@ -534,9 +534,9 @@ wserver_stop(VALUE self)
     try {
         server->stop();
     } catch (Wt::WServer::Exception& e) {
-        printf("%s\n", e.what());
+        rb_raise(rb_eRuntimeError, e.what());
     } catch (std::exception& e) {
-        printf("exception: %s\n", e.what());
+        rb_raise(rb_eRuntimeError, e.what());
     }
 
     return Qnil;
@@ -1065,7 +1065,6 @@ create_wt_class(VALUE /*self*/, VALUE package_value, VALUE module_value)
         rb_define_method(klass, "implement_stateless", (VALUE (*) (...)) wobject_implementstateless, -1);
         rb_define_method(klass, "isStateless", (VALUE (*) (...)) wobject_isstateless, 1);
         rb_define_attr(klass, "stateless_slots", 1, 1);
-
     }
 
     free((void *) package);
