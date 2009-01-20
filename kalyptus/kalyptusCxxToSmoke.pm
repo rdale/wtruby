@@ -695,6 +695,7 @@ sub preParseClass
 			|| ($className eq 'KDevelop::UiController' and $name eq 'defaultArea')
 			|| ($className eq 'Sublime::ViewWidgetCreator' and $name eq 'createViewWidget')
 
+			|| $name eq 'impl'
 			|| ($className =~ /^Wt::/ and $name eq 'createJS')
 			|| ($className eq 'boost::any' and $name eq 'type')
 			|| ($className eq 'boost::any' and $name eq 'any'

@@ -1,3 +1,6 @@
+2009-01-20 Richard Dale <richard.j.dale@gmail.com>
+* Skip methods called 'impl' in the Smoke library generation
+
 2009-01-19 Richard Dale <richard.j.dale@gmail.com>
 * When a WServer method raises a C++ exception, convert it to a Ruby runtime
 error calling rb_raise()
