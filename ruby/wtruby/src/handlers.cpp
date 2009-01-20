@@ -736,6 +736,76 @@ void marshall_StdStringVector(Marshall *m) {
     }
 }
 
+
+void marshall_WStringVector(Marshall *m) {
+    switch(m->action()) {
+    case Marshall::FromVALUE: 
+    {
+        VALUE list = *(m->var());
+        if (TYPE(list) != T_ARRAY) {
+            m->item().s_voidp = 0;
+            break;
+        }
+
+        int count = RARRAY(list)->len;
+        std::vector<Wt::WString> *stringlist = new std::vector<Wt::WString>;
+
+        for (long i = 0; i < count; i++) {
+            VALUE item = rb_ary_entry(list, i);
+            if (TYPE(item) != T_STRING) {
+                stringlist->push_back(Wt::WString());
+                continue;
+            }
+
+            Wt::WString str = Wt::WString::fromUTF8(StringValuePtr(item));
+            stringlist->push_back(str);
+        }
+
+        m->item().s_voidp = stringlist;
+        m->next();
+
+        if (stringlist != 0 && !m->type().isConst()) {
+            rb_ary_clear(list);
+            for (unsigned i = 0; i < stringlist->size(); ++i) {
+                rb_ary_push(list, rb_str_new2(stringlist->at(i).toUTF8().c_str()));
+            }
+        }
+        
+        if (m->cleanup()) {
+            delete stringlist;
+        }
+    
+        break;
+    }
+
+    case Marshall::ToVALUE: 
+    {
+        std::vector<Wt::WString> *stringlist = static_cast<std::vector<Wt::WString> *>(m->item().s_voidp);
+        if (stringlist == 0) {
+            *(m->var()) = Qnil;
+            break;
+        }
+
+        VALUE av = rb_ary_new();
+        for (unsigned i = 0; i < stringlist->size(); ++i) {
+            rb_ary_push(av, rb_str_new2(stringlist->at(i).toUTF8().c_str()));
+        }
+
+        *(m->var()) = av;
+
+        if (m->cleanup()) {
+            delete stringlist;
+        }
+
+    }
+    break;
+
+    default:
+        m->unsupported();
+        break;
+    }
+}
+
 static void marshall_charP_array(Marshall *m) {
     switch(m->action()) {
     case Marshall::FromVALUE:
@@ -1072,6 +1142,8 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "std::vector<char>&", marshall_StdCharVector },
     { "std::vector<std::string>", marshall_StdStringVector },
     { "std::vector<std::string>&", marshall_StdStringVector },
+    { "std::vector<Wt::WString>", marshall_WStringVector },
+    { "std::vector<Wt::WString>&", marshall_WStringVector },
     { "std::vector<Wt::WWidget*>&", marshall_WWidgetVector },
     { "std::vector<Wt::WPoint>&", marshall_WPointVector },
     { "std::vector<Wt::WPointF>&", marshall_WPointFVector },
