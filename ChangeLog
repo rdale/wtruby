@@ -9,6 +9,7 @@ correctly.
 Ext::RadioButtons
 * Added support for JSignal<bool>, JSignal<int> and JSignal<int,int> types.
 The Ext::ComboBox activated signal of type JSignal<int> now works correctly
+* Added marshallers for various std::set types
 
 2009-01-20 Richard Dale <richard.j.dale@gmail.com>
 * Skip methods called 'impl' in the Smoke library generation
