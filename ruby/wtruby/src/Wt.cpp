@@ -227,11 +227,6 @@ Binding::callMethod(Smoke::Index method, void *ptr, Smoke::Stack args, bool /*is
 
     const char *methodName = smoke->methodNames[smoke->methods[method].name];
 
-    // Special case load() at present as it clashes with Kernel#load
-    if (std::strcmp(methodName, "load") == 0) {
-        return false;
-    }
-
     // If the virtual method hasn't been overriden, just call the C++ one.
     if (rb_respond_to(obj, rb_intern(methodName)) == 0) {
         return false;
