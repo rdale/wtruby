@@ -581,6 +581,141 @@ jsignal2_emit(VALUE self, VALUE arg1, VALUE arg2)
 }
 
 static VALUE
+new_jsignal_boolean(int argc, VALUE * argv, VALUE klass)
+{
+    smokeruby_object * o = value_obj_info(argv[0]);
+    Wt::WObject * wobject = (Wt::WObject *) o->smoke->cast(o->ptr, o->classId, o->smoke->idClass("Wt::WObject").index);
+
+    Wt::JSignal<bool> * sig = new Wt::JSignal<bool>(wobject, std::string(StringValuePtr(argv[1])));
+    smokeruby_object  * s = alloc_smokeruby_object( true, 
+                                                    wt_Smoke, 
+                                                    wt_Smoke->idClass("Wt::EventSignalBase").index, 
+                                                    static_cast<void *>(sig) );
+
+    VALUE result = Data_Wrap_Struct(Wt::Ruby::jsignal_boolean_class, smokeruby_mark, smokeruby_free, s);
+    mapObject(result, result);
+    return result;
+}
+
+static VALUE
+jsignal_boolean_name(VALUE self)
+{
+    smokeruby_object * o = value_obj_info(self);
+    Wt::JSignal<bool> * sig = static_cast<Wt::JSignal<bool> * >(o->ptr);
+    return rb_str_new2(sig->name().c_str());
+}
+
+static VALUE
+jsignal_boolean_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect1< Wt::JSignal<bool> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+jsignal_boolean_emit(VALUE self, VALUE arg)
+{
+    smokeruby_object * o = value_obj_info(self);
+    Wt::JSignal<bool> * sig = static_cast<Wt::JSignal<bool> * >(o->ptr);
+    sig->emit(arg == Qtrue ? true : false);
+    return self;
+}
+
+static VALUE
+new_jsignal_int(int argc, VALUE * argv, VALUE klass)
+{
+    smokeruby_object * o = value_obj_info(argv[0]);
+    Wt::WObject * wobject = (Wt::WObject *) o->smoke->cast(o->ptr, o->classId, o->smoke->idClass("Wt::WObject").index);
+
+    Wt::JSignal<int> * sig = new Wt::JSignal<int>(wobject, std::string(StringValuePtr(argv[1])));
+    smokeruby_object  * s = alloc_smokeruby_object( true, 
+                                                    wt_Smoke, 
+                                                    wt_Smoke->idClass("Wt::EventSignalBase").index, 
+                                                    static_cast<void *>(sig) );
+
+    VALUE result = Data_Wrap_Struct(Wt::Ruby::jsignal_int_class, smokeruby_mark, smokeruby_free, s);
+    mapObject(result, result);
+    return result;
+}
+
+static VALUE
+jsignal_int_name(VALUE self)
+{
+    smokeruby_object * o = value_obj_info(self);
+    Wt::JSignal<int> * sig = static_cast<Wt::JSignal<int> * >(o->ptr);
+    return rb_str_new2(sig->name().c_str());
+}
+
+static VALUE
+jsignal_int_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect1< Wt::JSignal<int> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+jsignal_int_emit(VALUE self, VALUE arg)
+{
+    smokeruby_object * o = value_obj_info(self);
+    Wt::JSignal<int> * sig = static_cast<Wt::JSignal<int> * >(o->ptr);
+    sig->emit(NUM2INT(arg));
+    return self;
+}
+
+static VALUE
+new_jsignal_int_int(int argc, VALUE * argv, VALUE klass)
+{
+    smokeruby_object * o = value_obj_info(argv[0]);
+    Wt::WObject * wobject = (Wt::WObject *) o->smoke->cast(o->ptr, o->classId, o->smoke->idClass("Wt::WObject").index);
+
+    Wt::JSignal<int, int> * sig = new Wt::JSignal<int, int>(wobject, std::string(StringValuePtr(argv[1])));
+    smokeruby_object  * s = alloc_smokeruby_object( true, 
+                                                    wt_Smoke, 
+                                                    wt_Smoke->idClass("Wt::EventSignalBase").index, 
+                                                    static_cast<void *>(sig) );
+
+    VALUE result = Data_Wrap_Struct(Wt::Ruby::jsignal_int_int_class, smokeruby_mark, smokeruby_free, s);
+    mapObject(result, result);
+    return result;
+}
+
+static VALUE
+jsignal_int_int_name(VALUE self)
+{
+    smokeruby_object * o = value_obj_info(self);
+    Wt::JSignal<int, int> * sig = static_cast<Wt::JSignal<int, int> * >(o->ptr);
+    return rb_str_new2(sig->name().c_str());
+}
+
+static VALUE
+jsignal_int_int_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect1< Wt::JSignal<int, int> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+jsignal_int_int_emit(VALUE self, VALUE arg1, VALUE arg2)
+{
+    smokeruby_object * o = value_obj_info(self);
+    Wt::JSignal<int, int> * sig = static_cast<Wt::JSignal<int, int> * >(o->ptr);
+    sig->emit(NUM2INT(arg1), NUM2INT(arg2));
+    return self;
+}
+
+static VALUE
 new_signal(int argc, VALUE * argv, VALUE klass)
 {
     Wt::Signal<void> * sig = 0;
@@ -974,6 +1109,24 @@ define_eventsignals(VALUE klass)
     rb_define_method(Wt::Ruby::jsignal2_class, "connect", (VALUE (*) (...)) jsignal2_connect, -1);
     rb_define_method(Wt::Ruby::jsignal2_class, "emit", (VALUE (*) (...)) jsignal2_emit, 2);
     rb_define_method(Wt::Ruby::jsignal2_class, "name", (VALUE (*) (...)) jsignal2_name, 0);
+
+    Wt::Ruby::jsignal_boolean_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignalBoolean", klass);
+    rb_define_singleton_method(Wt::Ruby::jsignal_boolean_class, "new", (VALUE (*) (...)) new_jsignal_boolean, -1);
+    rb_define_method(Wt::Ruby::jsignal_boolean_class, "connect", (VALUE (*) (...)) jsignal_boolean_connect, -1);
+    rb_define_method(Wt::Ruby::jsignal_boolean_class, "emit", (VALUE (*) (...)) jsignal_boolean_emit, 1);
+    rb_define_method(Wt::Ruby::jsignal_boolean_class, "name", (VALUE (*) (...)) jsignal_boolean_name, 0);
+
+    Wt::Ruby::jsignal_int_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignalInt", klass);
+    rb_define_singleton_method(Wt::Ruby::jsignal_int_class, "new", (VALUE (*) (...)) new_jsignal_int, -1);
+    rb_define_method(Wt::Ruby::jsignal_int_class, "connect", (VALUE (*) (...)) jsignal_int_connect, -1);
+    rb_define_method(Wt::Ruby::jsignal_int_class, "emit", (VALUE (*) (...)) jsignal_int_emit, 1);
+    rb_define_method(Wt::Ruby::jsignal_int_class, "name", (VALUE (*) (...)) jsignal_int_name, 0);
+
+    Wt::Ruby::jsignal_int_int_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignalIntInt", klass);
+    rb_define_singleton_method(Wt::Ruby::jsignal_int_int_class, "new", (VALUE (*) (...)) new_jsignal_int_int, -1);
+    rb_define_method(Wt::Ruby::jsignal_int_int_class, "connect", (VALUE (*) (...)) jsignal_int_int_connect, -1);
+    rb_define_method(Wt::Ruby::jsignal_int_int_class, "emit", (VALUE (*) (...)) jsignal_int_int_emit, 2);
+    rb_define_method(Wt::Ruby::jsignal_int_int_class, "name", (VALUE (*) (...)) jsignal_int_int_name, 0);
 }
 
 void
