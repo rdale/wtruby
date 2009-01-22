@@ -15,12 +15,40 @@
  *                                                                         *
  ***************************************************************************/
 
+#include <Wt/WButtonGroup>
+
 #include <ruby.h>
 
 #include <smoke/wtext_smoke.h>
 #include <wtruby.h>
 
 #include <iostream>
+#include <cstring>
+
+namespace Wt {
+  namespace Ruby {
+    static VALUE wt_wbuttongroup_class;
+  }
+}
+
+static VALUE
+wbuttongroup_addbutton(int argc, VALUE * argv, VALUE self)
+{
+    if (    argc == 1 
+            && std::strcmp(rb_obj_classname(argv[0]), "Wt::Ext::RadioButton") == 0 )
+    {
+        smokeruby_object *o = value_obj_info(self);
+        Wt::WButtonGroup * group = static_cast<Wt::WButtonGroup *>(o->ptr);
+
+        smokeruby_object *b = value_obj_info(argv[0]);
+        Wt::Ext::RadioButton * button = static_cast<Wt::Ext::RadioButton *>(b->ptr);
+
+        group->addButton(button);
+        return self;
+    }
+
+    rb_call_super(argc, argv);
+}
 
 static VALUE getClassList(VALUE /*self*/)
 {
@@ -64,6 +92,10 @@ Init_wtext()
 
     wtext_module = rb_define_module_under(Wt::Ruby::wt_module, "Ext");
     wtext_internal_module = rb_define_module_under(wtext_module, "Internal");
+
+    Wt::Ruby::wt_wbuttongroup_class = rb_define_class_under(Wt::Ruby::wt_module, "WButtonGroup", Wt::Ruby::wt_base_class);
+    rb_define_method(Wt::Ruby::wt_wbuttongroup_class, "addButton", (VALUE (*) (...)) wbuttongroup_addbutton, -1);
+    rb_define_method(Wt::Ruby::wt_wbuttongroup_class, "add_button", (VALUE (*) (...)) wbuttongroup_addbutton, -1);
 
     rb_define_singleton_method(wtext_internal_module, "getClassList", (VALUE (*) (...)) getClassList, 0);
 

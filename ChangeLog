@@ -5,6 +5,8 @@ Kernel#load is a module method, and a respond_to? test on a Wt::Ruby instance
 won't ever be true. So remove the load() special casing. This makes the code
 for DeferredWidgets in the wt-homepage and widgetgallery examples work 
 correctly.
+* Special cased the Wt::WButtonGroup.addButton() method so that it works with
+Ext::RadioButtons
 
 2009-01-20 Richard Dale <richard.j.dale@gmail.com>
 * Skip methods called 'impl' in the Smoke library generation
