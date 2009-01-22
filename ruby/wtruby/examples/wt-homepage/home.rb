@@ -211,12 +211,11 @@ class Home < Wt::WApplication
       readReleases(@releases, "releases.txt")
     end
 
-    super
+    # super
   end
 
   def news
     result = Wt::WContainerWidget.new
-
     result.addWidget(Wt::WText.new(tr("home.news")))
 
     result.addWidget(Wt::WText.new(tr("home.latest-news")))
@@ -591,7 +590,7 @@ class Home < Wt::WApplication
     releaseTable.elementAt(0, 1).resize(Wt::WLength.new(15, Wt::WLength::FontEx),
                                           Wt::WLength.new)
 
-    int row = 1
+    row = 1
 
     while line = f.gets
       fields = line.split(',')
