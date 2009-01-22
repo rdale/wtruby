@@ -14,6 +14,7 @@
 
 #include <Wt/Chart/WDataSeries>
 #include <Wt/WAbstractArea>
+#include <Wt/WDate>
 #include <Wt/WFormWidget>
 #include <Wt/WLabel>
 #include <Wt/WLineF>
@@ -737,6 +738,71 @@ void marshall_StdStringVector(Marshall *m) {
 }
 
 
+void marshall_StdIntSet(Marshall *m) {
+    switch(m->action()) {
+    case Marshall::FromVALUE: 
+    {
+        VALUE list = *(m->var());
+        if (TYPE(list) != T_ARRAY) {
+            m->item().s_voidp = 0;
+            break;
+        }
+
+        int count = RARRAY(list)->len;
+        std::set<int> *intlist = new std::set<int>;
+
+        for (long i = 0; i < count; i++) {
+            VALUE item = rb_ary_entry(list, i);
+            if (TYPE(item) != T_FIXNUM) {
+                continue;
+            }
+            intlist->insert(NUM2INT(item));
+        }
+
+        m->item().s_voidp = intlist;
+        m->next();
+
+        if (intlist != 0 && !m->type().isConst()) {
+            rb_ary_clear(list);
+            for (std::set<int>::iterator at = intlist->begin(); at != intlist->end(); ++at) {
+                rb_ary_push(list, INT2NUM(*at));
+            }
+        }
+        
+        if (m->cleanup()) {
+            delete intlist;
+        }
+    
+        break;
+    }
+
+    case Marshall::ToVALUE: 
+    {
+        std::set<int> *intlist = static_cast<std::set<int> *>(m->item().s_voidp);
+        if (intlist == 0) {
+            *(m->var()) = Qnil;
+            break;
+        }
+
+        VALUE av = rb_ary_new();
+        for (std::set<int>::iterator at = intlist->begin(); at != intlist->end(); ++at) {
+            rb_ary_push(av, INT2NUM(*at));
+        }
+
+        *(m->var()) = av;
+
+        if (m->cleanup()) {
+            delete intlist;
+        }
+    }
+    break;
+
+    default:
+        m->unsupported();
+        break;
+    }
+}
+
 void marshall_WStringVector(Marshall *m) {
     switch(m->action()) {
     case Marshall::FromVALUE: 
@@ -1062,7 +1128,6 @@ DEF_LIST_MARSHALLER( WTreeNodeVector, std::vector<Wt::WTreeNode*>, Wt::WTreeNode
 // DEF_LIST_MARSHALLER( DomElementVector, std::vector<Wt::DomElement*>, Wt::DomElement )
 DEF_LIST_MARSHALLER( WObjectVector, std::vector<Wt::WObject*>, Wt::WObject )
 
-
 DEF_VALUELIST_MARSHALLER( WPointVector, std::vector<Wt::WPoint>, Wt::WPoint )
 DEF_VALUELIST_MARSHALLER( WPointFVector, std::vector<Wt::WPointF>, Wt::WPointF )
 DEF_VALUELIST_MARSHALLER( ChartWDataSeriesVector, std::vector<Wt::Chart::WDataSeries>, Wt::Chart::WDataSeries )
@@ -1072,6 +1137,10 @@ DEF_VALUELIST_MARSHALLER( WPainterPathSegmentVector, std::vector<Wt::WPainterPat
 DEF_VALUELIST_MARSHALLER( WRectFVector, std::vector<Wt::WRectF>, Wt::WRectF )
 DEF_VALUELIST_MARSHALLER( WModelIndexVector, std::vector<Wt::WModelIndex>, Wt::WModelIndex )
 
+DEF_SET_MARSHALLER( WTreeNodeSet, std::set<Wt::WTreeNode*>, Wt::WTreeNode, std::set<Wt::WTreeNode*>::iterator )
+
+DEF_VALUESET_MARSHALLER( WDateSet, std::set<Wt::WDate>, Wt::WDate, std::set<Wt::WDate>::iterator )
+DEF_VALUESET_MARSHALLER( WModelIndexSet, std::set<Wt::WModelIndex>, Wt::WModelIndex, std::set<Wt::WModelIndex>::iterator )
 
 WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "bool*", marshall_it<bool *> },
@@ -1150,6 +1219,10 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "std::vector<Wt::WAbstractArea*>", marshall_WAbstractAreaVector },
     { "std::vector<Wt::WMenuItem*>&", marshall_WMenuItemVector },
     { "std::vector<Wt::WTreeNode*>&", marshall_WTreeNodeVector },
+    { "std::set<int>&", marshall_StdIntSet },
+    { "std::set<Wt::WTreeNode*>&", marshall_WTreeNodeSet },
+    { "std::set<Wt::WDate>&", marshall_WDateSet },
+    { "std::set<Wt::WModelIndex>&", marshall_WModelIndexSet },
     { "std::vector<Wt::WStandardItem*>", marshall_WStandardItemVector },
     { "std::vector<Wt::WStandardItem*>&", marshall_WStandardItemVector },
 //    { "std::vector<Wt::DomElement*>&", marshall_DomElementVector },

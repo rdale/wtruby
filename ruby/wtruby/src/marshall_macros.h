@@ -25,6 +25,12 @@
 #define DEF_VALUELIST_MARSHALLER(ListIdent,ItemList,Item) namespace { char ListIdent##STR[] = #Item; }  \
         Marshall::HandlerFn marshall_##ListIdent = marshall_ValueListItem<Item,ItemList,ListIdent##STR>;
 
+#define DEF_SET_MARSHALLER(SetIdent,ItemSet,Item,ItemSetIterator) namespace { char SetIdent##STR[] = #Item; }  \
+        Marshall::HandlerFn marshall_##SetIdent = marshall_ItemSet<Item,ItemSet,ItemSetIterator,SetIdent##STR>;
+
+#define DEF_VALUESET_MARSHALLER(SetIdent,ItemSet,Item,ItemSetIterator) namespace { char SetIdent##STR[] = #Item; }  \
+        Marshall::HandlerFn marshall_##SetIdent = marshall_ItemValueSet<Item,ItemSet,ItemSetIterator,SetIdent##STR>;
+
 #define DEF_SIGNAL_MARSHALLER(SIGNAL_IDENT, CLASS_IDENT, CLASS_NAME) \
 void marshall_##SIGNAL_IDENT(Marshall *m) { \
     switch(m->action()) { \
@@ -51,7 +57,6 @@ void marshall_##SIGNAL_IDENT(Marshall *m) { \
         break; \
     } \
 }
-
 
 template <class Item, class ItemList, const char *ItemSTR >
 void marshall_ItemList(Marshall *m) {
@@ -229,6 +234,194 @@ void marshall_ValueListItem(Marshall *m) {
     }
     break;
       
+    default:
+        m->unsupported();
+        break;
+    }
+}
+
+template <class Item, class ItemSet, class ItemSetIterator, const char *ItemSTR >
+void marshall_ItemSet(Marshall *m) {
+    switch(m->action()) {
+    case Marshall::FromVALUE:
+    {
+        VALUE list = *(m->var());
+        if (TYPE(list) != T_ARRAY) {
+            m->item().s_voidp = 0;
+            break;
+        }
+
+        int count = RARRAY(list)->len;
+        ItemSet *stdset = new ItemSet;
+        long i;
+        for (i = 0; i < count; i++) {
+            VALUE item = rb_ary_entry(list, i);
+            // TODO do type checking!
+            smokeruby_object *o = value_obj_info(item);
+            if (o == 0 || o->ptr == 0) {
+                continue;
+            }
+            void *ptr = o->ptr;
+            ptr = o->smoke->cast(ptr, o->classId, o->smoke->idClass(ItemSTR).index);
+            stdset->insert((Item *) ptr);
+        }
+
+        m->item().s_voidp = stdset;
+        m->next();
+
+        if (!m->type().isConst()) {
+            rb_ary_clear(list);
+            for (   ItemSetIterator at = stdset->begin(); 
+                    at != stdset->end(); 
+                    ++at ) 
+            {
+                VALUE obj = getPointerObject((void *) *at);
+                rb_ary_push(list, obj);
+            }
+        }
+
+        if (m->cleanup()) {
+            delete stdset;
+        }
+    }
+    break;
+      
+    case Marshall::ToVALUE:
+    {
+        ItemSet *stdset = (ItemSet*)m->item().s_voidp;
+        if (stdset == 0) {
+            *(m->var()) = Qnil;
+            break;
+        }
+
+        VALUE av = rb_ary_new();
+
+        for (   ItemSetIterator at = stdset->begin(); 
+                at != stdset->end(); 
+                ++at ) 
+        {
+            void *p = (void *) *at;
+
+            if (m->item().s_voidp == 0) {
+                *(m->var()) = Qnil;
+                break;
+            }
+
+            VALUE obj = getPointerObject(p);
+            if (obj == Qnil) {
+                smokeruby_object * o = alloc_smokeruby_object(  false, 
+                                                                m->smoke(), 
+                                                                m->smoke()->idClass(ItemSTR).index, 
+                                                                p );
+                obj = set_obj_info(resolve_classname(o), o);
+            }
+        
+            rb_ary_push(av, obj);
+        }
+
+        *(m->var()) = av;
+        m->next();
+
+        if (m->cleanup()) {
+            delete stdset;
+        }
+    }
+    break;
+
+    default:
+        m->unsupported();
+        break;
+    }
+}
+
+template <class Item, class ItemSet, class ItemSetIterator, const char *ItemSTR >
+void marshall_ItemValueSet(Marshall *m) {
+    switch(m->action()) {
+    case Marshall::FromVALUE:
+    {
+        VALUE list = *(m->var());
+        if (TYPE(list) != T_ARRAY) {
+            m->item().s_voidp = 0;
+            break;
+        }
+
+        int count = RARRAY(list)->len;
+        ItemSet *stdset = new ItemSet;
+        long i;
+        for (i = 0; i < count; i++) {
+            VALUE item = rb_ary_entry(list, i);
+            // TODO do type checking!
+            smokeruby_object *o = value_obj_info(item);
+            if (o == 0 || o->ptr == 0) {
+                continue;
+            }
+            void *ptr = o->ptr;
+            ptr = o->smoke->cast(ptr, o->classId, o->smoke->idClass(ItemSTR).index);
+            stdset->insert(*((Item *) ptr));
+        }
+
+        m->item().s_voidp = stdset;
+        m->next();
+
+        if (!m->type().isConst()) {
+            rb_ary_clear(list);
+            for (   ItemSetIterator at = stdset->begin(); 
+                    at != stdset->end(); 
+                    ++at ) 
+            {
+                VALUE obj = getPointerObject((void *) &(*at));
+                rb_ary_push(list, obj);
+            }
+        }
+
+        if (m->cleanup()) {
+            delete stdset;
+        }
+    }
+    break;
+      
+    case Marshall::ToVALUE:
+    {
+        ItemSet *stdset = (ItemSet*)m->item().s_voidp;
+        if (stdset == 0) {
+            *(m->var()) = Qnil;
+            break;
+        }
+
+        VALUE av = rb_ary_new();
+
+        for (   ItemSetIterator at = stdset->begin(); 
+                at != stdset->end(); 
+                ++at ) 
+        {
+            void *p = (void *) &(*at);
+
+            if (m->item().s_voidp == 0) {
+                *(m->var()) = Qnil;
+                break;
+            }
+
+            VALUE obj = getPointerObject(p);
+            if (obj == Qnil) {
+                smokeruby_object * o = alloc_smokeruby_object(  false, 
+                                                                m->smoke(), 
+                                                                m->smoke()->idClass(ItemSTR).index, 
+                                                                p );
+                obj = set_obj_info(resolve_classname(o), o);
+            }
+        
+            rb_ary_push(av, obj);
+        }
+
+        *(m->var()) = av;
+        m->next();
+
+        if (m->cleanup()) {
+            delete stdset;
+        }
+    }
+    break;
+
     default:
         m->unsupported();
         break;
