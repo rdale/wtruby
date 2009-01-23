@@ -1,4 +1,3 @@
-#!/usr/bin/ruby
 #
 # Copyright (C) 2008 Emweb bvba, Kessel-Lo, Belgium.
 #
@@ -6,45 +5,55 @@
 #
 # Translated to Ruby by Richard Dale
 
-require 'wt'
-require 'wtext'
 require 'chartconfig.rb'
 require 'csvutil.rb'
 require 'panellist.rb'
+
+module ChartsUtil
+  # Read the model from a CSV file
+  def readCsvFile(fname)
+    model = Wt::WStandardItemModel.new(0, 0, self)
+    begin
+      f = File.open(fname, "r")
+    rescue
+      error = tr("error-missing-data ")
+      error += fname
+      Wt::WText.new(error, $wApp.root)
+      return nil
+    end
+
+    readFromCsv(f, model)
+    return model
+  end
+end
 
 #
 #  chartsexample Charts example
 #
 # An application that demonstrates various aspects of the charting lib.
 #
-class ChartsExample < Wt::WApplication
+class ChartsExample < Wt::WContainerWidget
 
   # Constructor.
   #
-  def initialize(env)
-    super(env)
-    setTitle("Charts example")
-  
-    messageResourceBundle.use("charts")
-  
-    root.padding = Wt::WLength.new(10)
-  
+  def initialize(root)
+    super(root)
     Wt::WText.new(tr("introduction"), root)
   
-    categoryExample
-    timeSeriesExample
-    scatterPlotExample
-    pieExample
-  
-    #
-    # Set our style sheet last, so that it loaded after the ext stylesheets.
-    #
-    useStyleSheet("charts.css")
+    CategoryExample.new(self)
+    TimeSeriesExample.new(self)
+    ScatterPlotExample.new(self)
+    # PieExample.new(self)
   end
+end
 
   # Creates the category chart example
-  def categoryExample
-    Wt::WText.new(tr("category chart"), root)
+class CategoryExample < Wt::WContainerWidget
+  include ChartsUtil
+
+  def initialize(parent)
+    super(parent)
+    Wt::WText.new(tr("category chart"), self)
   
     model = readCsvFile("category.csv")
   
@@ -56,8 +65,8 @@ class ChartsExample < Wt::WApplication
     # If we have JavaScript, show an Ext table view that allows editing
     # of the model.
     #
-    if environment.javaScript
-      w = Wt::WContainerWidget.new(root)
+    if $wApp.environment.javaScript
+      w = Wt::WContainerWidget.new(self)
       table = Wt::Ext::TableView.new(w)
       table.setMargin(Wt::WLength.new(10), Wt::Top | Wt::Bottom)
       table.setMargin(Wt::WLength.new, Wt::Left | Wt::Right)
@@ -76,7 +85,7 @@ class ChartsExample < Wt::WApplication
     #
     # Create the category chart.
     #
-    chart = Wt::Chart::WCartesianChart.new(root)
+    chart = Wt::Chart::WCartesianChart.new(self)
     chart.model = model;        # set the model
     chart.xSeriesColumn = 0;    # set the column that holds the categories
     chart.legendEnabled = true; # enable the legend
@@ -100,12 +109,17 @@ class ChartsExample < Wt::WApplication
     chart.setMargin(Wt::WLength.new(10), Wt::Top | Wt::Bottom)        # add margin vertically
     chart.setMargin(Wt::WLength.new, Wt::Left | Wt::Right) # center horizontally
   
-    ChartConfig.new(chart, root)
+    ChartConfig.new(chart, self)
   end
+end
 
   # Creates the time series scatterplot example
-  def timeSeriesExample
-    Wt::WText.new(tr("scatter plot"), root)
+class TimeSeriesExample < Wt::WContainerWidget
+  include ChartsUtil
+
+  def initialize(parent)
+    super(parent)
+    Wt::WText.new(tr("scatter plot"), self)
   
     model = readCsvFile("timeseries.csv")
   
@@ -125,7 +139,7 @@ class ChartsExample < Wt::WApplication
     #
     # Create the scatter plot.
     #
-    chart = Wt::Chart::WCartesianChart.new(root)
+    chart = Wt::Chart::WCartesianChart.new(self)
     chart.model = model;        # set the model
     chart.xSeriesColumn = 0;    # set the column that holds the X data
     chart.legendEnabled = true; # enable the legend
@@ -143,18 +157,23 @@ class ChartsExample < Wt::WApplication
     for i in 1...3
       s = Wt::Chart::WDataSeries.new(i, Wt::Chart::LineSeries)
       chart.addSeries(s)
-      end
+    end
   
     chart.resize(Wt::WLength.new(800), Wt::WLength.new(400)) # Wt::WPaintedWidget must be given explicit size
   
     chart.setMargin(Wt::WLength.new(10), Wt::Top | Wt::Bottom)        # add margin vertically
     chart.setMargin(Wt::WLength.new, Wt::Left | Wt::Right) # center horizontally
   
-    ChartConfig.new(chart, root)
+    ChartConfig.new(chart, self)
   end
+end
 
-  def scatterPlotExample
-    Wt::WText.new(tr("scatter plot 2"), root)
+class ScatterPlotExample < Wt::WContainerWidget
+  include ChartsUtil
+
+  def initialize(parent)
+    super(parent)
+    Wt::WText.new(tr("scatter plot 2"), self)
   
     model = Wt::WStandardItemModel.new(100, 2, self)
     model.setHeaderData(0, Boost::Any.new("X"))
@@ -170,7 +189,7 @@ class ChartsExample < Wt::WApplication
     #
     # Create the scatter plot.
     #
-    chart = Wt::Chart::WCartesianChart.new(root)
+    chart = Wt::Chart::WCartesianChart.new(self)
     chart.model = model        # set the model
     chart.xSeriesColumn = 0    # set the column that holds the X data
     chart.legendEnabled = true # enable the legend
@@ -194,13 +213,17 @@ class ChartsExample < Wt::WApplication
     chart.setMargin(Wt::WLength.new(10), Wt::Top | Wt::Bottom)        # add margin vertically
     chart.setMargin(Wt::WLength.new, Wt::Left | Wt::Right) # center horizontally
   
-    config = ChartConfig.new(chart, root)
+    config = ChartConfig.new(chart, self)
     config.valueFill = Wt::Chart::ZeroValueFill
   end
+end
 
   # Creates the pie chart example
-  def pieExample
-    Wt::WText.new(tr("pie chart"), root)
+class PieExample < Wt::WContainerWidget
+  include ChartsUtil
+
+  def initialize(parent)
+    Wt::WText.new(tr("pie chart"), self)
   
     model = readCsvFile("pie.csv")
   
@@ -212,8 +235,8 @@ class ChartsExample < Wt::WApplication
     # If we have JavaScript, show an Ext table view that allows editing
     # of the model.
     #
-    if environment.javaScript
-      w = Wt::WContainerWidget.new(root)
+    if $wApp.environment.javaScript
+      w = Wt::WContainerWidget.new(self)
       table = Wt::Ext::TableView.new(w)
       table.setMargin(Wt::WLength.new(10), Wt::Top | Wt::Bottom)
       table.setMargin(Wt::WLength.new, Wt::Left | Wt::Right)
@@ -231,7 +254,7 @@ class ChartsExample < Wt::WApplication
     #
     # Create the pie chart.
     #
-    chart = Wt::Chart::WPieChart.new(root)
+    chart = Wt::Chart::WPieChart.new(self)
     chart.model = model       # set the model
     chart.labelsColumn = 0    # set the column that holds the labels
     chart.dataColumn = 1      # set the column that holds the data
@@ -250,27 +273,6 @@ class ChartsExample < Wt::WApplication
     chart.setMargin(Wt::WLength.new(10), Wt::Top | Wt::Bottom)        # add margin vertically
     chart.setMargin(Wt::WLength.new, Wt::Left | Wt::Right) # center horizontally
   end
-
-  # Read the model from a CSV file
-  def readCsvFile(fname)
-    model = Wt::WStandardItemModel.new(0, 0, self)
-    begin
-      f = File.open(fname, "r")
-    rescue
-      error = tr("error-missing-data ")
-      error += fname
-      Wt::WText.new(error, root)
-      return nil
-    end
-
-    readFromCsv(f, model)
-    return model
-  end
-end
-
-Wt::WRun(ARGV) do |env|
-  app = ChartsExample.new(env)
-  app
 end
 
 # kate: space-indent on; indent-width 2; replace-tabs on; mixed-indent off;

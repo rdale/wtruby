@@ -6,20 +6,17 @@
 #
 # Translated to Ruby by Richard Dale
 
-require 'wt'
 require 'shapeswidget.rb'
 
-class PaintExample < Wt::WApplication
+class PaintExample < Wt::WContainerWidget
 
-  def initialize(env)
-    super(env)
-    setTitle("Paint example")
-    useStyleSheet("painting.css")
+  def initialize(root)
+    super(root)
 
     Wt::WText.new("<h2>Paint example</h2>" \
       "<p>A simple example demonstrating cross-browser vector graphics." \
       "</p>" \
-      "<p>The emweb logo below is painted using the Wt Wt::WPainter API, and " \
+      "<p>The emweb logo below is painted using the Wt WPainter API, and " \
       "rendered to the browser using inline SVG, inline VML or the " \
       "HTML 5 &lt;canvas&gt; element." \
       "</p>",
@@ -73,10 +70,6 @@ class PaintExample < Wt::WApplication
   def scaleShape(v)
     @shapes.relativeSize = 0.1 + 0.9 * (v/20.0)
   end
-end
-
-Wt::WRun(ARGV) do |env|
-  PaintExample.new(env)
 end
 
 # kate: space-indent on; indent-width 2; replace-tabs on; mixed-indent off;

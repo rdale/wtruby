@@ -1,3 +1,7 @@
+2009-01-23 Richard Dale <richard.j.dale@gmail.com>
+* Added the widgetgallery example, and amended the charts, dragdrop and 
+painting examples to work with it.
+
 2009-01-22 Richard Dale <richard.j.dale@gmail.com>
 * There was an exception in the virtual method callback code to ignore any
 load() methods as they clashed with the Ruby Kernel#load method. However,

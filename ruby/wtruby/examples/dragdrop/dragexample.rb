@@ -1,6 +1,5 @@
 #!/usr/bin/ruby
 # dragexample Drag and Drop example
-require 'wt'
 require 'character.rb'
 
 
@@ -22,38 +21,33 @@ def createDragImage(url, smallurl, mimeType, p)
   return result
 end
 
-Wt::WRun(ARGV) do |env|
-  app = Wt::WApplication.new(env)
-  app.title = "Drag &amp; drop"
-  Wt::WText.new("<h1>Wt Drag &amp; drop example.</h1>", app.root)
+class DragExample < Wt::WContainerWidget
+  def initialize(root)
+    super(root)
+    Wt::WText.new("<p>Help these people with their decision by dragging one of " \
+        "the pills.</p>", self)
 
-  Wt::WText.new("<p>Help these people with their decision by dragging one of " \
-      "the pills.</p>", app.root)
-
-  if !env.javaScript
-    Wt::WText.new("<i>This examples requires that javascript support is " \
-        "enabled.</i>", app.root)
+    if !$wApp.environment.javaScript
+      Wt::WText.new("<i>This examples requires that javascript support is " \
+          "enabled.</i>", self)
     end
 
-  pills = Wt::WContainerWidget.new(app.root)
-  pills.contentAlignment = Wt::WWidget::AlignCenter
+    pills = Wt::WContainerWidget.new(self)
+    pills.contentAlignment = Wt::WWidget::AlignCenter
 
-  createDragImage("icons/blue-pill.jpg",
-      "icons/blue-pill-small.png",
-      "blue-pill", pills)
-  createDragImage("icons/red-pill.jpg",
-      "icons/red-pill-small.png",
-      "red-pill", pills)
+    createDragImage("icons/blue-pill.jpg",
+        "icons/blue-pill-small.png",
+        "blue-pill", pills)
+    createDragImage("icons/red-pill.jpg",
+        "icons/red-pill-small.png",
+        "red-pill", pills)
 
-  dropSites = Wt::WContainerWidget.new(app.root)
+    dropSites = Wt::WContainerWidget.new(self)
 
-  Character.new("Neo", dropSites)
-  Character.new("Morpheus", dropSites)
-  Character.new("Trinity", dropSites)
-
-  app.useStyleSheet("dragdrop.css")
-
-  app
+    Character.new("Neo", dropSites)
+    Character.new("Morpheus", dropSites)
+    Character.new("Trinity", dropSites)
+  end
 end
 
 # kate: space-indent on; indent-width 2; replace-tabs on; mixed-indent off;
