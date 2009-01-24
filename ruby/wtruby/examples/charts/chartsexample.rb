@@ -43,7 +43,7 @@ class ChartsExample < Wt::WContainerWidget
     CategoryExample.new(self)
     TimeSeriesExample.new(self)
     ScatterPlotExample.new(self)
-    # PieExample.new(self)
+    PieExample.new(self)
   end
 end
 
@@ -223,6 +223,7 @@ class PieExample < Wt::WContainerWidget
   include ChartsUtil
 
   def initialize(parent)
+    super(parent)
     Wt::WText.new(tr("pie chart"), self)
   
     model = readCsvFile("pie.csv")
@@ -230,7 +231,7 @@ class PieExample < Wt::WContainerWidget
     if !model
       return
     end
-  
+
     #
     # If we have JavaScript, show an Ext table view that allows editing
     # of the model.
@@ -250,7 +251,6 @@ class PieExample < Wt::WContainerWidget
         table.setEditor(i, Wt::Ext::NumberField.new)
       end
     end
-
     #
     # Create the pie chart.
     #
