@@ -39,6 +39,10 @@ class EventDisplayer < Wt::WContainerWidget
     showEvent("Last activated signal: " + str + wstr)
   end
 
+  def status=(msg)
+    setStatus(msg)
+  end
+
   def setStatus(msg)
     showEvent("Last status message: " + msg)
   end

@@ -10,8 +10,8 @@ class DialogWidgets < ControlsWidget
   end
 
   def populateSubMenu(menu)
-    menu.addItem("Wt::WDialog", wDialog)
-    menu.addItem("Wt::WMessageBox", wMessageBox)
+    menu.addItem("WDialog", wDialog)
+    menu.addItem("WMessageBox", wMessageBox)
     menu.addItem("Ext Dialogs",
                   deferCreate(:eDialogs, self))
   end
@@ -19,8 +19,8 @@ class DialogWidgets < ControlsWidget
   def wDialog
     result = Wt::WContainerWidget.new
 
-    topic("Wt::WDialog", result)
-    Wt::WText.new(tr("dialogs-Wt::WDialog"), result)
+    topic("WDialog", result)
+    Wt::WText.new(tr("dialogs-WDialog"), result)
     button = Wt::WPushButton.new("Familiar", result)
     button.clicked.connect(SLOT(self, :custom))
 
@@ -30,8 +30,8 @@ class DialogWidgets < ControlsWidget
   def wMessageBox
     result = Wt::WContainerWidget.new
 
-    topic("Wt::WMessageBox", result)
-    Wt::WText.new(tr("dialogs-Wt::WMessageBox"),
+    topic("WMessageBox", result)
+    Wt::WText.new(tr("dialogs-WMessageBox"),
               result)
     
     ex = Wt::WContainerWidget.new(result)
@@ -56,7 +56,7 @@ class DialogWidgets < ControlsWidget
   def eDialogs
     result = Wt::WContainerWidget.new
 
-    topic("Wt::Ext::Dialog", "Wt::Ext::MessageBox", "Wt::Ext::ProgressDialog", result)
+    topic("Ext::Dialog", "Ext::MessageBox", "Ext::ProgressDialog", result)
     Wt::WText.new(tr("dialogs-ExtDialog"), result)
     ex = Wt::WContainerWidget.new(result)
     
@@ -67,7 +67,7 @@ class DialogWidgets < ControlsWidget
     
     vLayout.addWidget(button = Wt::WPushButton.new("Ext Message Box"))
     button.clicked.connect(SLOT(self, :createExtMessageBox))
-    vLayout.addWidget(button = Wt::WPushButton.new("Ext Wt::Ext::Dialog"))
+    vLayout.addWidget(button = Wt::WPushButton.new("Ext Dialog"))
     button.clicked.connect(SLOT(self, :createExtDialog))
     vLayout.addWidget(button = Wt::WPushButton.new("Ext Progress Bar"))
     button.clicked.connect(SLOT(self, :createExtProgress))
@@ -139,9 +139,9 @@ class DialogWidgets < ControlsWidget
   def custom
     dialog = Wt::WDialog.new("Personalia")
 
-    Wt::WText.new("You can freely format the contents of a Wt::WDialog by " \
-              "adding any widget you want to it.<br/>Here, we added Wt::WText, " \
-              "Wt::WLineEdit and Wt::WPushButton to a dialog", dialog.contents)
+    Wt::WText.new("You can freely format the contents of a WDialog by " \
+              "adding any widget you want to it.<br/>Here, we added WText, " \
+              "WLineEdit and WPushButton to a dialog", dialog.contents)
     Wt::WBreak.new(dialog.contents)
     Wt::WText.new("Enter your name: ", dialog.contents)
     edit = Wt::WLineEdit.new(dialog.contents)
@@ -171,42 +171,42 @@ class DialogWidgets < ControlsWidget
   end
 
   def createExtDialog
-    Ext::d = Wt::Ext::Dialog.new
-    d.windowTitle = "Wt::Ext::Dialog with Wt::WBorderLayout"
+    d = Wt::Ext::Dialog.new
+    d.windowTitle = "Ext::Dialog with WBorderLayout"
     d.resize(Wt::WLength.new(400), Wt::WLength.new(300))
     d.styleClass = "dialog"
 
-    Ext::okButton = Wt::Ext::Button.new("Ok")
-    okButton.activated.connect(SLOT(d, Wt::Ext::Dialog::accept))
+    okButton = Wt::Ext::Button.new("Ok")
+    okButton.activated.connect(SLOT(d, :accept))
     d.addButton(okButton)
     okButton.default = true
 
-    Ext::cancelButton = Wt::Ext::Button.new("Cancel")
-    cancelButton.activated.connect(SLOT(d, Wt::Ext::Dialog::reject))
+    cancelButton = Wt::Ext::Button.new("Cancel")
+    cancelButton.activated.connect(SLOT(d, :reject))
     d.addButton(cancelButton)
 
     layout = Wt::WBorderLayout.new
     d.layout = layout
 
-    Ext::west = Wt::Ext::Panel.new
+    west = Wt::Ext::Panel.new
     west.title = "West"
     west.resizable = true
     west.collapsible = true
-    west.resize(100, Wt::WLength.new)
+    west.resize(Wt::WLength.new(100), Wt::WLength.new)
     west.layout = Wt::WFitLayout.new
     west.layout.addWidget(Wt::WText.new("This is a resizable and collapsible " \
                                         "panel"))
     layout.addWidget(west, Wt::WBorderLayout::West)
 
-    Ext::center = Wt::Ext::Panel.new
+    center = Wt::Ext::Panel.new
     center.title = "Center"
 
     nestedLayout = Wt::WBorderLayout.new
     center.layout = nestedLayout
 
-    Ext::nestedNorth = Wt::Ext::Panel.new
+    nestedNorth = Wt::Ext::Panel.new
     nestedLayout.addWidget(nestedNorth, Wt::WBorderLayout::North)
-    nestedNorth.resize(Wt::WLength.new, 70)
+    nestedNorth.resize(Wt::WLength.new, Wt::WLength.new(70))
     nestedNorth.layout.addWidget(
       Wt::WText.new("Ext Dialogs, like Wt Dialogs, can contain any widget. This " \
                 "is a dialog with a layout manager. The left pane can be " \
@@ -214,7 +214,7 @@ class DialogWidgets < ControlsWidget
 
     nestedCenter = Wt::Ext::Panel.new
     nestedLayout.addWidget(nestedCenter, Wt::WBorderLayout::Center)
-    nestedCenter.layout.addWidget(Wt::WText.new("This is simply Wt::WText, but " \
+    nestedCenter.layout.addWidget(Wt::WText.new("This is simply WText, but " \
                                                 "could have been any widget."))
 
     layout.addWidget(center, Wt::WBorderLayout::Center)

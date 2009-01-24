@@ -2,6 +2,8 @@
 * Fixed bugs in the widgetgallery 'Form Validators' option
 * The Pie Chart example wasn't calling super in its WContainer constructor and
 was causing a seg fault
+* Various fixes for the widgetgallery Ext Dialog example, and added a 
+'status=()' method to the event displayer
 
 2009-01-23 Richard Dale <richard.j.dale@gmail.com>
 * Added the widgetgallery example, and amended the charts, dragdrop and 

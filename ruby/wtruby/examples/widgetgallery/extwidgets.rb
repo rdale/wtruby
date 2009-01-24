@@ -38,7 +38,7 @@ class ExtWidgets < ControlsWidget
     result = Wt::WContainerWidget.new
 
     topic("Ext::Button", result)
-    Wt::WText.new(tr("ext-Ext::Button"), result)
+    Wt::WText.new(tr("ext-Button"), result)
 
     ex = Wt::WContainerWidget.new(result)
     vLayout = Wt::WVBoxLayout.new
@@ -63,7 +63,7 @@ class ExtWidgets < ControlsWidget
 
     topic("Ext::LineEdit", result)
 
-    Wt::WText.new(tr("ext-Ext::LineEdit"), result)
+    Wt::WText.new(tr("ext-LineEdit"), result)
     le = Wt::Ext::LineEdit.new(result)
     le.textSize = 50
     @ed.mapConnect(le.keyWentUp, "Ext::LineEdit keyWentUp")
@@ -76,7 +76,7 @@ class ExtWidgets < ControlsWidget
 
     topic("Ext::NumberField", result)
 
-    Wt::WText.new(tr("ext-Ext::NumberField"), result)
+    Wt::WText.new(tr("ext-NumberField"), result)
     Wt::WText.new("Total amount to pay: ", result)
     nf = Wt::Ext::NumberField.new(result)
     nf.decimalPrecision = 2
@@ -91,7 +91,7 @@ class ExtWidgets < ControlsWidget
 
     topic("Ext::CheckBox", result)
     
-    Wt::WText.new(tr("ext-Ext::CheckBox"), result)
+    Wt::WText.new(tr("ext-CheckBox"), result)
     cb = Wt::Ext::CheckBox.new("Check me!", result)
     @ed.mapConnect(cb.checked, "Ext::CheckBox checked")
     cb = Wt::Ext::CheckBox.new("Check me too!", result)
@@ -106,7 +106,7 @@ class ExtWidgets < ControlsWidget
 
     topic("Ext::ComboBox", result)
 
-    Wt::WText.new(tr("ext-Ext::ComboBox"), result)
+    Wt::WText.new(tr("ext-ComboBox"), result)
     cb = Wt::Ext::ComboBox.new(result)
     cb.addItem("Stella")
     cb.addItem("Duvel")
@@ -127,7 +127,7 @@ class ExtWidgets < ControlsWidget
 
     topic("Ext::RadioButton", result)
 
-    Wt::WText.new(tr("ext-Ext::RadioButton"), result)
+    Wt::WText.new(tr("ext-RadioButton"), result)
     bg = Wt::WButtonGroup.new(result)
     rb = Wt::Ext::RadioButton.new("Kitchen", result)
     bg.addButton(rb)
@@ -150,7 +150,7 @@ class ExtWidgets < ControlsWidget
 
     topic("Ext::Calendar", result)
 
-    Wt::WText.new(tr("ext-Ext::Calendar"), result)
+    Wt::WText.new(tr("ext-Calendar"), result)
     c = Wt::Ext::Calendar.new(false, result)
     @ed.mapConnect(c.selectionChanged, "Ext::Calendar selectionChanged")
 
@@ -162,7 +162,7 @@ class ExtWidgets < ControlsWidget
 
     topic("Ext::DateField", result)
 
-    Wt::WText.new(tr("ext-Ext::DateField"), result)
+    Wt::WText.new(tr("ext-DateField"), result)
     df = Wt::Ext::DateField.new(result)
     df.format = "ddd MMM d yyyy"
     df.textSize = 25
@@ -175,7 +175,7 @@ class ExtWidgets < ControlsWidget
 
     topic("Ext::Menu", "Ext::ToolBar", result)
 
-    Wt::WText.new(tr("ext-Ext::Menu"), result)
+    Wt::WText.new(tr("ext-Menu"), result)
     menu = Wt::Ext::Menu.new
 
     item = menu.addItem("File open...")
@@ -231,7 +231,7 @@ class ExtWidgets < ControlsWidget
 
     topic("Ext::Dialog", "Ext::MessageBox", "Ext::ProgressDialog", result)
 
-    Wt::WText.new(tr("ext-Ext::Dialog"), result)
+    Wt::WText.new(tr("ext-Dialog"), result)
 
     return result
   end
