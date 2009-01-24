@@ -83,17 +83,14 @@ class Validators < ControlsWidget
   end
 
   def validateServerside
-    for i in 0...@fields.size
-      case @fields[i].first.validate
+    for i in 0...@fields.length
+      case @fields[i][0].validate
       when Wt::WValidator::Valid:
-        @fields[i].second.text = "Valid"
-        break
+        @fields[i][1].text = "Valid"
       when Wt::WValidator::InvalidEmpty:
-        @fields[i].second.text = "InvalidEmpty"
-        break
+        @fields[i][1].text = "InvalidEmpty"
       when Wt::WValidator::Invalid:
-        @fields[i].second.text = "Invalid"
-        break
+        @fields[i][1].text = "Invalid"
       end
     end
   end

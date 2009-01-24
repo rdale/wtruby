@@ -1,3 +1,6 @@
+2009-01-24 Richard Dale <richard.j.dale@gmail.com>
+* Fixed bugs in the widgetgallery 'Form Validators' option
+
 2009-01-23 Richard Dale <richard.j.dale@gmail.com>
 * Added the widgetgallery example, and amended the charts, dragdrop and 
 painting examples to work with it.
