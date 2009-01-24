@@ -864,12 +864,12 @@ module Wt
 
     def inspect
       str = super
-      str.sub(/>$/, " id=%s>" % [id])
+      str.sub(/>$/, " id=%s, text='%s'>" % [id, text])
     end
     
     def pretty_print(pp)
       str = to_s
-      pp.text str.sub(/>$/, "\n id=%s>" % [id])
+      pp.text str.sub(/>$/, "\n id=%s,\n text='%s'>" % [id, text])
     end
   end
 
