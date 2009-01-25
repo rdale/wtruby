@@ -96,90 +96,78 @@ class EventsDemo < ControlsWidget
     return result
   end
 
-  def <<(o, item)
-    if item.kind_of(Wt::Enum) && item.type == "Wt::WMouseEvent::Button"
-      return write_wmouse_event_button(o, item)
-    elsif item.kind_of(Wt::Enum) && item.type == "Wt::Key"
-      return write_wt_key(o, item)
-    elsif item.kind_of(Wt::Enum) && item.type == "Wt::WMouseEvent::Coordinates"
-      return write_wmouse_event_coordinates(o, item)
-    else
-      return o << item.to_s
-    end
-  end
-
-  def write_wmouse_event_button(o, b)
+  def wMouseEventButtonToString(b)
     case b
     when Wt::WMouseEvent::LeftButton:
-      return o << "LeftButton"
+      return "LeftButton"
     when Wt::WMouseEvent::RightButton:
-      return o << "LeftButton"
+      return "LeftButton"
     when Wt::WMouseEvent::MiddleButton:
-      return o << "LeftButton"
+      return "LeftButton"
     else
-      return o << "Unknown Ext::Button"
+      return "Unknown Button"
     end
   end
 
-  def write_wt_key(o, k)
+  def keyToString(k)
     case k
-    when Key_unknown : return o << "Key_unknown"
-    when Key_Enter : return o << "Key_Enter"
-    when Key_Tab : return o << "Key_Tab"
-    when Key_Backspace : return o << "Key_Backspace"
-    when Key_Shift : return o << "Key_Shift"
-    when Key_Control : return o << "Key_Control"
-    when Key_Alt : return o << "Key_Alt"
-    when Key_PageUp : return o << "Key_PageUp"
-    when Key_PageDown : return o << "Key_PageDown"
-    when Key_End : return o << "Key_End"
-    when Key_Home : return o << "Key_Home"
-    when Key_Left : return o << "Key_Left"
-    when Key_Up : return o << "Key_Up"
-    when Key_Right : return o << "Key_Right"
-    when Key_Down : return o << "Key_Down"
-    when Key_Insert : return o << "Key_Insert"
-    when Key_Delete : return o << "Key_Delete"
-    when Key_Escape : return o << "Key_Escape"
-    when Key_F1 : return o << "Key_F1"
-    when Key_F2 : return o << "Key_F2"
-    when Key_F3 : return o << "Key_F3"
-    when Key_F4 : return o << "Key_F4"
-    when Key_F5 : return o << "Key_F5"
-    when Key_F6 : return o << "Key_F6"
-    when Key_F7 : return o << "Key_F7"
-    when Key_F8 : return o << "Key_F8"
-    when Key_F9 : return o << "Key_F9"
-    when Key_F10 : return o << "Key_F10"
-    when Key_F11 : return o << "Key_F11"
-    when Key_F12 : return o << "Key_F12"
-    when Key_Space : return o << "Key_Space"
-    when Key_A : return o << "Key_A"
-    when Key_B : return o << "Key_B"
-    when Key_C : return o << "Key_C"
-    when Key_D : return o << "Key_D"
-    when Key_E : return o << "Key_E"
-    when Key_F : return o << "Key_F"
-    when Key_G : return o << "Key_G"
-    when Key_H : return o << "Key_H"
-    when Key_I : return o << "Key_I"
-    when Key_J : return o << "Key_J"
-    when Key_K : return o << "Key_K"
-    when Key_L : return o << "Key_"
-    when Key_M : return o << "Key_M"
-    when Key_N : return o << "Key_N"
-    when Key_O : return o << "Key_O"
-    when Key_P : return o << "Key_P"
-    when Key_Q : return o << "Key_Q"
-    when Key_R : return o << "Key_R"
-    when Key_S : return o << "Key_S"
-    when Key_T : return o << "Key_T"
-    when Key_U : return o << "Key_U"
-    when Key_V : return o << "Key_V"
-    when Key_W : return o << "Key_W"
-    when Key_X : return o << "Key_X"
-    when Key_Y : return o << "Key_Y"
-    when Key_Z : return o << "Key_Z"
+    when Wt::Key_unknown : return "Key_unknown"
+    when Wt::Key_Enter : return "Key_Enter"
+    when Wt::Key_Tab : return "Key_Tab"
+    when Wt::Key_Backspace : return "Key_Backspace"
+    when Wt::Key_Shift : return "Key_Shift"
+    when Wt::Key_Control : return "Key_Control"
+    when Wt::Key_Alt : return "Key_Alt"
+    when Wt::Key_PageUp : return "Key_PageUp"
+    when Wt::Key_PageDown : return "Key_PageDown"
+    when Wt::Key_End : return "Key_End"
+    when Wt::Key_Home : return "Key_Home"
+    when Wt::Key_Left : return "Key_Left"
+    when Wt::Key_Up : return "Key_Up"
+    when Wt::Key_Right : return "Key_Right"
+    when Wt::Key_Down : return "Key_Down"
+    when Wt::Key_Insert : return "Key_Insert"
+    when Wt::Key_Delete : return "Key_Delete"
+    when Wt::Key_Escape : return "Key_Escape"
+    when Wt::Key_F1 : return "Key_F1"
+    when Wt::Key_F2 : return "Key_F2"
+    when Wt::Key_F3 : return "Key_F3"
+    when Wt::Key_F4 : return "Key_F4"
+    when Wt::Key_F5 : return "Key_F5"
+    when Wt::Key_F6 : return "Key_F6"
+    when Wt::Key_F7 : return "Key_F7"
+    when Wt::Key_F8 : return "Key_F8"
+    when Wt::Key_F9 : return "Key_F9"
+    when Wt::Key_F10 : return "Key_F10"
+    when Wt::Key_F11 : return "Key_F11"
+    when Wt::Key_F12 : return "Key_F12"
+    when Wt::Key_Space : return "Key_Space"
+    when Wt::Key_A : return "Key_A"
+    when Wt::Key_B : return "Key_B"
+    when Wt::Key_C : return "Key_C"
+    when Wt::Key_D : return "Key_D"
+    when Wt::Key_E : return "Key_E"
+    when Wt::Key_F : return "Key_F"
+    when Wt::Key_G : return "Key_G"
+    when Wt::Key_H : return "Key_H"
+    when Wt::Key_I : return "Key_I"
+    when Wt::Key_J : return "Key_J"
+    when Wt::Key_K : return "Key_K"
+    when Wt::Key_L : return "Key_"
+    when Wt::Key_M : return "Key_M"
+    when Wt::Key_N : return "Key_N"
+    when Wt::Key_O : return "Key_O"
+    when Wt::Key_P : return "Key_P"
+    when Wt::Key_Q : return "Key_Q"
+    when Wt::Key_R : return "Key_R"
+    when Wt::Key_S : return "Key_S"
+    when Wt::Key_T : return "Key_T"
+    when Wt::Key_U : return "Key_U"
+    when Wt::Key_V : return "Key_V"
+    when Wt::Key_W : return "Key_W"
+    when Wt::Key_X : return "Key_X"
+    when Wt::Key_Y : return "Key_Y"
+    when Wt::Key_Z : return "Key_Z"
     end
   end
 
@@ -246,16 +234,16 @@ class EventsDemo < ControlsWidget
 
   def describe(e)
     if e.kind_of?(Wt::WKeyEvent)
-      describe_wkey_event(e)
+      describeWKeyEvent(e)
     elsif e.kind_of?(Wt::WMouseEvent)
-      decribe_wmouse_event(e)
+      describeWMouseEvent(e)
     end
   end
 
-  def describe_wkey_event(e)
-    ss = "Key: " << e.key.to_s << "<br/>" <<
+  def describeWKeyEvent(e)
+    ss = "Key: " << keyToString(e.key) << "<br/>" <<
          "Modifiers: " << modifiersToString(e.modifiers) << "<br/>" <<
-         "Char code: " << e.charCode << "<br/>" <<
+         "Char code: " << e.charCode.to_s << "<br/>" <<
          "text: " << e.text << "<br/>"
     @keyEventDescription.text = ss
   end
@@ -295,13 +283,13 @@ class EventsDemo < ControlsWidget
     describe(e)
   end
 
-  def decribe_wmouse_event(e)
-    ss = "Ext::Button: " << e.button.to_s << "<br/>" <<
+  def describeWMouseEvent(e)
+    ss = "Button: " << wMouseEventButtonToString(e.button) << "<br/>" <<
          "Modifiers: " << modifiersToString(e.modifiers) << "<br/>" <<
          "Document coordinates: " << mouseEventCoordinatesToString(e.document) << "<br/>" <<
          "Window coordinates: " << mouseEventCoordinatesToString(e.window) << "<br/>" <<
          "Screen coordinates: " << mouseEventCoordinatesToString(e.screen) << "<br/>" <<
-         "Ext::Widget coordinates: " << mouseEventCoordinatesToString(e.widget) << "<br/>" <<
+         "Widget coordinates: " << mouseEventCoordinatesToString(e.widget) << "<br/>" <<
          "DragDelta coordinates: " << mouseEventCoordinatesToString(e.dragDelta) << "<br/>"
     @mouseEventDescription.text = ss
   end

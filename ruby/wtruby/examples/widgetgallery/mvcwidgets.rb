@@ -3,6 +3,10 @@
 #
 # See the LICENSE file for terms of use.
 #
+
+$: << '../treeview'
+require 'treeviewexample.rb'
+
 class MvcWidgets < ControlsWidget
 
   def initialize(ed)
@@ -93,7 +97,7 @@ class MvcWidgets < ControlsWidget
 
     topic("WTreeView", result)
     Wt::WText.new(tr("mvc-WTreeView"), result)
-    # TreeViewExample.new(false, result)
+    TreeViewExample.new(false, result)
     return result
   end
 

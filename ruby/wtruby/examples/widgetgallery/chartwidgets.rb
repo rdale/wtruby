@@ -16,12 +16,9 @@ class ChartWidgets < ControlsWidget
   end
 
   def populateSubMenu(menu)
-    menu.addItem("Category Charts",
-                  deferCreate(:category, self))
-    menu.addItem("Scatter Plots",
-                  deferCreate(:scatterplot, self))
-    menu.addItem("Pie Charts",
-                  deferCreate(:pie, self))
+    menu.addItem("Category Charts", deferCreate(:category, self))
+    menu.addItem("Scatter Plots", deferCreate(:scatterplot, self))
+    menu.addItem("Pie Charts", deferCreate(:pie, self))
   end
 
   def category

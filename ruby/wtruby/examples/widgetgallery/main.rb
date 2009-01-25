@@ -22,10 +22,14 @@ require 'mvcwidgets.rb'
 require 'stylelayout.rb'
 require 'validators.rb'
 require 'widgetgallery.rb'
-# require 'widgetgalleryapplication.rb'
 
 Wt::WRun(ARGV) do |env|
-  WidgetGallery.new(env)
+  app = WidgetGallery.new(env)
+  # More work needs to be done on coordinating Ruby garbage collection
+  # with the Wt runtime, so run with GC disabled for now
+  # Wt::Internal::setDebug Wt::WtDebugChannel::WTDB_GC
+  GC.disable
+  app
 end
 
 # kate: space-indent on; indent-width 2; replace-tabs on; mixed-indent off;

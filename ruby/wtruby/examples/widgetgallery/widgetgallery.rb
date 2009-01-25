@@ -20,44 +20,43 @@ class WidgetGallery < Wt::WApplication
     @contentsStack.positionScheme = Wt::Relative
     @contentsStack.styleClass = "contents"
 
-    eventDisplayer = EventDisplayer.new(nil)
+    @eventDisplayer = EventDisplayer.new(nil)
 
     #
     # Setup the menu (and submenus)
     #
-    menu = Wt::WMenu.new(@contentsStack, Wt::Vertical, nil)
-    menu.renderAsList = true
-    menu.styleClass = "menu"
-    menu.setInternalPathEnabled
-    menu.internalBasePath = "/"
+    @menu = Wt::WMenu.new(@contentsStack, Wt::Vertical, nil)
+    @menu.renderAsList = true
+    @menu.styleClass = "menu"
+    @menu.setInternalPathEnabled
+    @menu.internalBasePath = "/"
 
     initialInternalPath = internalPath
 
-    addToMenu(menu, "Basics", BasicControls.new(eventDisplayer))
-    addToMenu(menu, "Form Widgets", FormWidgets.new(eventDisplayer))
-    addToMenu(menu, "Form Validators", Validators.new(eventDisplayer))
-    addToMenu(menu, "Ext Widgets", ExtWidgets.new(eventDisplayer))
-    addToMenu(menu, "Vector Graphics", GraphicsWidgets.new(eventDisplayer))
-    addToMenu(menu, "Dialogs", DialogWidgets.new(eventDisplayer))
-    addToMenu(menu, "Charts", ChartWidgets.new(eventDisplayer))
-    addToMenu(menu, "MVC Widgets", MvcWidgets.new(eventDisplayer))
-    addToMenu(menu, "Events", EventsDemo.new(eventDisplayer))
-    addToMenu(menu, "Style and Layout", StyleLayout.new(eventDisplayer))
+    addToMenu(@menu, "Basics", BasicControls.new(@eventDisplayer))
+    addToMenu(@menu, "Form Widgets", FormWidgets.new(@eventDisplayer))
+    addToMenu(@menu, "Form Validators", Validators.new(@eventDisplayer))
+    addToMenu(@menu, "Ext Widgets", ExtWidgets.new(@eventDisplayer))
+    addToMenu(@menu, "Vector Graphics", GraphicsWidgets.new(@eventDisplayer))
+    addToMenu(@menu, "Dialogs", DialogWidgets.new(@eventDisplayer))
+    addToMenu(@menu, "Charts", ChartWidgets.new(@eventDisplayer))
+    addToMenu(@menu, "MVC Widgets", MvcWidgets.new(@eventDisplayer))
+    addToMenu(@menu, "Events", EventsDemo.new(@eventDisplayer))
+    addToMenu(@menu, "Style and Layout", StyleLayout.new(@eventDisplayer))
 
     setInternalPath(initialInternalPath)
-    menu.select(0)
+    @menu.select(0)
 
     #
     # Add it all inside a layout
     #
-    horizLayout = Wt::WHBoxLayout.new(root)
-    vertLayout = Wt::WVBoxLayout.new
+    @horizLayout = Wt::WHBoxLayout.new(root)
+    @vertLayout = Wt::WVBoxLayout.new
 
-    horizLayout.addWidget(menu, 0)
-    horizLayout.addLayout(vertLayout, 1)
-    vertLayout.addWidget(@contentsStack, 1)
-    vertLayout.addWidget(eventDisplayer)
-
+    @horizLayout.addWidget(@menu, 0)
+    @horizLayout.addLayout(@vertLayout, 1)
+    @vertLayout.addWidget(@contentsStack, 1)
+    @vertLayout.addWidget(@eventDisplayer)
     #
     # Set our style sheet last, so that it loaded after the ext stylesheets.
     #
