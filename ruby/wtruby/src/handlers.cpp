@@ -83,7 +83,7 @@ mark_wobject_children(Wt::WObject * wobject)
         VALUE obj = getPointerObject(child);
         if (obj != Qnil) {
             if (Wt::Ruby::do_debug & wtdb_gc) {
-                printf("Marking (%s*)%p -> %p", "Wt::WObject", child, (void*)obj);
+                printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), child, (void*)obj);
             }
             rb_gc_mark(obj);
         }
@@ -102,7 +102,7 @@ mark_wwebwidget_children(Wt::WWebWidget * widget)
         VALUE obj = getPointerObject(child);
         if (obj != Qnil) {
             if (Wt::Ruby::do_debug & wtdb_gc) {
-                printf("Marking (%s*)%p -> %p", "Wt::WWidget", child, (void*)obj);
+                printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), child, (void*)obj);
             }
             rb_gc_mark(obj);
         }
@@ -121,7 +121,7 @@ mark_wcontainerwidget_children(Wt::WContainerWidget * widget)
         obj = getPointerObject(child);
         if (obj != Qnil) {
             if (Wt::Ruby::do_debug & wtdb_gc) {
-                printf("Marking (%s*)%p -> %p", "Wt::WWidget", child, (void*)obj);
+                printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), child, (void*)obj);
             }
             rb_gc_mark(obj);
         }
@@ -156,7 +156,7 @@ smokeruby_mark(void * p)
             obj = getPointerObject(layout);
             if (obj != Qnil) {
                 if (Wt::Ruby::do_debug & wtdb_gc) {
-                    printf("Marking (%s*)%p -> %p", "Wt::WLayout", layout, (void*) obj);
+                    printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), layout, (void*) obj);
                 }
                 rb_gc_mark(obj);
             }
@@ -169,7 +169,7 @@ smokeruby_mark(void * p)
             obj = getPointerObject(label);
             if (obj != Qnil) {
                 if (Wt::Ruby::do_debug & wtdb_gc) {
-                    printf("Marking (%s*)%p -> %p", "Wt::WLabel", label, (void*) obj);
+                    printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), label, (void*) obj);
                 }
                 rb_gc_mark(obj);
             }
@@ -178,7 +178,7 @@ smokeruby_mark(void * p)
             obj = getPointerObject(label);
             if (obj != Qnil) {
                 if (Wt::Ruby::do_debug & wtdb_gc) {
-                    printf("Marking (%s*)%p -> %p", "Wt::WValidator", validator, (void*) obj);
+                    printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), validator, (void*) obj);
                 }
                 rb_gc_mark(obj);
             }
@@ -191,7 +191,7 @@ smokeruby_mark(void * p)
                 obj = getPointerObject(tableRow);
                 if (obj != Qnil) {
                     if (Wt::Ruby::do_debug & wtdb_gc) {
-                        printf("Marking (%s*)%p -> %p", "Wt::WTableRow", tableRow, (void*)obj);
+                        printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), tableRow, (void*)obj);
                     }
                     rb_gc_mark(obj);
                 }
@@ -200,7 +200,7 @@ smokeruby_mark(void * p)
                     obj = getPointerObject(cell);
                     if (obj != Qnil) {
                         if (Wt::Ruby::do_debug & wtdb_gc) {
-                            printf("Marking (%s*)%p -> %p", "Wt::WTableCell", cell, (void*)obj);
+                            printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), cell, (void*)obj);
                         }
                         rb_gc_mark(obj);
                     }
@@ -212,7 +212,7 @@ smokeruby_mark(void * p)
                 obj = getPointerObject(tableColumn);
                 if (obj != Qnil) {
                     if (Wt::Ruby::do_debug & wtdb_gc) {
-                        printf("Marking (%s*)%p -> %p", "Wt::WTableColumn", tableColumn, (void*)obj);
+                        printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), tableColumn, (void*)obj);
                     }
                     rb_gc_mark(obj);
                 }
