@@ -77,7 +77,7 @@ class DialogWidgets < ControlsWidget
 
   def messageBox1
     Wt::WMessageBox::show("Information",
-                      "One-liner dialogs have a simple constructor", Ok)
+                      "One-liner dialogs have a simple constructor", Wt::Ok)
     @ed.status = "Ok'ed"
   end
 
@@ -97,7 +97,7 @@ class DialogWidgets < ControlsWidget
                                "checking show's return value",
                                Wt::Ok | Wt::Cancel)
 
-    if result == Ok
+    if result == Wt::Ok
       @ed.status = "Accepted!"
     else
       @ed.status = "Cancelled!"
@@ -110,8 +110,8 @@ class DialogWidgets < ControlsWidget
                         "Your work is not saved",
                         Wt::NoIcon, Wt::NoButton)
 
-    @messageBox.addButton("Cancel modifications", Cancel)
-    @messageBox.addButton("Continue modifying work", Ok)
+    @messageBox.addButton("Cancel modifications", Wt::Cancel)
+    @messageBox.addButton("Continue modifying work", Wt::Ok)
 
     @messageBox.buttonClicked.connect(SLOT(self, :messageBoxDone))
 
@@ -240,7 +240,7 @@ class DialogWidgets < ControlsWidget
         sleep(1)
       else
         Wt::Ext::MessageBox.show("Operation cancelled",
-                "It does not matter, Pi is overrated", Ok)
+                "It does not matter, Pi is overrated", Wt::Ok)
         break
       end
     end
