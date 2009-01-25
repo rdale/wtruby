@@ -4,6 +4,10 @@ Ruby class in the debug logging
 * Fixed some bugs in the widgetgallery dialogwidgets examples
 * Added inspect() and pp() methods for Wt::WSubMenuItem and added a 'text'
 item to the Wt::WMenuItem inspect method
+* More tweaks to the widgetsgallery demo. Disable Ruby garbage collection for
+now until problems in coordinating GC with Wt are fixed
+* Some improvements to the smokeruby_mark() function and garbage collection
+logging
 
 2009-01-24 Richard Dale <richard.j.dale@gmail.com>
 * Fixed bugs in the widgetgallery 'Form Validators' option
@@ -12,10 +16,6 @@ was causing a seg fault
 * Various fixes for the widgetgallery Ext Dialog example, and added a 
 'status=()' method to the event displayer
 * Added a text value to the WLineEdit inspect() and pp() methods
-* More tweaks to the widgetsgallery demo. Disable Ruby garbage collection for
-now until problems in coordinating GC with Wt are fixed
-* Some improvements to the smokeruby_mark() function and garbage collection
-logging
 
 2009-01-23 Richard Dale <richard.j.dale@gmail.com>
 * Added the widgetgallery example, and amended the charts, dragdrop and 
