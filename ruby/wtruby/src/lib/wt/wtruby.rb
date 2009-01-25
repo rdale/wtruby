@@ -932,12 +932,12 @@ module Wt
 
     def inspect
       str = super
-      str.sub(/>$/, " id=%s>" % [id])
+      str.sub(/>$/, " id=%s, text='%s'>" % [id, text])
     end
     
     def pretty_print(pp)
       str = to_s
-      pp.text str.sub(/>$/, "\n id=%s>" % [id])
+      pp.text str.sub(/>$/, "\n id=%s,\n text='%s'>" % [id, text])
     end
   end
 
@@ -1298,6 +1298,26 @@ module Wt
   class WStatelessSlot < Wt::Base
     def type(*args)
       method_missing(:type, *args)
+    end
+  end
+
+  class WSubMenuItem < Wt::Base
+    def id(*args)
+      method_missing(:id, *args)
+    end
+
+    def select(*args)
+      method_missing(:select, *args)
+    end
+
+    def inspect
+      str = super
+      str.sub(/>$/, " id=%s, text='%s'>" % [id, text])
+    end
+    
+    def pretty_print(pp)
+      str = to_s
+      pp.text str.sub(/>$/, "\n id=%s,\n text='%s'>" % [id, text])
     end
   end
 

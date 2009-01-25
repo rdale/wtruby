@@ -2,6 +2,8 @@
 * When an item is marked for not needing garbage collection show the actual
 Ruby class in the debug logging
 * Fixed some bugs in the widgetgallery dialogwidgets examples
+* Added inspect() and pp() methods for Wt::WSubMenuItem and added a 'text'
+item to the Wt::WMenuItem inspect method
 
 2009-01-24 Richard Dale <richard.j.dale@gmail.com>
 * Fixed bugs in the widgetgallery 'Form Validators' option
