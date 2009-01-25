@@ -22,28 +22,20 @@ class ControlsWidget < Wt::WContainerWidget
   end
 
   def escape(name)
-    ss = ""
-    for i in 0...name.size
-      if name[i] != ':'
-        ss += name[i, 1]
-      else
-        ss += "_1"
-      end
-    end
-    return ss
+    name.gsub(':', '_1')
   end
 
   def doxygenAnchor(classname)
-    ss = "<a href=\"http:#www.webtoolkit.eu/wt/doc/reference/html/class" +
+    ss = '<a href="http://www.webtoolkit.eu/wt/doc/reference/html/class' +
       escape("Wt::" + classname) +
-      ".html\" target=\"_blank\">doc</a>"
+      '.html" target="_blank">doc</a>'
 
     return ss
   end
 
   def title(classname)
-    return "<span class=\"title\">" + classname + "</span> " +
-      "<span class=\"doc\">[" +
+    return '<span class="title">' + classname + "</span> " +
+      '<span class="doc">[' +
       doxygenAnchor(classname) + "]</span>"
   end
 

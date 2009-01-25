@@ -8,6 +8,7 @@ item to the Wt::WMenuItem inspect method
 now until problems in coordinating GC with Wt are fixed
 * Some improvements to the smokeruby_mark() function and garbage collection
 logging
+* The url escaping code in the widgetgallery example was wrong
 
 2009-01-24 Richard Dale <richard.j.dale@gmail.com>
 * Fixed bugs in the widgetgallery 'Form Validators' option
