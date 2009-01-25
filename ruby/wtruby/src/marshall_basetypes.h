@@ -135,7 +135,7 @@ void marshall_to_ruby<SmokeClassWrapper>(Marshall *m)
     }
     void *p = m->item().s_voidp;
     VALUE obj = getPointerObject(p);
-    if(obj != Qnil) {
+    if (obj != Qnil) {
         *(m->var()) = obj;
         return ;
     }
@@ -149,7 +149,7 @@ void marshall_to_ruby<SmokeClassWrapper>(Marshall *m)
             printf("copying %s %p to %p\n", classname, o->ptr, p);
         }
 
-        if(p) {
+        if (p != 0) {
             o->ptr = p;
             o->allocated = true;
         }

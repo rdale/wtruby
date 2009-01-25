@@ -19,7 +19,9 @@
 #include <Wt/WLabel>
 #include <Wt/WLineF>
 #include <Wt/WLogger>
+#include <Wt/WMenu>
 #include <Wt/WMenuItem>
+#include <Wt/WSubMenuItem>
 #include <Wt/WModelIndex>
 #include <Wt/WObject>
 #include <Wt/WPainterPath>
@@ -32,6 +34,9 @@
 #include <Wt/WTable>
 #include <Wt/WTreeNode>
 #include <Wt/WWidget>
+
+#include <Wt/Chart/WDataSeries>
+#include <Wt/Chart/WCartesianChart>
 
 #include "marshall.h"
 #include "wtruby.h"
@@ -83,7 +88,7 @@ mark_wobject_children(Wt::WObject * wobject)
         VALUE obj = getPointerObject(child);
         if (obj != Qnil) {
             if (Wt::Ruby::do_debug & wtdb_gc) {
-                printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), child, (void*)obj);
+                printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), child, (void*)obj);
             }
             rb_gc_mark(obj);
         }
@@ -102,7 +107,7 @@ mark_wwebwidget_children(Wt::WWebWidget * widget)
         VALUE obj = getPointerObject(child);
         if (obj != Qnil) {
             if (Wt::Ruby::do_debug & wtdb_gc) {
-                printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), child, (void*)obj);
+                printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), child, (void*)obj);
             }
             rb_gc_mark(obj);
         }
@@ -121,9 +126,40 @@ mark_wcontainerwidget_children(Wt::WContainerWidget * widget)
         obj = getPointerObject(child);
         if (obj != Qnil) {
             if (Wt::Ruby::do_debug & wtdb_gc) {
-                printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), child, (void*)obj);
+                printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), child, (void*)obj);
             }
             rb_gc_mark(obj);
+        }
+    }
+}
+
+void
+mark_wmenu_items(Wt::WMenu * menu)
+{
+    VALUE obj;
+    
+    const std::vector<Wt::WMenuItem*> & l = menu->items();
+
+    for (unsigned int i = 0; i < l.size(); i++) {
+        Wt::WMenuItem * item = l.at(i);
+        obj = getPointerObject(item);
+        if (obj != Qnil) {
+            if (Wt::Ruby::do_debug & wtdb_gc) {
+                printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), item, (void*)obj);
+            }
+            rb_gc_mark(obj);
+
+            if (std::strcmp(rb_obj_classname(obj), "Wt::WSubMenuItem") == 0) {
+                Wt::WMenu * subMenu = static_cast<Wt::WSubMenuItem*>(item)->subMenu();
+                obj = getPointerObject(subMenu);
+                if (obj != Qnil) {
+                    if (Wt::Ruby::do_debug & wtdb_gc) {
+                        printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), subMenu, (void*)obj);
+                    }
+                    rb_gc_mark(obj);
+                }
+                mark_wmenu_items(subMenu);
+            }
         }
     }
 }
@@ -148,6 +184,11 @@ smokeruby_mark(void * p)
             mark_wwebwidget_children(widget);
         }
 
+        if (o->smoke->isDerivedFromByName(className, "Wt::WMenu")) {
+            Wt::WMenu * menu = (Wt::WMenu *) o->smoke->cast(o->ptr, o->classId, o->smoke->idClass("Wt::WMenu").index);
+            mark_wmenu_items(menu);
+        }
+
         if (o->smoke->isDerivedFromByName(className, "Wt::WContainerWidget")) {
             Wt::WContainerWidget * widget = (Wt::WContainerWidget *) o->smoke->cast(o->ptr, o->classId, o->smoke->idClass("Wt::WContainerWidget").index);
             mark_wcontainerwidget_children(widget);
@@ -156,7 +197,7 @@ smokeruby_mark(void * p)
             obj = getPointerObject(layout);
             if (obj != Qnil) {
                 if (Wt::Ruby::do_debug & wtdb_gc) {
-                    printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), layout, (void*) obj);
+                    printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), layout, (void*) obj);
                 }
                 rb_gc_mark(obj);
             }
@@ -169,7 +210,7 @@ smokeruby_mark(void * p)
             obj = getPointerObject(label);
             if (obj != Qnil) {
                 if (Wt::Ruby::do_debug & wtdb_gc) {
-                    printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), label, (void*) obj);
+                    printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), label, (void*) obj);
                 }
                 rb_gc_mark(obj);
             }
@@ -178,9 +219,24 @@ smokeruby_mark(void * p)
             obj = getPointerObject(label);
             if (obj != Qnil) {
                 if (Wt::Ruby::do_debug & wtdb_gc) {
-                    printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), validator, (void*) obj);
+                    printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), validator, (void*) obj);
                 }
                 rb_gc_mark(obj);
+            }
+        }
+
+        if (o->smoke->isDerivedFromByName(className, "Wt::Chart::WCartesianChart")) {
+            Wt::Chart::WCartesianChart * chart = (Wt::Chart::WCartesianChart *) o->smoke->cast(o->ptr, o->classId, o->smoke->idClass("Wt::Chart::WCartesianChart").index);
+            const std::vector<Wt::Chart::WDataSeries> & l = chart->series();
+
+            for (unsigned int i = 0; i < l.size(); i++) {
+                obj = getPointerObject((void *) &(l.at(i)));
+                if (obj != Qnil) {
+                    if (Wt::Ruby::do_debug & wtdb_gc) {
+                        printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), &(l.at(i)), (void*)obj);
+                    }
+                    rb_gc_mark(obj);
+                }
             }
         }
 
@@ -191,7 +247,7 @@ smokeruby_mark(void * p)
                 obj = getPointerObject(tableRow);
                 if (obj != Qnil) {
                     if (Wt::Ruby::do_debug & wtdb_gc) {
-                        printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), tableRow, (void*)obj);
+                        printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), tableRow, (void*)obj);
                     }
                     rb_gc_mark(obj);
                 }
@@ -200,7 +256,7 @@ smokeruby_mark(void * p)
                     obj = getPointerObject(cell);
                     if (obj != Qnil) {
                         if (Wt::Ruby::do_debug & wtdb_gc) {
-                            printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), cell, (void*)obj);
+                            printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), cell, (void*)obj);
                         }
                         rb_gc_mark(obj);
                     }
@@ -212,7 +268,7 @@ smokeruby_mark(void * p)
                 obj = getPointerObject(tableColumn);
                 if (obj != Qnil) {
                     if (Wt::Ruby::do_debug & wtdb_gc) {
-                        printf("Marking (%s*)%p -> %p", rb_obj_classname(obj), tableColumn, (void*)obj);
+                        printf("Marking (%s*)%p -> %p\n", rb_obj_classname(obj), tableColumn, (void*)obj);
                     }
                     rb_gc_mark(obj);
                 }
@@ -242,6 +298,14 @@ smokeruby_free(void * p)
     if (o->smoke->isDerivedFromByName(className, "Wt::WObject")) {
         Wt::WObject * object = (Wt::WObject *) o->smoke->cast(o->ptr, o->classId, o->smoke->idClass("Wt::WObject").index);
         if (object->parent() != 0) {
+            free_smokeruby_object(o);
+            return;
+        }
+    }
+
+    if (o->smoke->isDerivedFromByName(className, "Wt::WMenuItem")) {
+        Wt::WMenuItem * item = (Wt::WMenuItem *) o->smoke->cast(o->ptr, o->classId, o->smoke->idClass("Wt::WMenuItem").index);
+        if (item->menu() != 0) {
             free_smokeruby_object(o);
             return;
         }

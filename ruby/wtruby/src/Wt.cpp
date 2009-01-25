@@ -118,9 +118,13 @@ VALUE getPointerObject(void *ptr) {
         return Qnil;
     } else {
         if (Wt::Ruby::do_debug & wtdb_gc) {
-            printf("getPointerObject %p -> %p\n", ptr, Wt::Ruby::pointerMap[ptr]);
+            printf("getPointerObject %s %p -> %p\n", rb_obj_classname(*(Wt::Ruby::pointerMap[ptr])), ptr, Wt::Ruby::pointerMap[ptr]);
         }
-        return *(Wt::Ruby::pointerMap[ptr]);
+        if (TYPE(*(Wt::Ruby::pointerMap[ptr])) != T_DATA) {
+            return Qnil;
+        } else {
+            return *(Wt::Ruby::pointerMap[ptr]);
+        }
     }
 }
 
@@ -134,7 +138,7 @@ void unmapPointer(smokeruby_object *o, Smoke::Index classId, void *lastptr) {
         
             if (Wt::Ruby::do_debug & wtdb_gc) {
                 const char *className = o->smoke->classes[o->classId].className;
-                printf("unmapPointer (%s*)%p -> %p size: %d\n", className, ptr, obj_ptr, Wt::Ruby::pointerMap.size() - 1);
+                printf("unmapPointer (%s*)%p -> %p\n", className, ptr, obj_ptr);
             }
         
             Wt::Ruby::pointerMap.erase(ptr);
@@ -160,7 +164,7 @@ void mapPointer(VALUE obj, smokeruby_object *o, Smoke::Index classId, void *last
         
         if (Wt::Ruby::do_debug & wtdb_gc) {
             const char *className = o->smoke->classes[o->classId].className;
-            printf("mapPointer (%s*)%p -> %p size: %d\n", className, ptr, (void*)obj, Wt::Ruby::pointerMap.size() + 1);
+            printf("mapPointer %s (%s*) %p -> %p\n", rb_obj_classname(*obj_ptr), className, ptr, (void*)obj);
         }
     
         Wt::Ruby::pointerMap[ptr] = obj_ptr;
