@@ -350,6 +350,350 @@ module Wt
       return !@value 
     end
   end
+  module Internal
+    @@classes   = {}
+    @@cpp_names = {}
+    @@idclass   = []
+
+    @@normalize_procs = []
+
+    class ModuleIndex
+      attr_accessor :index
+
+      def smoke
+        if ! @smoke
+            return 0
+        end
+        return @smoke
+      end
+      
+      def initialize(smoke, index)
+        @smoke = smoke
+        @index = index
+      end
+    end
+
+    def self.classes
+      return @@classes
+    end
+
+    def self.cpp_names
+      return @@cpp_names
+    end
+
+    def self.idclass
+      return @@idclass
+    end
+
+    def self.add_normalize_proc(func)
+      @@normalize_procs << func
+    end
+
+    def Internal.normalize_classname(classname)
+      @@normalize_procs.each do |func|
+        ret = func.call(classname)
+        if !ret.nil?
+          return ret
+        end
+      end
+      if classname =~ /^boost/
+        ruby_classname = classname.gsub(/(^.)/) {|m| m.upcase}.gsub(/::(.)/) {|m| m.upcase}
+      else
+        ruby_classname = classname
+      end
+      return ruby_classname
+    end
+
+    def Internal.init_class(c)
+      if c == "QGlobalSpace" || c == "Wt::Ext"
+        return
+      end
+      classname = Wt::Internal::normalize_classname(c)
+      classId = Wt::Internal.findClass(c)
+      insert_pclassid(classname, classId)
+      @@idclass[classId.index] = classname
+      @@cpp_names[classname] = c
+      if c =~/^Wt::Chart/
+        klass = create_wt_class(classname, Wt::Chart)
+      elsif c =~/^boost::signals/
+        klass = create_wt_class(classname, Boost::Signals)
+      elsif c =~/^boost/
+        klass = create_wt_class(classname, Boost)
+      else
+        klass = create_wt_class(classname, Wt)
+      end
+      @@classes[classname] = klass unless klass.nil?
+    end
+
+    def Internal.debug_level
+      Wt.debug_level
+    end
+
+    def Internal.checkarg(argtype, typename)
+      puts "      #{typename} (#{argtype})" if debug_level >= DebugLevel::High
+      if argtype == 'i'
+        if typename =~ /^int&?$|^signed int&?$|^signed$/
+          return 2
+        elsif typename =~ /^(?:short|ushort|unsigned short int|unsigned short|char|uchar|uint|long|ulong|unsigned long int|unsigned|float|double)$/
+          return 1
+        elsif typename =~ /^(long long)|(unsigned long long)$/
+          return 1
+        else 
+          t = typename.sub(/^const\s+/, '')
+          t.sub!(/[&*]$/, '')
+          if isEnum(t)
+            return 0
+          end
+        end
+      elsif argtype == 'n'
+        if typename =~ /^double$/
+          return 2
+        elsif typename =~ /^float$/
+          return 1
+        elsif typename =~ /^int&?$/
+          return 0
+        elsif typename =~ /^(?:short|ushort|uint|long|ulong|signed|unsigned|float|double)$/
+          return 0
+        else 
+          t = typename.sub(/^const\s+/, '')
+          t.sub!(/[&*]$/, '')
+          if isEnum(t)
+            return 0
+          end
+        end
+      elsif argtype == 'B'
+        if typename =~ /^(?:bool)[*&]?$/
+          return 0
+        end
+      elsif argtype == 's'
+        if typename =~ /^(const )?((QChar)[*&]?)$/
+          return 1
+        elsif typename =~ /^(const )?std::vector<char>[*&]?$/
+          return 0
+        elsif typename =~ /^(?:u?char\*|(?:const )?(std::w?string[*&]?)|const u?char\*|(?:const )?(Wt::WString)[*&]?)$/
+          wstring = !$1.nil?
+          return $1 ? 2 : ($2 ? 3 : 0)
+        end
+      elsif argtype == 'a'
+      elsif argtype == 'u'
+        # Give nil matched against string types a higher score than anything else
+        if typename =~ /^(?:u?char\*|const u?char\*|(?:const )?((Wt::WString))[*&]?)$/
+          return 1
+        # Numerics will give a runtime conversion error, so they fail the match
+        elsif typename =~ /^(?:short|ushort|uint|long|ulong|signed|unsigned|int)$/
+          return -99
+        else
+          return 0
+        end
+      elsif argtype == 'U'
+        if typename =~ /WStringList/
+          return 1
+        else
+          return 0
+        end
+      else
+        t = typename.sub(/^const\s+/, '')
+        t.sub!(/(::)?Ptr$/, '')
+        t.sub!(/[&*]$/, '')
+        if argtype == t
+          return 1
+        elsif classIsa(argtype, t)
+          return 0
+        elsif isEnum(argtype) and 
+            (t =~ /int|uint|long|ulong/ or isEnum(t))
+          return 0
+        end
+      end
+      return -99
+    end
+
+    def Internal.find_class(classname)
+      @@classes[classname]
+    end
+    
+    # Runs the initializer as far as allocating the Wt C++ instance.
+    # Then use a throw to jump back to here with the C++ instance 
+    # wrapped in a new ruby variable of type T_DATA
+    def Internal.try_initialize(instance, *args)
+      initializer = instance.method(:initialize)
+      catch "new_wt" do
+        initializer.call(*args)
+      end
+    end
+    
+        # If a block was passed to the constructor, then
+    # run that now. Either run the context of the new instance
+    # if no args were passed to the block. Or otherwise,
+    # run the block in the context of the arg.
+    def Internal.run_initializer_block(instance, block)
+      if block.arity == -1
+        instance.instance_eval(&block)
+      elsif block.arity == 1
+        block.call(instance)
+      else
+        raise ArgumentError, "Wrong number of arguments to block(#{block.arity} for 1)"
+      end
+    end
+
+    def Internal.do_method_missing(package, method, klass, this, *args)
+      if klass.class == Module
+        classname = klass.name
+      else
+        classname = @@cpp_names[klass.name]
+        if classname.nil?
+          if klass != Object
+            return do_method_missing(package, method, klass.superclass, this, *args)
+          else
+            return nil
+          end
+        end
+      end
+
+      if method == "new"
+        method = classname.dup 
+        method.gsub!(/^.*::/,"")
+      end
+      method = "operator" + method.sub("@","") if method !~ /[a-zA-Z]+/
+      # Change foobar= to setFoobar()          
+      method = 'set' + method[0,1].upcase + method[1,method.length].sub("=", "") if method =~ /.*[^-+%\/|=]=$/ && method != 'operator='
+
+      methods = []
+      methods << method.dup
+      args.each do |arg|
+        if arg.nil?
+          # For each nil arg encountered, triple the number of munged method
+          # templates, in order to cover all possible types that can match nil
+          temp = []
+          methods.collect! do |meth| 
+            temp << meth + '?' 
+            temp << meth + '#'
+            meth << '$'
+          end
+          methods.concat(temp)
+        elsif isObject(arg)
+          methods.collect! { |meth| meth << '#' }
+        elsif arg.kind_of? Array or arg.kind_of? Hash
+          methods.collect! { |meth| meth << '?' }
+        else
+          methods.collect! { |meth| meth << '$' }
+        end
+      end
+      
+      methodIds = []
+      methods.collect { |meth| methodIds.concat( findMethod(classname, meth) ) }
+      
+      if method =~ /._./ && methodIds.length == 0
+        # If the method name contains underscores, convert to camel case
+        # form and try again
+        method.gsub!(/(.)_(.)/) {$1 + $2.upcase}
+        return do_method_missing(package, method, klass, this, *args)
+      end
+
+      if debug_level >= DebugLevel::High
+        puts "classname    == #{classname}"
+        puts ":: method == #{method}"
+        puts "-> methodIds == #{methodIds.inspect}"
+        puts "candidate list:"
+        prototypes = dumpCandidates(methodIds).split("\n")
+        line_len = (prototypes.collect { |p| p.length }).max
+        prototypes.zip(methodIds) { 
+          |prototype,id| puts "#{prototype.ljust line_len}  (smoke: #{id.smoke} index: #{id.index})" 
+        }
+      end
+      
+      chosen = nil
+      if methodIds.length > 0
+        best_match = -1
+        methodIds.each do
+          |id|
+          puts "matching => smoke: #{id.smoke} index: #{id.index}" if debug_level >= DebugLevel::High
+          current_match = 0
+          (0...args.length).each do
+            |i|
+            current_match += checkarg(get_value_type(args[i]), get_arg_type_name(id, i))
+          end
+          
+          # Note that if current_match > best_match, then chosen must be nil
+          if current_match > best_match
+            best_match = current_match
+            chosen = id
+          # Multiple matches are an error; the equality test below _cannot_ be commented out.
+          # If ambiguous matches occur the problem must be fixed be adjusting the relative
+          # ranking of the arg types involved in checkarg().
+          elsif current_match == best_match
+            chosen = nil
+          end
+          puts "match => #{id.index} score: #{current_match}" if debug_level >= DebugLevel::High
+        end
+          
+        puts "Resolved to id: #{chosen.index}" if !chosen.nil? && debug_level >= DebugLevel::High
+      end
+
+      if debug_level >= DebugLevel::Minimal && chosen.nil? && method !~ /^operator/
+        id = find_pclassid(normalize_classname(klass.name))
+        hash = findAllMethods(id)
+        constructor_names = nil
+        if method == classname
+          puts "No matching constructor found, possibles:\n"
+          constructor_names = hash.keys.grep(/^#{classname}/)
+        else
+          puts "Possible prototypes:"
+          constructor_names = hash.keys
+        end
+        method_ids = hash.values_at(*constructor_names).flatten
+        puts dumpCandidates(method_ids)
+      else
+        puts "setCurrentMethod(smokeList index: #{chosen.smoke}, meth index: #{chosen.index})" if chosen && debug_level >= DebugLevel::High
+      end
+      setCurrentMethod(chosen) if chosen
+      return nil
+    end
+
+    def Internal.init_all_classes()
+      Wt::Internal::getClassList().each do |c|
+        if !c.empty?
+          Wt::Internal::init_class(c)
+        end
+      end
+
+      @@classes['Wt::Integer'] = Wt::Integer
+      @@classes['Wt::Boolean'] = Wt::Boolean
+      @@classes['Wt::Enum'] = Wt::Enum
+    end
+    
+    def Internal.get_winteger(num)
+      return num.value
+    end
+    
+    def Internal.set_winteger(num, val)
+      return num.value = val
+    end
+    
+    def Internal.create_wenum(num, enum_type)
+      return Wt::Enum.new(num, enum_type)
+    end
+    
+    def Internal.get_wenum_type(e)
+      return e.type
+    end
+    
+    def Internal.get_wboolean(b)
+      return b.value
+    end
+    
+    def Internal.set_wboolean(b, val)
+      return b.value = val
+    end
+
+    def Internal.getAllParents(class_id, res)
+      getIsa(class_id).each do |s|
+        c = findClass(s)
+        res << c
+        getAllParents(c, res)
+      end
+    end
+
+  end # Wt::Internal
 
   class Chart::WAbstractChart < Wt::Base
     def id(*args)
@@ -487,6 +831,12 @@ module Wt
     def initialize(env)
       super(env)
       $wApp = self
+      #
+      # Keep the value of root in an instance variable so that
+      # the smokeruby_mark() function will always have that value
+      # as a place to start when marking the instances in the
+      # WObject tree under it as not needing garbage collection
+      @root = root
     end 
 
     def id(*args)
@@ -666,6 +1016,17 @@ module Wt
       str = to_s
       pp.text str.sub(/>$/, "\n id=%s>" % [id])
     end
+  end
+
+  class WCssDecorationStyle < Wt::Base
+    Default = Wt::ArrowCursor
+    Auto = Wt::AutoCursor
+    CrossHair = Wt::CrossCursor
+    Pointer = Wt::PointingHandCursor
+    Move = Wt::OpenHandCursor
+    Wait = Wt::WaitCursor
+    Text = Wt::IBeamCursor
+    Help = Wt::WhatsThisCursor
   end
 
   class WDate < Wt::Base
@@ -1071,8 +1432,11 @@ module Wt
     def addItem(*args)
       item = super(*args)
       # Keep the 'contents' arg values in a hash to prevent ruby from
-      # garbage collecting them, as the aren't directly accessible
-      # from the Wt C++ api once they've been added to a Wt::MenuItem
+      # garbage collecting them, as they aren't directly accessible
+      # from the Wt C++ api once they've been added to a Wt::MenuItem.
+      # This means that the smokeruby_mark() function can't access 
+      # the contents instances when traversing the tree of 
+      # WMenu/WMenuItems
       if args.length > 1
         # puts "Wt::Menu#addItem #{item} adding to contents: #{args[1]}"
         @contents[item] = args[1]
@@ -1627,6 +1991,10 @@ module Wt
   end
 
   class WText < Wt::Base
+    XHTMLFormatting = Wt::XHTMLText
+    XHTMLUnsafeFormatting = Wt::XHTMLUnsafeText
+    PlainFormatting = Wt::PlainText
+
     def id(*args)
       method_missing(:id, *args)
     end
@@ -1900,6 +2268,38 @@ module Wt
   end
 
   class WWidget < Wt::Base
+    None = Wt::None
+    Top = Wt::Top
+    Bottom = Wt::Bottom
+    Left = Wt::Left
+    Right = Wt::Right
+    CenterX = Wt::CenterX
+    CenterY = Wt::CenterY
+    CenterXY = Wt::CenterXY
+    Verticals = Wt::Verticals
+    Horizontals = Wt::Horizontals
+    All = Wt::All
+
+    AlignBaseline = Wt::AlignBaseline
+    AlignSub = Wt::AlignSub
+    AlignSuper = Wt::AlignSuper
+    AlignTop = Wt::AlignTop
+    AlignTextTop = Wt::AlignTextTop
+    AlignMiddle = Wt::AlignMiddle
+    AlignBottom = Wt::AlignBottom
+    AlignTextBottom = Wt::AlignTextBottom
+    AlignLength = Wt::AlignLength
+
+    AlignLeft = Wt::AlignLeft
+    AlignRight = Wt::AlignRight
+    AlignCenter = Wt::AlignCenter
+    AlignJustify = Wt::AlignJustify
+
+    Static = Wt::Static
+    Relative = Wt::Relative
+    Absolute = Wt::Absolute
+    Fixed = Wt::Fixed
+
     def id(*args)
       method_missing(:id, *args)
     end
@@ -2031,350 +2431,6 @@ module Wt
     end
   end
   
-  module Internal
-    @@classes   = {}
-    @@cpp_names = {}
-    @@idclass   = []
-
-    @@normalize_procs = []
-
-    class ModuleIndex
-      attr_accessor :index
-
-      def smoke
-        if ! @smoke
-            return 0
-        end
-        return @smoke
-      end
-      
-      def initialize(smoke, index)
-        @smoke = smoke
-        @index = index
-      end
-    end
-
-    def self.classes
-      return @@classes
-    end
-
-    def self.cpp_names
-      return @@cpp_names
-    end
-
-    def self.idclass
-      return @@idclass
-    end
-
-    def self.add_normalize_proc(func)
-      @@normalize_procs << func
-    end
-
-    def Internal.normalize_classname(classname)
-      @@normalize_procs.each do |func|
-        ret = func.call(classname)
-        if !ret.nil?
-          return ret
-        end
-      end
-      if classname =~ /^boost/
-        ruby_classname = classname.gsub(/(^.)/) {|m| m.upcase}.gsub(/::(.)/) {|m| m.upcase}
-      else
-        ruby_classname = classname
-      end
-      return ruby_classname
-    end
-
-    def Internal.init_class(c)
-      if c == "QGlobalSpace" || c == "Wt::Ext"
-        return
-      end
-      classname = Wt::Internal::normalize_classname(c)
-      classId = Wt::Internal.findClass(c)
-      insert_pclassid(classname, classId)
-      @@idclass[classId.index] = classname
-      @@cpp_names[classname] = c
-      if c =~/^Wt::Chart/
-        klass = create_wt_class(classname, Wt::Chart)
-      elsif c =~/^boost::signals/
-        klass = create_wt_class(classname, Boost::Signals)
-      elsif c =~/^boost/
-        klass = create_wt_class(classname, Boost)
-      else
-        klass = create_wt_class(classname, Wt)
-      end
-      @@classes[classname] = klass unless klass.nil?
-    end
-
-    def Internal.debug_level
-      Wt.debug_level
-    end
-
-    def Internal.checkarg(argtype, typename)
-      puts "      #{typename} (#{argtype})" if debug_level >= DebugLevel::High
-      if argtype == 'i'
-        if typename =~ /^int&?$|^signed int&?$|^signed$/
-          return 2
-        elsif typename =~ /^(?:short|ushort|unsigned short int|unsigned short|char|uchar|uint|long|ulong|unsigned long int|unsigned|float|double)$/
-          return 1
-        elsif typename =~ /^(long long)|(unsigned long long)$/
-          return 1
-        else 
-          t = typename.sub(/^const\s+/, '')
-          t.sub!(/[&*]$/, '')
-          if isEnum(t)
-            return 0
-          end
-        end
-      elsif argtype == 'n'
-        if typename =~ /^double$/
-          return 2
-        elsif typename =~ /^float$/
-          return 1
-        elsif typename =~ /^int&?$/
-          return 0
-        elsif typename =~ /^(?:short|ushort|uint|long|ulong|signed|unsigned|float|double)$/
-          return 0
-        else 
-          t = typename.sub(/^const\s+/, '')
-          t.sub!(/[&*]$/, '')
-          if isEnum(t)
-            return 0
-          end
-        end
-      elsif argtype == 'B'
-        if typename =~ /^(?:bool)[*&]?$/
-          return 0
-        end
-      elsif argtype == 's'
-        if typename =~ /^(const )?((QChar)[*&]?)$/
-          return 1
-        elsif typename =~ /^(const )?std::vector<char>[*&]?$/
-          return 0
-        elsif typename =~ /^(?:u?char\*|(?:const )?(std::w?string[*&]?)|const u?char\*|(?:const )?(Wt::WString)[*&]?)$/
-          wstring = !$1.nil?
-          return $1 ? 2 : ($2 ? 3 : 0)
-        end
-      elsif argtype == 'a'
-      elsif argtype == 'u'
-        # Give nil matched against string types a higher score than anything else
-        if typename =~ /^(?:u?char\*|const u?char\*|(?:const )?((Wt::WString))[*&]?)$/
-          return 1
-        # Numerics will give a runtime conversion error, so they fail the match
-        elsif typename =~ /^(?:short|ushort|uint|long|ulong|signed|unsigned|int)$/
-          return -99
-        else
-          return 0
-        end
-      elsif argtype == 'U'
-        if typename =~ /WStringList/
-          return 1
-        else
-          return 0
-        end
-      else
-        t = typename.sub(/^const\s+/, '')
-        t.sub!(/(::)?Ptr$/, '')
-        t.sub!(/[&*]$/, '')
-        if argtype == t
-          return 1
-        elsif classIsa(argtype, t)
-          return 0
-        elsif isEnum(argtype) and 
-            (t =~ /int|uint|long|ulong/ or isEnum(t))
-          return 0
-        end
-      end
-      return -99
-    end
-
-    def Internal.find_class(classname)
-      @@classes[classname]
-    end
-    
-    # Runs the initializer as far as allocating the Wt C++ instance.
-    # Then use a throw to jump back to here with the C++ instance 
-    # wrapped in a new ruby variable of type T_DATA
-    def Internal.try_initialize(instance, *args)
-      initializer = instance.method(:initialize)
-      catch "new_wt" do
-        initializer.call(*args)
-      end
-    end
-    
-        # If a block was passed to the constructor, then
-    # run that now. Either run the context of the new instance
-    # if no args were passed to the block. Or otherwise,
-    # run the block in the context of the arg.
-    def Internal.run_initializer_block(instance, block)
-      if block.arity == -1
-        instance.instance_eval(&block)
-      elsif block.arity == 1
-        block.call(instance)
-      else
-        raise ArgumentError, "Wrong number of arguments to block(#{block.arity} for 1)"
-      end
-    end
-
-    def Internal.do_method_missing(package, method, klass, this, *args)
-      if klass.class == Module
-        classname = klass.name
-      else
-        classname = @@cpp_names[klass.name]
-        if classname.nil?
-          if klass != Object
-            return do_method_missing(package, method, klass.superclass, this, *args)
-          else
-            return nil
-          end
-        end
-      end
-
-      if method == "new"
-        method = classname.dup 
-        method.gsub!(/^.*::/,"")
-      end
-      method = "operator" + method.sub("@","") if method !~ /[a-zA-Z]+/
-      # Change foobar= to setFoobar()          
-      method = 'set' + method[0,1].upcase + method[1,method.length].sub("=", "") if method =~ /.*[^-+%\/|=]=$/ && method != 'operator='
-
-      methods = []
-      methods << method.dup
-      args.each do |arg|
-        if arg.nil?
-          # For each nil arg encountered, triple the number of munged method
-          # templates, in order to cover all possible types that can match nil
-          temp = []
-          methods.collect! do |meth| 
-            temp << meth + '?' 
-            temp << meth + '#'
-            meth << '$'
-          end
-          methods.concat(temp)
-        elsif isObject(arg)
-          methods.collect! { |meth| meth << '#' }
-        elsif arg.kind_of? Array or arg.kind_of? Hash
-          methods.collect! { |meth| meth << '?' }
-        else
-          methods.collect! { |meth| meth << '$' }
-        end
-      end
-      
-      methodIds = []
-      methods.collect { |meth| methodIds.concat( findMethod(classname, meth) ) }
-      
-      if method =~ /._./ && methodIds.length == 0
-        # If the method name contains underscores, convert to camel case
-        # form and try again
-        method.gsub!(/(.)_(.)/) {$1 + $2.upcase}
-        return do_method_missing(package, method, klass, this, *args)
-      end
-
-      if debug_level >= DebugLevel::High
-        puts "classname    == #{classname}"
-        puts ":: method == #{method}"
-        puts "-> methodIds == #{methodIds.inspect}"
-        puts "candidate list:"
-        prototypes = dumpCandidates(methodIds).split("\n")
-        line_len = (prototypes.collect { |p| p.length }).max
-        prototypes.zip(methodIds) { 
-          |prototype,id| puts "#{prototype.ljust line_len}  (smoke: #{id.smoke} index: #{id.index})" 
-        }
-      end
-      
-      chosen = nil
-      if methodIds.length > 0
-        best_match = -1
-        methodIds.each do
-          |id|
-          puts "matching => smoke: #{id.smoke} index: #{id.index}" if debug_level >= DebugLevel::High
-          current_match = 0
-          (0...args.length).each do
-            |i|
-            current_match += checkarg(get_value_type(args[i]), get_arg_type_name(id, i))
-          end
-          
-          # Note that if current_match > best_match, then chosen must be nil
-          if current_match > best_match
-            best_match = current_match
-            chosen = id
-          # Multiple matches are an error; the equality test below _cannot_ be commented out.
-          # If ambiguous matches occur the problem must be fixed be adjusting the relative
-          # ranking of the arg types involved in checkarg().
-          elsif current_match == best_match
-            chosen = nil
-          end
-          puts "match => #{id.index} score: #{current_match}" if debug_level >= DebugLevel::High
-        end
-          
-        puts "Resolved to id: #{chosen.index}" if !chosen.nil? && debug_level >= DebugLevel::High
-      end
-
-      if debug_level >= DebugLevel::Minimal && chosen.nil? && method !~ /^operator/
-        id = find_pclassid(normalize_classname(klass.name))
-        hash = findAllMethods(id)
-        constructor_names = nil
-        if method == classname
-          puts "No matching constructor found, possibles:\n"
-          constructor_names = hash.keys.grep(/^#{classname}/)
-        else
-          puts "Possible prototypes:"
-          constructor_names = hash.keys
-        end
-        method_ids = hash.values_at(*constructor_names).flatten
-        puts dumpCandidates(method_ids)
-      else
-        puts "setCurrentMethod(smokeList index: #{chosen.smoke}, meth index: #{chosen.index})" if chosen && debug_level >= DebugLevel::High
-      end
-      setCurrentMethod(chosen) if chosen
-      return nil
-    end
-
-    def Internal.init_all_classes()
-      Wt::Internal::getClassList().each do |c|
-        if !c.empty?
-          Wt::Internal::init_class(c)
-        end
-      end
-
-      @@classes['Wt::Integer'] = Wt::Integer
-      @@classes['Wt::Boolean'] = Wt::Boolean
-      @@classes['Wt::Enum'] = Wt::Enum
-    end
-    
-    def Internal.get_winteger(num)
-      return num.value
-    end
-    
-    def Internal.set_winteger(num, val)
-      return num.value = val
-    end
-    
-    def Internal.create_wenum(num, enum_type)
-      return Wt::Enum.new(num, enum_type)
-    end
-    
-    def Internal.get_wenum_type(e)
-      return e.type
-    end
-    
-    def Internal.get_wboolean(b)
-      return b.value
-    end
-    
-    def Internal.set_wboolean(b, val)
-      return b.value = val
-    end
-
-    def Internal.getAllParents(class_id, res)
-      getIsa(class_id).each do |s|
-        c = findClass(s)
-        res << c
-        getAllParents(c, res)
-      end
-    end
-
-  end # Wt::Internal
 end # Wt
 
 module Boost
