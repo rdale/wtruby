@@ -10,6 +10,8 @@ Wt::WWidget::None is defined as Wt::None. Add the same equivalent names to the
 Wt::Ruby classes.
 * Change the name of the WMenu hash to 'item_contents' and make the key the id
 of the WMenuItem, as this is useful for debugging
+* Remove the WDllDefs.h from the wt_header_list as it was messing up the code
+generation of the Smoke library with Wt 2.2.3
 
 2009-01-25 Richard Dale <richard.j.dale@gmail.com>
 * When an item is marked for not needing garbage collection show the actual

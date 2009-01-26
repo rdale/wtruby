@@ -37,7 +37,6 @@ Wt/WDateValidator
 Wt/WDefaultLayout
 Wt/WDefaultLoadingIndicator
 Wt/WDialog
-Wt/WDllDefs.h
 Wt/WDoubleValidator
 Wt/WEnvironment
 Wt/WEvent
