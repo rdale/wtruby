@@ -1439,7 +1439,9 @@ module Wt
       # This means that the smokeruby_mark() function can't access 
       # the contents instances when traversing the tree of 
       # WMenu/WMenuItems
-      if args.length > 1
+      if args.length == 1
+        @item_contents[item.id] = args[0].item_contents
+      else
         # puts "Wt::Menu#addItem #{item} adding to contents: #{args[1]}"
         @item_contents[item.id] = args[1]
       end
@@ -1465,6 +1467,13 @@ module Wt
   end
 
   class WMenuItem < Wt::Base
+    attr_reader :item_contents
+
+    def initialize(*args)
+      super(*args)
+      @item_contents = args[1]
+    end
+
     def id(*args)
       method_missing(:id, *args)
     end
@@ -1763,7 +1772,7 @@ module Wt
 
     def inspect
       str = super
-      str.sub(/>$/, " id=%d, minimum=%d, maximum=%d, value=%d>" % [id, minimum, maximum, value])
+      str.sub(/>$/, " id=%s, minimum=%d, maximum=%d, value=%d>" % [id, minimum, maximum, value])
     end
     
     def pretty_print(pp)
@@ -1845,6 +1854,18 @@ module Wt
   end
 
   class WSubMenuItem < Wt::Base
+    attr_reader :item_contents
+
+    def initialize(*args)
+      super(*args)
+      @item_contents = args[1]
+    end
+
+    def setSubMenu(menu)
+      super(menu)
+      menu.item_contents[id] = @item_contents
+    end
+
     def id(*args)
       method_missing(:id, *args)
     end
