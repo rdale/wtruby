@@ -12,6 +12,10 @@ Wt::Ruby classes.
 of the WMenuItem, as this is useful for debugging
 * Remove the WDllDefs.h from the wt_header_list as it was messing up the code
 generation of the Smoke library with Wt 2.2.3
+* More fixes for the examples
+* Added @item_contents instance variables to Wt::WMenuItem and 
+Wt::WSubMenuItem so that they can be added to the item_contents hash table of
+an owning WMenu, to help with coordinating Ruby garbage collection with Wt
 
 2009-01-25 Richard Dale <richard.j.dale@gmail.com>
 * When an item is marked for not needing garbage collection show the actual
