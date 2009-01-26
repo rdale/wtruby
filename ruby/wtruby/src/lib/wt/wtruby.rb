@@ -190,6 +190,167 @@ module Wt
     end
   end # Wt::Base
 
+  # Provides a mutable numeric class for passing to methods with
+  # C++ 'int*' or 'int&' arg types
+  class Integer
+    attr_accessor :value
+    def initialize(n=0) @value = n end
+    
+    def +(n) 
+      return Integer.new(@value + n.to_i) 
+    end
+    def -(n) 
+      return Integer.new(@value - n.to_i)
+    end
+    def *(n) 
+      return Integer.new(@value * n.to_i)
+    end
+    def /(n) 
+      return Integer.new(@value / n.to_i)
+    end
+    def %(n) 
+      return Integer.new(@value % n.to_i)
+    end
+    def **(n) 
+      return Integer.new(@value ** n.to_i)
+    end
+    
+    def |(n) 
+      return Integer.new(@value | n.to_i)
+    end
+    def &(n) 
+      return Integer.new(@value & n.to_i)
+    end
+    def ^(n) 
+      return Integer.new(@value ^ n.to_i)
+    end
+    def <<(n) 
+      return Integer.new(@value << n.to_i)
+    end
+    def >>(n) 
+      return Integer.new(@value >> n.to_i)
+    end
+    def >(n) 
+      return @value > n.to_i
+    end
+    def >=(n) 
+      return @value >= n.to_i
+    end
+    def <(n) 
+      return @value < n.to_i
+    end
+    def <=(n) 
+      return @value <= n.to_i
+    end
+    
+    def <=>(n)
+      if @value < n.to_i
+        return -1
+      elsif @value > n.to_i
+        return 1
+      else
+        return 0
+      end
+    end
+    
+    def to_f() return @value.to_f end
+    def to_i() return @value.to_i end
+    def to_s() return @value.to_s end
+    
+    def coerce(n)
+      [n, @value]
+    end
+  end
+  
+  # If a C++ enum was converted to an ordinary ruby Integer, the
+  # name of the type is lost. The enum type name is needed for overloaded
+  # method resolution when two methods differ only by an enum type.
+  class Enum
+    attr_accessor :type, :value
+    def initialize(n, enum_type)
+      @value = n 
+      @type = enum_type
+    end
+    
+    def +(n) 
+      return @value + n.to_i
+    end
+    def -(n) 
+      return @value - n.to_i
+    end
+    def *(n) 
+      return @value * n.to_i
+    end
+    def /(n) 
+      return @value / n.to_i
+    end
+    def %(n) 
+      return @value % n.to_i
+    end
+    def **(n) 
+      return @value ** n.to_i
+    end
+    
+    def |(n) 
+      return Enum.new(@value | n.to_i, @type)
+    end
+    def &(n) 
+      return Enum.new(@value & n.to_i, @type)
+    end
+    def ^(n) 
+      return Enum.new(@value ^ n.to_i, @type)
+    end
+    def ~() 
+      return ~ @value
+    end
+    def <(n) 
+      return @value < n.to_i
+    end
+    def <=(n) 
+      return @value <= n.to_i
+    end
+    def >(n) 
+      return @value > n.to_i
+    end
+    def >=(n) 
+      return @value >= n.to_i
+    end
+    def <<(n) 
+      return Enum.new(@value << n.to_i, @type)
+    end
+    def >>(n) 
+      return Enum.new(@value >> n.to_i, @type)
+    end
+    
+    def ==(n) return @value == n.to_i end
+    def to_i() return @value end
+
+    def to_f() return @value.to_f end
+    def to_s() return @value.to_s end
+    
+    def coerce(n)
+      [n, @value]
+    end
+    
+    def inspect
+      to_s
+    end
+
+    def pretty_print(pp)
+      pp.text "#<%s:0x%8.8x @type=%s, @value=%d>" % [self.class.name, object_id, type, value]
+    end
+  end
+  
+  # Provides a mutable boolean class for passing to methods with
+  # C++ 'bool*' or 'bool&' arg types
+  class Boolean
+    attr_accessor :value
+    def initialize(b=false) @value = b end
+    def nil? 
+      return !@value 
+    end
+  end
+
   class Chart::WAbstractChart < Wt::Base
     def id(*args)
       method_missing(:id, *args)
@@ -902,6 +1063,22 @@ module Wt
   end
 
   class WMenu < Wt::Base
+    def initialize(*args)
+      super(*args)
+      @contents = {}
+    end
+
+    def addItem(*args)
+      item = super(*args)
+      # Keep the 'contents' arg values in a hash to prevent ruby from
+      # garbage collecting them, as the aren't directly accessible
+      # from the Wt C++ api once they've been added to a Wt::MenuItem
+      if args.length > 1
+        # puts "Wt::Menu#addItem #{item} adding to contents: #{args[1]}"
+        @contents[item] = args[1]
+      end
+    end
+
     def id(*args)
       method_missing(:id, *args)
     end
@@ -1851,167 +2028,6 @@ module Wt
       else
         return PreLearnStateless
       end
-    end
-  end
-
-  # Provides a mutable numeric class for passing to methods with
-  # C++ 'int*' or 'int&' arg types
-  class Integer
-    attr_accessor :value
-    def initialize(n=0) @value = n end
-    
-    def +(n) 
-      return Integer.new(@value + n.to_i) 
-    end
-    def -(n) 
-      return Integer.new(@value - n.to_i)
-    end
-    def *(n) 
-      return Integer.new(@value * n.to_i)
-    end
-    def /(n) 
-      return Integer.new(@value / n.to_i)
-    end
-    def %(n) 
-      return Integer.new(@value % n.to_i)
-    end
-    def **(n) 
-      return Integer.new(@value ** n.to_i)
-    end
-    
-    def |(n) 
-      return Integer.new(@value | n.to_i)
-    end
-    def &(n) 
-      return Integer.new(@value & n.to_i)
-    end
-    def ^(n) 
-      return Integer.new(@value ^ n.to_i)
-    end
-    def <<(n) 
-      return Integer.new(@value << n.to_i)
-    end
-    def >>(n) 
-      return Integer.new(@value >> n.to_i)
-    end
-    def >(n) 
-      return @value > n.to_i
-    end
-    def >=(n) 
-      return @value >= n.to_i
-    end
-    def <(n) 
-      return @value < n.to_i
-    end
-    def <=(n) 
-      return @value <= n.to_i
-    end
-    
-    def <=>(n)
-      if @value < n.to_i
-        return -1
-      elsif @value > n.to_i
-        return 1
-      else
-        return 0
-      end
-    end
-    
-    def to_f() return @value.to_f end
-    def to_i() return @value.to_i end
-    def to_s() return @value.to_s end
-    
-    def coerce(n)
-      [n, @value]
-    end
-  end
-  
-  # If a C++ enum was converted to an ordinary ruby Integer, the
-  # name of the type is lost. The enum type name is needed for overloaded
-  # method resolution when two methods differ only by an enum type.
-  class Enum
-    attr_accessor :type, :value
-    def initialize(n, enum_type)
-      @value = n 
-      @type = enum_type
-    end
-    
-    def +(n) 
-      return @value + n.to_i
-    end
-    def -(n) 
-      return @value - n.to_i
-    end
-    def *(n) 
-      return @value * n.to_i
-    end
-    def /(n) 
-      return @value / n.to_i
-    end
-    def %(n) 
-      return @value % n.to_i
-    end
-    def **(n) 
-      return @value ** n.to_i
-    end
-    
-    def |(n) 
-      return Enum.new(@value | n.to_i, @type)
-    end
-    def &(n) 
-      return Enum.new(@value & n.to_i, @type)
-    end
-    def ^(n) 
-      return Enum.new(@value ^ n.to_i, @type)
-    end
-    def ~() 
-      return ~ @value
-    end
-    def <(n) 
-      return @value < n.to_i
-    end
-    def <=(n) 
-      return @value <= n.to_i
-    end
-    def >(n) 
-      return @value > n.to_i
-    end
-    def >=(n) 
-      return @value >= n.to_i
-    end
-    def <<(n) 
-      return Enum.new(@value << n.to_i, @type)
-    end
-    def >>(n) 
-      return Enum.new(@value >> n.to_i, @type)
-    end
-    
-    def ==(n) return @value == n.to_i end
-    def to_i() return @value end
-
-    def to_f() return @value.to_f end
-    def to_s() return @value.to_s end
-    
-    def coerce(n)
-      [n, @value]
-    end
-    
-    def inspect
-      to_s
-    end
-
-    def pretty_print(pp)
-      pp.text "#<%s:0x%8.8x @type=%s, @value=%d>" % [self.class.name, object_id, type, value]
-    end
-  end
-  
-  # Provides a mutable boolean class for passing to methods with
-  # C++ 'bool*' or 'bool&' arg types
-  class Boolean
-    attr_accessor :value
-    def initialize(b=false) @value = b end
-    def nil? 
-      return !@value 
     end
   end
   

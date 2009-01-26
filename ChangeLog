@@ -1,3 +1,11 @@
+2009-01-26 Richard Dale <richard.j.dale@gmail.com>
+* Special case the WMenu#addItem method and keep the 'contents' arg values in 
+a hash to prevent ruby from garbage collecting them. They aren't directly 
+accessible from the Wt C++ api once they've been added to a Wt::MenuItem, and
+that makes it impossible for the code in the smokeruby_mark() function to mark
+them as not needing garbage collection when traversing the WMenu/WMenuItem 
+heirarchy.
+
 2009-01-25 Richard Dale <richard.j.dale@gmail.com>
 * When an item is marked for not needing garbage collection show the actual
 Ruby class in the debug logging
