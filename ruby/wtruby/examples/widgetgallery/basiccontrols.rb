@@ -195,7 +195,7 @@ class BasicControls < ControlsWidget
   def wTreeTable
     result = Wt::WContainerWidget.new
 
-    topic("Wt::WTreeTable","WTreeTableNode", result)
+    topic("WTreeTable","WTreeTableNode", result)
     Wt::WText.new(tr("basics-WTreeTable"), result)
     tt = Wt::WTreeTable.new(result)
     tt.resize(Wt::WLength.new(650), Wt::WLength.new(300))
