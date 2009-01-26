@@ -8,6 +8,8 @@ heirarchy.
 * In Wt, various enums are defined in terms of other enums, for instance 
 Wt::WWidget::None is defined as Wt::None. Add the same equivalent names to the 
 Wt::Ruby classes.
+* Change the name of the WMenu hash to 'item_contents' and make the key the id
+of the WMenuItem, as this is useful for debugging
 
 2009-01-25 Richard Dale <richard.j.dale@gmail.com>
 * When an item is marked for not needing garbage collection show the actual

@@ -1424,9 +1424,11 @@ module Wt
   end
 
   class WMenu < Wt::Base
+    attr_reader :item_contents
+
     def initialize(*args)
       super(*args)
-      @contents = {}
+      @item_contents = {}
     end
 
     def addItem(*args)
@@ -1439,7 +1441,7 @@ module Wt
       # WMenu/WMenuItems
       if args.length > 1
         # puts "Wt::Menu#addItem #{item} adding to contents: #{args[1]}"
-        @contents[item] = args[1]
+        @item_contents[item.id] = args[1]
       end
     end
 
