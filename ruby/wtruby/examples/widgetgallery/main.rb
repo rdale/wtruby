@@ -23,13 +23,40 @@ require 'stylelayout.rb'
 require 'validators.rb'
 require 'widgetgallery.rb'
 
+# DUMP_INDENT = '    '
+DUMP_INDENT = ''
+
+def dumpWObjects(obj, indent = DUMP_INDENT)
+  puts "#{indent}#{obj.inspect}"
+
+  begin
+    puts "#{indent}#{DUMP_INDENT}#{obj.layout.inspect}" unless obj.layout.nil?
+  rescue
+  end
+
+  begin
+    dumpWObjects(obj.subMenu, indent + DUMP_INDENT)
+  rescue
+  end
+
+  begin
+    obj.items.each do |item|
+      dumpWObjects(item, indent + DUMP_INDENT)
+      dumpWObjects(obj.item_contents[item.id], indent + DUMP_INDENT + DUMP_INDENT) unless obj.item_contents[item.id].nil?
+    end
+  rescue
+  end
+
+  begin
+    obj.children.each do |child|
+      dumpWObjects(child, indent + DUMP_INDENT)
+    end
+  rescue
+  end
+end
+
 Wt::WRun(ARGV) do |env|
-  app = WidgetGallery.new(env)
-  # More work needs to be done on coordinating Ruby garbage collection
-  # with the Wt runtime, so run with GC disabled for now
-  # Wt::Internal::setDebug Wt::WtDebugChannel::WTDB_GC
-  GC.disable
-  app
+  WidgetGallery.new(env)
 end
 
 # kate: space-indent on; indent-width 2; replace-tabs on; mixed-indent off;

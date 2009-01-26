@@ -16,6 +16,9 @@ generation of the Smoke library with Wt 2.2.3
 * Added @item_contents instance variables to Wt::WMenuItem and 
 Wt::WSubMenuItem so that they can be added to the item_contents hash table of
 an owning WMenu, to help with coordinating Ruby garbage collection with Wt
+* Added a 'dump_objects.rb' script to print out a tree of WObjects in a 
+running program 
+* Removed 'GC.disable' from the widgetgallery example
 
 2009-01-25 Richard Dale <richard.j.dale@gmail.com>
 * When an item is marked for not needing garbage collection show the actual
