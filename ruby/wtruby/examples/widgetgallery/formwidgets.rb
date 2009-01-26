@@ -90,7 +90,7 @@ class FormWidgets < ControlsWidget
   def wComboBox
     result = Wt::WContainerWidget.new
 
-    topic("Wt::WComboBox", result)
+    topic("WComboBox", result)
     Wt::WText.new(tr("formwidgets-WComboBox"), result)
     cb = Wt::WComboBox.new(result)
     cb.addItem("Heavy")

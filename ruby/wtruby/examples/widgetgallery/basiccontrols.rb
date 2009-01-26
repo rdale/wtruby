@@ -283,7 +283,7 @@ class BasicControls < ControlsWidget
                         "the browser to ensure swift switching."),
               "Waterloo", Wt::WTabWidget::PreLoading)
     tw.addTab(Wt::WText.new("This is yet another pre-loaded tab. " \
-                        "Look how good self works."),
+                        "Look how good this works."),
               "Victoria", Wt::WTabWidget::PreLoading)
     tw.addTab(Wt::WText.new("The colors of the tab widget can be changed by " \
                         "modifying some images."),

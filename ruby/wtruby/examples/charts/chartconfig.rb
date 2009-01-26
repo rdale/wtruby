@@ -83,7 +83,7 @@ class ChartConfig < Wt::WContainerWidget
   
     chartConfig.elementAt(row, 0).addWidget(Wt::WText.new("Width:"))
     @chartWidthEdit = Wt::WLineEdit.new(chartConfig.elementAt(row, 1))
-    @chartWidthEdit.text = @chart.width.to_s
+    @chartWidthEdit.text = @chart.width.value.to_s
     @chartWidthEdit.validator = sizeValidator
     @chartWidthEdit.maxLength = 4
     connectSignals(@chartWidthEdit)
@@ -91,7 +91,7 @@ class ChartConfig < Wt::WContainerWidget
   
     chartConfig.elementAt(row, 0).addWidget(Wt::WText.new("Height:"))
     @chartHeightEdit = Wt::WLineEdit.new(chartConfig.elementAt(row, 1))
-    @chartHeightEdit.text = @chart.height.to_s
+    @chartHeightEdit.text = @chart.height.value.to_s
     @chartHeightEdit.validator = sizeValidator
     @chartHeightEdit.maxLength = 4
     connectSignals(@chartHeightEdit)
