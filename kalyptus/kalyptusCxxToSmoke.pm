@@ -469,7 +469,6 @@ sub preParseClass
 			|| $className eq 'Wt::WServer::Exception'
 			|| $className eq 'Wt::Impl::Grid'
 			|| $className eq 'Wt::Signal'
-#			|| $className eq 'Wt::SignalBase'
 			|| $className eq 'Wt::WString'
 			|| $className eq 'Wt::InvalidDateException'
 

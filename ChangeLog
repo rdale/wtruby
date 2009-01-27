@@ -1,3 +1,8 @@
+2009-01-27 Richard Dale <richard.j.dale@gmail.com>
+* Added the treeview-dragdrop example, but can't get drag and drop to work 
+with it in either Ruby or C++
+* Added the Wt::Signal<Wt::WModelIndex,Wt::WMouseEvent> signal type
+
 2009-01-26 Richard Dale <richard.j.dale@gmail.com>
 * Special case the WMenu#addItem method and keep the 'contents' arg values in 
 a hash to prevent ruby from garbage collecting them. They aren't directly 

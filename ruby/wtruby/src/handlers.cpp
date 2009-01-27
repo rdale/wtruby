@@ -69,6 +69,7 @@ VALUE signal_longlong_longlong_class = Qnil;
 VALUE signal_enum_class = Qnil;
 VALUE signal_wmenuitem_class = Qnil;
 VALUE signal_wwidget_class = Qnil;
+VALUE signal_wmodelindex_wmouseevent_class = Qnil;
 VALUE signal_wstring_class = Qnil;
 VALUE signal_string_class = Qnil;
 VALUE signal_string_string_class = Qnil;
@@ -1174,6 +1175,7 @@ DEF_SIGNAL_MARSHALLER( SignalLonglongLonglong, Wt::Ruby::signal_longlong_longlon
 DEF_SIGNAL_MARSHALLER( SignalEnum, Wt::Ruby::signal_enum_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalWMenuItem, Wt::Ruby::signal_wmenuitem_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalWWidget, Wt::Ruby::signal_wwidget_class, "Wt::SignalBase" )
+DEF_SIGNAL_MARSHALLER( SignalWModelIndexWMouseEvent, Wt::Ruby::signal_wmodelindex_wmouseevent_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalWString, Wt::Ruby::signal_wstring_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalString, Wt::Ruby::signal_string_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalStringString, Wt::Ruby::signal_string_string_class, "Wt::SignalBase" )
@@ -1259,6 +1261,7 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "Wt::Signal<Wt::WMenuItem*>", marshall_SignalWMenuItem },
     { "Wt::Signal<Wt::WString>",  marshall_SignalWString }, 
     { "Wt::Signal<Wt::WWidget*>", marshall_SignalWWidget },
+    { "Wt::Signal<Wt::WModelIndex,Wt::WMouseEvent>", marshall_SignalWModelIndexWMouseEvent },
     { "Wt::Signal<std::string>",  marshall_SignalString },
     { "Wt::Signal<std::string,std::string>",  marshall_SignalStringString },
     { "Wt::Signal<void>",  marshall_Signal },
@@ -1286,6 +1289,7 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "std::set<int>&", marshall_StdIntSet },
     { "std::set<Wt::WTreeNode*>&", marshall_WTreeNodeSet },
     { "std::set<Wt::WDate>&", marshall_WDateSet },
+    { "std::set<Wt::WModelIndex>", marshall_WModelIndexSet },
     { "std::set<Wt::WModelIndex>&", marshall_WModelIndexSet },
     { "std::vector<Wt::WStandardItem*>", marshall_WStandardItemVector },
     { "std::vector<Wt::WStandardItem*>&", marshall_WStandardItemVector },

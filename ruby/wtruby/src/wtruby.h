@@ -141,6 +141,7 @@ extern WTRUBY_EXPORT VALUE signal_longlong_longlong_class;
 extern WTRUBY_EXPORT VALUE signal_enum_class;
 extern WTRUBY_EXPORT VALUE signal_wmenuitem_class;
 extern WTRUBY_EXPORT VALUE signal_wwidget_class;
+extern WTRUBY_EXPORT VALUE signal_wmodelindex_wmouseevent_class;
 extern WTRUBY_EXPORT VALUE signal_wstring_class;
 extern WTRUBY_EXPORT VALUE signal_string_class;
 extern WTRUBY_EXPORT VALUE signal_string_string_class;

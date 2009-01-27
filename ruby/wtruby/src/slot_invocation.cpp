@@ -20,6 +20,8 @@
 #include <Wt/WWidget>
 #include <Wt/WDialog>
 #include <Wt/WMenuItem>
+#include <Wt/WModelIndex>
+#include <Wt/WEvent>
 
 #include <smoke/smoke.h>
 #include <smoke/wt_smoke.h>
@@ -134,6 +136,41 @@ public:
         }
 
         rb_funcall(target_, SYM2ID(method_), 1, obj);
+    }
+
+    void invoke1(Wt::WModelIndex arg1) {
+        VALUE obj1 = getPointerObject((void *) &arg1);
+        if (obj1 == Qnil) {
+            smokeruby_object * o1 = alloc_smokeruby_object( false, 
+                                                            wt_Smoke, 
+                                                            wt_Smoke->idClass("Wt::WModelIndex").index, 
+                                                            (void *) &arg1 );
+            obj1 = set_obj_info("Wt::WModelIndex", o1);
+        }
+
+        rb_funcall(target_, SYM2ID(method_), 1, obj1);
+    }
+
+    void invoke2(Wt::WModelIndex arg1, Wt::WMouseEvent arg2) {
+        VALUE obj1 = getPointerObject((void *) &arg1);
+        if (obj1 == Qnil) {
+            smokeruby_object * o1 = alloc_smokeruby_object( false, 
+                                                            wt_Smoke, 
+                                                            wt_Smoke->idClass("Wt::WModelIndex").index, 
+                                                            (void *) &arg1 );
+            obj1 = set_obj_info("Wt::WModelIndex", o1);
+        }
+
+        VALUE obj2 = getPointerObject((void *) &arg2);
+        if (obj2 == Qnil) {
+            smokeruby_object * o2 = alloc_smokeruby_object( false, 
+                                                            wt_Smoke, 
+                                                            wt_Smoke->idClass("Wt::WMouseEvent").index, 
+                                                            (void *) &arg2 );
+            obj2 = set_obj_info("Wt::WMouseEvent", o2);
+        }
+
+        rb_funcall(target_, SYM2ID(method_), 2, obj1, obj2);
     }
 
     void invoke1(Wt::StandardButton arg) {
@@ -307,6 +344,18 @@ static void signal_emit1(VALUE self, VALUE arg1) {
     S * sig = static_cast<S *>(o->ptr);
     smokeruby_object * a1 = value_obj_info(arg1);
     sig->emit(*(static_cast<A1 *>(a1->ptr)));
+}
+
+template <class S, class A1, class A2> 
+static void signal_emit2(VALUE self, VALUE arg1, VALUE arg2) {
+    smokeruby_object * o = value_obj_info(self);
+    if (o == 0 || o->ptr == 0) {
+        return;
+    }
+    S * sig = static_cast<S *>(o->ptr);
+    smokeruby_object * a1 = value_obj_info(arg1);
+    smokeruby_object * a2 = value_obj_info(arg2);
+    sig->emit(*(static_cast<A1 *>(a1->ptr)), *(static_cast<A2 *>(a1->ptr)));
 }
 
 /*
@@ -1055,6 +1104,24 @@ signal_wwidget_emit(VALUE self, VALUE arg)
 }
 
 static VALUE
+signal_wmodelindex_wmouseevent_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect2< Wt::Signal<Wt::WModelIndex,Wt::WMouseEvent> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+signal_wmodelindex_wmouseevent_emit(VALUE self, VALUE arg1, VALUE arg2)
+{
+    Wt::Ruby::signal_emit2<Wt::Signal<Wt::WModelIndex,Wt::WMouseEvent>, Wt::WModelIndex, Wt::WMouseEvent>(self, arg1, arg2);
+    return self;
+}
+
+static VALUE
 signal_wmenuitem_connect(int argc, VALUE * argv, VALUE self)
 {
     if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
@@ -1186,6 +1253,10 @@ define_signals(VALUE klass)
     Wt::Ruby::signal_wwidget_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalWWidget", klass);
     rb_define_method(Wt::Ruby::signal_wwidget_class, "connect", (VALUE (*) (...)) signal_wwidget_connect, -1);
     rb_define_method(Wt::Ruby::signal_wwidget_class, "emit", (VALUE (*) (...)) signal_wwidget_emit, 1);
+
+    Wt::Ruby::signal_wmodelindex_wmouseevent_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalWModelIndexWMouseEvent", klass);
+    rb_define_method(Wt::Ruby::signal_wmodelindex_wmouseevent_class, "connect", (VALUE (*) (...)) signal_wmodelindex_wmouseevent_connect, -1);
+    rb_define_method(Wt::Ruby::signal_wmodelindex_wmouseevent_class, "emit", (VALUE (*) (...)) signal_wmodelindex_wmouseevent_emit, 2);
 
     Wt::Ruby::signal_wmenuitem_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalWWidget", klass);
     rb_define_method(Wt::Ruby::signal_wmenuitem_class, "connect", (VALUE (*) (...)) signal_wmenuitem_connect, -1);
