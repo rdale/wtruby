@@ -13,6 +13,7 @@ In Ruby is translated to:
 * Fixed the treeview-dragdrop to work with a single threaded version of the
 wthttp lib by adding a constant MULTI_THREADED, value false, and not making
 any calls that depend on multi-threading.
+* Added a std::map<std::string,std::string> marshaller
 
 2009-01-27 Richard Dale <richard.j.dale@gmail.com>
 * Added the treeview-dragdrop example, but can't get drag and drop to work 

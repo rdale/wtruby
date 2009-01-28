@@ -1243,6 +1243,70 @@ void marshall_IntBoostAnyMap(Marshall *m) {
     }
 }
 
+void marshall_StringStringMap(Marshall *m) {
+    switch(m->action()) {
+
+    case Marshall::FromVALUE:
+    {
+        VALUE hash = *(m->var());
+        if (TYPE(hash) != T_HASH) {
+            m->item().s_voidp = 0;
+            break;
+        }
+        
+        std::map<std::string,std::string> * map = new std::map<std::string,std::string>;
+        
+        // Convert the ruby hash to an array of key/value arrays
+        VALUE temp = rb_funcall(hash, rb_intern("to_a"), 0);
+
+        for (long i = 0; i < RARRAY(temp)->len; i++) {
+            VALUE key = rb_ary_entry(rb_ary_entry(temp, i), 0);
+            VALUE value = rb_ary_entry(rb_ary_entry(temp, i), 1);
+
+            (*map)[StringValuePtr(key)] = StringValuePtr(value);
+        }
+        
+        m->item().s_voidp = map;
+        m->next();
+        
+        if (m->cleanup()) {
+            delete map;
+        }
+    }
+    break;
+
+    case Marshall::ToVALUE:
+    {
+        std::map<std::string,std::string> *map = static_cast<std::map<std::string,std::string> *>(m->item().s_voidp);
+        if (map == 0) {
+            *(m->var()) = Qnil;
+            break;
+        }
+        
+        VALUE hv = rb_hash_new();
+
+        for (   std::map<std::string,std::string>::const_iterator i = map->begin();
+                i != map->end(); 
+                ++i )
+        {            
+            rb_hash_aset(hv, rb_str_new2(i->first.c_str()), rb_str_new2(i->second.c_str()));
+        }
+        
+        *(m->var()) = hv;
+        m->next();
+        
+        if (m->cleanup()) {
+            delete map;
+        }
+    }
+    break;
+
+    default:
+        m->unsupported();
+        break;
+    }
+}
+
 DEF_SIGNAL_MARSHALLER( EventSignalWKeyEvent, Wt::Ruby::eventsignal_wkey_event_class, "Wt::EventSignalBase" )
 DEF_SIGNAL_MARSHALLER( EventSignalWMouseEvent, Wt::Ruby::eventsignal_wmouse_event_class, "Wt::EventSignalBase" )
 DEF_SIGNAL_MARSHALLER( EventSignalWResponseEvent, Wt::Ruby::eventsignal_wresponse_event_class, "Wt::EventSignalBase" )
@@ -1344,6 +1408,8 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "signed int&", marshall_it<int *> },
     { "std::map<int,boost::any>", marshall_IntBoostAnyMap},
     { "std::map<int,boost::any>&", marshall_IntBoostAnyMap},
+    { "std::map<std::string,std::string>", marshall_StringStringMap},
+    { "std::map<std::string,std::string>&", marshall_StringStringMap},
     { "std::map<std::string,std::vector<std::string> >", marshall_WResourceArgumentMap},
     { "std::map<std::string,std::vector<std::string> >&", marshall_WResourceArgumentMap},
     { "std::ostream", marshall_StdOStream },
