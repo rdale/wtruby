@@ -1,3 +1,18 @@
+2009-01-28 Richard Dale <richard.j.dale@gmail.com>
+* Added a Wt::dynamic_cast() method for use when the corresponding C++ code 
+would have needed a dynamic cast. For instance, this C++ code:
+
+    WItemSelectionModel *selection
+      = dynamic_cast<WItemSelectionModel *>(event.source());
+
+In Ruby is translated to:
+
+    selection = Wt::dynamic_cast(event.source, Wt::WItemSelectionModel)
+* Added a marshaller for std::map<int,boost::any> types
+* Fixed the treeview-dragdrop to work with a single threaded version of the
+wthttp lib by adding a constant MULTI_THREADED, value false, and not making
+any calls that depend on multi-threading.
+
 2009-01-27 Richard Dale <richard.j.dale@gmail.com>
 * Added the treeview-dragdrop example, but can't get drag and drop to work 
 with it in either Ruby or C++

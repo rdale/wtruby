@@ -33,11 +33,15 @@ class FolderView < Wt::WTreeView
       # The source object for a drag of a selection from a WTreeView is
       # a WItemSelectionModel.
       #
-      selection = event.source
+      selection = Wt::dynamic_cast(event.source, Wt::WItemSelectionModel)
 
-      result = Wt::WMessageBox::show("Drop event",
-        "Move #{selection.selectedIndexes.length} files to folder '#{target.data(Wt::DisplayRole)}'?",
-        Wt::Yes | Wt::No)
+      if TreeViewDragDrop::MULTI_THREADED
+        result = Wt::WMessageBox::show("Drop event",
+          "Move #{selection.selectedIndexes.length} files to folder '#{target.data(Wt::DisplayRole).value}'?",
+          Wt::Yes | Wt::No)
+      else
+        result = Wt::Yes
+      end
 
       if result == Wt::Yes
         #
@@ -52,7 +56,7 @@ class FolderView < Wt::WTreeView
 
           #
           # Copy target folder to file. Since we are using a
-          # dynamic WSortFilterProxyModel that filters on folder, self
+          # dynamic WSortFilterProxyModel that filters on folder, this
           # will also result in the removal of the file from the
           # current view.
           #

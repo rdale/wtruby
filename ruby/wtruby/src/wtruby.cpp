@@ -719,6 +719,28 @@ wobject_isstateless(VALUE self, VALUE method)
     return rb_hash_aref(statelessSlots, method);
 }
 
+static VALUE
+wt_dynamic_cast(VALUE /*self*/, VALUE object, VALUE new_klass)
+{
+    smokeruby_object *o = value_obj_info(object);
+
+    VALUE new_klassname = rb_funcall(new_klass, rb_intern("name"), 0);
+
+    Smoke::ModuleIndex * cast_to_id = Wt::Ruby::classcache[StringValuePtr(new_klassname)];
+    if (cast_to_id == 0) {
+        rb_raise(rb_eArgError, "unable to find class \"%s\" to cast to\n", StringValuePtr(new_klassname));
+    }
+
+    smokeruby_object * o_cast = alloc_smokeruby_object( o->allocated, 
+                                                        cast_to_id->smoke, 
+                                                        (int) cast_to_id->index, 
+                                                        o->smoke->cast(o->ptr, o->classId, (int) cast_to_id->index) );
+
+    VALUE obj = Data_Wrap_Struct(new_klass, smokeruby_mark, smokeruby_free, (void *) o_cast);
+    mapPointer(obj, o_cast, o_cast->classId, 0);
+    return obj;
+}
+
 // --------------- Ruby C functions for Wt::_internal.* helpers  ----------------
 
 
@@ -1171,6 +1193,7 @@ Init_wt()
     rb_define_module_function(Wt::Ruby::wt_internal_module, "create_wt_class", (VALUE (*) (...)) create_wt_class, 2);
     rb_define_module_function(Wt::Ruby::wt_internal_module, "set_wtruby_embedded", (VALUE (*) (...)) set_wtruby_embedded_wrapped, 1);
     rb_define_module_function(Wt::Ruby::wt_internal_module, "application_terminated=", (VALUE (*) (...)) set_application_terminated, 1);
+    rb_define_module_function(Wt::Ruby::wt_module, "dynamic_cast", (VALUE (*) (...)) wt_dynamic_cast, 2);
 
     rb_define_module_function(Wt::Ruby::wt_module, "WRun", (VALUE (*) (...)) wt_wrun, 1);
 

@@ -1161,6 +1161,87 @@ void marshall_WResourceArgumentMap(Marshall *m) {
     }
 }
 
+void marshall_IntBoostAnyMap(Marshall *m) {
+    switch(m->action()) {
+
+    case Marshall::FromVALUE:
+    {
+        VALUE hash = *(m->var());
+        if (TYPE(hash) != T_HASH) {
+            m->item().s_voidp = 0;
+            break;
+        }
+        
+        std::map<int,boost::any> * map = new std::map<int,boost::any>;
+        
+        // Convert the ruby hash to an array of key/value arrays
+        VALUE temp = rb_funcall(hash, rb_intern("to_a"), 0);
+
+        for (long i = 0; i < RARRAY(temp)->len; i++) {
+            VALUE key = rb_ary_entry(rb_ary_entry(temp, i), 0);
+            if (std::strcmp(rb_obj_classname(key), "Wt::Enum") == 0) {
+                key = rb_funcall(key, rb_intern("to_i"), 0);
+            }
+
+            VALUE any = rb_ary_entry(rb_ary_entry(temp, i), 1);
+            smokeruby_object *a = value_obj_info(any);
+            if (a == 0 || a->ptr == 0) {
+                continue;
+            }
+
+            (*map)[NUM2INT(key)] = *((boost::any*) a->ptr);
+        }
+        
+        m->item().s_voidp = map;
+        m->next();
+        
+        if (m->cleanup()) {
+            delete map;
+        }
+    }
+    break;
+
+    case Marshall::ToVALUE:
+    {
+        std::map<int,boost::any> *map = static_cast<std::map<int,boost::any> *>(m->item().s_voidp);
+        if (map == 0) {
+            *(m->var()) = Qnil;
+            break;
+        }
+        
+        VALUE hv = rb_hash_new();
+
+        for (   std::map<int,boost::any>::const_iterator i = map->begin();
+                i != map->end(); 
+                ++i )
+        {
+            void * ptr = (void *) &(i->second);
+            VALUE obj = getPointerObject(ptr);
+            if (obj == Qnil) {
+                smokeruby_object * o = alloc_smokeruby_object(  false, 
+                                                                m->smoke(), 
+                                                                m->smoke()->idClass("Boost::Any").index, 
+                                                                ptr );
+                obj = set_obj_info("Boost::Any", o);
+            }
+            
+            rb_hash_aset(hv, INT2NUM(i->first), obj);
+        }
+        
+        *(m->var()) = hv;
+        m->next();
+        
+        if (m->cleanup()) {
+            delete map;
+        }
+    }
+    break;
+
+    default:
+        m->unsupported();
+        break;
+    }
+}
 
 DEF_SIGNAL_MARSHALLER( EventSignalWKeyEvent, Wt::Ruby::eventsignal_wkey_event_class, "Wt::EventSignalBase" )
 DEF_SIGNAL_MARSHALLER( EventSignalWMouseEvent, Wt::Ruby::eventsignal_wmouse_event_class, "Wt::EventSignalBase" )
@@ -1209,31 +1290,7 @@ DEF_VALUESET_MARSHALLER( WDateSet, std::set<Wt::WDate>, Wt::WDate, std::set<Wt::
 DEF_VALUESET_MARSHALLER( WModelIndexSet, std::set<Wt::WModelIndex>, Wt::WModelIndex, std::set<Wt::WModelIndex>::iterator )
 
 WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
-    { "bool*", marshall_it<bool *> },
-    { "bool&", marshall_it<bool *> },
-    { "char**", marshall_charP_array },
-    { "char*",marshall_it<char *> },
-    { "double*", marshall_doubleR },
-    { "double&", marshall_doubleR },
-    { "int*", marshall_it<int *> },
-    { "int&", marshall_it<int *> },
-    { "long long int", marshall_it<long long> },
-    { "long long int&", marshall_it<long long> },
-    { "long long", marshall_it<long long> },
-    { "long long&", marshall_it<long long> },
-    { "unsigned int&", marshall_it<unsigned int *> },
-    { "quint32&", marshall_it<unsigned int *> },
-    { "uint&", marshall_it<unsigned int *> },
-    { "signed int&", marshall_it<int *> },
-    { "uchar*", marshall_ucharP },
-    { "unsigned long long int", marshall_it<long long> },
-    { "unsigned long long int&", marshall_it<long long> },
-    { "void", marshall_void },
-    { "void**", marshall_voidP_array },
-    { "Wt::WResource::ArgumentMap", marshall_WResourceArgumentMap },
-    { "Wt::WResource::ArgumentMap&", marshall_WResourceArgumentMap },
     { "Cursor", marshall_StaticConstEnum },
-    { "Wt::TextFormat", marshall_StaticConstEnum },
     { "HorizontalAlignment", marshall_StaticConstEnum },
     { "PositionScheme", marshall_StaticConstEnum },
     { "Side", marshall_StaticConstEnum },
@@ -1251,58 +1308,85 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "Wt::JSignal<bool>", marshall_JSignalBoolean },
     { "Wt::JSignal<int,int>", marshall_JSignalIntInt },
     { "Wt::JSignal<int>", marshall_JSignalInt },
-    { "Wt::Signal<bool>", marshall_SignalBoolean },
-    { "Wt::Signal<int>", marshall_SignalInt },
-    { "Wt::Signal<int,int>",  marshall_SignalIntInt },
-    { "Wt::Signal<long long,long long>",  marshall_SignalLonglongLonglong },
+    { "Wt::Signal<Wt::Ext::Dialog::DialogCode>", marshall_SignalEnum },
     { "Wt::Signal<Wt::StandardButton>", marshall_SignalEnum },
     { "Wt::Signal<Wt::WDialog::DialogCode>", marshall_SignalEnum },
-    { "Wt::Signal<Wt::Ext::Dialog::DialogCode>", marshall_SignalEnum },
     { "Wt::Signal<Wt::WMenuItem*>", marshall_SignalWMenuItem },
+    { "Wt::Signal<Wt::WModelIndex,Wt::WMouseEvent>", marshall_SignalWModelIndexWMouseEvent },
     { "Wt::Signal<Wt::WString>",  marshall_SignalWString }, 
     { "Wt::Signal<Wt::WWidget*>", marshall_SignalWWidget },
-    { "Wt::Signal<Wt::WModelIndex,Wt::WMouseEvent>", marshall_SignalWModelIndexWMouseEvent },
-    { "Wt::Signal<std::string>",  marshall_SignalString },
+    { "Wt::Signal<bool>", marshall_SignalBoolean },
+    { "Wt::Signal<int,int>",  marshall_SignalIntInt },
+    { "Wt::Signal<int>", marshall_SignalInt },
+    { "Wt::Signal<long long,long long>",  marshall_SignalLonglongLonglong },
     { "Wt::Signal<std::string,std::string>",  marshall_SignalStringString },
+    { "Wt::Signal<std::string>",  marshall_SignalString },
     { "Wt::Signal<void>",  marshall_Signal },
+    { "Wt::TextFormat", marshall_StaticConstEnum },
+    { "Wt::WResource::ArgumentMap", marshall_WResourceArgumentMap },
+    { "Wt::WResource::ArgumentMap&", marshall_WResourceArgumentMap },
     { "Wt::WString", marshall_WString },
-    { "Wt::WString*", marshall_WString },
     { "Wt::WString&", marshall_WString },
+    { "Wt::WString*", marshall_WString },
+    { "bool&", marshall_it<bool *> },
+    { "bool*", marshall_it<bool *> },
+    { "char*",marshall_it<char *> },
+    { "char**", marshall_charP_array },
+    { "double&", marshall_doubleR },
+    { "double*", marshall_doubleR },
+    { "int&", marshall_it<int *> },
+    { "int*", marshall_it<int *> },
+    { "long long int", marshall_it<long long> },
+    { "long long int&", marshall_it<long long> },
+    { "long long", marshall_it<long long> },
+    { "long long&", marshall_it<long long> },
+    { "quint32&", marshall_it<unsigned int *> },
+    { "signed int&", marshall_it<int *> },
+    { "std::map<int,boost::any>", marshall_IntBoostAnyMap},
+    { "std::map<int,boost::any>&", marshall_IntBoostAnyMap},
+    { "std::map<std::string,std::vector<std::string> >", marshall_WResourceArgumentMap},
+    { "std::map<std::string,std::vector<std::string> >&", marshall_WResourceArgumentMap},
+    { "std::ostream", marshall_StdOStream },
+    { "std::ostream&", marshall_StdOStream },
+    { "std::set<Wt::WDate>&", marshall_WDateSet },
+    { "std::set<Wt::WModelIndex>", marshall_WModelIndexSet },
+    { "std::set<Wt::WModelIndex>&", marshall_WModelIndexSet },
+    { "std::set<Wt::WTreeNode*>&", marshall_WTreeNodeSet },
+    { "std::set<int>&", marshall_StdIntSet },
     { "std::string", marshall_StdString },
-    { "std::string*", marshall_StdString },
     { "std::string&", marshall_StdString },
-    { "std::wstring", marshall_StdWString },
-    { "std::wstring*", marshall_StdWString },
-    { "std::wstring&", marshall_StdWString },
+    { "std::string*", marshall_StdString },
+    { "std::vector<Wt::Chart::WDataSeries>&", marshall_ChartWDataSeriesVector },
+    { "std::vector<Wt::WAbstractArea*>", marshall_WAbstractAreaVector },
+    { "std::vector<Wt::WLineF>&", marshall_WLineFVector },
+    { "std::vector<Wt::WLogger::Field>&", marshall_WLoggerFieldVector },
+    { "std::vector<Wt::WMenuItem*>&", marshall_WMenuItemVector },
+    { "std::vector<Wt::WModelIndex>", marshall_WModelIndexVector },
+    { "std::vector<Wt::WObject*>&", marshall_WObjectVector },
+    { "std::vector<Wt::WPainterPath::Segment>&", marshall_WPainterPathSegmentVector },
+    { "std::vector<Wt::WPoint>&", marshall_WPointVector },
+    { "std::vector<Wt::WPointF>&", marshall_WPointFVector },
+    { "std::vector<Wt::WRectF>&", marshall_WRectFVector },
+    { "std::vector<Wt::WStandardItem*>", marshall_WStandardItemVector },
+    { "std::vector<Wt::WStandardItem*>&", marshall_WStandardItemVector },
+    { "std::vector<Wt::WString>", marshall_WStringVector },
+    { "std::vector<Wt::WString>&", marshall_WStringVector },
+    { "std::vector<Wt::WTreeNode*>&", marshall_WTreeNodeVector },
+    { "std::vector<Wt::WWidget*>&", marshall_WWidgetVector },
     { "std::vector<char>", marshall_StdCharVector },
     { "std::vector<char>&", marshall_StdCharVector },
     { "std::vector<std::string>", marshall_StdStringVector },
     { "std::vector<std::string>&", marshall_StdStringVector },
-    { "std::vector<Wt::WString>", marshall_WStringVector },
-    { "std::vector<Wt::WString>&", marshall_WStringVector },
-    { "std::vector<Wt::WWidget*>&", marshall_WWidgetVector },
-    { "std::vector<Wt::WPoint>&", marshall_WPointVector },
-    { "std::vector<Wt::WPointF>&", marshall_WPointFVector },
-    { "std::vector<Wt::WAbstractArea*>", marshall_WAbstractAreaVector },
-    { "std::vector<Wt::WMenuItem*>&", marshall_WMenuItemVector },
-    { "std::vector<Wt::WTreeNode*>&", marshall_WTreeNodeVector },
-    { "std::set<int>&", marshall_StdIntSet },
-    { "std::set<Wt::WTreeNode*>&", marshall_WTreeNodeSet },
-    { "std::set<Wt::WDate>&", marshall_WDateSet },
-    { "std::set<Wt::WModelIndex>", marshall_WModelIndexSet },
-    { "std::set<Wt::WModelIndex>&", marshall_WModelIndexSet },
-    { "std::vector<Wt::WStandardItem*>", marshall_WStandardItemVector },
-    { "std::vector<Wt::WStandardItem*>&", marshall_WStandardItemVector },
-//    { "std::vector<Wt::DomElement*>&", marshall_DomElementVector },
-    { "std::vector<Wt::WObject*>&", marshall_WObjectVector },
-    { "std::vector<Wt::Chart::WDataSeries>&", marshall_ChartWDataSeriesVector },
-    { "std::vector<Wt::WLineF>&", marshall_WLineFVector },
-    { "std::vector<Wt::WLogger::Field>&", marshall_WLoggerFieldVector },
-    { "std::vector<Wt::WPainterPath::Segment>&", marshall_WPainterPathSegmentVector },
-    { "std::vector<Wt::WRectF>&", marshall_WRectFVector },
-    { "std::vector<Wt::WModelIndex>", marshall_WModelIndexVector },
-    { "std::ostream", marshall_StdOStream },
-    { "std::ostream&", marshall_StdOStream },
+    { "std::wstring", marshall_StdWString },
+    { "std::wstring&", marshall_StdWString },
+    { "std::wstring*", marshall_StdWString },
+    { "uchar*", marshall_ucharP },
+    { "uint&", marshall_it<unsigned int *> },
+    { "unsigned int&", marshall_it<unsigned int *> },
+    { "unsigned long long int", marshall_it<long long> },
+    { "unsigned long long int&", marshall_it<long long> },
+    { "void", marshall_void },
+    { "void**", marshall_voidP_array },
 
     { 0, 0 }
 };

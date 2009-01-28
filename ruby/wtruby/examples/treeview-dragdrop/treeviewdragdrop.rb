@@ -31,6 +31,8 @@ class FileModel < Wt::WStandardItemModel
 end
 
 class FileView < Wt::WTreeView
+  MAX_INT = 0x7ffffff
+
   def initilize(parent = nil)
     super(parent)
     doubleClicked.connect(SLOT(self, :edit))
@@ -175,9 +177,13 @@ end
 #  \brief Main application class.
 #
 class TreeViewDragDrop < Wt::WApplication
+  # The multi-threaded version of the wthttp lib doesn't work with Ruby
+  MULTI_THREADED = false
+
   def initialize(env)
     super(env)
     @folderNameMap = {}
+    messageResourceBundle.use("about")
 
     #
     # Create the data models.
@@ -333,7 +339,7 @@ class TreeViewDragDrop < Wt::WApplication
   # Show a popup for a folder item.
   #
   def showPopup(item, event)
-    if event.button == Wt::WMouseEvent::RightButton
+    if MULTI_THREADED && event.button == Wt::WMouseEvent::RightButton
 
       # Select the item, it was not yet selected.
       @folderView.select(item)
@@ -461,7 +467,9 @@ Wt::WRun(ARGV) do |env|
   app = TreeViewDragDrop.new(env)
   app.title = "WTreeView Drag & Drop"
   app.useStyleSheet("styles.css")
-  app.messageResourceBundle.use("about")
+  # This works if it is called in the WApplication constructor,
+  # but not here
+  # app.messageResourceBundle.use("about")
   app.refresh
   app
 end
