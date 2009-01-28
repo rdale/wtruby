@@ -8,6 +8,7 @@ would have needed a dynamic cast. For instance, this C++ code:
 In Ruby is translated to:
 
     selection = Wt::dynamic_cast(event.source, Wt::WItemSelectionModel)
+
 * Added a marshaller for std::map<int,boost::any> types
 * Fixed the treeview-dragdrop to work with a single threaded version of the
 wthttp lib by adding a constant MULTI_THREADED, value false, and not making
