@@ -641,37 +641,38 @@ wt_std_ostream_flush(VALUE self)
 static VALUE
 wabstractitemmodel_createindex(int argc, VALUE * argv, VALUE self)
 {
-    if (argc == 2 || argc == 3) {
+    if (argc > 1) {
         smokeruby_object * o = value_obj_info(self);
-        Smoke::ModuleIndex nameId = o->smoke->idMethodName("createIndex$$$");
+        Smoke::StackItem stack[4];
+        Smoke::ModuleIndex nameId;
+        stack[1].s_int = NUM2INT(argv[0]);
+        stack[2].s_int = NUM2INT(argv[1]);
+        if (argc == 2 || argv[2] == Qnil) {
+            stack[3].s_voidp = (void *) Qnil;
+            nameId = o->smoke->idMethodName("createIndex$$$");
+        } else if (TYPE(argv[2]) == T_FIXNUM) {
+            stack[3].s_voidp = (void *) new long long(rb_num2ull(argv[2]));
+            nameId = o->smoke->idMethodName("createIndex$$?");
+        } else if (TYPE(argv[2]) == T_DATA) {
+            stack[3].s_voidp = (void *) argv[2];
+            nameId = o->smoke->idMethodName("createIndex$$$");
+        }
+
         Smoke::ModuleIndex meth = o->smoke->findMethod(wt_Smoke->findClass("Wt::WAbstractItemModel"), nameId);
         Smoke::Index i = meth.smoke->methodMaps[meth.index].method;
-        i = -i;     // turn into ambiguousMethodList index
-        while (o->smoke->ambiguousMethodList[i] != 0) {
-            if (    strcmp( o->smoke->types[o->smoke->argumentList[o->smoke->methods[o->smoke->ambiguousMethodList[i]].args + 2]].name,
-                            "void*" ) == 0 )
-            {
-                Smoke::Method &m = o->smoke->methods[o->smoke->ambiguousMethodList[i]];
-                Smoke::ClassFn fn = o->smoke->classes[m.classId].classFn;
-                Smoke::StackItem stack[4];
-                stack[1].s_int = NUM2INT(argv[0]);
-                stack[2].s_int = NUM2INT(argv[1]);
-                if (argc == 2) {
-                    stack[3].s_voidp = (void*) Qnil;
-                } else {
-                    stack[3].s_voidp = (void*) argv[2];
-                }
-                (*fn)(m.method, o->ptr, stack);
-                smokeruby_object  * result = alloc_smokeruby_object(    true, 
-                                                                        o->smoke, 
-                                                                        o->smoke->idClass("Wt::WModelIndex").index, 
-                                                                        stack[0].s_voidp );
-
-                return set_obj_info("Wt::WModelIndex", result);
-            }
-
-            i++;
+        Smoke::Method &m = meth.smoke->methods[i];
+        Smoke::ClassFn fn = o->smoke->classes[m.classId].classFn;
+        (*fn)(m.method, o->ptr, stack);
+        if (TYPE(argv[2]) == T_FIXNUM) {
+            delete (long long int *) stack[3].s_voidp;
         }
+            nameId = o->smoke->idMethodName("createIndex$$?");
+        smokeruby_object  * result = alloc_smokeruby_object(    true, 
+                                                                o->smoke, 
+                                                                o->smoke->idClass("Wt::WModelIndex").index, 
+                                                                stack[0].s_voidp );
+
+        return set_obj_info("Wt::WModelIndex", result);
     }
 
     return rb_call_super(argc, argv);

@@ -705,7 +705,7 @@ sub preParseClass
 			|| ($className eq 'Wt::WServer' and $name eq 'addEntryPoint')
 			|| ($className eq 'Wt::WModelIndex' and $name eq 'internalHashId')
 			|| ($className eq 'Wt::WAbstractItemModel' and $name eq 'createIndex'
-                && $m->{ParamList}[2]->{ArgType} !~ /void/)
+                && $m->{ParamList}[2]->{ArgType} !~ /void|uint64_t/)
 			|| ($className =~ /^Wt::/ and $name eq 'createDomElement')
 
 			# added by Koen: these use stringstream now, but are not public API anyway

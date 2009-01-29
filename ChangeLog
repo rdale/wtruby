@@ -4,6 +4,10 @@
 when running in garbage collection debug mode to give a warning that a copy 
 has failed. Also put the function in the Wt::Ruby namespace.
 * Added a marshaller for Wt::Signal<> type as a synonym for Wt::Signal<void>
+* Added uint64_t and int64_t marshallers
+* Got WAbstractItemModel.createIndex() working with both 'void *' (ie Ruby 
+instances), and uint64_t (Ruby Fixnums).
+* Added a not quite working gitmodel example
 
 2009-01-28 Richard Dale <richard.j.dale@gmail.com>
 * Added a Wt::dynamic_cast() method for use when the corresponding C++ code 
