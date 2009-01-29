@@ -159,6 +159,8 @@ extern WTRUBY_EXPORT VALUE moduleindex_class;
 
 extern WTRUBY_EXPORT bool application_terminated;
 
+extern WTRUBY_EXPORT void * construct_copy(smokeruby_object *o);
+
   }
 }
 
@@ -198,8 +200,6 @@ extern WTRUBY_EXPORT void rb_str_catf(VALUE self, const char *format, ...) __att
 extern WTRUBY_EXPORT VALUE findMethod(VALUE self, VALUE c_value, VALUE name_value);
 extern WTRUBY_EXPORT VALUE findAllMethods(int argc, VALUE * argv, VALUE self);
 extern WTRUBY_EXPORT VALUE findAllMethodNames(VALUE self, VALUE result, VALUE classid, VALUE flags_value);
-
-extern WTRUBY_EXPORT void * construct_copy(smokeruby_object *o);
 
 extern "C"
 {

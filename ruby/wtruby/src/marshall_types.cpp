@@ -184,7 +184,7 @@ MethodReturnValueBase::classname()
 
 
 VirtualMethodReturnValue::VirtualMethodReturnValue(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack, VALUE retval) :
-    MethodReturnValueBase(smoke,meth,stack), _retval2(retval) 
+    MethodReturnValueBase(smoke, meth, stack), _retval2(retval) 
 {
     _retval = &_retval2;
     Marshall::HandlerFn fn = getMarshallFn(type());
@@ -198,7 +198,7 @@ VirtualMethodReturnValue::action()
 }
 
 MethodReturnValue::MethodReturnValue(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack, VALUE * retval) :
-    MethodReturnValueBase(smoke,meth,stack) 
+    MethodReturnValueBase(smoke, meth, stack) 
 {
     _retval = retval;
     Marshall::HandlerFn fn = getMarshallFn(type());

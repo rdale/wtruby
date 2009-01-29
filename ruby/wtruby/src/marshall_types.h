@@ -33,130 +33,130 @@ namespace Wt {
 class WTRUBY_EXPORT MethodReturnValueBase : public Marshall 
 {
 public:
-	MethodReturnValueBase(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack);
-	const Smoke::Method &method();
-	Smoke::StackItem &item();
-	Smoke *smoke();
-	SmokeType type();
-	void next();
-	bool cleanup();
-	void unsupported();
+    MethodReturnValueBase(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack);
+    const Smoke::Method &method();
+    Smoke::StackItem &item();
+    Smoke *smoke();
+    SmokeType type();
+    void next();
+    bool cleanup();
+    void unsupported();
     VALUE * var();
 protected:
-	Smoke *_smoke;
-	Smoke::Index _method;
-	Smoke::Stack _stack;
-	SmokeType _st;
-	VALUE *_retval;
-	virtual const char *classname();
+    Smoke *_smoke;
+    Smoke::Index _method;
+    Smoke::Stack _stack;
+    SmokeType _st;
+    VALUE *_retval;
+    virtual const char *classname();
 };
 
 
 class WTRUBY_EXPORT VirtualMethodReturnValue : public MethodReturnValueBase {
 public:
-	VirtualMethodReturnValue(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack, VALUE retval);
-	Marshall::Action action();
+    VirtualMethodReturnValue(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack, VALUE retval);
+    Marshall::Action action();
 
 private:
-	VALUE _retval2;
+    VALUE _retval2;
 };
 
 
 class WTRUBY_EXPORT MethodReturnValue : public MethodReturnValueBase {
 public:
-	MethodReturnValue(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack, VALUE * retval);
+    MethodReturnValue(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack, VALUE * retval);
     Marshall::Action action();
 
 private:
-	const char *classname();
+    const char *classname();
 };
 
 class WTRUBY_EXPORT MethodCallBase : public Marshall
 {
 public:
-	MethodCallBase(Smoke *smoke, Smoke::Index meth);
-	MethodCallBase(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack);
-	Smoke *smoke();
-	SmokeType type();
-	Smoke::StackItem &item();
-	const Smoke::Method &method();
-	virtual int items() = 0;
-	virtual void callMethod() = 0;	
-	void next();
-	void unsupported();
+    MethodCallBase(Smoke *smoke, Smoke::Index meth);
+    MethodCallBase(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack);
+    Smoke *smoke();
+    SmokeType type();
+    Smoke::StackItem &item();
+    const Smoke::Method &method();
+    virtual int items() = 0;
+    virtual void callMethod() = 0;    
+    void next();
+    void unsupported();
 
 protected:
-	Smoke *_smoke;
-	Smoke::Index _method;
-	Smoke::Stack _stack;
-	int _cur;
-	Smoke::Index *_args;
-	bool _called;
-	VALUE *_sp;
-	virtual const char* classname();
+    Smoke *_smoke;
+    Smoke::Index _method;
+    Smoke::Stack _stack;
+    int _cur;
+    Smoke::Index *_args;
+    bool _called;
+    VALUE *_sp;
+    virtual const char* classname();
 };
 
 
 class WTRUBY_EXPORT VirtualMethodCall : public MethodCallBase {
 public:
-	VirtualMethodCall(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack, VALUE obj, VALUE *sp);
-	~VirtualMethodCall();
-	Marshall::Action action();
-	VALUE * var();
-	int items();
-	void callMethod();
-	bool cleanup();
+    VirtualMethodCall(Smoke *smoke, Smoke::Index meth, Smoke::Stack stack, VALUE obj, VALUE *sp);
+    ~VirtualMethodCall();
+    Marshall::Action action();
+    VALUE * var();
+    int items();
+    void callMethod();
+    bool cleanup();
  
 private:
-	VALUE _obj;
+    VALUE _obj;
 };
 
 
 class WTRUBY_EXPORT MethodCall : public MethodCallBase {
 public:
-	MethodCall(Smoke *smoke, Smoke::Index method, VALUE target, VALUE *sp, int items);
-	~MethodCall();
-	Marshall::Action action();
-	VALUE * var();
+    MethodCall(Smoke *smoke, Smoke::Index method, VALUE target, VALUE *sp, int items);
+    ~MethodCall();
+    Marshall::Action action();
+    VALUE * var();
 
-	inline void callMethod() {
-		if(_called) return;
-		_called = true;
+    inline void callMethod() {
+        if(_called) return;
+        _called = true;
 
-		if (_target == Qnil && !(method().flags & Smoke::mf_static)) {
-			rb_raise(rb_eArgError, "%s is not a class method\n", _smoke->methodNames[method().name]);
-		}
-	
-		Smoke::ClassFn fn = _smoke->classes[method().classId].classFn;
-		void * ptr = 0;
+        if (_target == Qnil && !(method().flags & Smoke::mf_static)) {
+            rb_raise(rb_eArgError, "%s is not a class method\n", _smoke->methodNames[method().name]);
+        }
+    
+        Smoke::ClassFn fn = _smoke->classes[method().classId].classFn;
+        void * ptr = 0;
 
-		if (_o != 0) {
-			const Smoke::Class &cl = _smoke->classes[method().classId];
+        if (_o != 0) {
+            const Smoke::Class &cl = _smoke->classes[method().classId];
 
-			ptr = _o->smoke->cast(	_o->ptr,
-									_o->classId,
-									_o->smoke->idClass(cl.className, true).index );
-		}
+            ptr = _o->smoke->cast(    _o->ptr,
+                                    _o->classId,
+                                    _o->smoke->idClass(cl.className, true).index );
+        }
 
-		_items = -1;
-		(*fn)(method().method, ptr, _stack);
-		if (method().flags & Smoke::mf_ctor) {
-			Smoke::StackItem s[2];
-			s[1].s_voidp = modules[_smoke].binding;
-			(*fn)(0, _stack[0].s_voidp, s);
-		}
-		MethodReturnValue r(_smoke, _method, _stack, &_retval);
-	}
+        _items = -1;
+        (*fn)(method().method, ptr, _stack);
+        if (method().flags & Smoke::mf_ctor) {
+            Smoke::StackItem s[2];
+            s[1].s_voidp = modules[_smoke].binding;
+            (*fn)(0, _stack[0].s_voidp, s);
+        }
+        MethodReturnValue r(_smoke, _method, _stack, &_retval);
+    }
 
-	int items();
-	bool cleanup();
+    int items();
+    bool cleanup();
 private:
-	VALUE _target;
-	smokeruby_object * _o;
-	VALUE *_sp;
-	int _items;
-	VALUE _retval;
-	const char *classname();
+    VALUE _target;
+    smokeruby_object * _o;
+    VALUE *_sp;
+    int _items;
+    VALUE _retval;
+    const char *classname();
 };
 
   }

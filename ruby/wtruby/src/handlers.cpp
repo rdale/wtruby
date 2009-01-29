@@ -76,10 +76,101 @@ VALUE signal_string_string_class = Qnil;
 
 VALUE wt_std_ostream_class = Qnil;
 
+static bool
+matches_arg(Smoke *smoke, Smoke::Index meth, Smoke::Index argidx, const char *argtype)
+{
+    Smoke::Index *arg = smoke->argumentList + smoke->methods[meth].args + argidx;
+    SmokeType type = SmokeType(smoke, *arg);
+    if (type.name() != 0 && std::strcmp(type.name(), argtype) == 0) {
+        return true;
+    }
+    return false;
+}
+
+void *
+construct_copy(smokeruby_object *o)
+{
+    const char * className = o->smoke->className(o->classId);
+    int classNameLen = strlen(className);
+    char * ccSig = new char[classNameLen + 2];       // copy constructor signature
+
+    std::string fullClassName(className);
+    std::size_t p1 = fullClassName.find("::", 0);
+    std::size_t p2 = 0;
+    while (p1 != std::string::npos) {
+        p2 = p1 + strlen("::");
+        p1 = fullClassName.find("::", p2);
+    }
+
+    strcpy(ccSig, fullClassName.substr(p2, fullClassName.size() - p2).c_str());
+    strcat(ccSig, "#");
+
+    Smoke::ModuleIndex ccId = o->smoke->findMethodName(className, ccSig);
+    delete[] ccSig;
+
+    char * ccArg = new char[classNameLen + 8];
+    sprintf(ccArg, "const %s&", className);
+
+    Smoke::ModuleIndex classIdx = { o->smoke, o->classId };
+    Smoke::ModuleIndex ccMeth = o->smoke->findMethod(classIdx, ccId);
+
+    if (ccMeth.index == 0) {
+        delete[] ccArg;
+        if (Wt::Ruby::do_debug & wtdb_gc) {
+            printf("WARNING: construct_copy() failed %s\n", className);
+        }
+        return 0;
+    }
+    Smoke::Index method = ccMeth.smoke->methodMaps[ccMeth.index].method;
+    if (method > 0) {
+        // Make sure it's a copy constructor
+        if (!matches_arg(o->smoke, method, 0, ccArg)) {
+            delete[] ccArg;
+            if (Wt::Ruby::do_debug & wtdb_gc) {
+                printf("WARNING: construct_copy() failed %s\n", className);
+            }
+            return 0;
+        }
+        delete[] ccArg;
+        ccMeth.index = method;
+    } else {
+        // ambiguous method, pick the copy constructor
+        Smoke::Index i = -method;
+        while(ccMeth.smoke->ambiguousMethodList[i]) {
+            if (matches_arg(ccMeth.smoke, ccMeth.smoke->ambiguousMethodList[i], 0, ccArg)) {
+                break;
+            }
+            i++;
+        }
+        delete[] ccArg;
+        ccMeth.index = ccMeth.smoke->ambiguousMethodList[i];
+        if (ccMeth.index == 0) {
+            if (Wt::Ruby::do_debug & wtdb_gc) {
+                printf("WARNING: construct_copy() failed %s\n", className);
+            }
+            return 0;
+        }
+    }
+
+    // Okay, ccMeth is the copy constructor. Time to call it.
+    Smoke::StackItem args[2];
+    args[0].s_voidp = 0;
+    args[1].s_voidp = o->ptr;
+    Smoke::ClassFn fn = o->smoke->classes[o->classId].classFn;
+    (*fn)(o->smoke->methods[ccMeth.index].method, 0, args);
+
+    // Initialize the binding for the new instance
+    Smoke::StackItem s[2];
+    s[1].s_voidp = Wt::Ruby::modules[o->smoke].binding;
+    (*fn)(0, args[0].s_voidp, s);
+
+    return args[0].s_voidp;
+
+}
   }
 }
 
-void
+static void
 mark_wobject_children(Wt::WObject * wobject)
 {
     const std::vector<Wt::WObject*>& l = wobject->children();
@@ -98,7 +189,7 @@ mark_wobject_children(Wt::WObject * wobject)
     }
 }
 
-void
+static void
 mark_wwebwidget_children(Wt::WWebWidget * widget)
 {
     const std::vector<Wt::WWidget*>& l = widget->children();
@@ -115,7 +206,7 @@ mark_wwebwidget_children(Wt::WWebWidget * widget)
     }
 }
 
-void
+static void
 mark_wcontainerwidget_children(Wt::WContainerWidget * widget)
 {
     VALUE obj;
@@ -134,7 +225,7 @@ mark_wcontainerwidget_children(Wt::WContainerWidget * widget)
     }
 }
 
-void
+static void
 mark_wmenu_items(Wt::WMenu * menu)
 {
     VALUE obj;
@@ -342,78 +433,6 @@ WTRUBY_EXPORT const char *
 resolve_classname_wt(smokeruby_object * o)
 {
     return Wt::Ruby::modules[o->smoke].binding->className(o->classId);
-}
-
-bool
-matches_arg(Smoke *smoke, Smoke::Index meth, Smoke::Index argidx, const char *argtype)
-{
-    Smoke::Index *arg = smoke->argumentList + smoke->methods[meth].args + argidx;
-    SmokeType type = SmokeType(smoke, *arg);
-    if (type.name() != 0 && std::strcmp(type.name(), argtype) == 0) {
-        return true;
-    }
-    return false;
-}
-
-void *
-construct_copy(smokeruby_object *o)
-{
-    const char * className = o->smoke->className(o->classId);
-    int classNameLen = strlen(className);
-    char * ccSig = new char[classNameLen + 2];       // copy constructor signature
-    strcpy(ccSig, className);
-    strcat(ccSig, "#");
-    Smoke::ModuleIndex ccId = o->smoke->findMethodName(className, ccSig);
-    delete[] ccSig;
-
-    char * ccArg = new char[classNameLen + 8];
-    sprintf(ccArg, "const %s&", className);
-
-    Smoke::ModuleIndex classIdx = { o->smoke, o->classId };
-    Smoke::ModuleIndex ccMeth = o->smoke->findMethod(classIdx, ccId);
-
-    if (ccMeth.index == 0) {
-        delete[] ccArg;
-        return 0;
-    }
-    Smoke::Index method = ccMeth.smoke->methodMaps[ccMeth.index].method;
-    if (method > 0) {
-        // Make sure it's a copy constructor
-        if (!matches_arg(o->smoke, method, 0, ccArg)) {
-            delete[] ccArg;
-            return 0;
-        }
-        delete[] ccArg;
-        ccMeth.index = method;
-    } else {
-        // ambiguous method, pick the copy constructor
-        Smoke::Index i = -method;
-        while(ccMeth.smoke->ambiguousMethodList[i]) {
-            if (matches_arg(ccMeth.smoke, ccMeth.smoke->ambiguousMethodList[i], 0, ccArg)) {
-                break;
-            }
-            i++;
-        }
-        delete[] ccArg;
-        ccMeth.index = ccMeth.smoke->ambiguousMethodList[i];
-        if (ccMeth.index == 0) {
-            return 0;
-        }
-    }
-
-    // Okay, ccMeth is the copy constructor. Time to call it.
-    Smoke::StackItem args[2];
-    args[0].s_voidp = 0;
-    args[1].s_voidp = o->ptr;
-    Smoke::ClassFn fn = o->smoke->classes[o->classId].classFn;
-    (*fn)(o->smoke->methods[ccMeth.index].method, 0, args);
-
-    // Initialize the binding for the new instance
-    Smoke::StackItem s[2];
-    s[1].s_voidp = Wt::Ruby::modules[o->smoke].binding;
-    (*fn)(0, args[0].s_voidp, s);
-
-    return args[0].s_voidp;
 }
 
 template <class T>

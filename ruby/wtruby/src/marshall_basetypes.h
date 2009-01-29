@@ -77,8 +77,6 @@ void marshall_to_ruby<SmokeEnumWrapper>(Marshall *m)
                              2, LONG2NUM(val), rb_str_new2( m->type().name()) );
 }
 
-// extern std::map<std::string, Wt::RubyTypeHandler*> type_handlers;
-
 template <>
 void marshall_from_ruby<SmokeClassWrapper>(Marshall *m)
 {
@@ -107,21 +105,20 @@ void marshall_from_ruby<SmokeClassWrapper>(Marshall *m)
         
     void *ptr = o->ptr;
     if (!m->cleanup() && m->type().isStack()) {
-        ptr = construct_copy(o);
+        ptr = Wt::Ruby::construct_copy(o);
         if (Wt::Ruby::do_debug & wtdb_gc) {
             printf("copying %s %p to %p\n", resolve_classname(o), o->ptr, ptr);
         }
+
+        // If the attempt to copy the instance failed, 
+        // give up and use the original value
+        if (ptr == 0) {
+            ptr = o->ptr;
+        }
     }
 
-
     const Smoke::Class &cl = m->smoke()->classes[m->type().classId()];
-    
-    ptr = o->smoke->cast(
-        ptr,                // pointer
-        o->classId,                // from
-        o->smoke->idClass(cl.className, true).index    // to
-        );
-
+    ptr = o->smoke->cast(ptr, o->classId, o->smoke->idClass(cl.className, true).index);
     m->item().s_class = ptr;
     return;
 }
@@ -129,10 +126,11 @@ void marshall_from_ruby<SmokeClassWrapper>(Marshall *m)
 template <>
 void marshall_to_ruby<SmokeClassWrapper>(Marshall *m)
 {
-    if(m->item().s_voidp == 0) {
+    if (m->item().s_voidp == 0) {
         *(m->var()) = Qnil;
         return;
     }
+
     void *p = m->item().s_voidp;
     VALUE obj = getPointerObject(p);
     if (obj != Qnil) {
@@ -143,8 +141,8 @@ void marshall_to_ruby<SmokeClassWrapper>(Marshall *m)
     smokeruby_object  * o = alloc_smokeruby_object(false, m->smoke(), m->type().classId(), p);
 
     const char * classname = resolve_classname(o);
-    if(m->type().isConst() && m->type().isRef()) {
-        p = construct_copy( o );
+    if (m->type().isConst() && m->type().isRef()) {
+        p = Wt::Ruby::construct_copy(o);
         if (Wt::Ruby::do_debug & wtdb_gc) {
             printf("copying %s %p to %p\n", classname, o->ptr, p);
         }

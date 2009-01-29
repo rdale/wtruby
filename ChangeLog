@@ -1,3 +1,9 @@
+2009-01-29 Richard Dale <richard.j.dale@gmail.com>
+* The construct_copy() function wasn't working with class names containing 
+'::', which happens to be all of the classes in Wt::Ruby. Add some logging
+when running in garbage collection debug mode to give a warning that a copy 
+has failed. Also put the function in the Wt::Ruby namespace.
+
 2009-01-28 Richard Dale <richard.j.dale@gmail.com>
 * Added a Wt::dynamic_cast() method for use when the corresponding C++ code 
 would have needed a dynamic cast. For instance, this C++ code:
