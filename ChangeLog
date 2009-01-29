@@ -3,6 +3,7 @@
 '::', which happens to be all of the classes in Wt::Ruby. Add some logging
 when running in garbage collection debug mode to give a warning that a copy 
 has failed. Also put the function in the Wt::Ruby namespace.
+* Added a marshaller for Wt::Signal<> type as a synonym for Wt::Signal<void>
 
 2009-01-28 Richard Dale <richard.j.dale@gmail.com>
 * Added a Wt::dynamic_cast() method for use when the corresponding C++ code 

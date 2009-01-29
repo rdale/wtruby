@@ -1405,6 +1405,7 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "Wt::Signal<std::string,std::string>",  marshall_SignalStringString },
     { "Wt::Signal<std::string>",  marshall_SignalString },
     { "Wt::Signal<void>",  marshall_Signal },
+    { "Wt::Signal<>",  marshall_Signal },
     { "Wt::TextFormat", marshall_StaticConstEnum },
     { "Wt::WResource::ArgumentMap", marshall_WResourceArgumentMap },
     { "Wt::WResource::ArgumentMap&", marshall_WResourceArgumentMap },
