@@ -66,7 +66,7 @@ class Git
 
       if !cached
         stream = IO.popen(s, "r")
-        @contents = stream.readlines.collect {|line| line.lstrip.rstrip}
+        @contents = stream.readlines.collect {|line| line.rstrip}
         stream.close
         if $?.exitstatus != 0
           raise "Git: could not execute: '" + s + "'"
