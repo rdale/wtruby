@@ -15,7 +15,7 @@ Wt::WRun(ARGV) do |env|
   edit = Wt::WInPlaceEdit.new("Bob Smith", app.root)
   edit.styleClass = "inplace"
 
-  app.styleSheet.addRule("*.inplace span:hover", "background-color: Wt::gray")
+  app.styleSheet.addRule("*.inplace span:hover", "background-color: gray")
 
   app
 end
