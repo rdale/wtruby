@@ -35,7 +35,7 @@ class Git
       end
 
       @id = id
-      @value = (@id.scan(/../).collect { |v| v.hex }).pack("C*")
+      @value = (@id.scan(/../).collect {|v| v.hex }).pack("C*")
       super(@id)
     end
 
@@ -65,10 +65,8 @@ class Git
       end
 
       if !cached
-        puts "Running command: #{s}"
         stream = IO.popen(s, "r")
         @contents = stream.readlines.collect {|line| line.lstrip.rstrip}
-        p @contents
         stream.close
         if $?.exitstatus != 0
           raise "Git: could not execute: '" + s + "'"
@@ -89,17 +87,17 @@ class Git
 
 #
 # About the git files:
-# @type="commit":
+# type="commit":
 #  - of a reference, like the SHA1 ID obtained from git-rev-parse of a
 #    particular revision
 #  - contains the SHA1 ID of the tree
 #
-# @type="tree":
+# type="tree":
 #  100644 blob 0732f5e4def48d6d5b556fbad005adc994af1e0b    CMakeLists.txt
 #  040000 tree 037d59672d37e116f6e0013a067a7ce1f8760b7c    Wt
 #  <mode> SP <@type> SP <object> TAB <file>
 #
-# @type="blob": contents of a file
+# type="blob": contents of a file
 #
 
   def initialize
@@ -122,7 +120,6 @@ class Git
 
   def catFile(id)
     result = []
-
     if !getCmdResult("cat-file -p " + id, result, -1)
       raise "Git: could not cat '" + @id + "'"
     end
@@ -187,7 +184,6 @@ class Git
   end
 
   def getCmdResult(gitCmd, result, index)
-    puts "getCmdResult('#{gitCmd}', #{result}, #{index}"
     p = POpenWrapper.new("git --git-dir=" + @repository + " " + gitCmd, @cache)
 
     if p.exitStatus != 0
@@ -213,7 +209,6 @@ class Git
 
     p.contents.each do |line|
       if line.include?(tag)
-        puts "Found tag #{tag} in line #{line}"
         result.push(line)
         return true
       end

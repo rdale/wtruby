@@ -1,4 +1,4 @@
-#
+# #
 # Copyright (C) 2008 Emweb bvba, Kessel-Lo, Belgium.
 #
 # See the LICENSE file for terms of use.
@@ -35,14 +35,12 @@ class GitModel < Wt::WAbstractItemModel
       @index = anIndex
     end
 
-    def <(other)
-      if @parentId < other.parentId
-        return true
-      elsif @parentId > other.parentId
-        return false
-      else 
-        return @index < other.index
-      end
+    def hash
+      return  (@parentId * 10000) + @index
+    end
+
+    def eql?(other)
+      return @parentId == other.parentId && @index == other.index
     end
   end
 
@@ -103,10 +101,11 @@ class GitModel < Wt::WAbstractItemModel
 
   def parent(index)
     # @treeData[0] indicates the top-level parent.
-    if !index.valid? || index.internalId.nil?
+    if !index.valid? || index.internalId == 0
       return Wt::WModelIndex.new
     else
       # get the item that corresponds to the parent ...
+      
       item = @treeData[index.internalId]
 
       # ... and construct that identifies the parent:
@@ -119,36 +118,36 @@ class GitModel < Wt::WAbstractItemModel
   def index(row, column, parent)
     # the top-level parent has id=0.
     if !parent.valid?
-      @parentId = 0
+      parentId = 0
     else
       # the internal id of the parent identifies the grand parent
       grandParentId = parent.internalId
 
       # lookup the parent id for the parent himself, based on grand parent
       # and child-@index (=row) within the grand parent
-      @parentId = getTreeId(grandParentId, parent.row)
+      parentId = getTreeId(grandParentId, parent.row)
     end
 
-    return createIndex(row, column, @parentId)
+    return createIndex(row, column, parentId)
   end
 
   def getTreeId(parentId, childIndex)
     index = ChildIndex.new(parentId, childIndex)
-
-    if @childPointer[index].nil?
+    value = @childPointer[index]
+    if value.nil?
       # no tree object was already allocated, so do that now.
 
       # lookup the git SHA1 object Id (within the parent)
-      parentItem = @treeData[@parentId]
+      parentItem = @treeData[parentId]
       o = @git.treeGetObject(parentItem.treeObject, childIndex)
 
       # and add to @treeData and @childPointer data structures
-      @treeData.push(Tree.new(@parentId, childIndex, o.id))
-      result = @treeData.size - 1
+      @treeData.push(Tree.new(parentId, childIndex, o.id))
+      result = @treeData.length - 1
       @childPointer[index] = result
       return result
     else
-      return i[1]
+      return value
     end
   end
 
@@ -199,13 +198,13 @@ class GitModel < Wt::WAbstractItemModel
     #
     if index.column == 0
       object = getObject(index)
-      if role == DisplayRole
+      if role == Wt::DisplayRole
         if object.type == Git::Tree
           return Boost::Any.new(object.name + '/')
         else
           return Boost::Any.new(object.name)
         end
-      elsif role == DecorationRole
+      elsif role == Wt::DecorationRole
         if object.type == Git::Blob
           return Boost::Any.new("icons/git-blob.png")
         elsif object.type == Git::Tree
@@ -213,7 +212,7 @@ class GitModel < Wt::WAbstractItemModel
         end
       elsif role == ContentsRole
         if object.type == Git::Blob
-          return Boost::Any.new(@git.catFile(object.id))
+          return Boost::Any.new(@git.catFile(object.id).join("\n"))
         end
       end
     end
@@ -230,8 +229,8 @@ class GitModel < Wt::WAbstractItemModel
   end
 
   def getObject(index)
-    @parentId = index.internalId
-    parentItem = @treeData[@parentId]
+    parentId = index.internalId
+    parentItem = @treeData[parentId]
     return @git.treeGetObject(parentItem.treeObject, index.row)
   end
 end

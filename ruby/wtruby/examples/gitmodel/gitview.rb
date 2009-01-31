@@ -57,7 +57,7 @@ class SourceView < Wt::WViewWidget
     end
 
     d = @index.data(@role)
-    t = d.to_s
+    t = d.value
 
     result.textFormat = Wt::PlainText
     result.text = t
