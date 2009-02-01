@@ -1,3 +1,7 @@
+2009-02-01 Richard Dale <richard.j.dale@gmail.com>
+* Wt::Internal#try_intialize now catches a symbol :wtnew, which should be 
+compatible with Ruby 1.9.x
+
 2009-01-31 Richard Dale <richard.j.dale@gmail.com>
 * The gitmodel example now works
 

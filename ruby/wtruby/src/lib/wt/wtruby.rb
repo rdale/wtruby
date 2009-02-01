@@ -516,7 +516,7 @@ module Wt
     # wrapped in a new ruby variable of type T_DATA
     def Internal.try_initialize(instance, *args)
       initializer = instance.method(:initialize)
-      catch "new_wt" do
+      catch :newwt do
         initializer.call(*args)
       end
     end

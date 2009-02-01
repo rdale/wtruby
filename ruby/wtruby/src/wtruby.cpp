@@ -357,7 +357,7 @@ initialize_wt(int argc, VALUE * argv, VALUE self)
     VALUE result = Data_Wrap_Struct(klass, smokeruby_mark, smokeruby_free, o);
     mapObject(result, result);
     // Off with a longjmp, never to return..
-    rb_throw("new_wt", result);
+    rb_throw("newwt", result);
     /*NOTREACHED*/
     return self;
 }
