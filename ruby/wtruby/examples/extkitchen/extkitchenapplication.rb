@@ -637,7 +637,6 @@ class ExtKitchenApplication < Wt::WApplication
 end
 
 Wt::WRun(ARGV) do |env|
-  GC.disable
   ExtKitchenApplication.new(env)
 end
 
