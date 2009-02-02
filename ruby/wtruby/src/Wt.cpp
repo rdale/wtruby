@@ -250,7 +250,7 @@ Binding::className(Smoke::Index classId) {
   }
 }
 
-void rb_str_catf(VALUE self, const char *format, ...) 
+VALUE rb_str_catf(VALUE self, const char *format, ...) 
 {
 #define CAT_BUFFER_SIZE 2048
 static char p[CAT_BUFFER_SIZE];

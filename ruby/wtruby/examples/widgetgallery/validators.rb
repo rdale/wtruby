@@ -85,11 +85,11 @@ class Validators < ControlsWidget
   def validateServerside
     for i in 0...@fields.length
       case @fields[i][0].validate
-      when Wt::WValidator::Valid:
+      when Wt::WValidator::Valid
         @fields[i][1].text = "Valid"
-      when Wt::WValidator::InvalidEmpty:
+      when Wt::WValidator::InvalidEmpty
         @fields[i][1].text = "InvalidEmpty"
-      when Wt::WValidator::Invalid:
+      when Wt::WValidator::Invalid
         @fields[i][1].text = "Invalid"
       end
     end

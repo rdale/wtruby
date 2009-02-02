@@ -98,13 +98,13 @@ class DialogExample < Wt::WApplication
   
   def messageBoxDone(result)
     case result
-    when Wt::Ok:
+    when Wt::Ok
       setStatus("Ok'ed")
-    when Wt::Cancel:
+    when Wt::Cancel
       setStatus("Cancelled!")
-    when Wt::Yes:
+    when Wt::Yes
       setStatus("Me too!")
-    when Wt::No:
+    when Wt::No
       setStatus("Me neither!")
     when
       setStatus("Unkonwn result?")

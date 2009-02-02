@@ -69,7 +69,7 @@ void marshall_ItemList(Marshall *m) {
             break;
         }
 
-        int count = RARRAY(list)->len;
+        int count = RARRAY_LEN(list);
         ItemList *cpplist = new ItemList;
         long i;
         for (i = 0; i < count; i++) {
@@ -157,7 +157,7 @@ void marshall_ValueListItem(Marshall *m) {
             m->item().s_voidp = 0;
             break;
         }
-        int count = RARRAY(list)->len;
+        int count = RARRAY_LEN(list);
         ItemList *cpplist = new ItemList;
         long i;
         for (i = 0; i < count; i++) {
@@ -251,7 +251,7 @@ void marshall_ItemSet(Marshall *m) {
             break;
         }
 
-        int count = RARRAY(list)->len;
+        int count = RARRAY_LEN(list);
         ItemSet *stdset = new ItemSet;
         long i;
         for (i = 0; i < count; i++) {
@@ -345,7 +345,7 @@ void marshall_ItemValueSet(Marshall *m) {
             break;
         }
 
-        int count = RARRAY(list)->len;
+        int count = RARRAY_LEN(list);
         ItemSet *stdset = new ItemSet;
         long i;
         for (i = 0; i < count; i++) {

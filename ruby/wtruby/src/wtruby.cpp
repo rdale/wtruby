@@ -405,7 +405,7 @@ createApplication(const Wt::WEnvironment& env)
 static char **
 args2argv(VALUE args, int& argc)
 {
-    argc = RARRAY(args)->len + 1;
+    argc = RARRAY_LEN(args) + 1;
     char ** argv = new char *[argc];
 
     VALUE program_name = rb_gv_get("$0");
@@ -413,7 +413,7 @@ args2argv(VALUE args, int& argc)
     argv[0] = new char[strlen(arg) + 1];
     strcpy(argv[0], arg);
 
-    for (long i = 0; i < RARRAY(args)->len; i++) {
+    for (long i = 0; i < RARRAY_LEN(args); i++) {
         VALUE item = rb_ary_entry(args, i);
         arg = StringValuePtr(item);
         argv[i + 1] = new char[strlen(arg) + 1];
@@ -957,7 +957,7 @@ dumpCandidates(VALUE /*self*/, VALUE rmeths)
 {
     VALUE errmsg = rb_str_new2("");
     if (rmeths != Qnil) {
-        int count = RARRAY(rmeths)->len;
+        int count = RARRAY_LEN(rmeths);
         for (int i = 0; i < count; i++) {
             rb_str_catf(errmsg, "\t");
             int id = NUM2INT(rb_funcall(rb_ary_entry(rmeths, i), rb_intern("index"), 0));

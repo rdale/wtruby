@@ -1,3 +1,10 @@
+2009-02-02 Richard Dale <richard.j.dale@gmail.com>
+* Made Wt::Ruby build with Ruby 1.9.1 as well as 1.8.x
+* Ported the examples to work with Ruby 1.9.1. Mostly 'when statements' ending
+in colons needing fixing. Changed character literals like '?,' to '?,.ord'. 
+Added '# encoding: utf-8' at the top of any sources with multi-byte characters
+in them.
+
 2009-02-01 Richard Dale <richard.j.dale@gmail.com>
 * Wt::Internal#try_intialize now catches a symbol :wtnew, which should be 
 compatible with Ruby 1.9.x

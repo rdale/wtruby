@@ -241,7 +241,7 @@ class FormWidgets < ControlsWidget
     contactOptions = Wt::WSuggestionPopup::Options.new do |opt|
       opt.highlightBeginTag = '<span class="highlight">'
       opt.highlightEndTag = '</span>'
-      opt.listSeparator = ?,                        # for multiple addresses
+      opt.listSeparator = ?,.ord                        # for multiple addresses
       opt.whitespace = ' \n'
       opt.wordSeparators = '-., "@\n;'              # within an address
       opt.appendReplacedText = ", "                 # prepare next email address

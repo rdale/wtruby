@@ -128,21 +128,21 @@ class Form < Wt::WTable
     @cityEdit.currentIndex = -1
   
     case @countryEdit.currentIndex
-    when 0:
-    when 1:
+    when 0
+    when 1
       @cityEdit.addItem("Antwerp")
       @cityEdit.addItem("Brussels")
       @cityEdit.addItem("Oekene")
-    when 2:
+    when 2
       @cityEdit.addItem("Amsterdam")
       @cityEdit.addItem("Den Haag")
       @cityEdit.addItem("Rotterdam")
-    when 3:
+    when 3
       @cityEdit.addItem("London")
       @cityEdit.addItem("Bristol")
       @cityEdit.addItem("Oxford")
       @cityEdit.addItem("Stonehenge")
-    when 4:
+    when 4
       @cityEdit.addItem("Boston")
       @cityEdit.addItem("Chicago")
       @cityEdit.addItem("Los Angelos")

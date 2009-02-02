@@ -20,7 +20,6 @@
 #include <string>
 
 #include "marshall_types.h"
-#include <rubysig.h>
 #include <smoke/wt_smoke.h>
 
 static bool wtruby_embedded = false;
@@ -74,7 +73,7 @@ show_exception_message()
 {
     VALUE info = rb_gv_get("$!");
     VALUE bt = rb_funcall(info, rb_intern("backtrace"), 0);
-    VALUE message = RARRAY(bt)->ptr[0];
+    VALUE message = RARRAY_PTR(bt)[0];
 
     std::string errormessage =  std::string(STR2CSTR(message)) + ": "
                                 + STR2CSTR(rb_obj_as_string(info))
@@ -82,9 +81,9 @@ show_exception_message()
     fprintf(stderr, "%s\n", errormessage.c_str());
 
     std::string tracemessage;
-    for (int i = 1; i < RARRAY(bt)->len; ++i) {
-        if (TYPE(RARRAY(bt)->ptr[i]) == T_STRING) {
-            std::string s = std::string(STR2CSTR(RARRAY(bt)->ptr[i])) + "\n";
+    for (int i = 1; i < RARRAY_LEN(bt); ++i) {
+        if (TYPE(RARRAY_PTR(bt)[i]) == T_STRING) {
+            std::string s = std::string(STR2CSTR(RARRAY_PTR(bt)[i])) + "\n";
             tracemessage += s;
             fprintf(stderr, "\t%s", s.c_str());
         }

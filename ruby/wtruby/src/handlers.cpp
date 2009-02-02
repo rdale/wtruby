@@ -764,7 +764,7 @@ void marshall_StdStringVector(Marshall *m) {
             break;
         }
 
-        int count = RARRAY(list)->len;
+        int count = RARRAY_LEN(list);
         std::vector<std::string> *stringlist = new std::vector<std::string>;
 
         for (long i = 0; i < count; i++) {
@@ -832,7 +832,7 @@ void marshall_StdIntSet(Marshall *m) {
             break;
         }
 
-        int count = RARRAY(list)->len;
+        int count = RARRAY_LEN(list);
         std::set<int> *intlist = new std::set<int>;
 
         for (long i = 0; i < count; i++) {
@@ -897,7 +897,7 @@ void marshall_WStringVector(Marshall *m) {
             break;
         }
 
-        int count = RARRAY(list)->len;
+        int count = RARRAY_LEN(list);
         std::vector<Wt::WString> *stringlist = new std::vector<Wt::WString>;
 
         for (long i = 0; i < count; i++) {
@@ -963,15 +963,15 @@ static void marshall_charP_array(Marshall *m) {
         VALUE arglist = *(m->var());
         if (    arglist == Qnil
                 || TYPE(arglist) != T_ARRAY
-                || RARRAY(arglist)->len == 0 )
+                || RARRAY_LEN(arglist) == 0 )
         {
             m->item().s_voidp = 0;
             break;
         }
 
-        char ** argv = new char *[RARRAY(arglist)->len + 1];
+        char ** argv = new char *[RARRAY_LEN(arglist) + 1];
         long i;
-        for (i = 0; i < RARRAY(arglist)->len; i++) {
+        for (i = 0; i < RARRAY_LEN(arglist); i++) {
             VALUE item = rb_ary_entry(arglist, i);
             char * s = StringValuePtr(item);
             argv[i] = new char[strlen(s) + 1];
@@ -1115,13 +1115,13 @@ void marshall_WResourceArgumentMap(Marshall *m) {
         // Convert the ruby hash to an array of key/value arrays
         VALUE temp = rb_funcall(hash, rb_intern("to_a"), 0);
 
-        for (long i = 0; i < RARRAY(temp)->len; i++) {
+        for (long i = 0; i < RARRAY_LEN(temp); i++) {
             VALUE key = rb_ary_entry(rb_ary_entry(temp, i), 0);
             VALUE av = rb_ary_entry(rb_ary_entry(temp, i), 1);
 
             std::vector<std::string> list;
 
-            for (long j = 0; j < RARRAY(av)->len; j++) {
+            for (long j = 0; j < RARRAY_LEN(av); j++) {
                 VALUE sv = rb_ary_entry(av, j);
                 list.push_back(std::string(StringValuePtr(sv)));
             }
@@ -1196,7 +1196,7 @@ void marshall_IntBoostAnyMap(Marshall *m) {
         // Convert the ruby hash to an array of key/value arrays
         VALUE temp = rb_funcall(hash, rb_intern("to_a"), 0);
 
-        for (long i = 0; i < RARRAY(temp)->len; i++) {
+        for (long i = 0; i < RARRAY_LEN(temp); i++) {
             VALUE key = rb_ary_entry(rb_ary_entry(temp, i), 0);
             if (std::strcmp(rb_obj_classname(key), "Wt::Enum") == 0) {
                 key = rb_funcall(key, rb_intern("to_i"), 0);
@@ -1278,7 +1278,7 @@ void marshall_StringStringMap(Marshall *m) {
         // Convert the ruby hash to an array of key/value arrays
         VALUE temp = rb_funcall(hash, rb_intern("to_a"), 0);
 
-        for (long i = 0; i < RARRAY(temp)->len; i++) {
+        for (long i = 0; i < RARRAY_LEN(temp); i++) {
             VALUE key = rb_ary_entry(rb_ary_entry(temp, i), 0);
             VALUE value = rb_ary_entry(rb_ary_entry(temp, i), 1);
 

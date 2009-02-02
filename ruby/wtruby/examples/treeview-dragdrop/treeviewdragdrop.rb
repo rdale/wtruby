@@ -128,13 +128,13 @@ class FileView < Wt::WTreeView
     # Focus the form widget that corresonds to the selected item.
     #
     case item.column
-    when 2:
+    when 2
       typeEdit.setFocus
-    when 3:
+    when 3
       sizeEdit.setFocus
-    when 4:
+    when 4
       createdEdit.setFocus
-    when 5:
+    when 5
       modifiedEdit.setFocus
     else
       nameEdit.setFocus

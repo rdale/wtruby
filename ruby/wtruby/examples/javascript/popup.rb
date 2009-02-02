@@ -49,16 +49,16 @@ class Popup < Wt::WObject
     # type of arguments in the JSignal definition.
     #
     case @t
-    when Confirm:
+    when Confirm
       @show.javaScript =  "function(){ if (confirm('" + @message + "')) {" \
                           "  Wt.emit('" + id + "','" + @okPressed.name + "', '');" \
                           "} else {" \
                           "  Wt.emit('" + id + "','" + @cancelPressed.name + "');" \
                           "}}"
-    when Alert:
+    when Alert
       @show.javaScript =  "function(){ alert('" + @message + "');" \
                           "Wt.emit('" + id + "','" + @okPressed.name + "', '');}"
-    when Prompt:
+    when Prompt
       @show.javaScript =  "function(){var n = prompt('" + @message + "', '" +
                           @defaultValue + "');" \
                           "if (n != null) {" \

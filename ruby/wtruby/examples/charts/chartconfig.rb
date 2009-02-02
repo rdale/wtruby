@@ -193,13 +193,13 @@ class ChartConfig < Wt::WContainerWidget
         sc.enabledEdit.setChecked
         s = @chart.series(j)
         case s.type
-        when Wt::Chart::PointSeries:
+        when Wt::Chart::PointSeries
           sc.typeEdit.currentIndex = 0
-        when Wt::Chart::LineSeries:
+        when Wt::Chart::LineSeries
           sc.typeEdit.currentIndex = (s.fillRange != Wt::Chart::NoFill ? (s.isStacked ? 7 : 4) : 1)
-        when Wt::Chart::CurveSeries:
+        when Wt::Chart::CurveSeries
           sc.typeEdit.currentIndex = (s.fillRange != Wt::Chart::NoFill ? (s.isStacked ? 8 : 5) : 2)
-        when Wt::Chart::BarSeries:
+        when Wt::Chart::BarSeries
           sc.typeEdit.currentIndex = s.isStacked ? 6 : 3
         end
   
@@ -337,31 +337,31 @@ class ChartConfig < Wt::WContainerWidget
         s = Wt::Chart::WDataSeries.new(i)
   
         case sc.typeEdit.currentIndex
-        when 0:
+        when 0
           s.type = Wt::Chart::PointSeries
           if sc.markerEdit.currentIndex == 0
             sc.markerEdit.currentIndex = 1
           end
-        when 1:
+        when 1
           s.type = Wt::Chart::LineSeries
-        when 2:
+        when 2
           s.type = Wt::Chart::CurveSeries
-        when 3:
+        when 3
           s.type = Wt::Chart::BarSeries
-        when 4:
+        when 4
           s.type = Wt::Chart::LineSeries
           s.fillRange = @fill
-        when 5:
+        when 5
           s.type = Wt::Chart::CurveSeries
           s.fillRange = @fill
-        when 6:
+        when 6
           s.type = Wt::Chart::BarSeries
           s.stacked = true
-        when 7:
+        when 7
           s.type = Wt::Chart::LineSeries
           s.fillRange = @fill
           s.stacked = true
-        when 8:
+        when 8
           s.type = Wt::Chart::CurveSeries
           s.fillRange = @fill
           s.stacked = true
@@ -381,11 +381,11 @@ class ChartConfig < Wt::WContainerWidget
         end
 
         case sc.labelsEdit.currentIndex
-        when 1:
+        when 1
           s.labelsEnabled = Wt::Chart::XAxis
-        when 2:
+        when 2
           s.labelsEnabled = Wt::Chart::YAxis
-        when 3:
+        when 3
           s.labelsEnabled = Wt::Chart::XAxis
           s.labelsEnabled = Wt::Chart::YAxis
         end
@@ -413,11 +413,11 @@ class ChartConfig < Wt::WContainerWidget
         end
     
         case k
-        when 1:
+        when 1
           axis.scale = Wt::Chart::LinearScale
-        when 2:
+        when 2
           axis.scale = Wt::Chart::LogScale
-        when 3:
+        when 3
           axis.scale = Wt::Chart::DateScale
         end
       end
@@ -456,9 +456,9 @@ class ChartConfig < Wt::WContainerWidget
     end
   
     case @chartOrientationEdit.currentIndex
-    when 0:
+    when 0
       @chart.orientation = Wt::Vertical
-    when 1:
+    when 1
       @chart.orientation = Wt::Horizontal
     end
   

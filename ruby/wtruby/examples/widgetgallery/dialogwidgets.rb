@@ -120,13 +120,13 @@ class DialogWidgets < ControlsWidget
 
   def messageBoxDone(result)
     case result
-    when Wt::Ok:
+    when Wt::Ok
       @ed.status = "Ok'ed"
-    when Wt::Cancel:
+    when Wt::Cancel
       @ed.status = "Cancelled!"
-    when Wt::Yes:
+    when Wt::Yes
       @ed.status = "Me too!"
-    when Wt::No:
+    when Wt::No
       @ed.status = "Me neither!"
     else
       @ed.status = "Unknown result?"

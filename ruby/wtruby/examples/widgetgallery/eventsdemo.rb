@@ -98,11 +98,11 @@ class EventsDemo < ControlsWidget
 
   def wMouseEventButtonToString(b)
     case b
-    when Wt::WMouseEvent::LeftButton:
+    when Wt::WMouseEvent::LeftButton
       return "LeftButton"
-    when Wt::WMouseEvent::RightButton:
+    when Wt::WMouseEvent::RightButton
       return "LeftButton"
-    when Wt::WMouseEvent::MiddleButton:
+    when Wt::WMouseEvent::MiddleButton
       return "LeftButton"
     else
       return "Unknown Button"
@@ -111,63 +111,120 @@ class EventsDemo < ControlsWidget
 
   def keyToString(k)
     case k
-    when Wt::Key_unknown : return "Key_unknown"
-    when Wt::Key_Enter : return "Key_Enter"
-    when Wt::Key_Tab : return "Key_Tab"
-    when Wt::Key_Backspace : return "Key_Backspace"
-    when Wt::Key_Shift : return "Key_Shift"
-    when Wt::Key_Control : return "Key_Control"
-    when Wt::Key_Alt : return "Key_Alt"
-    when Wt::Key_PageUp : return "Key_PageUp"
-    when Wt::Key_PageDown : return "Key_PageDown"
-    when Wt::Key_End : return "Key_End"
-    when Wt::Key_Home : return "Key_Home"
-    when Wt::Key_Left : return "Key_Left"
-    when Wt::Key_Up : return "Key_Up"
-    when Wt::Key_Right : return "Key_Right"
-    when Wt::Key_Down : return "Key_Down"
-    when Wt::Key_Insert : return "Key_Insert"
-    when Wt::Key_Delete : return "Key_Delete"
-    when Wt::Key_Escape : return "Key_Escape"
-    when Wt::Key_F1 : return "Key_F1"
-    when Wt::Key_F2 : return "Key_F2"
-    when Wt::Key_F3 : return "Key_F3"
-    when Wt::Key_F4 : return "Key_F4"
-    when Wt::Key_F5 : return "Key_F5"
-    when Wt::Key_F6 : return "Key_F6"
-    when Wt::Key_F7 : return "Key_F7"
-    when Wt::Key_F8 : return "Key_F8"
-    when Wt::Key_F9 : return "Key_F9"
-    when Wt::Key_F10 : return "Key_F10"
-    when Wt::Key_F11 : return "Key_F11"
-    when Wt::Key_F12 : return "Key_F12"
-    when Wt::Key_Space : return "Key_Space"
-    when Wt::Key_A : return "Key_A"
-    when Wt::Key_B : return "Key_B"
-    when Wt::Key_C : return "Key_C"
-    when Wt::Key_D : return "Key_D"
-    when Wt::Key_E : return "Key_E"
-    when Wt::Key_F : return "Key_F"
-    when Wt::Key_G : return "Key_G"
-    when Wt::Key_H : return "Key_H"
-    when Wt::Key_I : return "Key_I"
-    when Wt::Key_J : return "Key_J"
-    when Wt::Key_K : return "Key_K"
-    when Wt::Key_L : return "Key_"
-    when Wt::Key_M : return "Key_M"
-    when Wt::Key_N : return "Key_N"
-    when Wt::Key_O : return "Key_O"
-    when Wt::Key_P : return "Key_P"
-    when Wt::Key_Q : return "Key_Q"
-    when Wt::Key_R : return "Key_R"
-    when Wt::Key_S : return "Key_S"
-    when Wt::Key_T : return "Key_T"
-    when Wt::Key_U : return "Key_U"
-    when Wt::Key_V : return "Key_V"
-    when Wt::Key_W : return "Key_W"
-    when Wt::Key_X : return "Key_X"
-    when Wt::Key_Y : return "Key_Y"
-    when Wt::Key_Z : return "Key_Z"
+    when Wt::Key_unknown
+      return "Key_unknown"
+    when Wt::Key_Enter     
+      return "Key_Enter"
+    when Wt::Key_Tab
+      return "Key_Tab"
+    when Wt::Key_Backspace
+      return "Key_Backspace"
+    when Wt::Key_Shift
+      return "Key_Shift"
+    when Wt::Key_Control
+      return "Key_Control"
+    when Wt::Key_Alt
+      return "Key_Alt"
+    when Wt::Key_PageUp
+      return "Key_PageUp"
+    when Wt::Key_PageDown
+      return "Key_PageDown"
+    when Wt::Key_End
+      return "Key_End"
+    when Wt::Key_Home
+      return "Key_Home"
+    when Wt::Key_Left
+      return "Key_Left"
+    when Wt::Key_Up
+      return "Key_Up"
+    when Wt::Key_Right
+      return "Key_Right"
+    when Wt::Key_Down
+      return "Key_Down"
+    when Wt::Key_Insert
+      return "Key_Insert"
+    when Wt::Key_Delete
+      return "Key_Delete"
+    when Wt::Key_Escape
+      return "Key_Escape"
+    when Wt::Key_F1
+      return "Key_F1"
+    when Wt::Key_F2
+      return "Key_F2"
+    when Wt::Key_F3
+      return "Key_F3"
+    when Wt::Key_F4
+      return "Key_F4"
+    when Wt::Key_F5
+      return "Key_F5"
+    when Wt::Key_F6
+      return "Key_F6"
+    when Wt::Key_F7
+      return "Key_F7"
+    when Wt::Key_F8
+      return "Key_F8"
+    when Wt::Key_F9
+      return "Key_F9"
+    when Wt::Key_F10
+      return "Key_F10"
+    when Wt::Key_F11
+      return "Key_F11"
+    when Wt::Key_F12
+      return "Key_F12"
+    when Wt::Key_Space
+      return "Key_Space"
+    when Wt::Key_A
+      return "Key_A"
+    when Wt::Key_B
+      return "Key_B"
+    when Wt::Key_C
+      return "Key_C"
+    when Wt::Key_D
+      return "Key_D"
+    when Wt::Key_E
+      return "Key_E"
+    when Wt::Key_F
+      return "Key_F"
+    when Wt::Key_G
+      return "Key_G"
+    when Wt::Key_H
+      return "Key_H"
+    when Wt::Key_I
+      return "Key_I"
+    when Wt::Key_J
+      return "Key_J"
+    when Wt::Key_K
+      return "Key_K"
+    when Wt::Key_L
+      return "Key_"
+    when Wt::Key_M
+      return "Key_M"
+    when Wt::Key_N
+      return "Key_N"
+    when Wt::Key_O
+      return "Key_O"
+    when Wt::Key_P
+      return "Key_P"
+    when Wt::Key_Q
+      return "Key_Q"
+    when Wt::Key_R
+      return "Key_R"
+    when Wt::Key_S
+      return "Key_S"
+    when Wt::Key_T
+      return "Key_T"
+    when Wt::Key_U
+      return "Key_U"
+    when Wt::Key_V
+      return "Key_V"
+    when Wt::Key_W
+      return "Key_W"
+    when Wt::Key_X
+      return "Key_X"
+    when Wt::Key_Y
+      return "Key_Y"
+    when Wt::Key_Z
+      return "Key_Z"
     end
   end
 

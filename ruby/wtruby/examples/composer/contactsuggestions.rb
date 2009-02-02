@@ -21,7 +21,7 @@ class ContactSuggestions < Wt::WSuggestionPopup
   @@contactOptions = Options.new do |opt|
     opt.highlightBeginTag = "<b>"
     opt.highlightEndTag = "</b>"
-    opt.listSeparator = ?,
+    opt.listSeparator = ?,.ord
     opt.whitespace = ' \n'
     opt.wordSeparators = '-., "@\n;'
     opt.appendReplacedText = ", "
