@@ -1,0 +1,18 @@
+* The Wt library is either licensed under the GNU General Public License Version
+2, or under a commercial license. 
+
+* The example programs translated from C++ to Ruby are under the same license as
+the original versions.
+
+* The Smoke libraries that Wt::Ruby links against are under an MIT license
+
+* The kalyptus bindings code generator is under a GPL license, but generates
+C++ code with an MIT license for building the Smoke libraries
+
+* The remainder of the Wt::Ruby code is under an LGPL license. The intention is
+that the Ruby bindings can be used for writing Free Software in conjunction with
+the GPL'd version of Wt, or for writing commercial software in conjunction with
+the commercially licensed version.
+
+* Note that the code of Wt::Ruby itself can only be modified under the terms of
+the LGPL, whether or not the user has a commercial Wt license.

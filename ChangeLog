@@ -1,3 +1,8 @@
+2009-02-03 Richard Dale <richard.j.dale@gmail.com>
+* Change the license of Wt::Ruby from GPL to LGPL 2 and update the license
+headers in the source files. See the LICENSES and AUTHORS files for more
+details.
+
 2009-02-02 Richard Dale <richard.j.dale@gmail.com>
 * Made Wt::Ruby build with Ruby 1.9.1 as well as 1.8.x
 * Ported the examples to work with Ruby 1.9.1. Mostly 'when statements' ending

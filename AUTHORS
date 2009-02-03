@@ -1,0 +1,18 @@
+Wt::Ruby was derived from QtRuby, which in turn was derived from PerlQt.
+
+Wt::Ruby was written by Richard Dale
+
+QtRuby was written by Richard Dale with contributions from:
+    Alex Kellet
+    Caleb Tennis
+    Arno Rehn
+    ..and many others (see the ChangeLog for details)
+
+PerlQt3/Smoke was written by:
+    Ashley Winters
+    Germain Garand
+    David Faure
+
+Ashley Winters and David Faure have granted permission for projects derived from
+the PerQt code to be licensed under the LGPL
+
