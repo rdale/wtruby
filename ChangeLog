@@ -1,3 +1,8 @@
+2009-02-04 Richard Dale  <richard.j.dale@gmail.com>
+* In Ruby 1.9.1 the arity of a block with no arguments is 0, whereas in Ruby 
+1.8.x it is -1. This meant that blocks passed to QtRuby constructors with no 
+args weren't working with Ruby 1.9.1
+
 2009-02-03 Richard Dale <richard.j.dale@gmail.com>
 * Change the license of Wt::Ruby from GPL to LGPL 2 and update the license
 headers in the source files. See the LICENSES and AUTHORS files for more

@@ -526,12 +526,12 @@ module Wt
       end
     end
     
-        # If a block was passed to the constructor, then
+    # If a block was passed to the constructor, then
     # run that now. Either run the context of the new instance
     # if no args were passed to the block. Or otherwise,
     # run the block in the context of the arg.
     def Internal.run_initializer_block(instance, block)
-      if block.arity == -1
+      if block.arity == -1 || block.arity == 0
         instance.instance_eval(&block)
       elsif block.arity == 1
         block.call(instance)
