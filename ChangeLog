@@ -1,3 +1,10 @@
+2009-02-10 Richard Dale  <richard.j.dale@gmail.com>
+* Add hash() and eql?() methods to the Wt::Base class. This is so that if the
+same C++ instance is wrapped more than once in a Ruby instance, they are 
+considered equal to each other from the point of view of keys to Hashes. This
+fixes a bug in the Wt::WSignalMapper class, whether the data associated with
+mapped signals kept in a Hash was not being found when the signal was emitted.
+
 2009-02-04 Richard Dale  <richard.j.dale@gmail.com>
 * In Ruby 1.9.1 the arity of a block with no arguments is 0, whereas in Ruby 
 1.8.x it is -1. This meant that blocks passed to QtRuby constructors with no 

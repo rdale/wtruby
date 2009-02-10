@@ -926,6 +926,21 @@ is_disposed(VALUE self)
     return (o != 0 && o->ptr != 0) ? Qfalse : Qtrue;
 }
 
+static VALUE
+wt_hash(VALUE self)
+{
+    smokeruby_object *o = value_obj_info(self);
+    return INT2NUM((int) o->ptr);
+}
+
+static VALUE
+wt_eql(VALUE self, VALUE other)
+{
+    smokeruby_object *s = value_obj_info(self);
+    smokeruby_object *o = value_obj_info(other);
+    return (o != 0 && o->ptr != 0 && s != 0 && s->ptr != 0 && s->ptr == o->ptr) ? Qtrue : Qfalse;
+}
+
 // Returns the Smoke classId of a ruby instance
 static VALUE
 idInstance(VALUE /*self*/, VALUE instance)
@@ -1170,6 +1185,8 @@ Init_wt()
     rb_define_method(Wt::Ruby::wt_base_class, "dispose", (VALUE (*) (...)) dispose, 0);
     rb_define_method(Wt::Ruby::wt_base_class, "isDisposed", (VALUE (*) (...)) is_disposed, 0);
     rb_define_method(Wt::Ruby::wt_base_class, "disposed?", (VALUE (*) (...)) is_disposed, 0);
+    rb_define_method(Wt::Ruby::wt_base_class, "eql?", (VALUE (*) (...)) wt_eql, 1);
+    rb_define_method(Wt::Ruby::wt_base_class, "hash", (VALUE (*) (...)) wt_hash, 0);
 
     rb_define_module_function(Wt::Ruby::wt_internal_module, "getMethStat", (VALUE (*) (...)) getMethStat, 0);
     rb_define_module_function(Wt::Ruby::wt_internal_module, "getClassStat", (VALUE (*) (...)) getClassStat, 0);
