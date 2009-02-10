@@ -56,7 +56,7 @@ end
  The block passed to WRun specifies the code that will instantiate
  new application objects. That block is executed when a new user surfs
  to the Wt application, and after the library has negotiated browser
- support. The block should return a newly instantiated application
+ support. The block should yield a newly instantiated application
  object.
 =end
 Wt::WRun(ARGV) do |env|
