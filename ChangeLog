@@ -1,3 +1,8 @@
+2009-02-11 Richard Dale  <richard.j.dale@gmail.com>
+* Improved the hash() function for Wt::Base classes to work with 64 bit 
+pointers
+* Fixed warnings in rb_raise() calls about format args being wrong
+
 2009-02-10 Richard Dale  <richard.j.dale@gmail.com>
 * Add hash() and eql?() methods to the Wt::Base class. This is so that if the
 same C++ instance is wrapped more than once in a Ruby instance, they are 

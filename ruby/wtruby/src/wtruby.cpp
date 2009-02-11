@@ -499,9 +499,9 @@ wserver_setserverconfiguration(VALUE self, VALUE args, VALUE serverConfiguration
     try {
         server->setServerConfiguration(argc, argv, std::string(StringValuePtr(serverConfigurationFile)));
     } catch (Wt::WServer::Exception& e) {
-        rb_raise(rb_eRuntimeError, e.what());
+        rb_raise(rb_eRuntimeError, "%s", e.what());
     } catch (std::exception& e) {
-        rb_raise(rb_eRuntimeError, e.what());
+        rb_raise(rb_eRuntimeError, "%s", e.what());
     }
 
     return Qnil;
@@ -519,9 +519,9 @@ wserver_start(VALUE self)
             return Qtrue;
         }
     } catch (Wt::WServer::Exception& e) {
-        rb_raise(rb_eRuntimeError, e.what());
+        rb_raise(rb_eRuntimeError, "%s", e.what());
     } catch (std::exception& e) {
-        rb_raise(rb_eRuntimeError, e.what());
+        rb_raise(rb_eRuntimeError, "%s", e.what());
     }
 
     return Qfalse;
@@ -536,9 +536,9 @@ wserver_stop(VALUE self)
     try {
         server->stop();
     } catch (Wt::WServer::Exception& e) {
-        rb_raise(rb_eRuntimeError, e.what());
+        rb_raise(rb_eRuntimeError, "%s", e.what());
     } catch (std::exception& e) {
-        rb_raise(rb_eRuntimeError, e.what());
+        rb_raise(rb_eRuntimeError, "%s", e.what());
     }
 
     return Qnil;
@@ -930,7 +930,13 @@ static VALUE
 wt_hash(VALUE self)
 {
     smokeruby_object *o = value_obj_info(self);
-    return INT2NUM((int) o->ptr);
+
+    if (sizeof(void*) > sizeof(int)) {
+        int64_t key = (int64_t) o->ptr;
+        return INT2NUM((int) ((key >> (8 * sizeof(int) - 1)) ^ key));
+    } else {
+        return INT2NUM((int) (int64_t) o->ptr);
+    }
 }
 
 static VALUE
