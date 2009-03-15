@@ -1,0 +1,2286 @@
+[2009-Mar-15 00:33:02.026388] 8749 - [notice] "Wt: initializing built-in httpd"
+[2009-Mar-15 00:33:02.028285] 8749 - [notice] "Reading Wt config file: /etc/wt/wt_config.xml (location = 'formexample.rb')"
+[2009-Mar-15 00:33:02.035429] 8749 - [notice] "Starting server: http://localhost:3000"
+[2009-Mar-15 00:33:02.038326] 8749 - [warn] "No boost thread support, running in main thread."
+[2009-Mar-15 00:33:08.550927] 8749 [/ 6Bd999SjzEMquIcM] [notice] "Session created (#sessions = 1)"
+127.0.0.1 - - [2009-Mar-15 00:33:08.555850] "GET / HTTP/1.1" 200 1693
+getPointerObject 0x81b90f8 -> nil
+allocating Wt::WApplication 0x81b90f8 -> 0xb7bb42e0
+mapPointer Wt::WApplication (Wt::WApplication*) 0x81b90f8 -> 0xb7bb3fd4
+mapPointer Wt::WApplication (Wt::WApplication*) 0x81b90fc -> 0xb7bb3fd4
+getPointerObject 0x81c0630 -> nil
+allocating Wt::WContainerWidget 0x81c0630 -> 0xb7bb3c50
+getPointerObject 0x82040d8 -> nil
+allocating Wt::WMessageResourceBundle 0x82040d8 -> 0xb7bb3b10
+getPointerObject 0x81c0630 -> nil
+allocating Wt::WContainerWidget 0x81c0630 -> 0xb7bb33cc
+getPointerObject 0x816df98 -> nil
+allocating Wt::WContainerWidget 0x816df98 -> 0xb7bb2e18
+mapPointer FormExample (Wt::WContainerWidget*) 0x816df98 -> 0xb7bb2d14
+mapPointer FormExample (Wt::WContainerWidget*) 0x816df9c -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject 0x81df1f0 -> nil
+allocating Wt::WContainerWidget 0x81df1f0 -> 0xb7bb260c
+mapPointer Wt::WContainerWidget (Wt::WContainerWidget*) 0x81df1f0 -> 0xb7bb25bc
+mapPointer Wt::WContainerWidget (Wt::WContainerWidget*) 0x81df1f4 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject 0x81e6e98 -> nil
+allocating Wt::WText 0x81e6e98 -> 0xb7bb120c
+mapPointer Wt::WText (Wt::WText*) 0x81e6e98 -> 0xb7bb10cc
+mapPointer Wt::WText (Wt::WText*) 0x81e6e9c -> 0xb7bb10cc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject 0x82c59b8 -> nil
+allocating Wt::WText 0x82c59b8 -> 0xb7bb0938
+mapPointer Wt::WText (Wt::WText*) 0x82c59b8 -> 0xb7bb08d4
+mapPointer Wt::WText (Wt::WText*) 0x82c59bc -> 0xb7bb08d4
+getPointerObject 0x82c8588 -> nil
+allocating Wt::WLength 0x82c8588 -> 0xb7bb0438
+mapPointer Wt::WLength (Wt::WLength*) 0x82c8588 -> 0xb7bb049c
+getPointerObject 0x82256bc -> nil
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject 0x81cbdf0 -> nil
+allocating Wt::WText 0x81cbdf0 -> 0xb7baf470
+mapPointer Wt::WText (Wt::WText*) 0x81cbdf0 -> 0xb7baf448
+mapPointer Wt::WText (Wt::WText*) 0x81cbdf4 -> 0xb7baf448
+getPointerObject 0x81591a8 -> nil
+allocating Wt::WLength 0x81591a8 -> 0xb7baf308
+mapPointer Wt::WLength (Wt::WLength*) 0x81591a8 -> 0xb7baf27c
+getPointerObject 0x8225710 -> nil
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject 0x8204928 -> nil
+allocating Wt::WText 0x8204928 -> 0xb7baee08
+mapPointer Wt::WText (Wt::WText*) 0x8204928 -> 0xb7baed04
+mapPointer Wt::WText (Wt::WText*) 0x820492c -> 0xb7baed04
+getPointerObject 0x81cde38 -> nil
+allocating Wt::WLength 0x81cde38 -> 0xb7bae1d8
+mapPointer Wt::WLength (Wt::WLength*) 0x81cde38 -> 0xb7bae1c4
+getPointerObject 0x8225764 -> nil
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject 0x81d7ce0 -> nil
+allocating Wt::WTable 0x81d7ce0 -> 0xb7bac1a8
+mapPointer Form (Wt::WTable*) 0x81d7ce0 -> 0xb7bac090
+mapPointer Form (Wt::WTable*) 0x81d7ce4 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(0, 0) id: o10 => 0x8268180
+getPointerObject 0x8268180 -> nil
+allocating Wt::WTableCell 0x8268180 -> 0xb7bab9ec
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(0, 0) id: o10 => 0x8268180
+getPointerObject 0x8268180 -> nil
+allocating Wt::WTableCell 0x8268180 -> 0xb7baaf9c
+WTable::elementAt(0, 0) id: o10 => 0x8268180
+getPointerObject 0x8268180 -> nil
+allocating Wt::WTableCell 0x8268180 -> 0xb7ba9278
+getPointerObject 0x81dbbb0 -> nil
+allocating Wt::WLength 0x81dbbb0 -> 0xb7ba7c20
+mapPointer Wt::WLength (Wt::WLength*) 0x81dbbb0 -> 0xb7ba7c0c
+WTable::elementAt(0, 0) id: o10 => 0x8268180
+getPointerObject 0x8268180 -> nil
+allocating Wt::WTableCell 0x8268180 -> 0xb7ba6fa0
+getPointerObject 0x818c358 -> nil
+allocating Wt::WText 0x818c358 -> 0xb7ba69d8
+mapPointer Wt::WText (Wt::WText*) 0x818c358 -> 0xb7ba6834
+mapPointer Wt::WText (Wt::WText*) 0x818c35c -> 0xb7ba6834
+getPointerObject 0x82820f8 -> nil
+allocating Wt::WCssDecorationStyle 0x82820f8 -> 0xb7ba5d6c
+getPointerObject 0x8282178 -> nil
+allocating Wt::WFont 0x8282178 -> 0xb7ba58a8
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(1, 0) id: o15 => 0x8166f00
+getPointerObject 0x8166f00 -> nil
+allocating Wt::WTableCell 0x8166f00 -> 0xb7ba50c4
+WTable::elementAt(1, 0) id: o15 => 0x8166f00
+getPointerObject 0x8166f00 -> nil
+allocating Wt::WTableCell 0x8166f00 -> 0xb7ba4a70
+getPointerObject 0x81ebde0 -> nil
+allocating Wt::WLength 0x81ebde0 -> 0xb7ba4778
+mapPointer Wt::WLength (Wt::WLength*) 0x81ebde0 -> 0xb7ba4714
+getPointerObject 0x820b6a0 -> nil
+allocating Wt::WCssDecorationStyle 0x820b6a0 -> 0xb7ba4174
+getPointerObject 0x820a758 -> nil
+allocating Wt::WColor 0x820a758 -> 0xb7ba301c
+mapPointer Wt::WColor (Wt::WColor*) 0x820a758 -> 0xb7ba32c4
+getPointerObject 0x820b720 -> nil
+allocating Wt::WFont 0x820b720 -> 0xb7ba1e74
+getPointerObject 0x820b720 -> nil
+allocating Wt::WFont 0x820b720 -> 0xb7ba0ca4
+getPointerObject 0x820b720 -> nil
+allocating Wt::WFont 0x820b720 -> 0xb7b9fb38
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(2, 2) id: o1b => 0x82c94d8
+getPointerObject 0x82c94d8 -> nil
+allocating Wt::WTableCell 0x82c94d8 -> 0xb7b9e918
+getPointerObject 0x82c4cf0 -> nil
+allocating Wt::WLineEdit 0x82c4cf0 -> 0xb7b9ddd8
+mapPointer Wt::WLineEdit (Wt::WLineEdit*) 0x82c4cf0 -> 0xb7b9dcd4
+mapPointer Wt::WLineEdit (Wt::WLineEdit*) 0x82c4cf4 -> 0xb7b9dcd4
+WTable::elementAt(2, 0) id: o19 => 0x82c9388
+getPointerObject 0x82c9388 -> nil
+allocating Wt::WTableCell 0x82c9388 -> 0xb7b9d7e8
+getPointerObject 0x82c3230 -> nil
+allocating Wt::WLabel 0x82c3230 -> 0xb7b9d2fc
+mapPointer Wt::WLabel (Wt::WLabel*) 0x82c3230 -> 0xb7b9d11c
+mapPointer Wt::WLabel (Wt::WLabel*) 0x82c3234 -> 0xb7b9d11c
+getPointerObject 0x82bee38 -> nil
+allocating Wt::WValidator 0x82bee38 -> 0xb7b9b394
+mapPointer Wt::WValidator (Wt::WValidator*) 0x82bee38 -> 0xb7b9b218
+mapPointer Wt::WValidator (Wt::WValidator*) 0x82bee3c -> 0xb7b9b218
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WValidator 0x82bee38 -> 0xb7b9b218
+getPointerObject Wt::WValidator 0x82bee38 -> 0xb7b9b218
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WValidator 0x82bee38 -> 0xb7b9b218
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject 0x82b8b60 -> nil
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(3, 2) id: o24 => 0x82b2918
+getPointerObject 0x82b2918 -> nil
+allocating Wt::WTableCell 0x82b2918 -> 0xb7b99e40
+getPointerObject 0x82b2618 -> nil
+allocating Wt::WLineEdit 0x82b2618 -> 0xb7b99c88
+mapPointer Wt::WLineEdit (Wt::WLineEdit*) 0x82b2618 -> 0xb7b99c60
+mapPointer Wt::WLineEdit (Wt::WLineEdit*) 0x82b261c -> 0xb7b99c60
+WTable::elementAt(3, 0) id: o22 => 0x82b3dd0
+getPointerObject 0x82b3dd0 -> nil
+allocating Wt::WTableCell 0x82b3dd0 -> 0xb7b99a58
+getPointerObject 0x82b0498 -> nil
+allocating Wt::WLabel 0x82b0498 -> 0xb7b9983c
+mapPointer Wt::WLabel (Wt::WLabel*) 0x82b0498 -> 0xb7b997c4
+mapPointer Wt::WLabel (Wt::WLabel*) 0x82b049c -> 0xb7b997c4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(4, 2) id: o2b => 0x82adde0
+getPointerObject 0x82adde0 -> nil
+allocating Wt::WTableCell 0x82adde0 -> 0xb7b99594
+getPointerObject 0x82ac600 -> nil
+allocating Wt::WComboBox 0x82ac600 -> 0xb7b98edc
+mapPointer Wt::WComboBox (Wt::WComboBox*) 0x82ac600 -> 0xb7b98d10
+mapPointer Wt::WComboBox (Wt::WComboBox*) 0x82ac604 -> 0xb7b98d10
+WTable::elementAt(4, 0) id: o29 => 0x82adc90
+getPointerObject 0x82adc90 -> nil
+allocating Wt::WTableCell 0x82adc90 -> 0xb7b97550
+getPointerObject 0x82a6340 -> nil
+allocating Wt::WLabel 0x82a6340 -> 0xb7b9708c
+mapPointer Wt::WLabel (Wt::WLabel*) 0x82a6340 -> 0xb7b97078
+mapPointer Wt::WLabel (Wt::WLabel*) 0x82a6344 -> 0xb7b97078
+getPointerObject 0x82a3760 -> nil
+allocating Wt::WValidator 0x82a3760 -> 0xb7b9591c
+mapPointer Wt::WValidator (Wt::WValidator*) 0x82a3760 -> 0xb7b958cc
+mapPointer Wt::WValidator (Wt::WValidator*) 0x82a3764 -> 0xb7b958cc
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WValidator 0x82a3760 -> 0xb7b958cc
+getPointerObject Wt::WValidator 0x82a3760 -> 0xb7b958cc
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WValidator 0x82a3760 -> 0xb7b958cc
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject 0x82a18c8 -> nil
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(5, 2) id: o35 => 0x829b258
+getPointerObject 0x829b258 -> nil
+allocating Wt::WTableCell 0x829b258 -> 0xb7b944a4
+getPointerObject 0x8299d28 -> nil
+allocating Wt::WComboBox 0x8299d28 -> 0xb7b94274
+mapPointer Wt::WComboBox (Wt::WComboBox*) 0x8299d28 -> 0xb7b941d4
+mapPointer Wt::WComboBox (Wt::WComboBox*) 0x8299d2c -> 0xb7b941d4
+WTable::elementAt(5, 0) id: o33 => 0x829b558
+getPointerObject 0x829b558 -> nil
+allocating Wt::WTableCell 0x829b558 -> 0xb7b93ea0
+getPointerObject 0x8292850 -> nil
+allocating Wt::WLabel 0x8292850 -> 0xb7b93c48
+mapPointer Wt::WLabel (Wt::WLabel*) 0x8292850 -> 0xb7b93b30
+mapPointer Wt::WLabel (Wt::WLabel*) 0x8292854 -> 0xb7b93b30
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(6, 2) id: o3d => 0x8290d78
+getPointerObject 0x8290d78 -> nil
+allocating Wt::WTableCell 0x8290d78 -> 0xb7b93a68
+getPointerObject 0x828f828 -> nil
+allocating Wt::WLineEdit 0x828f828 -> 0xb7b9370c
+mapPointer Wt::WLineEdit (Wt::WLineEdit*) 0x828f828 -> 0xb7b936d0
+mapPointer Wt::WLineEdit (Wt::WLineEdit*) 0x828f82c -> 0xb7b936d0
+WTable::elementAt(6, 0) id: o3b => 0x82910f0
+getPointerObject 0x82910f0 -> nil
+allocating Wt::WTableCell 0x82910f0 -> 0xb7b9352c
+getPointerObject 0x828f528 -> nil
+allocating Wt::WLabel 0x828f528 -> 0xb7b9311c
+mapPointer Wt::WLabel (Wt::WLabel*) 0x828f528 -> 0xb7b930a4
+mapPointer Wt::WLabel (Wt::WLabel*) 0x828f52c -> 0xb7b930a4
+getPointerObject 0x828b320 -> nil
+allocating Wt::WRegExpValidator 0x828b320 -> 0xb7b91d6c
+mapPointer DateValidator (Wt::WRegExpValidator*) 0x828b320 -> 0xb7b9186c
+mapPointer DateValidator (Wt::WRegExpValidator*) 0x828b324 -> 0xb7b9186c
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject DateValidator 0x828b320 -> 0xb7b9186c
+getPointerObject DateValidator 0x828b320 -> 0xb7b9186c
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject DateValidator 0x828b320 -> 0xb7b9186c
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject DateValidator 0x828b320 -> 0xb7b9186c
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject DateValidator 0x828b320 -> 0xb7b9186c
+getPointerObject DateValidator 0x828b320 -> 0xb7b9186c
+getPointerObject 0x826eca0 -> nil
+allocating Wt::WText 0x826eca0 -> 0xb7b8dbf4
+mapPointer Wt::WText (Wt::WText*) 0x826eca0 -> 0xb7b8dac8
+mapPointer Wt::WText (Wt::WText*) 0x826eca4 -> 0xb7b8dac8
+WTable::elementAt(6, 2) id: o3d => 0x8290d78
+getPointerObject 0x8290d78 -> nil
+allocating Wt::WTableCell 0x8290d78 -> 0xb7b8d960
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+WTable::elementAt(0, 0) id: o57 => 0x81f1ad0
+WTable::elementAt(0, 0) id: o57 => 0x81f1ad0
+WTable::elementAt(0, 1) id: o59 => 0x8196368
+WTable::elementAt(0, 1) id: o59 => 0x8196368
+WTable::elementAt(0, 2) id: o5b => 0x8181968
+WTable::elementAt(0, 2) id: o5b => 0x8181968
+WTable::elementAt(0, 3) id: o5d => 0x81b1dd0
+WTable::elementAt(0, 3) id: o5d => 0x81b1dd0
+WTable::elementAt(0, 4) id: o5f => 0x81659c8
+WTable::elementAt(0, 4) id: o5f => 0x81659c8
+WTable::elementAt(0, 5) id: o61 => 0x8191220
+WTable::elementAt(0, 5) id: o61 => 0x8191220
+WTable::elementAt(0, 6) id: o63 => 0x81b2fb0
+WTable::elementAt(0, 6) id: o63 => 0x81b2fb0
+getPointerObject 0x826d0a8 -> nil
+allocating Wt::WDatePicker 0x826d0a8 -> 0xb7b8d014
+mapPointer Wt::WDatePicker (Wt::WDatePicker*) 0x826d0a8 -> 0xb7b8cc40
+mapPointer Wt::WDatePicker (Wt::WDatePicker*) 0x826d0ac -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(7, 2) id: o6a => 0x81cca70
+getPointerObject 0x81cca70 -> nil
+allocating Wt::WTableCell 0x81cca70 -> 0xb7b8cbc8
+getPointerObject 0x81c6c80 -> nil
+allocating Wt::WLineEdit 0x81c6c80 -> 0xb7b8b340
+mapPointer Wt::WLineEdit (Wt::WLineEdit*) 0x81c6c80 -> 0xb7b8b160
+mapPointer Wt::WLineEdit (Wt::WLineEdit*) 0x81c6c84 -> 0xb7b8b160
+WTable::elementAt(7, 0) id: o68 => 0x815ffe8
+getPointerObject 0x815ffe8 -> nil
+allocating Wt::WTableCell 0x815ffe8 -> 0xb7b8a3b4
+getPointerObject 0x81b8aa0 -> nil
+allocating Wt::WLabel 0x81b8aa0 -> 0xb7b8a06c
+mapPointer Wt::WLabel (Wt::WLabel*) 0x81b8aa0 -> 0xb7b8a058
+mapPointer Wt::WLabel (Wt::WLabel*) 0x81b8aa4 -> 0xb7b8a058
+getPointerObject 0x81b76e8 -> nil
+allocating Wt::WIntValidator 0x81b76e8 -> 0xb7b89a18
+mapPointer Wt::WIntValidator (Wt::WIntValidator*) 0x81b76e8 -> 0xb7b89784
+mapPointer Wt::WIntValidator (Wt::WIntValidator*) 0x81b76ec -> 0xb7b89784
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WIntValidator 0x81b76e8 -> 0xb7b89784
+getPointerObject Wt::WIntValidator 0x81b76e8 -> 0xb7b89784
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WIntValidator 0x81b76e8 -> 0xb7b89784
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WIntValidator 0x81b76e8 -> 0xb7b89784
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WIntValidator 0x81b76e8 -> 0xb7b89784
+getPointerObject Wt::WIntValidator 0x81b76e8 -> 0xb7b89784
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(8, 2) id: o72 => 0x81cd358
+getPointerObject 0x81cd358 -> nil
+allocating Wt::WTableCell 0x81cd358 -> 0xb7b87e34
+getPointerObject 0x817b510 -> nil
+allocating Wt::WTextArea 0x817b510 -> 0xb7b8727c
+mapPointer Wt::WTextArea (Wt::WTextArea*) 0x817b510 -> 0xb7b871a0
+mapPointer Wt::WTextArea (Wt::WTextArea*) 0x817b514 -> 0xb7b871a0
+WTable::elementAt(8, 0) id: o70 => 0x820f9d8
+getPointerObject 0x820f9d8 -> nil
+allocating Wt::WTableCell 0x820f9d8 -> 0xb7b855d0
+getPointerObject 0x8283cb0 -> nil
+allocating Wt::WLabel 0x8283cb0 -> 0xb7b852c4
+mapPointer Wt::WLabel (Wt::WLabel*) 0x8283cb0 -> 0xb7b85274
+mapPointer Wt::WLabel (Wt::WLabel*) 0x8283cb4 -> 0xb7b85274
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(9, 0) id: o77 => 0x8270778
+getPointerObject 0x8270778 -> nil
+allocating Wt::WTableCell 0x8270778 -> 0xb7b8420c
+getPointerObject 0x82690e8 -> nil
+allocating Wt::WPushButton 0x82690e8 -> 0xb7b83be0
+mapPointer Wt::WPushButton (Wt::WPushButton*) 0x82690e8 -> 0xb7b8399c
+mapPointer Wt::WPushButton (Wt::WPushButton*) 0x82690ec -> 0xb7b8399c
+getPointerObject 0x8225da0 -> nil
+getPointerObject 0x817ae28 -> nil
+allocating Wt::WLength 0x817ae28 -> 0xb7b828bc
+mapPointer Wt::WLength (Wt::WLength*) 0x817ae28 -> 0xb7b828a8
+WTable::elementAt(9, 0) id: o77 => 0x8270778
+getPointerObject 0x8270778 -> nil
+allocating Wt::WTableCell 0x8270778 -> 0xb7b81f48
+WTable::elementAt(9, 0) id: o77 => 0x8270778
+getPointerObject 0x8270778 -> nil
+allocating Wt::WTableCell 0x8270778 -> 0xb7b8100c
+WTable::elementAt(2, 0) id: o19 => 0x82c9388
+getPointerObject 0x82c9388 -> nil
+allocating Wt::WTableCell 0x82c9388 -> 0xb7b80c38
+getPointerObject 0x82d34d8 -> nil
+allocating Wt::WLength 0x82d34d8 -> 0xb7b7fc0c
+mapPointer Wt::WLength (Wt::WLength*) 0x82d34d8 -> 0xb7b7fe14
+getPointerObject 0x82568c8 -> nil
+allocating Wt::WLength 0x82568c8 -> 0xb7b7f388
+mapPointer Wt::WLength (Wt::WLength*) 0x82568c8 -> 0xb7b7f388
+WTable::elementAt(2, 1) id: o1a => 0x82c9438
+getPointerObject 0x82c9438 -> nil
+allocating Wt::WTableCell 0x82c9438 -> 0xb7b7ee24
+getPointerObject 0x81b93b0 -> nil
+allocating Wt::WLength 0x81b93b0 -> 0xb7b7dca4
+mapPointer Wt::WLength (Wt::WLength*) 0x81b93b0 -> 0xb7b7dc68
+getPointerObject 0x81b9430 -> nil
+allocating Wt::WLength 0x81b9430 -> 0xb7b7db64
+mapPointer Wt::WLength (Wt::WLength*) 0x81b9430 -> 0xb7b7db64
+getPointerObject 0x81fcac0 -> nil
+allocating Wt::WLength 0x81fcac0 -> 0xb7b7d858
+mapPointer Wt::WLength (Wt::WLength*) 0x81fcac0 -> 0xb7b7d844
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject 0x82cada0 -> nil
+allocating Wt::WCssDecorationStyle 0x82cada0 -> 0xb7b76db4
+mapPointer Wt::WCssDecorationStyle (Wt::WCssDecorationStyle*) 0x82cada0 -> 0xb7b76d28
+getPointerObject 0x82cae20 -> nil
+allocating Wt::WFont 0x82cae20 -> 0xb7b76be8
+getPointerObject 0x82c6540 -> nil
+allocating Wt::WColor 0x82c6540 -> 0xb7c8e24c
+mapPointer Wt::WColor (Wt::WColor*) 0x82c6540 -> 0xb7c8e148
+getPointerObject 0x81b9158 -> nil
+allocating Wt::WCssStyleSheet 0x81b9158 -> 0xb7c8b434
+getPointerObject 0x82bde08 -> nil
+allocating Wt::WCssTemplateRule 0x82bde08 -> 0xb7c8b204
+getPointerObject 0x82cae20 -> nil
+allocating Wt::WFont 0x82cae20 -> 0xb7c8adf4
+getPointerObject 0x81b9158 -> nil
+allocating Wt::WCssStyleSheet 0x81b9158 -> 0xb7c8acc8
+getPointerObject 0x82bd478 -> nil
+allocating Wt::WCssTemplateRule 0x82bd478 -> 0xb7c8ac14
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+127.0.0.1 - - [2009-Mar-15 00:33:09.224382] "GET /?wtd=6Bd999SjzEMquIcM&js=yes&ajax=yes&request=script&rand=1568119396 HTTP/1.1" 200 11510
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+WTable::elementAt(1, 0) id: o81 => 0x828fbb0
+WTable::elementAt(1, 1) id: o82 => 0x828fc68
+WTable::elementAt(1, 2) id: o83 => 0x8291258
+WTable::elementAt(1, 3) id: o84 => 0x82912f8
+WTable::elementAt(1, 4) id: o85 => 0x82913e0
+WTable::elementAt(1, 5) id: o86 => 0x828cba0
+WTable::elementAt(1, 6) id: o87 => 0x828cc50
+WTable::elementAt(2, 0) id: o90 => 0x8275508
+WTable::elementAt(2, 1) id: o91 => 0x8273bc0
+WTable::elementAt(2, 2) id: o92 => 0x8273c88
+WTable::elementAt(2, 3) id: o93 => 0x8273db0
+WTable::elementAt(2, 4) id: o94 => 0x8276850
+WTable::elementAt(2, 5) id: o95 => 0x8276900
+WTable::elementAt(2, 6) id: o96 => 0x82769b0
+WTable::elementAt(3, 0) id: o9f => 0x8224098
+WTable::elementAt(3, 1) id: oa0 => 0x8224148
+WTable::elementAt(3, 2) id: oa1 => 0x8224210
+WTable::elementAt(3, 3) id: oa2 => 0x81875f0
+WTable::elementAt(3, 4) id: oa3 => 0x81876e8
+WTable::elementAt(3, 5) id: oa4 => 0x8187798
+WTable::elementAt(3, 6) id: oa5 => 0x82092d8
+WTable::elementAt(4, 0) id: oae => 0x8150c20
+WTable::elementAt(4, 1) id: oaf => 0x8150cd0
+WTable::elementAt(4, 2) id: ob0 => 0x8150d98
+WTable::elementAt(4, 3) id: ob1 => 0x8151248
+WTable::elementAt(4, 4) id: ob2 => 0x8151340
+WTable::elementAt(4, 5) id: ob3 => 0x81513f0
+WTable::elementAt(4, 6) id: ob4 => 0x8211ef8
+WTable::elementAt(5, 0) id: obd => 0x82bba48
+WTable::elementAt(5, 1) id: obe => 0x82bbaf8
+WTable::elementAt(5, 2) id: obf => 0x82bbbc0
+WTable::elementAt(5, 3) id: oc0 => 0x829e0f8
+WTable::elementAt(5, 4) id: oc1 => 0x829e1f0
+WTable::elementAt(5, 5) id: oc2 => 0x829e2a0
+WTable::elementAt(5, 6) id: oc3 => 0x82a1be8
+WTable::elementAt(6, 0) id: occ => 0x81b3f28
+WTable::elementAt(6, 1) id: ocd => 0x818acf8
+WTable::elementAt(6, 2) id: oce => 0x818adc0
+WTable::elementAt(6, 3) id: ocf => 0x818ae70
+WTable::elementAt(6, 4) id: od0 => 0x81852a8
+WTable::elementAt(6, 5) id: od1 => 0x8185358
+WTable::elementAt(6, 6) id: od2 => 0x8185408
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+127.0.0.1 - - [2009-Mar-15 00:33:10.145109] "POST /?wtd=6Bd999SjzEMquIcM&rand=54264 HTTP/1.1" 200 58
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+127.0.0.1 - - [2009-Mar-15 00:33:10.523044] "POST /?wtd=6Bd999SjzEMquIcM&rand=56873 HTTP/1.1" 200 2115
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+127.0.0.1 - - [2009-Mar-15 00:33:20.697085] "POST /?wtd=6Bd999SjzEMquIcM&rand=70282 HTTP/1.1" 200 181
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WValidator 0x82bee38 -> 0xb7b9b218
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+getPointerObject 0x8218388 -> nil
+allocating Wt::WCssDecorationStyle 0x8218388 -> 0xb7c88f18
+getPointerObject 0x81afa30 -> nil
+allocating Wt::WColor 0x81afa30 -> 0xb7c873c0
+mapPointer Wt::WColor (Wt::WColor*) 0x81afa30 -> 0xb7c87208
+getPointerObject Wt::WValidator 0x82a3760 -> 0xb7b958cc
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+getPointerObject 0x820bf28 -> nil
+allocating Wt::WCssDecorationStyle 0x820bf28 -> 0xb7c84044
+getPointerObject 0x81c1298 -> nil
+allocating Wt::WColor 0x81c1298 -> 0xb7c828c0
+mapPointer Wt::WColor (Wt::WColor*) 0x81c1298 -> 0xb7c827f8
+getPointerObject DateValidator 0x828b320 -> 0xb7b9186c
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+getPointerObject 0x81518b0 -> nil
+allocating Wt::WCssDecorationStyle 0x81518b0 -> 0xb7c7bd54
+getPointerObject 0x81519b8 -> nil
+allocating Wt::WColor 0x81519b8 -> 0xb7c7acc4
+mapPointer Wt::WColor (Wt::WColor*) 0x81519b8 -> 0xb7c7a6ac
+getPointerObject Wt::WIntValidator 0x81b76e8 -> 0xb7b89784
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+getPointerObject 0x8228488 -> nil
+allocating Wt::WCssDecorationStyle 0x8228488 -> 0xb7c79c84
+getPointerObject 0x8151a70 -> nil
+allocating Wt::WColor 0x8151a70 -> 0xb7c78c08
+mapPointer Wt::WColor (Wt::WColor*) 0x8151a70 -> 0xb7c78bcc
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+Wt::WPushButton 0x82690e8 being deleted calling back
+getPointerObject Wt::WPushButton 0x82690e8 -> 0xb7b8399c
+~Wt::WPushButton() 0x82690e8
+~Wt::WPushButton() 0x82690e8 o: 0x82691f8 o->ptr: 0x82690e8
+unmapPointer (Wt::WPushButton*)0x82690e8 -> 0xb7b8399c
+unmapPointer (Wt::WPushButton*)0x82690ec -> 0xb7b8399c
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLabel 0x8283cb0 -> 0xb7b85274
+~Wt::WLabel() 0x8283cb0
+~Wt::WLabel() 0x8283cb0 o: 0x827d830 o->ptr: 0x8283cb0
+unmapPointer (Wt::WLabel*)0x8283cb0 -> 0xb7b85274
+unmapPointer (Wt::WLabel*)0x8283cb4 -> 0xb7b85274
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WTextArea 0x817b510 -> 0xb7b871a0
+~Wt::WTextArea() 0x817b510
+~Wt::WTextArea() 0x817b510 o: 0x817b4f8 o->ptr: 0x817b510
+unmapPointer (Wt::WTextArea*)0x817b510 -> 0xb7b871a0
+unmapPointer (Wt::WTextArea*)0x817b514 -> 0xb7b871a0
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLabel 0x81b8aa0 -> 0xb7b8a058
+~Wt::WLabel() 0x81b8aa0
+~Wt::WLabel() 0x81b8aa0 o: 0x81b80f8 o->ptr: 0x81b8aa0
+unmapPointer (Wt::WLabel*)0x81b8aa0 -> 0xb7b8a058
+unmapPointer (Wt::WLabel*)0x81b8aa4 -> 0xb7b8a058
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLineEdit 0x81c6c80 -> 0xb7b8b160
+~Wt::WLineEdit() 0x81c6c80
+~Wt::WLineEdit() 0x81c6c80 o: 0x81c6d98 o->ptr: 0x81c6c80
+unmapPointer (Wt::WLineEdit*)0x81c6c80 -> 0xb7b8b160
+unmapPointer (Wt::WLineEdit*)0x81c6c84 -> 0xb7b8b160
+getPointerObject Wt::WIntValidator 0x81b76e8 -> 0xb7b89784
+~Wt::WIntValidator() 0x81b76e8
+~Wt::WIntValidator() 0x81b76e8 o: 0x81b77b0 o->ptr: 0x81b76e8
+unmapPointer (Wt::WIntValidator*)0x81b76e8 -> 0xb7b89784
+unmapPointer (Wt::WIntValidator*)0x81b76ec -> 0xb7b89784
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLabel 0x828f528 -> 0xb7b930a4
+~Wt::WLabel() 0x828f528
+~Wt::WLabel() 0x828f528 o: 0x828e1a8 o->ptr: 0x828f528
+unmapPointer (Wt::WLabel*)0x828f528 -> 0xb7b930a4
+unmapPointer (Wt::WLabel*)0x828f52c -> 0xb7b930a4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLineEdit 0x828f828 -> 0xb7b936d0
+~Wt::WLineEdit() 0x828f828
+~Wt::WLineEdit() 0x828f828 o: 0x8290e88 o->ptr: 0x828f828
+unmapPointer (Wt::WLineEdit*)0x828f828 -> 0xb7b936d0
+unmapPointer (Wt::WLineEdit*)0x828f82c -> 0xb7b936d0
+getPointerObject DateValidator 0x828b320 -> 0xb7b9186c
+~Wt::WRegExpValidator() 0x828b320
+~Wt::WRegExpValidator() 0x828b320 o: 0x828b2b0 o->ptr: 0x828b320
+unmapPointer (Wt::WRegExpValidator*)0x828b320 -> 0xb7b9186c
+unmapPointer (Wt::WRegExpValidator*)0x828b324 -> 0xb7b9186c
+getPointerObject Wt::WDatePicker 0x826d0a8 -> 0xb7b8cc40
+~Wt::WDatePicker() 0x826d0a8
+~Wt::WDatePicker() 0x826d0a8 o: 0x81ca828 o->ptr: 0x826d0a8
+unmapPointer (Wt::WDatePicker*)0x826d0a8 -> 0xb7b8cc40
+unmapPointer (Wt::WDatePicker*)0x826d0ac -> 0xb7b8cc40
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+getPointerObject Wt::WText 0x826eca0 -> 0xb7b8dac8
+~Wt::WText() 0x826eca0
+~Wt::WText() 0x826eca0 o: 0x8270290 o->ptr: 0x826eca0
+unmapPointer (Wt::WText*)0x826eca0 -> 0xb7b8dac8
+unmapPointer (Wt::WText*)0x826eca4 -> 0xb7b8dac8
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLabel 0x8292850 -> 0xb7b93b30
+~Wt::WLabel() 0x8292850
+~Wt::WLabel() 0x8292850 o: 0x82926f8 o->ptr: 0x8292850
+unmapPointer (Wt::WLabel*)0x8292850 -> 0xb7b93b30
+unmapPointer (Wt::WLabel*)0x8292854 -> 0xb7b93b30
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WComboBox 0x8299d28 -> 0xb7b941d4
+~Wt::WComboBox() 0x8299d28
+~Wt::WComboBox() 0x8299d28 o: 0x829ca90 o->ptr: 0x8299d28
+unmapPointer (Wt::WComboBox*)0x8299d28 -> 0xb7b941d4
+unmapPointer (Wt::WComboBox*)0x8299d2c -> 0xb7b941d4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLabel 0x82a6340 -> 0xb7b97078
+~Wt::WLabel() 0x82a6340
+~Wt::WLabel() 0x82a6340 o: 0x82a3858 o->ptr: 0x82a6340
+unmapPointer (Wt::WLabel*)0x82a6340 -> 0xb7b97078
+unmapPointer (Wt::WLabel*)0x82a6344 -> 0xb7b97078
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WComboBox 0x82ac600 -> 0xb7b98d10
+~Wt::WComboBox() 0x82ac600
+~Wt::WComboBox() 0x82ac600 o: 0x82b5498 o->ptr: 0x82ac600
+unmapPointer (Wt::WComboBox*)0x82ac600 -> 0xb7b98d10
+unmapPointer (Wt::WComboBox*)0x82ac604 -> 0xb7b98d10
+getPointerObject Wt::WValidator 0x82a3760 -> 0xb7b958cc
+~Wt::WValidator() 0x82a3760
+~Wt::WValidator() 0x82a3760 o: 0x82a3870 o->ptr: 0x82a3760
+unmapPointer (Wt::WValidator*)0x82a3760 -> 0xb7b958cc
+unmapPointer (Wt::WValidator*)0x82a3764 -> 0xb7b958cc
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLabel 0x82b0498 -> 0xb7b997c4
+~Wt::WLabel() 0x82b0498
+~Wt::WLabel() 0x82b0498 o: 0x82b3f80 o->ptr: 0x82b0498
+unmapPointer (Wt::WLabel*)0x82b0498 -> 0xb7b997c4
+unmapPointer (Wt::WLabel*)0x82b049c -> 0xb7b997c4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLineEdit 0x82b2618 -> 0xb7b99c60
+~Wt::WLineEdit() 0x82b2618
+~Wt::WLineEdit() 0x82b2618 o: 0x82b53f8 o->ptr: 0x82b2618
+unmapPointer (Wt::WLineEdit*)0x82b2618 -> 0xb7b99c60
+unmapPointer (Wt::WLineEdit*)0x82b261c -> 0xb7b99c60
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLabel 0x82c3230 -> 0xb7b9d11c
+~Wt::WLabel() 0x82c3230
+~Wt::WLabel() 0x82c3230 o: 0x82c1eb8 o->ptr: 0x82c3230
+unmapPointer (Wt::WLabel*)0x82c3230 -> 0xb7b9d11c
+unmapPointer (Wt::WLabel*)0x82c3234 -> 0xb7b9d11c
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WLineEdit 0x82c4cf0 -> 0xb7b9dcd4
+~Wt::WLineEdit() 0x82c4cf0
+~Wt::WLineEdit() 0x82c4cf0 o: 0x82c63e8 o->ptr: 0x82c4cf0
+unmapPointer (Wt::WLineEdit*)0x82c4cf0 -> 0xb7b9dcd4
+unmapPointer (Wt::WLineEdit*)0x82c4cf4 -> 0xb7b9dcd4
+getPointerObject Wt::WValidator 0x82bee38 -> 0xb7b9b218
+~Wt::WValidator() 0x82bee38
+~Wt::WValidator() 0x82bee38 o: 0x82c0730 o->ptr: 0x82bee38
+unmapPointer (Wt::WValidator*)0x82bee38 -> 0xb7b9b218
+unmapPointer (Wt::WValidator*)0x82bee3c -> 0xb7b9b218
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x818c358 -> 0xb7ba6834
+~Wt::WText() 0x818c358
+~Wt::WText() 0x818c358 o: 0x8199220 o->ptr: 0x818c358
+unmapPointer (Wt::WText*)0x818c358 -> 0xb7ba6834
+unmapPointer (Wt::WText*)0x818c35c -> 0xb7ba6834
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(0, 0) id: odb => 0x82690e8
+getPointerObject 0x82690e8 -> nil
+allocating Wt::WTableCell 0x82690e8 -> 0xb7c71e1c
+elementAt(0, 0) #<Wt::WTableCell:0xb7c71e1c>
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(1, 0) id: odd => 0x8270778
+getPointerObject 0x8270778 -> nil
+allocating Wt::WTableCell 0x8270778 -> 0xb7c70670
+elementAt(1, 0) #<Wt::WTableCell:0xb7c70670>
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(2, 0) id: odf => 0x8270828
+getPointerObject 0x8270828 -> nil
+allocating Wt::WTableCell 0x8270828 -> 0xb7c6f61c
+elementAt(2, 0) #<Wt::WTableCell:0xb7c6f61c>
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(3, 0) id: oe1 => 0x820f9d8
+getPointerObject 0x820f9d8 -> nil
+allocating Wt::WTableCell 0x820f9d8 -> 0xb7c6f590
+elementAt(3, 0) #<Wt::WTableCell:0xb7c6f590>
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(4, 0) id: oe3 => 0x820fa88
+getPointerObject 0x820fa88 -> nil
+allocating Wt::WTableCell 0x820fa88 -> 0xb7c6f3ec
+elementAt(4, 0) #<Wt::WTableCell:0xb7c6f3ec>
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(5, 0) id: oe5 => 0x81cd358
+getPointerObject 0x81cd358 -> nil
+allocating Wt::WTableCell 0x81cd358 -> 0xb7c6f194
+elementAt(5, 0) #<Wt::WTableCell:0xb7c6f194>
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(6, 0) id: oe7 => 0x815ffe8
+getPointerObject 0x815ffe8 -> nil
+allocating Wt::WTableCell 0x815ffe8 -> 0xb7c6e974
+elementAt(6, 0) #<Wt::WTableCell:0xb7c6e974>
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(7, 0) id: oe9 => 0x82910f0
+getPointerObject 0x82910f0 -> nil
+allocating Wt::WTableCell 0x82910f0 -> 0xb7c6e49c
+elementAt(7, 0) #<Wt::WTableCell:0xb7c6e49c>
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+WTable::elementAt(8, 0) id: oeb => 0x8196368
+getPointerObject 0x8196368 -> nil
+allocating Wt::WTableCell 0x8196368 -> 0xb7c6e0dc
+elementAt(8, 0) #<Wt::WTableCell:0xb7c6e0dc>
+WTable::elementAt(0, 0) id: odb => 0x82690e8
+getPointerObject 0x82690e8 -> nil
+allocating Wt::WTableCell 0x82690e8 -> 0xb7c6d1f0
+getPointerObject 0x8283cb0 -> nil
+allocating Wt::WText 0x8283cb0 -> 0xb7c6c174
+mapPointer Wt::WText (Wt::WText*) 0x8283cb0 -> 0xb7c6c160
+mapPointer Wt::WText (Wt::WText*) 0x8283cb4 -> 0xb7c6c160
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+getPointerObject Wt::WApplication 0x81b90f8 -> 0xb7bb3fd4
+~Wt::WApplication() 0x81b90f8
+~Wt::WApplication() 0x81b90f8 o: 0x8182a48 o->ptr: 0x81b90f8
+unmapPointer (Wt::WApplication*)0x81b90f8 -> 0xb7bb3fd4
+unmapPointer (Wt::WApplication*)0x81b90fc -> 0xb7bb3fd4
+getPointerObject FormExample 0x816df98 -> 0xb7bb2d14
+~Wt::WContainerWidget() 0x816df98
+~Wt::WContainerWidget() 0x816df98 o: 0x8151f10 o->ptr: 0x816df98
+unmapPointer (Wt::WContainerWidget*)0x816df98 -> 0xb7bb2d14
+unmapPointer (Wt::WContainerWidget*)0x816df9c -> 0xb7bb2d14
+getPointerObject Wt::WContainerWidget 0x81df1f0 -> 0xb7bb25bc
+~Wt::WContainerWidget() 0x81df1f0
+~Wt::WContainerWidget() 0x81df1f0 o: 0x81686b0 o->ptr: 0x81df1f0
+unmapPointer (Wt::WContainerWidget*)0x81df1f0 -> 0xb7bb25bc
+unmapPointer (Wt::WContainerWidget*)0x81df1f4 -> 0xb7bb25bc
+getPointerObject Wt::WText 0x81e6e98 -> 0xb7bb10cc
+~Wt::WText() 0x81e6e98
+~Wt::WText() 0x81e6e98 o: 0x82c8498 o->ptr: 0x81e6e98
+unmapPointer (Wt::WText*)0x81e6e98 -> 0xb7bb10cc
+unmapPointer (Wt::WText*)0x81e6e9c -> 0xb7bb10cc
+getPointerObject Wt::WText 0x82c59b8 -> 0xb7bb08d4
+~Wt::WText() 0x82c59b8
+~Wt::WText() 0x82c59b8 o: 0x82c5990 o->ptr: 0x82c59b8
+unmapPointer (Wt::WText*)0x82c59b8 -> 0xb7bb08d4
+unmapPointer (Wt::WText*)0x82c59bc -> 0xb7bb08d4
+getPointerObject Wt::WText 0x81cbdf0 -> 0xb7baf448
+~Wt::WText() 0x81cbdf0
+~Wt::WText() 0x81cbdf0 o: 0x81fd220 o->ptr: 0x81cbdf0
+unmapPointer (Wt::WText*)0x81cbdf0 -> 0xb7baf448
+unmapPointer (Wt::WText*)0x81cbdf4 -> 0xb7baf448
+getPointerObject Wt::WText 0x8204928 -> 0xb7baed04
+~Wt::WText() 0x8204928
+~Wt::WText() 0x8204928 o: 0x82049c8 o->ptr: 0x8204928
+unmapPointer (Wt::WText*)0x8204928 -> 0xb7baed04
+unmapPointer (Wt::WText*)0x820492c -> 0xb7baed04
+getPointerObject Form 0x81d7ce0 -> 0xb7bac090
+~Wt::WTable() 0x81d7ce0
+~Wt::WTable() 0x81d7ce0 o: 0x81d7cc8 o->ptr: 0x81d7ce0
+unmapPointer (Wt::WTable*)0x81d7ce0 -> 0xb7bac090
+unmapPointer (Wt::WTable*)0x81d7ce4 -> 0xb7bac090
+getPointerObject Wt::WText 0x8283cb0 -> 0xb7c6c160
+~Wt::WText() 0x8283cb0
+~Wt::WText() 0x8283cb0 o: 0x8166b70 o->ptr: 0x8283cb0
+unmapPointer (Wt::WText*)0x8283cb0 -> 0xb7c6c160
+unmapPointer (Wt::WText*)0x8283cb4 -> 0xb7c6c160
+[2009-Mar-15 00:33:31.395755] 8749 [/ 6Bd999SjzEMquIcM] [notice] "Session destroyed (#sessions = 1)"
+127.0.0.1 - - [2009-Mar-15 00:33:31.403003] "POST /?wtd=6Bd999SjzEMquIcM&rand=30255 HTTP/1.1" 200 384
