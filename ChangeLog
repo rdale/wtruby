@@ -31,6 +31,8 @@ associated with the old instance, causing seg faults and/or strange behaviour.
 Ruby VALUE and not the address of the VALUE consistently.
 * Made the smoke library code generation work with Wt 2.99 and the runtime 
 compile and work with it.
+* Updated the INSTALL instructions so they say that Wt 2.2.3 or Wt 2.99 can be
+used, and also Ruby 1.8.x or Ruby 1.9.1
 
 2009-02-11 Richard Dale  <richard.j.dale@gmail.com>
 * Improved the hash() function for Wt::Base classes to work with 64 bit 

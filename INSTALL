@@ -1,14 +1,18 @@
                           Wt::Ruby Installation instructions
 
-   Based in the Wt install instructions included in Wt-2.2.2
+   Based in the Wt install instructions included in Wt-2.2.3
 
-   This page lists the instructions for building and installing Wt::Ruby 0.5.0.
+   This page lists the instructions for building and installing Wt::Ruby 0.9.0.
    It is organized in 3 sections:
      * Requirements
      * Building and installing the library
      * Trying the examples (or your own Wt::Ruby application)
 
 Requirements
+   * Either Wt 2.2.2 or higher, or Wt 2.99
+   * Ruby 1.8.x or Ruby 1.9.1 
+   * cmake 2.6.x 
+   * Boost 1.35 recommended (used to test Wt::Ruby)
 
    The library provides two ways for deploying applications: either using
    the FastCGI protocol, in conjunction with a webserver (like apache), or
@@ -36,6 +40,7 @@ Requirements
      * CMake cross-platform build system (www.cmake.org): cmake-2.4+.
      * Wt 2.2.2 or higher built with the '-DCONNECTOR_FCGI=YES' AND
        '-DMULTI_THREADED=NO'
+     * Wt 2.99 or higher will work too
 
     1a Using FastCGI
 
@@ -57,8 +62,8 @@ Requirements
 
 Building and installing the Wt::Ruby libraries and Ruby extensions
 
-    1. Edit the installed Wt WPopupMenu header and add a forward declaration for
-    the WApplication class like this:
+    1. If using Wt 2.2.2, edit the installed Wt WPopupMenu header and add a 
+    forward declaration for the WApplication class like this:
 
         namespace Wt {
 
