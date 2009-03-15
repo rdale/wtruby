@@ -1,0 +1,1 @@
+install( PROGRAMS rbwtapi DESTINATION ${CMAKE_INSTALL_PREFIX}/bin )
