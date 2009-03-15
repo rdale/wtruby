@@ -3,17 +3,17 @@
 Example usage of rbwtapi:
 
 $ rbwtapi --help
-rbqtapi - a qtruby introspection tool
+rbwtapi - a Wt::Ruby introspection tool
 
-usage: rbqtapi [-h] [-v] [-p] [-m <re> [-i]] [-r <extension> ...] [<class>]
+usage: rbwtapi [-h] [-v] [-p] [-m <re> [-i]] [-r <extension> ...] [<class>]
 
 options:
     -m <re> : find all functions matching regular expression/keyword <re>
     -i : together with -m, performs a case insensitive search
     -p : also display inherited methods for <class>
     -s | show method names with ruby types
-    -r : require a qtruby extension
-    -v : print qtruby and Wt versions
+    -r : require a Wt::Ruby extension
+    -v : print Wt::Ruby and Wt versions
     -h : print this help message
 
 $ rbwtapi -m objectName Wt::WObject
