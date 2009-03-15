@@ -83,8 +83,7 @@ class Form < Wt::WTable
     @birthDateEdit = Wt::WLineEdit.new(elementAt(row, 2))
     label = Wt::WLabel.new(tr("example.birthdate"), elementAt(row, 0))
     label.buddy = @birthDateEdit
-    @birthDateEdit.setValidator(DateValidator.new(Date.new(1900, 1, 1),
-                                Date.today))
+    @birthDateEdit.setValidator(DateValidator.new(Date.new(1900, 1, 1), Date.today))
     @birthDateEdit.validator.mandatory = true
   
     picker = Wt::WDatePicker.new( Wt::WText.new("..."),
