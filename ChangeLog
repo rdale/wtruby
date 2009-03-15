@@ -35,6 +35,16 @@ compile and work with it.
 used, and also Ruby 1.8.x or Ruby 1.9.1
 * Rename the examples directory 'examples_2_0' and create a new directory
 'examples_3_0' for any examples converted to use Wt 2.99/3.x
+* A problem has been found with QtRuby when it is run with Ruby 1.9.1
+and GC.stess is true - the same problem will occur with Wt::Ruby.
+In the smokeruby_mark() function called during garbage collection, 
+any virtual methods which are called on the instances being checked 
+could have overriden by Ruby methods.  So the Wt::Ruby runtime uses 
+'respond_to()' to find out whether they have been overriden.
+However, this involves calling 'rb_intern()' on the method name,
+which means memory could be allocated, giving an error when running under
+GC.stress mode. So workround it by pre-allocating any strings with
+rb_intern() for all the C++ methods used in smokeruby_mark()
 
 2009-02-11 Richard Dale  <richard.j.dale@gmail.com>
 * Improved the hash() function for Wt::Base classes to work with 64 bit 
