@@ -1,3 +1,35 @@
+2009-03-15 Richard Dale  <richard.j.dale@gmail.com>
+* Added 'rbwtapi' a command line introspection tool for the Wt::Ruby api.
+Example usage of rbwtapi:
+
+$ rbwtapi --help
+rbqtapi - a qtruby introspection tool
+
+usage: rbqtapi [-h] [-v] [-p] [-m <re> [-i]] [-r <extension> ...] [<class>]
+
+options:
+    -m <re> : find all functions matching regular expression/keyword <re>
+    -i : together with -m, performs a case insensitive search
+    -p : also display inherited methods for <class>
+    -s | show method names with ruby types
+    -r : require a qtruby extension
+    -v : print qtruby and Wt versions
+    -h : print this help message
+
+$ rbwtapi -m objectName Wt::WObject
+std::string Wt::WObject::objectName() const
+
+$ rbwtapi -m objectName -s Wt::WObject
+String Wt::WObject#objectName
+
+* Fixed bug in unmapPointer() which meant that no pointers ever got unmapped,
+oops! This meant that a C++ instance created via a call to Ruby new() could be
+deleted, and the Ruby side wouldn't know about it. When the address was
+reused for another C++ instance, the Wt::Ruby runtime would still think it was
+associated with the old instance, causing seg faults and/or strange behaviour.
+* Improved the garbage collection debug logging option so that it logs the
+Ruby VALUE and not the address of the VALUE consistently.
+
 2009-02-11 Richard Dale  <richard.j.dale@gmail.com>
 * Improved the hash() function for Wt::Base classes to work with 64 bit 
 pointers

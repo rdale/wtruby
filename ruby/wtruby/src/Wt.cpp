@@ -118,7 +118,7 @@ VALUE getPointerObject(void *ptr) {
         return Qnil;
     } else {
         if (Wt::Ruby::do_debug & wtdb_gc) {
-            printf("getPointerObject %s %p -> %p\n", rb_obj_classname(*(Wt::Ruby::pointerMap[ptr])), ptr, Wt::Ruby::pointerMap[ptr]);
+            printf("getPointerObject %s %p -> %p\n", rb_obj_classname(*(Wt::Ruby::pointerMap[ptr])), ptr, (void*) *(Wt::Ruby::pointerMap[ptr]));
         }
         if (TYPE(*(Wt::Ruby::pointerMap[ptr])) != T_DATA) {
             return Qnil;
@@ -133,12 +133,12 @@ void unmapPointer(smokeruby_object *o, Smoke::Index classId, void *lastptr) {
     if (ptr != lastptr) {
         lastptr = ptr;
         Wt::Ruby::PointerMap::const_iterator i = Wt::Ruby::pointerMap.find(ptr);
-        if (i == Wt::Ruby::pointerMap.end()) {
+        if (i != Wt::Ruby::pointerMap.end()) {
             VALUE * obj_ptr = Wt::Ruby::pointerMap[ptr];
         
             if (Wt::Ruby::do_debug & wtdb_gc) {
                 const char *className = o->smoke->classes[o->classId].className;
-                printf("unmapPointer (%s*)%p -> %p\n", className, ptr, obj_ptr);
+                printf("unmapPointer (%s*)%p -> %p\n", className, ptr, (void*) *obj_ptr);
             }
         
             Wt::Ruby::pointerMap.erase(ptr);
@@ -164,7 +164,7 @@ void mapPointer(VALUE obj, smokeruby_object *o, Smoke::Index classId, void *last
         
         if (Wt::Ruby::do_debug & wtdb_gc) {
             const char *className = o->smoke->classes[o->classId].className;
-            printf("mapPointer %s (%s*) %p -> %p\n", rb_obj_classname(*obj_ptr), className, ptr, (void*)obj);
+            printf("mapPointer %s (%s*) %p -> %p\n", rb_obj_classname(*obj_ptr), className, ptr, (void*) obj);
         }
     
         Wt::Ruby::pointerMap[ptr] = obj_ptr;
@@ -187,12 +187,15 @@ void
 Binding::deleted(Smoke::Index classId, void *ptr) {
     VALUE obj = getPointerObject(ptr);
     smokeruby_object *o = value_obj_info(obj);
+
     if (Wt::Ruby::do_debug & wtdb_gc) {
-        printf("%p->~%s()\n", ptr, smoke->className(classId));
+        printf("~%s() %p\n", smoke->className(classId), ptr);
     }
-    if (!o || !o->ptr) {
+
+    if (o == 0 || o->ptr == 0) {
         return;
     }
+
     unmapPointer(o, o->classId, 0);
     o->ptr = 0;
 }
@@ -538,9 +541,6 @@ mapObject(VALUE self, VALUE obj)
     mapPointer(obj, o, o->classId, 0);
     return self;
 }
-
-VALUE set_obj_info(const char * className, smokeruby_object * o);
-
 
 VALUE
 set_obj_info(const char * className, smokeruby_object * o)
