@@ -2,7 +2,7 @@
 
 # KDOC -- C++ and CORBA IDL interface documentation tool.
 # Sirtaj Singh Kang <taj@kde.org>, Jan 1999.
-# $Id: kalyptus 856372 2008-09-02 18:23:45Z rdale $
+# $Id: kalyptus 927764 2009-02-18 11:57:48Z rdale $
 
 # All files in this project are distributed under the GNU General
 # Public License. This is Free Software.
@@ -485,6 +485,7 @@ LOOP:
 		$p =~ s/Q_SCRIPTABLE//;
 		$p =~ s/Q_INVOKABLE//;
 		$p =~ s/K_DECLARE_PRIVATE\(\w+\)//;
+		$p =~ s/QTEST_COMPARE_DECL\(\w+\)//;
 		$p =~ s/PHONON_OBJECT\(\w+\)//;
 		$p =~ s/KDE_DUMMY_QHASH_FUNCTION\(\w+\)//;
 		$p =~ s/QT_STATIC_CONST_IMPL/const/;
@@ -501,7 +502,7 @@ LOOP:
 		$p =~ s/Q_SIGNALS/signals/;
 		$p =~ s/Q_SLOTS/slots/;
 		$p =~ s/ASYNC/void/;
-		$p =~ s/[A-Z_0-9]*_EXPORT_DEPRECATED//;
+		# $p =~ s/[A-Z_0-9]*_EXPORT_DEPRECATED//;
 		$p =~ s/[A-Z_0-9]*_EXPORT\s/ /;
 		$p =~ s/EXPORT_DOCKCLASS//;
 		$p =~ s/DLL_IMP_EXP_KMDICLASS//;
@@ -525,6 +526,9 @@ LOOP:
 		$p =~ s/KDOM_CAST/KJS::Value cast();/;
 		$p =~ s/Q_DECLARE_BUILTIN_METATYPE[^\)]*\)//;
 		$p =~ s/Q_[A-Z]+_EXPORT_INLINE//;
+		$p =~ s/WT_USTRING/WString/g;
+		$p =~ s/WT_BOSTREAM/std::ostream/g;
+		$p =~ s/WT_ARRAY//;
 		$p =~ s/WT_API//;
 		$p =~ s/WT_EXT_API//;
 		$p =~ s/WTCONNECTOR_API//;
@@ -553,6 +557,7 @@ LOOP:
                         || $p =~ /^\s*K_SYCOCAFACTORY/  #
                         || $p =~ /^\s*KSVG_/            # and KSVG stuff ;)
 						|| $p =~ /^\s*KDOM_/			# and KDOM stuff :(
+						|| $p =~ /^\s*W_DECLARE_OPERATORS_FOR_FLAGS/
 						|| $p =~ /^\s*Q_DECLARE_OPERATORS_FOR_FLAGS/
 						|| $p =~ /^\s*Q_DECLARE_PRIVATE/
 						|| $p =~ /^\s*Q_DECLARE_TYPEINFO/
@@ -594,6 +599,7 @@ LOOP:
 				     $p =~ m/^#\s*if\s+defined\s*\(Q_OS_/ or
 				     $p =~ m/^#\s*if\s+defined\(Q_CC_/ or
 				     $p =~ m/^#\s*if\s+defined\(QT_THREAD_SUPPORT/ or
+				     $p =~ m/^#\s*if\s+QT_VERSION\s+>=\s+0x040600/ or
 				     $p =~ m/^#\s*else/ or
 				     $p =~ m/^#\s*if\s+defined\(Q_FULL_TEMPLATE_INSTANTIATION/ or
 				     $p =~ m/^#\s*ifdef\s+QT_WORKSPACE_WINDOWMODE/ or
@@ -620,6 +626,7 @@ LOOP:
 				     $p =~ m/^#if\s*defined\(Q_INTERNAL_QAPP_SRC\)/ or
 				     ($p =~ m/^#if\s*QT_VERSION\s*<\s*0x040000/ and $qt4) or
 				     ($p =~ m/^#if\s*QT_VERSION\s*<\s*0x040400/ and $qt4) or
+				     $p =~ m/^#ifdef\s*WT_TARGET_JAVA/ or
 				     &$match_qt_defines( $p ) or
 				     $p =~ m/^#\s*if\s+0\s+/ ) {
 				     my $if_depth = 1;
@@ -820,7 +827,7 @@ sub identifyDecl
 	my $skipBlock = 0;
 	my $isDeprecated = 0;
 	
-	if ( $decl =~ s/KDE_DEPRECATED// || $decl =~ s/QT_DEPRECATED// ) {
+	if ( $decl =~ s/KDE_\w*DEPRECATED// || $decl =~ s/QT_DEPRECATED// || $decl =~ s/[A-Z_0-9]*_EXPORT_DEPRECATED//) {
 		$isDeprecated = 1;
 	}
 	# Doc comment
@@ -1001,8 +1008,8 @@ sub identifyDecl
 		$skipBlock = 1; # FIXME check end token before doing this!
 	}
 	# Using: import namespace
-	elsif ( $decl =~ /^\s*using(\s+namespace)?\s+(\w+)/ ) {
-		newNamespace( $2 );
+	elsif ( $decl =~ /^\s*using(\s+namespace)?\s+(::)?(\w+)/ ) {
+		newNamespace( $3 ) if ($2 eq '');
 
 	}
 
@@ -1435,6 +1442,21 @@ sub newNamespace
 }
 
 
+=head2 trim
+
+	Param: a string.
+
+	Strips whitespaces from a string.
+
+=cut
+
+sub trim
+{
+	my $string = shift;
+	$string =~ s/^\s+//;
+	$string =~ s/\s+$//;
+	return $string;
+}
 
 =head2 newTypedef
 
@@ -1447,6 +1469,7 @@ sub newNamespace
 sub newTypedef
 {
 	my ( $realtype, $name ) = @_;
+	return undef if trim($realtype) eq trim($name);
 
 	my ( $node ) = Ast::New( $name );
 
@@ -1682,7 +1705,7 @@ sub newMethod
 
 	For enum values, ArgType is unset, ArgName is the name, DefaultValue its value.
 
-	Author: David Faure <david@mandrakesoft.com>
+	Author: David Faure <faure@kde.org>
 =cut
 
 sub makeParamList($$$)
@@ -1708,12 +1731,15 @@ sub makeParamList($$$)
 		$arg =~ s/^class //; # Remove any redundant 'class' forward decln's
 		$arg =~ s/^enum //; # Remove any redundant 'enum's
 
+		# This RE is to match default args such as: foo = FooBar::foo()->bar()
+		if ( $arg =~ s/\s*=\s*([\w]+::[\w]+\([^)]*\)->[\w]+\([^)]*\))// ) {
+			$defaultparam = $1;
 		# The RE below reads as: = ( string constant or char or cast to numeric literal
 		# or some word/number, with optional bitwise shifts, OR'ed or +'ed flags, and/or function call ).
-		if ( $arg =~ s/\s*=\s*(("[^\"]*")|\([^)]*\)\s*[\+-]?\s*[0-9]+|(\'(\\\'|.)\')|(([-\w:~]*)\s*((\*|[<>\|\+-])*\s*[\w:._]*\s*)*(\([^(]*\))?))// ) {
+		} elsif ( $arg =~ s/\s*=\s*(("[^\"]*")|\([^)]*\)\s*[\+-]?\s*[0-9]+|(\'(\\\'|.)\')|(([-\w:~]*)\s*((\*|[<>\|\+-])*\s*[\w:._]*\s*)*(\([^(]*\))?))// ) {
 			$defaultparam = $1;
 		}
-		
+
 		if (defined $defaultparam && $isEnum) {
 			# Remove any casts in enum values, for example this in kfileitem.h:
 			#  'enum { Unknown = (mode_t) - 1 };'
@@ -1792,7 +1818,7 @@ sub newVar
 
 	my $static = 0;
 	if ( $type =~ /static/ ) {
-	#	$type =~ s/static//;
+		$type =~ s/static\s+//;
 		$static = 1;
 	}
 
@@ -1819,6 +1845,12 @@ sub newProperty
     $property =~ s/^\s+|\s+$//g;  
     $property =~ s/\(\s+/(/g;  
     $property =~ s/\s+\)/)/g;  
+
+    # Normalize position of any '*'s
+    # Change Q_PROPERTY(FooType *foo READ foo)
+    # To Q_PROPERTY(FooType* foo READ foo)
+    $property =~ s/\s*\*\s*/\* /g; 
+ 
     my @items = split(/\s+/,$property);
 
     do {

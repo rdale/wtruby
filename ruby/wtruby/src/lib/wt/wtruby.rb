@@ -2296,37 +2296,40 @@ module Wt
   end
 
   class WWidget < Wt::Base
-    None = Wt::None
-    Top = Wt::Top
-    Bottom = Wt::Bottom
-    Left = Wt::Left
-    Right = Wt::Right
-    CenterX = Wt::CenterX
-    CenterY = Wt::CenterY
-    CenterXY = Wt::CenterXY
-    Verticals = Wt::Verticals
-    Horizontals = Wt::Horizontals
-    All = Wt::All
 
-    AlignBaseline = Wt::AlignBaseline
-    AlignSub = Wt::AlignSub
-    AlignSuper = Wt::AlignSuper
-    AlignTop = Wt::AlignTop
-    AlignTextTop = Wt::AlignTextTop
-    AlignMiddle = Wt::AlignMiddle
-    AlignBottom = Wt::AlignBottom
-    AlignTextBottom = Wt::AlignTextBottom
-    AlignLength = Wt::AlignLength
+    if Wt::wt_version < "2.99.0"
+      None = Wt::None
+      Top = Wt::Top
+      Bottom = Wt::Bottom
+      Left = Wt::Left
+      Right = Wt::Right
+      CenterX = Wt::CenterX
+      CenterY = Wt::CenterY
+      CenterXY = Wt::CenterXY
+      Verticals = Wt::Verticals
+      Horizontals = Wt::Horizontals
+      All = Wt::All
 
-    AlignLeft = Wt::AlignLeft
-    AlignRight = Wt::AlignRight
-    AlignCenter = Wt::AlignCenter
-    AlignJustify = Wt::AlignJustify
+      AlignBaseline = Wt::AlignBaseline
+      AlignSub = Wt::AlignSub
+      AlignSuper = Wt::AlignSuper
+      AlignTop = Wt::AlignTop
+      AlignTextTop = Wt::AlignTextTop
+      AlignMiddle = Wt::AlignMiddle
+      AlignBottom = Wt::AlignBottom
+      AlignTextBottom = Wt::AlignTextBottom
+      AlignLength = Wt::AlignLength
 
-    Static = Wt::Static
-    Relative = Wt::Relative
-    Absolute = Wt::Absolute
-    Fixed = Wt::Fixed
+      AlignLeft = Wt::AlignLeft
+      AlignRight = Wt::AlignRight
+      AlignCenter = Wt::AlignCenter
+      AlignJustify = Wt::AlignJustify
+
+      Static = Wt::Static
+      Relative = Wt::Relative
+      Absolute = Wt::Absolute
+      Fixed = Wt::Fixed
+    end
 
     def id(*args)
       method_missing(:id, *args)

@@ -24,6 +24,7 @@
 #include <Wt/WMenuItem>
 #include <Wt/WModelIndex>
 #include <Wt/WEvent>
+#include <Wt/WApplication>
 
 #include <smoke/smoke.h>
 #include <smoke/wt_smoke.h>

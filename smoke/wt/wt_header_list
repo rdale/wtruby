@@ -2,6 +2,7 @@ Wt/Chart/WAbstractChart
 Wt/Chart/WAxis
 Wt/Chart/WCartesianChart
 Wt/Chart/WChart2DRenderer
+Wt/Chart/WChartGlobal
 Wt/Chart/WChartPalette
 Wt/Chart/WDataSeries
 Wt/Chart/WPieChart
@@ -43,9 +44,12 @@ Wt/WEvent
 Wt/WFileResource
 Wt/WFileUpload
 Wt/WFitLayout
+Wt/WFlags
 Wt/WFont
 Wt/WFormWidget
 Wt/WFwdDeclarations
+Wt/WGlobal
+Wt/WGoogleMap
 Wt/WGridLayout
 Wt/WGroupBox
 Wt/WHBoxLayout
@@ -93,6 +97,7 @@ Wt/WPushButton
 Wt/WRadioButton
 Wt/WRectArea
 Wt/WRectF
+Wt/WRegExp
 Wt/WRegExpValidator
 Wt/WResource
 Wt/WScrollArea

@@ -455,6 +455,7 @@ sub preParseClass
 			|| $className eq 'boost::bad_any_cast'
 			|| $className eq 'boost::gregorian'
 			|| $className eq 'boost::regex'
+			|| $className eq 'boost::intrusive::list_base_hook'
 			|| $className eq 'boost::signals::connection'
 			|| $className eq 'boost::signals::detail'
 			|| $className eq 'boost::signals::detail::basic_connection'
@@ -467,6 +468,7 @@ sub preParseClass
 			|| $className eq 'boost::signals::detail::connection_slot_pair'
 			|| $className eq 'boost::signals::scoped_connection'
 			|| $className eq 'Wt::WServer::Exception'
+			|| $className eq 'Wt::WAbstractEvent'
 			|| $className eq 'Wt::Impl::Grid'
 			|| $className eq 'Wt::Signal'
 			|| $className eq 'Wt::WString'
@@ -546,7 +548,6 @@ sub preParseClass
 
 	my( $classNode, $m ) = @_;
 	my $name = $m->{astNodeName};
-
 	if ( $m->{NodeType} eq "method" ) {
 		if ( $m->{ReturnType} eq 'typedef' # QFile's EncoderFn/DecoderFn callback, very badly parsed
 	       ) {
@@ -695,17 +696,32 @@ sub preParseClass
 			|| ($className eq 'Sublime::ViewWidgetCreator' and $name eq 'createViewWidget')
 
 			|| $name eq 'impl'
+			|| $name eq 'doneRerender'
+			|| $name eq 'getSDomChanges'
+			|| $name eq 'W_DECLARE_MASK_FOR_FLAGS'
+			|| $name eq 'getStateless'
 			|| ($className =~ /^Wt::/ and $name eq 'createJS')
 			|| ($className eq 'boost::any' and $name eq 'type')
 			|| ($className eq 'boost::any' and $name eq 'any'
                 && $#{$m->{ParamList}} > -1 && $m->{ParamList}[0]->{ArgType} =~ /ValueType/)
 			|| ($className eq 'boost::signals::connection' and $name eq 'connectBase')
+			|| ($className eq 'Wt::WResource' and $name eq 'write')
 			|| ($className eq 'Wt::WStatelessSlot' and $name eq 'implementsMethod')
 			|| ($className eq 'Wt' and $name eq 'WRun')
 			|| ($className eq 'Wt::WServer' and $name eq 'addEntryPoint')
+			|| ($className eq 'Wt::WEnvironment' and $name eq 'getParameterValues')
+			|| ($className eq 'Wt::WFileUpload' and $name eq 'setFormData')
+			|| ($className eq 'Wt::WGoogleMap' and $name eq 'zoomWindow')
 			|| ($className eq 'Wt::WModelIndex' and $name eq 'internalHashId')
 			|| ($className eq 'Wt::WAbstractItemModel' and $name eq 'createIndex'
                 && $m->{ParamList}[2]->{ArgType} !~ /void|uint64_t/)
+			|| ($className eq 'Wt::WGoogleMap::Coordinate' and $name =~ /operator/)
+			|| ($className eq 'Wt::WGoogleMap' and $name eq 'WGoogleMap'
+                && $m->{ParamList}[0]->{ArgType} =~ /pair/)
+
+			|| ($className eq 'Wt::WGoogleMap::Coordinate' and $name eq 'Coordinate'
+                && $#{$m->{ParamList}} == 0)
+
 			|| ($className =~ /^Wt::/ and $name eq 'createDomElement')
 
 			# added by Koen: these use stringstream now, but are not public API anyway
@@ -804,6 +820,7 @@ sub preParseClass
 		    # Resolve type in full, e.g. for QSessionManager::RestartHint
 		    # (x_QSessionManager doesn't inherit QSessionManager)
 		    $arg->{ArgType} = kalyptusDataDict::resolveType($arg->{ArgType}, $classNode, $rootnode);
+			$arg->{ArgType} =~ s/Wt::WFlags<([^>]*)>/$1/ unless $className =~ /WPaintDevice/;
 		    # Only add the type if the class using it is not defined in another module.
 		    # If the method is virtual, add the type anyway. A class in the current module might reimplement
 		    # that method.
@@ -858,6 +875,8 @@ sub preParseClass
 				|| ($className eq 'Wt::WText' and $name eq 'PlainFormatting')
 				|| ($className eq 'Wt::WApplication' and $name eq 'requestTooLarge')
 				|| ($className eq 'Wt::WAbstractItemModel' and $name eq 'dataChanged')
+				|| ($className eq 'Wt::WSlider' and $name eq 'NoTicks')
+				|| ($className eq 'Wt::WSlider' and $name eq 'TicksBothSides')
 
 				|| ($className eq 'KDevelop::DocumentRangeObject' and $name eq 'm_mutex')
 				|| ($className eq 'KDevelop::DocumentRangeObject' and $name eq 'm_mutex')
@@ -867,7 +886,6 @@ sub preParseClass
 			$m->{NodeType} = 'deleted';
 			next;
 		}
-
 		$m->{Type} = kalyptusDataDict::resolveType($m->{Type}, $classNode, $rootnode);
 
 	    my $varType = $m->{Type};

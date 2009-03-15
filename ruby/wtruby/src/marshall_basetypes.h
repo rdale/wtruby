@@ -174,7 +174,7 @@ void marshall_to_ruby<SmokeClassWrapper>(Marshall *m)
         // Keep a mapping of the pointer so that it is only wrapped once as a ruby VALUE
         mapPointer(obj, o, o->classId, 0);
     }
-*/            
+*/        
 
     *(m->var()) = obj;
 }

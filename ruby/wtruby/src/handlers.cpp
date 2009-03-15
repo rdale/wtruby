@@ -1072,7 +1072,7 @@ void marshall_StaticConstEnum(Marshall *m) {
         *(m->var()) = INT2NUM(*((long *) ptr));
         // There is no way to use '(enum *)' or similar here, so pick a
         // random enum, and assume they can all be deleted the same way
-        delete static_cast<Wt::WWidget::Side *>(ptr);
+        delete static_cast<Wt::Side *>(ptr);
     }
     break;
 

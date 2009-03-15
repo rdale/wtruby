@@ -9,8 +9,10 @@ ENDIF(NOT Wt_FOUND)
 include_directories( ${Wt_INCLUDE_DIR} 
                      ${Wt_INCLUDE_DIR}/Wt 
                      ${Wt_INCLUDE_DIR}/Wt/Chart
+                     ${Wt_INCLUDE_DIR}/Wt/web
                      ${Boost_INCLUDE_DIR}
                      ${Boost_INCLUDE_DIR}/boost
+                     ${Boost_INCLUDE_DIR}/boost/intrusive
                      ${Boost_INCLUDE_DIR}/boost/signals
                      ${CMAKE_SOURCE_DIR}/smoke )
 

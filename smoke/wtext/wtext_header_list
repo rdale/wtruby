@@ -28,4 +28,6 @@ Wt/Ext/TextEdit
 Wt/Ext/ToolBar
 Wt/Ext/ToolTipConfig
 Wt/Ext/Widget
+Wt/Ext/WGlobal
+Wt/Ext/WExtGlobal
 
