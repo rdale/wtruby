@@ -139,12 +139,8 @@ class String
 end
 
 candidates.gsub!("\t", "")
-candidates.each do |candidate|
-  if candidate =~ /~/ || candidate =~ /qt_metacall/ || candidate =~ /staticMetaObject/
-    next
-  end
-
-  print candidate.to_ruby_method(showOpt) if pattern.nil? || pattern =~ candidate
+candidates.split($/).each do |candidate|
+  puts candidate.to_ruby_method(showOpt) if pattern.nil? || pattern =~ candidate
 end
 
 # kate: space-indent on; indent-width 2; replace-tabs on; mixed-indent off;
