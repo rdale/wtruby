@@ -1661,6 +1661,7 @@ sub newMethod
 	$retType =~ s/extern\s+//;
 	$retType =~ s/^\s*//g;
 	$retType =~ s/\s*$//g;
+	$retType =~ s/\s*,\s*/,/g;
 	$retType =~ s/^class\s/ /;  # Remove redundant class forward decln's
 	$retType =~ s/<class\s/</;
 

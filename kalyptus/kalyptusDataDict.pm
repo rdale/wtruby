@@ -2968,7 +2968,7 @@ sub resolveTypeInHierarchy($$$)
 		$i++;
             }
             # normalize
-	    $argType = $before."<".join( ", ", @args).">".$after;
+	    $argType = $before."<".join( ",", @args).">".$after;
 		$argType =~ s/>>/> >/g;  # Nested template types must have a space
         }
 
