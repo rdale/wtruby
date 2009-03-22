@@ -124,7 +124,8 @@ class String
     method_name.gsub!(/bool/, 'Boolean')
     method_name.gsub!(/mode_t|time_t|long/, 'Integer')
     method_name.gsub!(/float|double|qreal/, 'Float')
-    method_name.gsub!(/q?u?longlong/, 'Integer')
+    method_name.gsub!(/u?longlong/, 'Integer')
+    method_name.gsub!(/u?int64_t/, 'Integer')
     method_name.gsub!(/^q?u?(int|long|short)[0-9]?[0-9]?/, 'Integer')
     method_name.gsub!(/([^A-Za-z])q?u?(int|long|short)[0-9]?[0-9]?([,)])/) { $1 + 'Integer' + $3 }
     method_name.gsub!(/(std::vector)<([^>]+)>/) { '[' + $2 + ', ...]' }
@@ -140,6 +141,9 @@ end
 
 candidates.gsub!("\t", "")
 candidates.split($/).each do |candidate|
+  if candidate =~ /~/
+    next
+  end
   puts candidate.to_ruby_method(showOpt) if pattern.nil? || pattern =~ candidate
 end
 

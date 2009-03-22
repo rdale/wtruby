@@ -1,3 +1,6 @@
+2009-03-22 Richard Dale  <richard.j.dale@gmail.com>
+* Make rbwtapi skip destructors
+
 2009-03-19 Richard Dale  <richard.j.dale@gmail.com>
 * The rbqwtapi tool was calling 'each' on a string which no longer works in 
 Ruby 1.9.1 as they aren't Enumerable. So use split instead so that the code
