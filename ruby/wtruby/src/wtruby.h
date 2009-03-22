@@ -124,6 +124,7 @@ extern WTRUBY_EXPORT VALUE eventsignal_void_class;
 extern WTRUBY_EXPORT VALUE eventsignal_wkey_event_class;
 extern WTRUBY_EXPORT VALUE eventsignal_wmouse_event_class;
 extern WTRUBY_EXPORT VALUE eventsignal_wresponse_event_class;
+extern WTRUBY_EXPORT VALUE eventsignal_wscroll_event_class;
 
 extern WTRUBY_EXPORT VALUE jsignal_class;
 extern WTRUBY_EXPORT VALUE jsignal1_class;
@@ -132,6 +133,10 @@ extern WTRUBY_EXPORT VALUE jsignal_boolean_class;
 extern WTRUBY_EXPORT VALUE jsignal_int_class;
 extern WTRUBY_EXPORT VALUE jsignal_int_int_class;
 
+#if WT_VERSION >= 0x02990000
+extern WTRUBY_EXPORT VALUE jsignal_wgooglemap_coordinate_class;
+#endif
+
 extern WTRUBY_EXPORT VALUE signal_class;
 extern WTRUBY_EXPORT VALUE signal1_class;
 extern WTRUBY_EXPORT VALUE signal2_class;
@@ -139,11 +144,17 @@ extern WTRUBY_EXPORT VALUE signal_boolean_class;
 extern WTRUBY_EXPORT VALUE signal_int_class;
 extern WTRUBY_EXPORT VALUE signal_int_int_class;
 extern WTRUBY_EXPORT VALUE signal_int_int_int_int_class;
+extern WTRUBY_EXPORT VALUE signal_orientation_int_int_class;
 extern WTRUBY_EXPORT VALUE signal_longlong_longlong_class;
 extern WTRUBY_EXPORT VALUE signal_enum_class;
+extern WTRUBY_EXPORT VALUE signal_wdate_class;
 extern WTRUBY_EXPORT VALUE signal_wmenuitem_class;
 extern WTRUBY_EXPORT VALUE signal_wwidget_class;
+extern WTRUBY_EXPORT VALUE signal_wmodelindex_class;
+extern WTRUBY_EXPORT VALUE signal_wmodelindex_int_int_class;
+extern WTRUBY_EXPORT VALUE signal_wmodelindex_wmodelindex_class;
 extern WTRUBY_EXPORT VALUE signal_wmodelindex_wmouseevent_class;
+extern WTRUBY_EXPORT VALUE signal_wstandarditem_class;
 extern WTRUBY_EXPORT VALUE signal_wstring_class;
 extern WTRUBY_EXPORT VALUE signal_string_class;
 extern WTRUBY_EXPORT VALUE signal_string_string_class;

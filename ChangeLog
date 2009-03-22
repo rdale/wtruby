@@ -1,6 +1,7 @@
 2009-03-22 Richard Dale  <richard.j.dale@gmail.com>
 * Make rbwtapi skip destructors
 * Make lists within templates consistent, and strip spaces round commas
+* Add signal type handlers for Wt 2.99.0
 
 2009-03-19 Richard Dale  <richard.j.dale@gmail.com>
 * The rbqwtapi tool was calling 'each' on a string which no longer works in 

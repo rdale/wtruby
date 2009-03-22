@@ -20,11 +20,17 @@
 #include <Wt/WJavaScript>
 #include <Wt/WObject>
 #include <Wt/WWidget>
+#include <Wt/WDate>
 #include <Wt/WDialog>
 #include <Wt/WMenuItem>
 #include <Wt/WModelIndex>
 #include <Wt/WEvent>
+#include <Wt/WStandardItem>
 #include <Wt/WApplication>
+
+#if WT_VERSION >= 0x0299000000
+#include <Wt/WGoogleMap>
+#endif
 
 #include <smoke/smoke.h>
 #include <smoke/wt_smoke.h>
@@ -88,11 +94,35 @@ public:
         rb_funcall(target_, SYM2ID(method_), 1, INT2NUM(arg));
     }
 
+    void invoke1(Wt::Orientation arg) {
+        rb_funcall(target_, SYM2ID(method_), 1, INT2NUM(arg));
+    }
+
+    void invoke1(Wt::WDate arg) {
+        smokeruby_object * o = alloc_smokeruby_object(  true, 
+                                                        wt_Smoke, 
+                                                        wt_Smoke->idClass("Wt::WDate").index, 
+                                                        static_cast<void*>(new Wt::WDate(arg)) );
+        VALUE obj = set_obj_info("Wt::WDate", o);
+        rb_funcall(target_, SYM2ID(method_), 1, obj);
+    }
+
+#if WT_VERSION >= 0x02990000
+    void invoke1(Wt::WGoogleMap::Coordinate arg) {
+        smokeruby_object * o = alloc_smokeruby_object(  true, 
+                                                        wt_Smoke, 
+                                                        wt_Smoke->idClass("Wt::WGoogleMap::Coordinate").index, 
+                                                        static_cast<void*>(new Wt::WGoogleMap::Coordinate(arg)) );
+        VALUE obj = set_obj_info("Wt::WGoogleMap::Coordinate", o);
+        rb_funcall(target_, SYM2ID(method_), 1, obj);
+    }
+#endif
+
     void invoke1(Wt::WKeyEvent arg) {
         smokeruby_object * o = alloc_smokeruby_object(  true, 
                                                         wt_Smoke, 
                                                         wt_Smoke->idClass("Wt::WKeyEvent").index, 
-                                                        new Wt::WKeyEvent(arg) );
+                                                        static_cast<void*>(new Wt::WKeyEvent(arg)) );
         VALUE obj = set_obj_info("Wt::WKeyEvent", o);
         rb_funcall(target_, SYM2ID(method_), 1, obj);
     }
@@ -114,7 +144,7 @@ public:
         smokeruby_object * o = alloc_smokeruby_object(  true, 
                                                         wt_Smoke, 
                                                         wt_Smoke->idClass("Wt::WMouseEvent").index, 
-                                                        new Wt::WMouseEvent(arg) );
+                                                        static_cast<void*>(new Wt::WMouseEvent(arg)) );
         VALUE obj = set_obj_info("Wt::WMouseEvent", o);
         rb_funcall(target_, SYM2ID(method_), 1, obj);
     }
@@ -123,8 +153,17 @@ public:
         smokeruby_object * o = alloc_smokeruby_object(  true, 
                                                         wt_Smoke, 
                                                         wt_Smoke->idClass("Wt::WResponseEvent").index, 
-                                                        new Wt::WResponseEvent(arg) );
+                                                        static_cast<void*>(new Wt::WResponseEvent(arg)) );
         VALUE obj = set_obj_info("Wt::WResponseEvent", o);
+        rb_funcall(target_, SYM2ID(method_), 1, obj);
+    }
+
+    void invoke1(Wt::WScrollEvent arg) {
+        smokeruby_object * o = alloc_smokeruby_object(  true, 
+                                                        wt_Smoke, 
+                                                        wt_Smoke->idClass("Wt::WScrollEvent").index, 
+                                                        static_cast<void*>(new Wt::WScrollEvent(arg)) );
+        VALUE obj = set_obj_info("Wt::WScrollEvent", o);
         rb_funcall(target_, SYM2ID(method_), 1, obj);
     }
 
@@ -141,35 +180,83 @@ public:
         rb_funcall(target_, SYM2ID(method_), 1, obj);
     }
 
-    void invoke1(Wt::WModelIndex arg1) {
-        VALUE obj1 = getPointerObject((void *) &arg1);
+    void invoke1(Wt::WStandardItem * arg1) {
+        VALUE obj1 = getPointerObject((void *) arg1);
         if (obj1 == Qnil) {
             smokeruby_object * o1 = alloc_smokeruby_object( false, 
                                                             wt_Smoke, 
+                                                            wt_Smoke->idClass("Wt::WStandardItem").index, 
+                                                            (void *) arg1 );
+            obj1 = set_obj_info("Wt::WStandardItem", o1);
+        }
+
+        rb_funcall(target_, SYM2ID(method_), 1, obj1);
+    }
+
+    void invoke1(Wt::WModelIndex arg1) {
+        VALUE obj1 = getPointerObject((void *) &arg1);
+        if (obj1 == Qnil) {
+            smokeruby_object * o1 = alloc_smokeruby_object( true, 
+                                                            wt_Smoke, 
                                                             wt_Smoke->idClass("Wt::WModelIndex").index, 
-                                                            (void *) &arg1 );
+                                                            static_cast<void*>(new Wt::WModelIndex(arg1)) );
             obj1 = set_obj_info("Wt::WModelIndex", o1);
         }
 
         rb_funcall(target_, SYM2ID(method_), 1, obj1);
     }
 
-    void invoke2(Wt::WModelIndex arg1, Wt::WMouseEvent arg2) {
+    void invoke2(Wt::WModelIndex arg1, int arg2) {
         VALUE obj1 = getPointerObject((void *) &arg1);
         if (obj1 == Qnil) {
-            smokeruby_object * o1 = alloc_smokeruby_object( false, 
+            smokeruby_object * o1 = alloc_smokeruby_object( true, 
                                                             wt_Smoke, 
                                                             wt_Smoke->idClass("Wt::WModelIndex").index, 
-                                                            (void *) &arg1 );
+                                                            static_cast<void*>(new Wt::WModelIndex(arg1)) );
+            obj1 = set_obj_info("Wt::WModelIndex", o1);
+        }
+
+        rb_funcall(target_, SYM2ID(method_), 2, obj1, INT2NUM(arg2));
+    }
+
+    void invoke2(Wt::WModelIndex arg1, Wt::WModelIndex arg2) {
+        VALUE obj1 = getPointerObject((void *) &arg1);
+        if (obj1 == Qnil) {
+            smokeruby_object * o1 = alloc_smokeruby_object( true, 
+                                                            wt_Smoke, 
+                                                            wt_Smoke->idClass("Wt::WModelIndex").index, 
+                                                            static_cast<void*>(new Wt::WModelIndex(arg1)) );
             obj1 = set_obj_info("Wt::WModelIndex", o1);
         }
 
         VALUE obj2 = getPointerObject((void *) &arg2);
         if (obj2 == Qnil) {
-            smokeruby_object * o2 = alloc_smokeruby_object( false, 
+            smokeruby_object * o2 = alloc_smokeruby_object( true, 
+                                                            wt_Smoke, 
+                                                            wt_Smoke->idClass("Wt::WModelIndex").index, 
+                                                            static_cast<void*>(new Wt::WModelIndex(arg2)) );
+            obj2 = set_obj_info("Wt::WModelIndex", o2);
+        }
+
+        rb_funcall(target_, SYM2ID(method_), 2, obj1, obj2);
+    }
+
+    void invoke2(Wt::WModelIndex arg1, Wt::WMouseEvent arg2) {
+        VALUE obj1 = getPointerObject((void *) &arg1);
+        if (obj1 == Qnil) {
+            smokeruby_object * o1 = alloc_smokeruby_object( true, 
+                                                            wt_Smoke, 
+                                                            wt_Smoke->idClass("Wt::WModelIndex").index, 
+                                                            static_cast<void*>(new Wt::WModelIndex(arg1)) );
+            obj1 = set_obj_info("Wt::WModelIndex", o1);
+        }
+
+        VALUE obj2 = getPointerObject((void *) &arg2);
+        if (obj2 == Qnil) {
+            smokeruby_object * o2 = alloc_smokeruby_object( true, 
                                                             wt_Smoke, 
                                                             wt_Smoke->idClass("Wt::WMouseEvent").index, 
-                                                            (void *) &arg2 );
+                                                            static_cast<void*>(new Wt::WMouseEvent(arg2)) );
             obj2 = set_obj_info("Wt::WMouseEvent", o2);
         }
 
@@ -204,8 +291,29 @@ public:
         rb_funcall(target_, SYM2ID(method_), 2, INT2NUM(arg1), INT2NUM(arg2));
     }
 
+    void invoke2(Wt::Orientation arg1, int arg2) {
+        rb_funcall(target_, SYM2ID(method_), 2, INT2NUM(arg1), INT2NUM(arg2));
+    }
+
     void invoke3(int arg1, int arg2, int arg3) {
         rb_funcall(target_, SYM2ID(method_), 3, INT2NUM(arg1), INT2NUM(arg2), INT2NUM(arg3));
+    }
+
+    void invoke3(Wt::Orientation arg1, int arg2, int arg3) {
+        rb_funcall(target_, SYM2ID(method_), 3, INT2NUM(arg1), INT2NUM(arg2), INT2NUM(arg3));
+    }
+
+    void invoke3(Wt::WModelIndex arg1, int arg2, int arg3) {
+        VALUE obj1 = getPointerObject((void *) &arg1);
+        if (obj1 == Qnil) {
+            smokeruby_object * o1 = alloc_smokeruby_object( true, 
+                                                            wt_Smoke, 
+                                                            wt_Smoke->idClass("Wt::WModelIndex").index, 
+                                                            static_cast<void*>(new Wt::WModelIndex(arg1)) );
+            obj1 = set_obj_info("Wt::WModelIndex", o1);
+        }
+
+        rb_funcall(target_, SYM2ID(method_), 2, obj1, INT2NUM(arg2), INT2NUM(arg3));
     }
 
     void invoke4(int arg1, int arg2, int arg3, int arg4) {
@@ -300,6 +408,37 @@ static void signal_connect2(VALUE self, VALUE args) {
         break;
     case 2:
         sig->connect(SLOT(invocation, SlotInvocation::invoke2));
+        break;
+    }
+}
+
+template <class S> 
+static void signal_connect3(VALUE self, VALUE args) {
+    VALUE target = rb_ary_entry(args, 0);
+    VALUE method = rb_ary_entry(args, 1);
+    int arity = NUM2INT(rb_ary_entry(args, 2));
+
+    smokeruby_object * o = value_obj_info(self);
+    if (o == 0 || o->ptr == 0) {
+        return;
+    }
+    S * sig = static_cast<S*>(o->ptr);
+
+    SlotInvocation * invocation = new SlotInvocation(   SlotInvocation::toWObject(target), 
+                                                        target, 
+                                                        method );
+    switch (arity) {
+    case 0:
+        sig->connect(SLOT(invocation, SlotInvocation::invoke));
+        break;
+    case 1:
+        sig->connect(SLOT(invocation, SlotInvocation::invoke1));
+        break;
+    case 2:
+        sig->connect(SLOT(invocation, SlotInvocation::invoke2));
+        break;
+    case 3:
+        sig->connect(SLOT(invocation, SlotInvocation::invoke3));
         break;
     }
 }
@@ -494,6 +633,31 @@ static VALUE
 eventsignal_wresponse_event_emit(VALUE self, VALUE arg)
 {
     Wt::Ruby::signal_emit1<Wt::EventSignal<Wt::WResponseEvent>, Wt::WResponseEvent>(self, arg);
+    return self;
+}
+
+
+static VALUE
+eventsignal_wscroll_event_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        int arity = NUM2INT(rb_ary_entry(argv[0], 2));
+        if (arity == 0) {
+            Wt::Ruby::eventsignal_connect< Wt::EventSignal<Wt::WScrollEvent> >(self, argv[0]);
+        } else {
+            Wt::Ruby::signal_connect1< Wt::EventSignal<Wt::WScrollEvent> >(self, argv[0]);
+        }
+
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+eventsignal_wscroll_event_emit(VALUE self, VALUE arg)
+{
+    Wt::Ruby::signal_emit1<Wt::EventSignal<Wt::WScrollEvent>, Wt::WScrollEvent>(self, arg);
     return self;
 }
 
@@ -751,7 +915,7 @@ static VALUE
 jsignal_int_int_connect(int argc, VALUE * argv, VALUE self)
 {
     if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
-        Wt::Ruby::signal_connect1< Wt::JSignal<int, int> >(self, argv[0]);
+        Wt::Ruby::signal_connect2< Wt::JSignal<int, int> >(self, argv[0]);
         return self;
     }
 
@@ -766,6 +930,54 @@ jsignal_int_int_emit(VALUE self, VALUE arg1, VALUE arg2)
     sig->emit(NUM2INT(arg1), NUM2INT(arg2));
     return self;
 }
+
+#if WT_VERSION >= 0x02990000
+static VALUE
+new_jsignal_wgooglemap_coordinate(int argc, VALUE * argv, VALUE klass)
+{
+    smokeruby_object * o = value_obj_info(argv[0]);
+    Wt::WObject * wobject = (Wt::WObject *) o->smoke->cast(o->ptr, o->classId, o->smoke->idClass("Wt::WObject").index);
+
+    Wt::JSignal<Wt::WGoogleMap::Coordinate> * sig = new Wt::JSignal<Wt::WGoogleMap::Coordinate>(wobject, std::string(StringValuePtr(argv[1])));
+    smokeruby_object  * s = alloc_smokeruby_object( true, 
+                                                    wt_Smoke, 
+                                                    wt_Smoke->idClass("Wt::EventSignalBase").index, 
+                                                    static_cast<void *>(sig) );
+
+    VALUE result = Data_Wrap_Struct(Wt::Ruby::jsignal_wgooglemap_coordinate_class, smokeruby_mark, smokeruby_free, s);
+    mapObject(result, result);
+    return result;
+}
+
+static VALUE
+jsignal_wgooglemap_coordinate_name(VALUE self)
+{
+    smokeruby_object * o = value_obj_info(self);
+    Wt::JSignal<Wt::WGoogleMap::Coordinate> * sig = static_cast<Wt::JSignal<Wt::WGoogleMap::Coordinate> * >(o->ptr);
+    return rb_str_new2(sig->name().c_str());
+}
+
+static VALUE
+jsignal_wgooglemap_coordinate_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect1< Wt::JSignal<Wt::WGoogleMap::Coordinate> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+jsignal_wgooglemap_coordinate_emit(VALUE self, VALUE arg1)
+{
+    smokeruby_object * o = value_obj_info(self);
+    Wt::JSignal<Wt::WGoogleMap::Coordinate> * sig = static_cast<Wt::JSignal<Wt::WGoogleMap::Coordinate> * >(o->ptr);
+    smokeruby_object * a1 = value_obj_info(arg1);
+    sig->emit(*(static_cast<Wt::WGoogleMap::Coordinate *>(a1->ptr)));
+    return self;
+}
+#endif
 
 static VALUE
 new_signal(int argc, VALUE * argv, VALUE klass)
@@ -969,6 +1181,26 @@ signal_int_int_emit(VALUE self, VALUE arg1, VALUE arg2)
 }
 
 static VALUE
+signal_orientation_int_int_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect3< Wt::Signal<Wt::Orientation, int, int> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+signal_orientation_int_int_emit(VALUE self, VALUE arg1, VALUE arg2, VALUE arg3)
+{
+    smokeruby_object * o = value_obj_info(self);
+    Wt::Signal<Wt::Orientation, int, int> * sig = static_cast<Wt::Signal<Wt::Orientation, int, int> *>(o->ptr);
+    sig->emit(static_cast<Wt::Orientation>(NUM2INT(arg1)), NUM2INT(arg2), NUM2INT(arg3));
+    return self;
+}
+
+static VALUE
 signal_int_int_int_int_connect(int argc, VALUE * argv, VALUE self)
 {
     if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
@@ -1107,6 +1339,81 @@ signal_wwidget_emit(VALUE self, VALUE arg)
 }
 
 static VALUE
+signal_wdate_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect1< Wt::Signal<Wt::WDate> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+signal_wdate_emit(VALUE self, VALUE arg)
+{
+    Wt::Ruby::signal_emit1<Wt::Signal<Wt::WDate>, Wt::WDate>(self, arg);
+    return self;
+}
+
+static VALUE
+signal_wmodelindex_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect1< Wt::Signal<Wt::WModelIndex> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+signal_wmodelindex_emit(VALUE self, VALUE arg1)
+{
+    Wt::Ruby::signal_emit1<Wt::Signal<Wt::WModelIndex>, Wt::WModelIndex>(self, arg1);
+    return self;
+}
+
+static VALUE
+signal_wmodelindex_int_int_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect3< Wt::Signal<Wt::WModelIndex,int,int> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+signal_wmodelindex_int_int_emit(VALUE self, VALUE arg1, VALUE arg2, VALUE arg3)
+{
+    smokeruby_object * o = value_obj_info(self);
+    Wt::Signal<Wt::WModelIndex,int, int> * sig = static_cast<Wt::Signal<Wt::WModelIndex,int, int> *>(o->ptr);
+    smokeruby_object * a1 = value_obj_info(arg1);
+    sig->emit(*(static_cast<Wt::WModelIndex *>(a1->ptr)), NUM2INT(arg2), NUM2INT(arg3));
+    return self;
+}
+
+static VALUE
+signal_wmodelindex_wmodelindex_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect2< Wt::Signal<Wt::WModelIndex,Wt::WModelIndex> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+signal_wmodelindex_wmodelindex_emit(VALUE self, VALUE arg1, VALUE arg2)
+{
+    Wt::Ruby::signal_emit2<Wt::Signal<Wt::WModelIndex,Wt::WModelIndex>, Wt::WModelIndex, Wt::WModelIndex>(self, arg1, arg2);
+    return self;
+}
+
+static VALUE
 signal_wmodelindex_wmouseevent_connect(int argc, VALUE * argv, VALUE self)
 {
     if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
@@ -1142,6 +1449,23 @@ signal_wmenuitem_emit(VALUE self, VALUE arg)
     return self;
 }
 
+static VALUE
+signal_wstandarditem_connect(int argc, VALUE * argv, VALUE self)
+{
+    if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
+        Wt::Ruby::signal_connect1< Wt::Signal<Wt::WStandardItem*> >(self, argv[0]);
+        return self;
+    }
+
+    return rb_call_super(argc, argv);
+}
+
+static VALUE
+signal_wstandarditem_emit(VALUE self, VALUE arg)
+{
+    Wt::Ruby::signal_emit1<Wt::Signal<Wt::WStandardItem*>, Wt::WStandardItem*>(self, arg);
+    return self;
+}
 
 void 
 define_eventsignals(VALUE klass)
@@ -1161,6 +1485,10 @@ define_eventsignals(VALUE klass)
     Wt::Ruby::eventsignal_wresponse_event_class = rb_define_class_under(Wt::Ruby::wt_module, "EventSignalWResponseEvent", klass);
     rb_define_method(Wt::Ruby::eventsignal_wresponse_event_class, "connect", (VALUE (*) (...)) eventsignal_wresponse_event_connect, -1);
     rb_define_method(Wt::Ruby::eventsignal_wresponse_event_class, "emit", (VALUE (*) (...)) eventsignal_wresponse_event_emit, 1);
+
+    Wt::Ruby::eventsignal_wscroll_event_class = rb_define_class_under(Wt::Ruby::wt_module, "EventSignalWScrollEvent", klass);
+    rb_define_method(Wt::Ruby::eventsignal_wscroll_event_class, "connect", (VALUE (*) (...)) eventsignal_wscroll_event_connect, -1);
+    rb_define_method(Wt::Ruby::eventsignal_wscroll_event_class, "emit", (VALUE (*) (...)) eventsignal_wscroll_event_emit, 1);
 
     Wt::Ruby::jsignal_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignal", klass);
     rb_define_singleton_method(Wt::Ruby::jsignal_class, "new", (VALUE (*) (...)) new_jsignal, -1);
@@ -1197,6 +1525,14 @@ define_eventsignals(VALUE klass)
     rb_define_method(Wt::Ruby::jsignal_int_int_class, "connect", (VALUE (*) (...)) jsignal_int_int_connect, -1);
     rb_define_method(Wt::Ruby::jsignal_int_int_class, "emit", (VALUE (*) (...)) jsignal_int_int_emit, 2);
     rb_define_method(Wt::Ruby::jsignal_int_int_class, "name", (VALUE (*) (...)) jsignal_int_int_name, 0);
+
+#if WT_VERSION >= 0x02990000
+    Wt::Ruby::jsignal_wgooglemap_coordinate_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignalIntInt", klass);
+    rb_define_singleton_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "new", (VALUE (*) (...)) new_jsignal_wgooglemap_coordinate, -1);
+    rb_define_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "connect", (VALUE (*) (...)) jsignal_wgooglemap_coordinate_connect, -1);
+    rb_define_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "emit", (VALUE (*) (...)) jsignal_wgooglemap_coordinate_emit, 2);
+    rb_define_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "name", (VALUE (*) (...)) jsignal_wgooglemap_coordinate_name, 0);
+#endif
 }
 
 void
@@ -1229,6 +1565,10 @@ define_signals(VALUE klass)
     rb_define_method(Wt::Ruby::signal_int_int_class, "connect", (VALUE (*) (...)) signal_int_int_connect, -1);
     rb_define_method(Wt::Ruby::signal_int_int_class, "emit", (VALUE (*) (...)) signal_int_int_emit, 1);
 
+    Wt::Ruby::signal_orientation_int_int_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalOrientationIntInt", klass);
+    rb_define_method(Wt::Ruby::signal_orientation_int_int_class, "connect", (VALUE (*) (...)) signal_orientation_int_int_connect, -1);
+    rb_define_method(Wt::Ruby::signal_orientation_int_int_class, "emit", (VALUE (*) (...)) signal_orientation_int_int_emit, 1);
+
     Wt::Ruby::signal_int_int_int_int_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalIntIntIntInt", klass);
     rb_define_method(Wt::Ruby::signal_int_int_int_int_class, "connect", (VALUE (*) (...)) signal_int_int_int_int_connect, -1);
     rb_define_method(Wt::Ruby::signal_int_int_int_int_class, "emit", (VALUE (*) (...)) signal_int_int_int_int_emit, 1);
@@ -1257,6 +1597,22 @@ define_signals(VALUE klass)
     rb_define_method(Wt::Ruby::signal_wwidget_class, "connect", (VALUE (*) (...)) signal_wwidget_connect, -1);
     rb_define_method(Wt::Ruby::signal_wwidget_class, "emit", (VALUE (*) (...)) signal_wwidget_emit, 1);
 
+    Wt::Ruby::signal_wdate_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalWDate", klass);
+    rb_define_method(Wt::Ruby::signal_wdate_class, "connect", (VALUE (*) (...)) signal_wdate_connect, -1);
+    rb_define_method(Wt::Ruby::signal_wdate_class, "emit", (VALUE (*) (...)) signal_wdate_emit, 1);
+
+    Wt::Ruby::signal_wmodelindex_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalWModelIndex", klass);
+    rb_define_method(Wt::Ruby::signal_wmodelindex_class, "connect", (VALUE (*) (...)) signal_wmodelindex_connect, -1);
+    rb_define_method(Wt::Ruby::signal_wmodelindex_class, "emit", (VALUE (*) (...)) signal_wmodelindex_emit, 1);
+
+    Wt::Ruby::signal_wmodelindex_int_int_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalWModelIndex", klass);
+    rb_define_method(Wt::Ruby::signal_wmodelindex_int_int_class, "connect", (VALUE (*) (...)) signal_wmodelindex_int_int_connect, -1);
+    rb_define_method(Wt::Ruby::signal_wmodelindex_int_int_class, "emit", (VALUE (*) (...)) signal_wmodelindex_int_int_emit, 3);
+
+    Wt::Ruby::signal_wmodelindex_wmodelindex_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalWModelIndexWModelIndex", klass);
+    rb_define_method(Wt::Ruby::signal_wmodelindex_wmodelindex_class, "connect", (VALUE (*) (...)) signal_wmodelindex_wmodelindex_connect, -1);
+    rb_define_method(Wt::Ruby::signal_wmodelindex_wmodelindex_class, "emit", (VALUE (*) (...)) signal_wmodelindex_wmodelindex_emit, 2);
+
     Wt::Ruby::signal_wmodelindex_wmouseevent_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalWModelIndexWMouseEvent", klass);
     rb_define_method(Wt::Ruby::signal_wmodelindex_wmouseevent_class, "connect", (VALUE (*) (...)) signal_wmodelindex_wmouseevent_connect, -1);
     rb_define_method(Wt::Ruby::signal_wmodelindex_wmouseevent_class, "emit", (VALUE (*) (...)) signal_wmodelindex_wmouseevent_emit, 2);
@@ -1264,6 +1620,10 @@ define_signals(VALUE klass)
     Wt::Ruby::signal_wmenuitem_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalWWidget", klass);
     rb_define_method(Wt::Ruby::signal_wmenuitem_class, "connect", (VALUE (*) (...)) signal_wmenuitem_connect, -1);
     rb_define_method(Wt::Ruby::signal_wmenuitem_class, "emit", (VALUE (*) (...)) signal_wmenuitem_emit, 1);
+
+    Wt::Ruby::signal_wstandarditem_class = rb_define_class_under(Wt::Ruby::wt_module, "SignalWStandardItem", klass);
+    rb_define_method(Wt::Ruby::signal_wstandarditem_class, "connect", (VALUE (*) (...)) signal_wstandarditem_connect, -1);
+    rb_define_method(Wt::Ruby::signal_wstandarditem_class, "emit", (VALUE (*) (...)) signal_wstandarditem_emit, 1);
 }
 
 // kate: space-indent on; indent-width 4; replace-tabs on; mixed-indent off;

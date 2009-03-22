@@ -59,6 +59,7 @@ VALUE eventsignal_void_class = Qnil;
 VALUE eventsignal_wkey_event_class = Qnil;
 VALUE eventsignal_wmouse_event_class = Qnil;
 VALUE eventsignal_wresponse_event_class = Qnil;
+VALUE eventsignal_wscroll_event_class = Qnil;
 
 VALUE jsignal_class = Qnil;
 VALUE jsignal1_class = Qnil;
@@ -67,6 +68,10 @@ VALUE jsignal_boolean_class = Qnil;
 VALUE jsignal_int_class = Qnil;
 VALUE jsignal_int_int_class = Qnil;
 
+#if WT_VERSION >= 0x02990000
+VALUE jsignal_wgooglemap_coordinate_class = Qnil;
+#endif
+
 VALUE signal_class = Qnil;
 VALUE signal1_class = Qnil;
 VALUE signal2_class = Qnil;
@@ -74,11 +79,17 @@ VALUE signal_boolean_class = Qnil;
 VALUE signal_int_class = Qnil;
 VALUE signal_int_int_class = Qnil;
 VALUE signal_int_int_int_int_class = Qnil;
+VALUE signal_orientation_int_int_class = Qnil;
 VALUE signal_longlong_longlong_class = Qnil;
 VALUE signal_enum_class = Qnil;
+VALUE signal_wdate_class = Qnil;
 VALUE signal_wmenuitem_class = Qnil;
 VALUE signal_wwidget_class = Qnil;
+VALUE signal_wmodelindex_class = Qnil;
+VALUE signal_wmodelindex_int_int_class = Qnil;
+VALUE signal_wmodelindex_wmodelindex_class = Qnil;
 VALUE signal_wmodelindex_wmouseevent_class = Qnil;
+VALUE signal_wstandarditem_class = Qnil;
 VALUE signal_wstring_class = Qnil;
 VALUE signal_string_class = Qnil;
 VALUE signal_string_string_class = Qnil;
@@ -1338,17 +1349,24 @@ void marshall_StringStringMap(Marshall *m) {
 DEF_SIGNAL_MARSHALLER( EventSignalWKeyEvent, Wt::Ruby::eventsignal_wkey_event_class, "Wt::EventSignalBase" )
 DEF_SIGNAL_MARSHALLER( EventSignalWMouseEvent, Wt::Ruby::eventsignal_wmouse_event_class, "Wt::EventSignalBase" )
 DEF_SIGNAL_MARSHALLER( EventSignalWResponseEvent, Wt::Ruby::eventsignal_wresponse_event_class, "Wt::EventSignalBase" )
+DEF_SIGNAL_MARSHALLER( EventSignalWScrollEvent, Wt::Ruby::eventsignal_wscroll_event_class, "Wt::EventSignalBase" )
 DEF_SIGNAL_MARSHALLER( EventSignalVoid, Wt::Ruby::eventsignal_void_class, "Wt::EventSignalBase" )
 
 DEF_SIGNAL_MARSHALLER( SignalBoolean, Wt::Ruby::signal_boolean_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalInt, Wt::Ruby::signal_int_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalIntInt, Wt::Ruby::signal_int_int_class, "Wt::SignalBase" )
+DEF_SIGNAL_MARSHALLER( SignalOrientationIntInt, Wt::Ruby::signal_orientation_int_int_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalIntIntIntInt, Wt::Ruby::signal_int_int_int_int_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalLonglongLonglong, Wt::Ruby::signal_longlong_longlong_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalEnum, Wt::Ruby::signal_enum_class, "Wt::SignalBase" )
+DEF_SIGNAL_MARSHALLER( SignalWDate, Wt::Ruby::signal_wdate_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalWMenuItem, Wt::Ruby::signal_wmenuitem_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalWWidget, Wt::Ruby::signal_wwidget_class, "Wt::SignalBase" )
+DEF_SIGNAL_MARSHALLER( SignalWModelIndex, Wt::Ruby::signal_wmodelindex_class, "Wt::SignalBase" )
+DEF_SIGNAL_MARSHALLER( SignalWModelIndexIntInt, Wt::Ruby::signal_wmodelindex_int_int_class, "Wt::SignalBase" )
+DEF_SIGNAL_MARSHALLER( SignalWModelIndexWModelIndex, Wt::Ruby::signal_wmodelindex_wmodelindex_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalWModelIndexWMouseEvent, Wt::Ruby::signal_wmodelindex_wmouseevent_class, "Wt::SignalBase" )
+DEF_SIGNAL_MARSHALLER( SignalWStandardItem, Wt::Ruby::signal_wstandarditem_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalWString, Wt::Ruby::signal_wstring_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalString, Wt::Ruby::signal_string_class, "Wt::SignalBase" )
 DEF_SIGNAL_MARSHALLER( SignalStringString, Wt::Ruby::signal_string_string_class, "Wt::SignalBase" )
@@ -1358,6 +1376,10 @@ DEF_SIGNAL_MARSHALLER( JSignal, Wt::Ruby::jsignal_class, "Wt::EventSignalBase" )
 DEF_SIGNAL_MARSHALLER( JSignalBoolean, Wt::Ruby::jsignal_boolean_class, "Wt::EventSignalBase" )
 DEF_SIGNAL_MARSHALLER( JSignalIntInt, Wt::Ruby::jsignal_int_int_class, "Wt::EventSignalBase" )
 DEF_SIGNAL_MARSHALLER( JSignalInt, Wt::Ruby::jsignal_int_class, "Wt::EventSignalBase" )
+
+#if WT_VERSION >= 0x02990000
+DEF_SIGNAL_MARSHALLER( JSignalWGoogleMapCoordinate, Wt::Ruby::jsignal_wgooglemap_coordinate_class, "Wt::EventSignalBase" )
+#endif
 
 DEF_LIST_MARSHALLER( WWidgetVector, std::vector<Wt::WWidget*>, Wt::WWidget )
 DEF_LIST_MARSHALLER( WAbstractAreaVector, std::vector<Wt::WAbstractArea*>, Wt::WAbstractArea )
@@ -1395,6 +1417,8 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "Wt::EventSignal<Wt::WMouseEvent>*", marshall_EventSignalWMouseEvent },
     { "Wt::EventSignal<Wt::WResponseEvent>", marshall_EventSignalWResponseEvent },
     { "Wt::EventSignal<Wt::WResponseEvent>&", marshall_EventSignalWResponseEvent },
+    { "Wt::EventSignal<Wt::WScrollEvent>&", marshall_EventSignalWScrollEvent },
+    { "Wt::EventSignal<Wt::WScrollEvent>*", marshall_EventSignalWScrollEvent },
     { "Wt::EventSignal<void>", marshall_EventSignalVoid },
     { "Wt::EventSignal<void>&", marshall_EventSignalVoid },
     { "Wt::EventSignal<void>*", marshall_EventSignalVoid },
@@ -1403,23 +1427,50 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "Wt::JSignal<bool>", marshall_JSignalBoolean },
     { "Wt::JSignal<int,int>", marshall_JSignalIntInt },
     { "Wt::JSignal<int>", marshall_JSignalInt },
-    { "Wt::Signal<Wt::Ext::Dialog::DialogCode>", marshall_SignalEnum },
-    { "Wt::Signal<Wt::StandardButton>", marshall_SignalEnum },
-    { "Wt::Signal<Wt::WDialog::DialogCode>", marshall_SignalEnum },
-    { "Wt::Signal<Wt::WMenuItem*>", marshall_SignalWMenuItem },
-    { "Wt::Signal<Wt::WModelIndex,Wt::WMouseEvent>", marshall_SignalWModelIndexWMouseEvent },
-    { "Wt::Signal<Wt::WString>",  marshall_SignalWString }, 
-    { "Wt::Signal<Wt::WWidget*>", marshall_SignalWWidget },
+#if WT_VERSION >= 0x02990000
+    { "Wt::JSignal<Wt::WGoogleMap::Coordinate>", marshall_JSignalWGoogleMapCoordinate },
+    { "Wt::JSignal<Wt::WGoogleMap::Coordinate>&", marshall_JSignalWGoogleMapCoordinate },
+#endif
     { "Wt::Signal<bool>", marshall_SignalBoolean },
     { "Wt::Signal<bool>&", marshall_SignalBoolean },
     { "Wt::Signal<int,int>",  marshall_SignalIntInt },
+    { "Wt::Signal<int,int>&",  marshall_SignalIntInt },
+    { "Wt::Signal<Wt::Orientation,int,int>",  marshall_SignalOrientationIntInt },
+    { "Wt::Signal<Wt::Orientation,int,int>&",  marshall_SignalOrientationIntInt },
     { "Wt::Signal<int>", marshall_SignalInt },
     { "Wt::Signal<int>&", marshall_SignalInt },
     { "Wt::Signal<long long,long long>",  marshall_SignalLonglongLonglong },
-    { "Wt::Signal<std::string,std::string>",  marshall_SignalStringString },
-    { "Wt::Signal<std::string>",  marshall_SignalString },
-    { "Wt::Signal<void>",  marshall_Signal },
+    { "Wt::Signal<int64_t,int64_t>&",  marshall_SignalLonglongLonglong },
     { "Wt::Signal<>",  marshall_Signal },
+    { "Wt::Signal<>&",  marshall_Signal },
+    { "Wt::Signal<std::string>",  marshall_SignalString },
+    { "Wt::Signal<std::string>&",  marshall_SignalString },
+    { "Wt::Signal<std::string,std::string>",  marshall_SignalStringString },
+    { "Wt::Signal<void>",  marshall_Signal },
+    { "Wt::Signal<void>&",  marshall_Signal },
+    { "Wt::Signal<Wt::Ext::Dialog::DialogCode>", marshall_SignalEnum },
+    { "Wt::Signal<Wt::StandardButton>", marshall_SignalEnum },
+    { "Wt::Signal<Wt::StandardButton>&", marshall_SignalEnum },
+    { "Wt::Signal<Wt::WDialog::DialogCode>", marshall_SignalEnum },
+    { "Wt::Signal<Wt::WDialog::DialogCode>&", marshall_SignalEnum },
+    { "Wt::Signal<Wt::WDate>", marshall_SignalWDate },
+    { "Wt::Signal<Wt::WDate>&", marshall_SignalWDate },
+    { "Wt::Signal<Wt::WMenuItem*>", marshall_SignalWMenuItem },
+    { "Wt::Signal<Wt::WMenuItem*>&", marshall_SignalWMenuItem },
+    { "Wt::Signal<Wt::WModelIndex>", marshall_SignalWModelIndex },
+    { "Wt::Signal<Wt::WModelIndex>&", marshall_SignalWModelIndex },
+    { "Wt::Signal<Wt::WModelIndex,int,int>", marshall_SignalWModelIndexIntInt },
+    { "Wt::Signal<Wt::WModelIndex,int,int>&", marshall_SignalWModelIndex },
+    { "Wt::Signal<Wt::WModelIndex,Wt::WModelIndex>", marshall_SignalWModelIndexWModelIndex },
+    { "Wt::Signal<Wt::WModelIndex,Wt::WModelIndex>&", marshall_SignalWModelIndexWModelIndex },
+    { "Wt::Signal<Wt::WModelIndex,Wt::WMouseEvent>", marshall_SignalWModelIndexWMouseEvent },
+    { "Wt::Signal<Wt::WModelIndex,Wt::WMouseEvent>&", marshall_SignalWModelIndexWMouseEvent },
+    { "Wt::Signal<Wt::WStandardItem*>",  marshall_SignalWStandardItem }, 
+    { "Wt::Signal<Wt::WStandardItem*>&",  marshall_SignalWStandardItem }, 
+    { "Wt::Signal<Wt::WString>",  marshall_SignalWString }, 
+    { "Wt::Signal<Wt::WString>&",  marshall_SignalWString }, 
+    { "Wt::Signal<Wt::WWidget*>", marshall_SignalWWidget },
+
     { "Wt::TextFormat", marshall_StaticConstEnum },
     { "Wt::WResource::ArgumentMap", marshall_WResourceArgumentMap },
     { "Wt::WResource::ArgumentMap&", marshall_WResourceArgumentMap },
