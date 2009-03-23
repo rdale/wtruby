@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# Note: this program is part of qtruby and makes use of its internal functions.
+# Note: this program is part of wtruby and makes use of its internal functions.
 #       You should not rely on those in your own programs.
 
 require 'wt'
@@ -12,7 +12,7 @@ rbwtapi - a Wt::Ruby introspection tool
 usage: rbwtapi [-h] [-v] [-p] [-m <re> [-i]] [-r <extension> ...] [<class>]
 
 options:
-    -m <re> : find all functions matching regular expression/keyword <re>
+    -m <re> : find all methods matching regular expression/keyword <re>
     -i : together with -m, performs a case insensitive search
     -p : also display inherited methods for <class>
     -s | show method names with ruby types
@@ -94,9 +94,13 @@ classnames.each do |classname|
     superclasses = []
     Wt::Internal::getAllParents(classid, superclasses)
     superclasses.each do |klass|
-        a = Wt::Internal::findAllMethods(klass)
-        ids = (a.keys.sort.map{|k|a[k]}).flatten
-        candidates << Wt::Internal::dumpCandidates(ids)
+      if Wt::Internal::classid2name(klass) =~ /^Boost/
+        next
+      end
+
+      a = Wt::Internal::findAllMethods(klass)
+      ids = (a.keys.sort.map{|k|a[k]}).flatten
+      candidates << Wt::Internal::dumpCandidates(ids)
     end
   end
 end
@@ -133,6 +137,7 @@ class String
     method_name.gsub!(/::setRange\(([a-zA-Z]+), ([a-zA-Z]+)\)/) { '::range=' + $1 + '..' + $2 }
     method_name.gsub!(/::(is|has)([A-Z])([\w]+)\(/) { '::' + $2.downcase + $3 + "?" + "(" }
     method_name.gsub!(/::set([A-Z])([a-zA-Z]+)(\([^,]*\))/) { '::' + $1.downcase + $2 + '=' + $3 }
+    method_name.sub!(/boost::any/, 'Boost::Any')
     method_name.sub!(/::([a-z])/) { '#' + $1 }
     method_name.sub!('()', '')
     return method_name
