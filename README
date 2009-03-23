@@ -15,7 +15,7 @@ web programming'.
 Here is a simple 'hello world' program that shows how a complete web application
 can be coded in a single source file 'hello.rb'.
 
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 require 'wt'
 
 class HelloApplication < Wt::WApplication
@@ -47,7 +47,12 @@ end
 During development this program can be started from the command line, where it
 will run as a self contained web server:
 
-$ ./hello.rb -- --docroot `pwd` --http-address localhost --http-port 4000
+$ ./hello.rb -- --docroot . --http-address localhost --http-port 4000
 
 A release version can be run under Apache2 via the FastGCI interface with
 no change to the source.
+
+See the tutorial on the Wt::Ruby wiki for an introduction to the Wt toolkit, 
+and programming in ruby:
+
+http://wiki.github.com/rdale/wtruby/tutorial
