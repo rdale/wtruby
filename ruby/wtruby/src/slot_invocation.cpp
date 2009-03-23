@@ -549,7 +549,7 @@ static VALUE
 eventsignal_void_connect(int argc, VALUE * argv, VALUE self)
 {
     if (argc == 1 && TYPE(argv[0]) == T_ARRAY) {
-        Wt::Ruby::eventsignal_connect< Wt::EventSignal<void> >(self, argv[0]);
+        Wt::Ruby::eventsignal_connect< Wt::EventSignal<> >(self, argv[0]);
         return self;
     }
 
@@ -560,7 +560,7 @@ static VALUE
 eventsignal_void_emit(VALUE self)
 {
     smokeruby_object * o = value_obj_info(self);
-    Wt::EventSignal<void> * sig = static_cast<Wt::EventSignal<void> * >(o->ptr);
+    Wt::EventSignal<> * sig = static_cast<Wt::EventSignal<> * >(o->ptr);
     sig->emit();
     return self;
 }
