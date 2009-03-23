@@ -1461,6 +1461,7 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "Wt::Signal<void>",  marshall_Signal },
     { "Wt::Signal<void>&",  marshall_Signal },
     { "Wt::Signal<Wt::Ext::Dialog::DialogCode>", marshall_SignalEnum },
+    { "Wt::Signal<Wt::Ext::Dialog::DialogCode>&", marshall_SignalEnum },
     { "Wt::Signal<Wt::StandardButton>", marshall_SignalEnum },
     { "Wt::Signal<Wt::StandardButton>&", marshall_SignalEnum },
     { "Wt::Signal<Wt::WDialog::DialogCode>", marshall_SignalEnum },
