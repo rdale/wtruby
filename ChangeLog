@@ -1,6 +1,7 @@
 2009-03-23 Richard Dale  <richard.j.dale@gmail.com>
 * Don't show boost classes as parents with rbwtapi as they aren't really part
 of the public api
+* Add marshallers for vectors of WRadioButtons and WGoogleMap::Coordinates
 
 2009-03-22 Richard Dale  <richard.j.dale@gmail.com>
 * Make rbwtapi skip destructors

@@ -36,6 +36,7 @@
 #include <Wt/WPainterPath>
 #include <Wt/WPoint>
 #include <Wt/WPointF>
+#include <Wt/WRadioButton>
 #include <Wt/WRectF>
 #include <Wt/WSignal>
 #include <Wt/WStandardItem>
@@ -43,6 +44,10 @@
 #include <Wt/WTable>
 #include <Wt/WTreeNode>
 #include <Wt/WWidget>
+
+#if WT_VERSION >= 0x0299000000
+#include <Wt/WGoogleMap>
+#endif
 
 #include <Wt/Chart/WDataSeries>
 #include <Wt/Chart/WCartesianChart>
@@ -1388,6 +1393,11 @@ DEF_LIST_MARSHALLER( WStandardItemVector, std::vector<Wt::WStandardItem*>, Wt::W
 DEF_LIST_MARSHALLER( WTreeNodeVector, std::vector<Wt::WTreeNode*>, Wt::WTreeNode )
 // DEF_LIST_MARSHALLER( DomElementVector, std::vector<Wt::DomElement*>, Wt::DomElement )
 DEF_LIST_MARSHALLER( WObjectVector, std::vector<Wt::WObject*>, Wt::WObject )
+DEF_LIST_MARSHALLER( WRadioButtonVector, std::vector<Wt::WRadioButton*>, Wt::WRadioButton )
+
+#if WT_VERSION >= 0x0299000000
+DEF_VALUELIST_MARSHALLER( WGoogleMapCoordinateVector, std::vector<Wt::WGoogleMap::Coordinate>, Wt::WGoogleMap::Coordinate )
+#endif
 
 DEF_VALUELIST_MARSHALLER( WPointVector, std::vector<Wt::WPoint>, Wt::WPoint )
 DEF_VALUELIST_MARSHALLER( WPointFVector, std::vector<Wt::WPointF>, Wt::WPointF )
@@ -1430,6 +1440,8 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
 #if WT_VERSION >= 0x02990000
     { "Wt::JSignal<Wt::WGoogleMap::Coordinate>", marshall_JSignalWGoogleMapCoordinate },
     { "Wt::JSignal<Wt::WGoogleMap::Coordinate>&", marshall_JSignalWGoogleMapCoordinate },
+    { "std::vector<Wt::WGoogleMap::Coordinate>", marshall_WGoogleMapCoordinateVector },
+    { "std::vector<Wt::WGoogleMap::Coordinate>&", marshall_WGoogleMapCoordinateVector },
 #endif
     { "Wt::Signal<bool>", marshall_SignalBoolean },
     { "Wt::Signal<bool>&", marshall_SignalBoolean },
@@ -1470,7 +1482,6 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "Wt::Signal<Wt::WString>",  marshall_SignalWString }, 
     { "Wt::Signal<Wt::WString>&",  marshall_SignalWString }, 
     { "Wt::Signal<Wt::WWidget*>", marshall_SignalWWidget },
-
     { "Wt::TextFormat", marshall_StaticConstEnum },
     { "Wt::WResource::ArgumentMap", marshall_WResourceArgumentMap },
     { "Wt::WResource::ArgumentMap&", marshall_WResourceArgumentMap },
@@ -1518,6 +1529,8 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "std::vector<Wt::WPainterPath::Segment>&", marshall_WPainterPathSegmentVector },
     { "std::vector<Wt::WPoint>&", marshall_WPointVector },
     { "std::vector<Wt::WPointF>&", marshall_WPointFVector },
+    { "std::vector<Wt::WRadioButton*>", marshall_WRadioButtonVector },
+    { "std::vector<Wt::WRadioButton*>&", marshall_WRadioButtonVector },
     { "std::vector<Wt::WRectF>&", marshall_WRectFVector },
     { "std::vector<Wt::WStandardItem*>", marshall_WStandardItemVector },
     { "std::vector<Wt::WStandardItem*>&", marshall_WStandardItemVector },
