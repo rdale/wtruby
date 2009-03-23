@@ -1429,6 +1429,8 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "Wt::EventSignal<Wt::WResponseEvent>&", marshall_EventSignalWResponseEvent },
     { "Wt::EventSignal<Wt::WScrollEvent>&", marshall_EventSignalWScrollEvent },
     { "Wt::EventSignal<Wt::WScrollEvent>*", marshall_EventSignalWScrollEvent },
+    { "Wt::EventSignal<>", marshall_EventSignalVoid },
+    { "Wt::EventSignal<>&", marshall_EventSignalVoid },
     { "Wt::EventSignal<void>", marshall_EventSignalVoid },
     { "Wt::EventSignal<void>&", marshall_EventSignalVoid },
     { "Wt::EventSignal<void>*", marshall_EventSignalVoid },
