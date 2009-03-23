@@ -916,7 +916,7 @@ dispose(VALUE self)
     o->ptr = 0;
     o->allocated = false;
     
-    return self;
+    return Qnil;
 }
 
 static VALUE

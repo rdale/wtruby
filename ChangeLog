@@ -4,6 +4,8 @@ of the public api
 * Add marshallers for vectors of WRadioButtons and WGoogleMap::Coordinates
 * Change Wt::EventSignal<void> to Wt::EventSignal<> as it no longer compiles
 with '<void>' for Wt 2.99.0
+* Make dispose() return nil rather than 'self' as it crashes in irb when irb
+tries to call inspect() on the return value
 
 2009-03-22 Richard Dale  <richard.j.dale@gmail.com>
 * Make rbwtapi skip destructors
