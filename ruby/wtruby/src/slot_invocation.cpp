@@ -661,6 +661,58 @@ eventsignal_wscroll_event_emit(VALUE self, VALUE arg)
     return self;
 }
 
+template <class S>
+static VALUE
+create_call(int argc, VALUE * argv, VALUE self)
+{
+    smokeruby_object * o = value_obj_info(self);
+    S * sig = static_cast<S*>(o->ptr);
+    const std::string result = sig->createUserEventCall(
+        std::string(), 
+        std::string(), 
+        sig->name(), 
+        argc > 0 ? std::string(StringValuePtr(argv[0])) : std::string(),
+        argc > 1 ? std::string(StringValuePtr(argv[1])) : std::string(),
+        argc > 2 ? std::string(StringValuePtr(argv[2])) : std::string(),
+        argc > 3 ? std::string(StringValuePtr(argv[3])) : std::string(),
+        argc > 4 ? std::string(StringValuePtr(argv[4])) : std::string(),
+        argc > 5 ? std::string(StringValuePtr(argv[5])) : std::string() );
+
+    return rb_str_new2(result.c_str());
+}
+
+template <class S>
+static VALUE
+create_event_call(int argc, VALUE * argv, VALUE self)
+{
+    smokeruby_object * o = value_obj_info(self);
+    S * sig = static_cast<S*>(o->ptr);
+    const std::string result = sig->createUserEventCall(
+        std::string(StringValuePtr(argv[0])), 
+        std::string(StringValuePtr(argv[1])), 
+        sig->name(), 
+        argc > 2 ? std::string(StringValuePtr(argv[2])) : std::string(),
+        argc > 3 ? std::string(StringValuePtr(argv[3])) : std::string(),
+        argc > 4 ? std::string(StringValuePtr(argv[4])) : std::string(),
+        argc > 5 ? std::string(StringValuePtr(argv[5])) : std::string(),
+        argc > 6 ? std::string(StringValuePtr(argv[6])) : std::string(),
+        argc > 7 ? std::string(StringValuePtr(argv[7])) : std::string() );
+
+    return rb_str_new2(result.c_str());
+}
+
+static VALUE
+jsignal_create_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_call<Wt::JSignal<void> >(argc, argv, self);
+}
+
+static VALUE
+jsignal_create_event_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_event_call<Wt::JSignal<void> >(argc, argv, self);
+}
+
 static VALUE
 new_jsignal(int argc, VALUE * argv, VALUE klass)
 {
@@ -752,6 +804,18 @@ jsignal1_emit(VALUE self, VALUE arg)
 }
 
 static VALUE
+jsignal1_create_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_call<Wt::JSignal<std::string> >(argc, argv, self);
+}
+
+static VALUE
+jsignal1_create_event_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_event_call<Wt::JSignal<std::string> >(argc, argv, self);
+}
+
+static VALUE
 new_jsignal2(int argc, VALUE * argv, VALUE klass)
 {
     smokeruby_object * o = value_obj_info(argv[0]);
@@ -797,6 +861,18 @@ jsignal2_emit(VALUE self, VALUE arg1, VALUE arg2)
 }
 
 static VALUE
+jsignal2_create_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_call<Wt::JSignal<std::string, std::string> >(argc, argv, self);
+}
+
+static VALUE
+jsignal2_create_event_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_event_call<Wt::JSignal<std::string, std::string> >(argc, argv, self);
+}
+
+static VALUE
 new_jsignal_boolean(int argc, VALUE * argv, VALUE klass)
 {
     smokeruby_object * o = value_obj_info(argv[0]);
@@ -839,6 +915,18 @@ jsignal_boolean_emit(VALUE self, VALUE arg)
     Wt::JSignal<bool> * sig = static_cast<Wt::JSignal<bool> * >(o->ptr);
     sig->emit(arg == Qtrue ? true : false);
     return self;
+}
+
+static VALUE
+jsignal_boolean_create_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_call<Wt::JSignal<bool> >(argc, argv, self);
+}
+
+static VALUE
+jsignal_boolean_create_event_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_event_call<Wt::JSignal<bool> >(argc, argv, self);
 }
 
 static VALUE
@@ -904,6 +992,18 @@ new_jsignal_int_int(int argc, VALUE * argv, VALUE klass)
 }
 
 static VALUE
+jsignal_int_create_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_call<Wt::JSignal<int> >(argc, argv, self);
+}
+
+static VALUE
+jsignal_int_create_event_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_event_call<Wt::JSignal<int> >(argc, argv, self);
+}
+
+static VALUE
 jsignal_int_int_name(VALUE self)
 {
     smokeruby_object * o = value_obj_info(self);
@@ -929,6 +1029,18 @@ jsignal_int_int_emit(VALUE self, VALUE arg1, VALUE arg2)
     Wt::JSignal<int, int> * sig = static_cast<Wt::JSignal<int, int> * >(o->ptr);
     sig->emit(NUM2INT(arg1), NUM2INT(arg2));
     return self;
+}
+
+static VALUE
+jsignal_int_int_create_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_call<Wt::JSignal<int, int> >(argc, argv, self);
+}
+
+static VALUE
+jsignal_int_int_create_event_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_event_call<Wt::JSignal<int, int> >(argc, argv, self);
 }
 
 #if WT_VERSION >= 0x02990000
@@ -976,6 +1088,18 @@ jsignal_wgooglemap_coordinate_emit(VALUE self, VALUE arg1)
     smokeruby_object * a1 = value_obj_info(arg1);
     sig->emit(*(static_cast<Wt::WGoogleMap::Coordinate *>(a1->ptr)));
     return self;
+}
+
+static VALUE
+jsignal_wgooglemap_coordinate_create_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_call<Wt::JSignal<Wt::WGoogleMap::Coordinate> >(argc, argv, self);
+}
+
+static VALUE
+jsignal_wgooglemap_coordinate_create_event_call(int argc, VALUE * argv, VALUE self)
+{
+    return create_event_call<Wt::JSignal<Wt::WGoogleMap::Coordinate> >(argc, argv, self);
 }
 #endif
 
@@ -1495,43 +1619,57 @@ define_eventsignals(VALUE klass)
     rb_define_method(Wt::Ruby::jsignal_class, "connect", (VALUE (*) (...)) jsignal_connect, -1);
     rb_define_method(Wt::Ruby::jsignal_class, "emit", (VALUE (*) (...)) jsignal_emit, 0);
     rb_define_method(Wt::Ruby::jsignal_class, "name", (VALUE (*) (...)) jsignal_name, 0);
+    rb_define_method(Wt::Ruby::jsignal_class, "createCall", (VALUE (*) (...)) jsignal_create_call, -1);
+    rb_define_method(Wt::Ruby::jsignal_class, "createEventCall", (VALUE (*) (...)) jsignal_create_event_call, -1);
 
     Wt::Ruby::jsignal1_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignal1", klass);
     rb_define_singleton_method(Wt::Ruby::jsignal1_class, "new", (VALUE (*) (...)) new_jsignal1, -1);
     rb_define_method(Wt::Ruby::jsignal1_class, "connect", (VALUE (*) (...)) jsignal1_connect, -1);
     rb_define_method(Wt::Ruby::jsignal1_class, "emit", (VALUE (*) (...)) jsignal1_emit, 1);
     rb_define_method(Wt::Ruby::jsignal1_class, "name", (VALUE (*) (...)) jsignal1_name, 0);
+    rb_define_method(Wt::Ruby::jsignal1_class, "createCall", (VALUE (*) (...)) jsignal1_create_call, -1);
+    rb_define_method(Wt::Ruby::jsignal1_class, "createEventCall", (VALUE (*) (...)) jsignal1_create_event_call, -1);
 
     Wt::Ruby::jsignal2_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignal2", klass);
     rb_define_singleton_method(Wt::Ruby::jsignal2_class, "new", (VALUE (*) (...)) new_jsignal2, -1);
     rb_define_method(Wt::Ruby::jsignal2_class, "connect", (VALUE (*) (...)) jsignal2_connect, -1);
     rb_define_method(Wt::Ruby::jsignal2_class, "emit", (VALUE (*) (...)) jsignal2_emit, 2);
     rb_define_method(Wt::Ruby::jsignal2_class, "name", (VALUE (*) (...)) jsignal2_name, 0);
+    rb_define_method(Wt::Ruby::jsignal2_class, "createCall", (VALUE (*) (...)) jsignal2_create_call, -1);
+    rb_define_method(Wt::Ruby::jsignal2_class, "createEventCall", (VALUE (*) (...)) jsignal2_create_event_call, -1);
 
     Wt::Ruby::jsignal_boolean_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignalBoolean", klass);
     rb_define_singleton_method(Wt::Ruby::jsignal_boolean_class, "new", (VALUE (*) (...)) new_jsignal_boolean, -1);
     rb_define_method(Wt::Ruby::jsignal_boolean_class, "connect", (VALUE (*) (...)) jsignal_boolean_connect, -1);
     rb_define_method(Wt::Ruby::jsignal_boolean_class, "emit", (VALUE (*) (...)) jsignal_boolean_emit, 1);
     rb_define_method(Wt::Ruby::jsignal_boolean_class, "name", (VALUE (*) (...)) jsignal_boolean_name, 0);
+    rb_define_method(Wt::Ruby::jsignal_boolean_class, "createCall", (VALUE (*) (...)) jsignal_boolean_create_call, -1);
+    rb_define_method(Wt::Ruby::jsignal_boolean_class, "createEventCall", (VALUE (*) (...)) jsignal_boolean_create_event_call, -1);
 
     Wt::Ruby::jsignal_int_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignalInt", klass);
     rb_define_singleton_method(Wt::Ruby::jsignal_int_class, "new", (VALUE (*) (...)) new_jsignal_int, -1);
     rb_define_method(Wt::Ruby::jsignal_int_class, "connect", (VALUE (*) (...)) jsignal_int_connect, -1);
     rb_define_method(Wt::Ruby::jsignal_int_class, "emit", (VALUE (*) (...)) jsignal_int_emit, 1);
     rb_define_method(Wt::Ruby::jsignal_int_class, "name", (VALUE (*) (...)) jsignal_int_name, 0);
+    rb_define_method(Wt::Ruby::jsignal_int_class, "createCall", (VALUE (*) (...)) jsignal_int_create_call, -1);
+    rb_define_method(Wt::Ruby::jsignal_int_class, "createEventCall", (VALUE (*) (...)) jsignal_int_create_event_call, -1);
 
     Wt::Ruby::jsignal_int_int_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignalIntInt", klass);
     rb_define_singleton_method(Wt::Ruby::jsignal_int_int_class, "new", (VALUE (*) (...)) new_jsignal_int_int, -1);
     rb_define_method(Wt::Ruby::jsignal_int_int_class, "connect", (VALUE (*) (...)) jsignal_int_int_connect, -1);
     rb_define_method(Wt::Ruby::jsignal_int_int_class, "emit", (VALUE (*) (...)) jsignal_int_int_emit, 2);
     rb_define_method(Wt::Ruby::jsignal_int_int_class, "name", (VALUE (*) (...)) jsignal_int_int_name, 0);
+    rb_define_method(Wt::Ruby::jsignal_int_int_class, "createCall", (VALUE (*) (...)) jsignal_int_int_create_call, -1);
+    rb_define_method(Wt::Ruby::jsignal_int_int_class, "createEventCall", (VALUE (*) (...)) jsignal_int_int_create_event_call, -1);
 
 #if WT_VERSION >= 0x02990000
-    Wt::Ruby::jsignal_wgooglemap_coordinate_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignalIntInt", klass);
+    Wt::Ruby::jsignal_wgooglemap_coordinate_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignalWGoogleMapCoordinate", klass);
     rb_define_singleton_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "new", (VALUE (*) (...)) new_jsignal_wgooglemap_coordinate, -1);
     rb_define_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "connect", (VALUE (*) (...)) jsignal_wgooglemap_coordinate_connect, -1);
     rb_define_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "emit", (VALUE (*) (...)) jsignal_wgooglemap_coordinate_emit, 2);
     rb_define_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "name", (VALUE (*) (...)) jsignal_wgooglemap_coordinate_name, 0);
+    rb_define_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "createCall", (VALUE (*) (...)) jsignal_wgooglemap_coordinate_create_call, -1);
+    rb_define_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "createEventCall", (VALUE (*) (...)) jsignal_wgooglemap_coordinate_create_event_call, -1);
 #endif
 }
 
