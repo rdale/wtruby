@@ -15,13 +15,9 @@ class MandelbrotResource < Wt::WResource
     @h = h
   end
 
-  def resourceMimeType
-    return "image/png"
-  end
-
-  def streamResourceData(stream, arguments)
-    @img.generate(@x, @y, @w, @h, stream)
-    return true
+  def handleRequest(request, response)
+    response.mimeType = "image/png"
+    @img.generate(@x, @y, @w, @h, response.out)
   end
 end
 
@@ -52,12 +48,12 @@ class MandelbrotImage < Wt::WVirtualImage
   def zoomOut
     puts "viewPortWidth %d imageWidth %d viewPortHeight %d imageHeight %d" % [viewPortWidth, imageWidth, viewPortHeight, imageHeight]
     puts "resizeImage(%d, %d)" %  [ [viewPortWidth, imageWidth / 2].max, [viewPortHeight, imageHeight / 2].max ]
-Wt::Internal::setDebug Wt::WtDebugChannel::WTDB_VIRTUAL
+    Wt::Internal::setDebug Wt::WtDebugChannel::WTDB_VIRTUAL
+    scrollTo( currentTopLeftX / 2 - viewPortWidth / 4,
+              currentTopLeftY / 2 - viewPortWidth / 4 )
     resizeImage(  [viewPortWidth, imageWidth / 2].max,
                   [viewPortHeight, imageHeight / 2].max )
   
-    scrollTo( currentTopLeftX / 2 - viewPortWidth / 4,
-              currentTopLeftY / 2 - viewPortWidth / 4 )
   end
 
   def render(x, y, w, h)
