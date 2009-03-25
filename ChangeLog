@@ -1,5 +1,6 @@
 2009-03-25 Richard Dale  <richard.j.dale@gmail.com>
 * Added JSignal#createCall and JSignal#createEventCall methods
+* Add the headers in Wt/Http
 
 2009-03-23 Richard Dale  <richard.j.dale@gmail.com>
 * Don't show boost classes as parents with rbwtapi as they aren't really part

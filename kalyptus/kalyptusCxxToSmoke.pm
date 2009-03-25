@@ -709,7 +709,6 @@ sub preParseClass
 			|| ($className eq 'Wt::WStatelessSlot' and $name eq 'implementsMethod')
 			|| ($className eq 'Wt' and $name eq 'WRun')
 			|| ($className eq 'Wt::WServer' and $name eq 'addEntryPoint')
-			|| ($className eq 'Wt::WEnvironment' and $name eq 'getParameterValues')
 			|| ($className eq 'Wt::WFileUpload' and $name eq 'setFormData')
 			|| ($className eq 'Wt::WGoogleMap' and $name eq 'zoomWindow')
 			|| ($className eq 'Wt::WModelIndex' and $name eq 'internalHashId')
