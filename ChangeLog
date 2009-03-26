@@ -1,3 +1,7 @@
+2009-03-26 Richard Dale  <richard.j.dale@gmail.com>
+* Fix the marshalling for the std::vector<unsigned char> type
+* Strip WFlags<> templates and leave the underlying enum for return types
+
 2009-03-25 Richard Dale  <richard.j.dale@gmail.com>
 * Added JSignal#createCall and JSignal#createEventCall methods
 * Add the headers in Wt/Http to the Smoke library code generation
