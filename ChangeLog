@@ -1,6 +1,6 @@
 2009-03-25 Richard Dale  <richard.j.dale@gmail.com>
 * Added JSignal#createCall and JSignal#createEventCall methods
-* Add the headers in Wt/Http
+* Add the headers in Wt/Http to the Smoke library code generation
 
 2009-03-23 Richard Dale  <richard.j.dale@gmail.com>
 * Don't show boost classes as parents with rbwtapi as they aren't really part
@@ -164,6 +164,8 @@ an owning WMenu, to help with coordinating Ruby garbage collection with Wt
 * Added a 'dump_objects.rb' script to print out a tree of WObjects in a 
 running program 
 * Removed 'GC.disable' from the widgetgallery example
+* Fix int64_t and uint64_t arg types
+* Skip the WWidget::render method for now
 
 2009-01-25 Richard Dale <richard.j.dale@gmail.com>
 * When an item is marked for not needing garbage collection show the actual

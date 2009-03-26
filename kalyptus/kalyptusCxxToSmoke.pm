@@ -78,6 +78,9 @@ BEGIN
      'std::vector<char>' => '$',
      'std::vector<char>*' => '$',
      'std::vector<char>&' => '$',
+     'std::vector<unsigned char>' => '$',
+     'std::vector<unsigned char>*' => '$',
+     'std::vector<unsigned char>&' => '$',
      'QDBusObjectPath' => '$',
      'QDBusObjectPath*' => '$',
      'QDBusObjectPath&' => '$',
@@ -93,6 +96,8 @@ BEGIN
      'Q_LLONG' => '$',
      'quint64' => '$',
      'qint64' => '$',
+     'uint64_t' => '$',
+     'int64_t' => '$',
      'long long' => '$',
      'qlonglong' => '$',
      'qulonglong' => '$',
@@ -706,6 +711,7 @@ sub preParseClass
                 && $#{$m->{ParamList}} > -1 && $m->{ParamList}[0]->{ArgType} =~ /ValueType/)
 			|| ($className eq 'boost::signals::connection' and $name eq 'connectBase')
 			|| ($className eq 'Wt::WResource' and $name eq 'write')
+			|| ($className eq 'Wt::WWidget' and $name eq 'render')
 			|| ($className eq 'Wt::WStatelessSlot' and $name eq 'implementsMethod')
 			|| ($className eq 'Wt' and $name eq 'WRun')
 			|| ($className eq 'Wt::WServer' and $name eq 'addEntryPoint')
@@ -837,6 +843,7 @@ sub preParseClass
         }
 
 	    $m->{ReturnType} = kalyptusDataDict::resolveType($m->{ReturnType}, $classNode, $rootnode) if ($m->{ReturnType});
+		$m->{ReturnType} =~ s/Wt::WFlags<([^>]*)>/$1/ unless $m->{Flags} =~ "v";
 	    registerType( $m->{ReturnType} ) unless (defined($excludeClasses{$className}) && !($m->{Flags} =~ "v"));
 	} elsif ( $m->{NodeType} eq "enum" ) {
 	    my $fullEnumName = $className."::".$m->{astNodeName};

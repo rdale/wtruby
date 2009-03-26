@@ -441,7 +441,7 @@ module Wt
           return 2
         elsif typename =~ /^(?:short|ushort|unsigned short int|unsigned short|char|uchar|uint|long|ulong|unsigned long int|unsigned|float|double)$/
           return 1
-        elsif typename =~ /^(long long)|(unsigned long long)$/
+        elsif typename =~ /^(long long)|(unsigned long long)|(int64_t)|(uint64_t)$/
           return 1
         else 
           t = typename.sub(/^const\s+/, '')
@@ -473,7 +473,7 @@ module Wt
       elsif argtype == 's'
         if typename =~ /^(const )?((QChar)[*&]?)$/
           return 1
-        elsif typename =~ /^(const )?std::vector<char>[*&]?$/
+        elsif typename =~ /^(const )?std::vector<(unsigned)? char>[*&]?$/
           return 0
         elsif typename =~ /^(?:u?char\*|(?:const )?(std::w?string[*&]?)|const u?char\*|(?:const )?(Wt::WString)[*&]?)$/
           wstring = !$1.nil?
@@ -1767,6 +1767,9 @@ module Wt
   end
 
   class WSlider < Wt::Base
+    NoTicks = 0
+    TicksBothSides = 3
+
     def id(*args)
       method_missing(:id, *args)
     end
