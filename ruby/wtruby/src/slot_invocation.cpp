@@ -28,7 +28,7 @@
 #include <Wt/WStandardItem>
 #include <Wt/WApplication>
 
-#if WT_VERSION >= 0x0299000000
+#if WT_VERSION >= 0x02630000
 #include <Wt/WGoogleMap>
 #endif
 
@@ -107,7 +107,7 @@ public:
         rb_funcall(target_, SYM2ID(method_), 1, obj);
     }
 
-#if WT_VERSION >= 0x02990000
+#if WT_VERSION >= 0x02630000
     void invoke1(Wt::WGoogleMap::Coordinate arg) {
         smokeruby_object * o = alloc_smokeruby_object(  true, 
                                                         wt_Smoke, 
@@ -1043,7 +1043,7 @@ jsignal_int_int_create_event_call(int argc, VALUE * argv, VALUE self)
     return create_event_call<Wt::JSignal<int, int> >(argc, argv, self);
 }
 
-#if WT_VERSION >= 0x02990000
+#if WT_VERSION >= 0x02630000
 static VALUE
 new_jsignal_wgooglemap_coordinate(int argc, VALUE * argv, VALUE klass)
 {
@@ -1662,7 +1662,7 @@ define_eventsignals(VALUE klass)
     rb_define_method(Wt::Ruby::jsignal_int_int_class, "createCall", (VALUE (*) (...)) jsignal_int_int_create_call, -1);
     rb_define_method(Wt::Ruby::jsignal_int_int_class, "createEventCall", (VALUE (*) (...)) jsignal_int_int_create_event_call, -1);
 
-#if WT_VERSION >= 0x02990000
+#if WT_VERSION >= 0x02630000
     Wt::Ruby::jsignal_wgooglemap_coordinate_class = rb_define_class_under(Wt::Ruby::wt_module, "JSignalWGoogleMapCoordinate", klass);
     rb_define_singleton_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "new", (VALUE (*) (...)) new_jsignal_wgooglemap_coordinate, -1);
     rb_define_method(Wt::Ruby::jsignal_wgooglemap_coordinate_class, "connect", (VALUE (*) (...)) jsignal_wgooglemap_coordinate_connect, -1);

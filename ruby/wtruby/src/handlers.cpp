@@ -45,7 +45,7 @@
 #include <Wt/WTreeNode>
 #include <Wt/WWidget>
 
-#if WT_VERSION >= 0x0299000000
+#if WT_VERSION >= 0x02630000
 #include <Wt/WGoogleMap>
 #endif
 
@@ -73,7 +73,7 @@ VALUE jsignal_boolean_class = Qnil;
 VALUE jsignal_int_class = Qnil;
 VALUE jsignal_int_int_class = Qnil;
 
-#if WT_VERSION >= 0x02990000
+#if WT_VERSION >= 0x02630000
 VALUE jsignal_wgooglemap_coordinate_class = Qnil;
 #endif
 
@@ -1098,6 +1098,48 @@ void marshall_StaticConstEnum(Marshall *m) {
     }
 }
 
+#if WT_VERSION >= 0x02630000
+/*
+    WFlags bases types are mostly handled by just stripping out the WFlags
+    part of the type and treating them as though they are the underlying
+    enum. This works fine for most method calls, but not for virtual methods.
+    so special case an WFlags types that are used in virtual methods.
+ */
+void marshall_WFlags(Marshall *m) {
+    switch(m->action()) {
+
+    case Marshall::FromVALUE:
+    {
+        VALUE v = *(m->var());
+
+        if (v == Qnil) {
+            m->item().s_voidp = 0;
+        } else {
+            m->item().s_voidp = new long(NUM2LONG(v));
+        }
+    }
+    break;
+
+    case Marshall::ToVALUE:
+    {
+        void * ptr = m->item().s_voidp;
+        if (ptr == 0) {
+            *(m->var()) = Qnil;
+        }
+        *(m->var()) = LONG2NUM(*((long *) ptr));
+        // There is no way to use '(enum *)' or similar here, so pick a
+        // random enum, and assume they can all be deleted the same way
+        //delete static_cast<Wt::WFlags<Wt::Side> *>(ptr);
+    }
+    break;
+
+    default:
+        m->unsupported();
+        break;
+    }
+}
+#endif
+
 void marshall_StdOStream(Marshall *m) {
     switch(m->action()) {
 
@@ -1382,7 +1424,7 @@ DEF_SIGNAL_MARSHALLER( JSignalBoolean, Wt::Ruby::jsignal_boolean_class, "Wt::Eve
 DEF_SIGNAL_MARSHALLER( JSignalIntInt, Wt::Ruby::jsignal_int_int_class, "Wt::EventSignalBase" )
 DEF_SIGNAL_MARSHALLER( JSignalInt, Wt::Ruby::jsignal_int_class, "Wt::EventSignalBase" )
 
-#if WT_VERSION >= 0x02990000
+#if WT_VERSION >= 0x02630000
 DEF_SIGNAL_MARSHALLER( JSignalWGoogleMapCoordinate, Wt::Ruby::jsignal_wgooglemap_coordinate_class, "Wt::EventSignalBase" )
 #endif
 
@@ -1395,7 +1437,7 @@ DEF_LIST_MARSHALLER( WTreeNodeVector, std::vector<Wt::WTreeNode*>, Wt::WTreeNode
 DEF_LIST_MARSHALLER( WObjectVector, std::vector<Wt::WObject*>, Wt::WObject )
 DEF_LIST_MARSHALLER( WRadioButtonVector, std::vector<Wt::WRadioButton*>, Wt::WRadioButton )
 
-#if WT_VERSION >= 0x0299000000
+#if WT_VERSION >= 0x02630000
 DEF_VALUELIST_MARSHALLER( WGoogleMapCoordinateVector, std::vector<Wt::WGoogleMap::Coordinate>, Wt::WGoogleMap::Coordinate )
 #endif
 
@@ -1442,7 +1484,7 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "Wt::JSignal<int,int>&", marshall_JSignalIntInt },
     { "Wt::JSignal<int>", marshall_JSignalInt },
     { "Wt::JSignal<int>&", marshall_JSignalInt },
-#if WT_VERSION >= 0x02990000
+#if WT_VERSION >= 0x02630000
     { "Wt::JSignal<Wt::WGoogleMap::Coordinate>", marshall_JSignalWGoogleMapCoordinate },
     { "Wt::JSignal<Wt::WGoogleMap::Coordinate>&", marshall_JSignalWGoogleMapCoordinate },
     { "std::vector<Wt::WGoogleMap::Coordinate>", marshall_WGoogleMapCoordinateVector },
@@ -1491,6 +1533,13 @@ WTRUBY_EXPORT TypeHandler Wt_handlers[] = {
     { "Wt::Signal<Wt::WString>&",  marshall_SignalWString }, 
     { "Wt::Signal<Wt::WWidget*>", marshall_SignalWWidget },
     { "Wt::TextFormat", marshall_StaticConstEnum },
+ #if WT_VERSION >= 0x02630000
+    { "Wt::WFlags<Wt::ItemFlag>", marshall_WFlags },
+    { "Wt::WFlags<Wt::Side>", marshall_WFlags },
+    { "Wt::WFlags<Wt::AlignmentFlag>", marshall_WFlags },
+    { "Wt::WFlags<Wt::WPaintDevice::ChangeFlag>", marshall_WFlags },
+    { "Wt::WFlags<Wt::KeyboardModifier>", marshall_WFlags },
+#endif
     { "Wt::WResource::ArgumentMap", marshall_WResourceArgumentMap },
     { "Wt::WResource::ArgumentMap&", marshall_WResourceArgumentMap },
     { "Wt::WString", marshall_WString },

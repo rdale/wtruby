@@ -1,3 +1,8 @@
+2009-03-27 Richard Dale  <richard.j.dale@gmail.com>
+* Special case the marshalling for WFlags types used in virtual methods.
+* Change the WT_VERSION check comparison to use 0x02630000 because hex 63 
+corresponds to the 99 in 2.99.0.
+
 2009-03-26 Richard Dale  <richard.j.dale@gmail.com>
 * Fix the marshalling for the std::vector<unsigned char> type
 * Strip WFlags<> templates and leave the underlying enum for return types

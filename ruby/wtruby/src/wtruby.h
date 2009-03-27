@@ -133,7 +133,7 @@ extern WTRUBY_EXPORT VALUE jsignal_boolean_class;
 extern WTRUBY_EXPORT VALUE jsignal_int_class;
 extern WTRUBY_EXPORT VALUE jsignal_int_int_class;
 
-#if WT_VERSION >= 0x02990000
+#if WT_VERSION >= 0x02630000
 extern WTRUBY_EXPORT VALUE jsignal_wgooglemap_coordinate_class;
 #endif
 
