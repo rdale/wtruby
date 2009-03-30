@@ -9,10 +9,11 @@
      * Trying the examples (or your own Wt::Ruby application)
 
 Requirements
-   * Either Wt 2.2.2 or higher, or Wt 2.99
+   * Either Wt 2.2.3 (or higher), or Wt 2.99
    * Ruby 1.8.x or Ruby 1.9.1 
    * cmake 2.6.x 
-   * Boost 1.35 recommended (used to test Wt::Ruby)
+   * Boost 1.35 recommended (used to test Wt::Ruby), but 1.35 or greater 
+   should work
 
    The library provides two ways for deploying applications: either using
    the FastCGI protocol, in conjunction with a webserver (like apache), or
@@ -62,17 +63,7 @@ Requirements
 
 Building and installing the Wt::Ruby libraries and Ruby extensions
 
-    1. If using Wt 2.2.2, edit the installed Wt WPopupMenu header and add a 
-    forward declaration for the WApplication class like this:
-
-        namespace Wt {
-
-          class WMouseEvent;
-          class WPoint;
-          class WPopupMenuItem;
-          class WApplication;
-
-    2. Create a build directory
+    1. Create a build directory
 
    The easiest way to build the library is in a seperate build directory,
    for example within the top-level of the Wt::Ruby package:
@@ -80,14 +71,14 @@ Building and installing the Wt::Ruby libraries and Ruby extensions
     $ mkdir build
     $ cd build
 
-    3. Configure the library
+    2. Configure the library
 
     $ cmake ../
 
    The latter command will try to locate the necessary libraries. If
    everything is OK, then this should end with something like:
   -- Generating done
-  -- Build files have been written to: /home/kdforc0/project/wtruby/build
+  -- Build files have been written to: /home/rdale/project/wtruby/build
 
    If CMake fails, because it cannot resolve all dependencies, then you
    may help CMake by setting some variables to help CMake locate the
@@ -118,15 +109,15 @@ Building and installing the Wt::Ruby libraries and Ruby extensions
    To change any entry, use [Enter]. To save and quit, do [c] followed by
    [g].
 
-    4. Build the library
+    3. Build the library
 
     $ make
 
-    5. Install the library (as user with sufficient permissions):
+    4. Install the library (as user with sufficient permissions):
 
     $ make install
 
-    6. Get your LD_LIBRARY_PATH ok, if needed (mostly for FastCGI).
+    5. Get your LD_LIBRARY_PATH ok, if needed (mostly for FastCGI).
 
    If you did not install the Wt::Ruby in a directory (CMAKE_INSTALL_PREFIX)
    included in the default linker dynamic library search path, then the
