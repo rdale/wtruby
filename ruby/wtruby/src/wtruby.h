@@ -28,7 +28,7 @@
 
 #include "marshall.h"
 
-#define WTRUBY_VERSION "0.9.0"
+#define WTRUBY_VERSION "0.9.1"
 
 #if !defined RSTRING_LEN
 #define RSTRING_LEN(a) RSTRING(a)->len
