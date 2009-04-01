@@ -2,14 +2,14 @@
 
    Based in the Wt install instructions included in Wt-2.2.3
 
-   This page lists the instructions for building and installing Wt::Ruby 0.9.0.
+   This page lists the instructions for building and installing Wt::Ruby 0.9.1.
    It is organized in 3 sections:
      * Requirements
      * Building and installing the library
      * Trying the examples (or your own Wt::Ruby application)
 
 Requirements
-   * Either Wt 2.2.3 (or higher), or Wt 2.99
+   * Either Wt 2.2.3 (or higher), or Wt 2.99.0 or higher
    * Ruby 1.8.x or Ruby 1.9.1 
    * cmake 2.6.x 
    * Boost 1.35 recommended (used to test Wt::Ruby), but 1.35 or greater 
@@ -39,9 +39,25 @@ Requirements
      * Compiler: gcc-3.3.4 or higher, or gcc-4.1.x or higher, or other
        Ansi C++ compiler that can deal with boost-like C++ code.
      * CMake cross-platform build system (www.cmake.org): cmake-2.4+.
-     * Wt 2.2.2 or higher built with the '-DCONNECTOR_FCGI=YES' AND
+     * Wt 2.2.3 or higher built with the '-DCONNECTOR_FCGI=YES' AND
        '-DMULTI_THREADED=NO'
-     * Wt 2.99 or higher will work too
+     * Wt 2.99.0 or higher will work too. A small fix is needed for Wt 2.99.0,
+       as the new WAbstractTableModel class is not included in the build (the
+       bug has been reported and will be fixed in a subsequent version). Change
+       wt/src/CMakeLists.txt as follows:
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt                                                                          
+index fdc683f..002ba8b 100644                                                                                                 
+--- a/src/CMakeLists.txt                                                                                                      
++++ b/src/CMakeLists.txt                                                                                                      
+@@ -62,6 +62,7 @@ Wt/WAbstractArea.C                                                                                          
+ Wt/WAbstractItemModel.C                                                                                                      
+ Wt/WAbstractListModel.C                                                                                                      
+ Wt/WAbstractProxyModel.C                                                                                                     
++Wt/WAbstractTableModel.C                                                                                                     
+ Wt/WAbstractToggleButton.C                                                                                                   
+ Wt/WAccordionLayout.C                                                                                                        
+ Wt/WAnchor.C                                                                                                                 
 
     1a Using FastCGI
 
@@ -88,20 +104,20 @@ Building and installing the Wt::Ruby libraries and Ruby extensions
 
    Variables that affect the location of dependencies are:
 
-   BOOST_COMPILER
-          The boost compiler signature. For a library
-          libboost_regex-gcc41-mt-1_34_1.so, this is 'gcc41'
-
-   BOOST_VERSION
-          The boost compiler signature. For a library
-          libboost_regex-gcc41-mt-1_34_1.so, this is '1_34_1'
-
-   BOOST_DIR
-          The boost installation directory. This is the directory where
-          lib/ and include/ are located for your boost installation.
-
    Other variables specify several build and configuration aspects of Wt::Ruby,
    of which the most relevant ones are:
+
+   Boost_VERSION
+           The version number of the boost libraries that have been found,
+           same as in version.hpp from Boost
+
+   Boost_INCLUDE_DIR
+           Boost include directories, this is cached and may be
+           modified by advanced users
+
+   Boost_LIBRARY_DIRS
+          The path to where the Boost library files are
+          lib/ and include/ are located for your boost installation.
 
    CMAKE_INSTALL_PREFIX
           Installation prefix for the library and include files)
