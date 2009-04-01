@@ -1,5 +1,7 @@
 2009-04-01 Richard Dale  <richard.j.dale@gmail.com>
 * Improved the INSTALL instructions
+* WMenu#addItem wasn't returning the newly created WMenuItem
+* Added the wt-homepage example to the Wt 3.x examples
 
 2009-03-30 Richard Dale  <richard.j.dale@gmail.com>
 * Raised the Wt::Ruby version number to 0.9.1 for the first release

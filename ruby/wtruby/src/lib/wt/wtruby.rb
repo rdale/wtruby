@@ -1450,6 +1450,8 @@ module Wt
         # puts "Wt::Menu#addItem #{item} adding to contents: #{args[1]}"
         @item_contents[item.id] = args[1]
       end
+
+      return item
     end
 
     def id(*args)
