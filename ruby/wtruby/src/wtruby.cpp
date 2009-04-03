@@ -18,6 +18,7 @@
  */
 
 #include <boost/regex.hpp>
+#include <signal.h>
 
 #include <Wt/WDate>
 #include <Wt/WServer>
@@ -456,6 +457,7 @@ wt_wrun(VALUE klass, VALUE args)
 
     int argc = 0;
     char ** argv = args2argv(args, argc);
+    (void) signal(SIGINT, SIG_DFL);
     Wt::WRun(argc, argv, &createApplication);
     return Qnil;
 }
@@ -515,6 +517,7 @@ wserver_start(VALUE self)
     Wt::WServer * server = static_cast<Wt::WServer *>(o->ptr);
 
     try {
+        (void) signal(SIGINT, SIG_DFL);
         if (server->start()) {
             return Qtrue;
         }

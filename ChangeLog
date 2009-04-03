@@ -1,3 +1,10 @@
+2009-04-03 Richard Dale  <richard.j.dale@gmail.com>
+* When the Ruby runtime starts it sets up signal handlers for all signals,
+so that they can be handled with Signal#trap. However, that was disabling
+the default behaviour of SIGINT, and control C would no longer terminate a
+Wt::Ruby program the way it would the C++ equivalent. So reenable the default
+behaviour for SIGINT and make the ruby program quit.
+
 2009-04-01 Richard Dale  <richard.j.dale@gmail.com>
 * Improved the INSTALL instructions
 * WMenu#addItem wasn't returning the newly created WMenuItem
