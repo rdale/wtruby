@@ -44,7 +44,6 @@ class HelloApplication < Wt::WApplication
 
   def greet
     # Update the text, using text input into the @nameEdit field.
-Wt::Internal::setDebug Wt::WtDebugChannel::WTDB_VIRTUAL
     @greeting.text = "Hello there, " + @nameEdit.text
   end
 end
