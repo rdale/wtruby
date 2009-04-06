@@ -1524,6 +1524,18 @@ module Wt
     end
   end
 
+  class WModelIndex < Wt::Base
+    def inspect
+      str = super
+      str.sub(/>$/, " valid?=%s, row=%s, column=%s>" % [valid?, row, column])
+    end
+    
+    def pretty_print(pp)
+      str = to_s
+      pp.text str.sub(/>$/, "\n valid?=%s,\n row=%s,\n column=%s>" % [valid?, row, column])
+    end
+  end
+
   class WObject < Wt::Base
     def id(*args)
       method_missing(:id, *args)
