@@ -1,5 +1,9 @@
 2009-04-06 Richard Dale  <richard.j.dale@gmail.com>
 * Added inspect() and pretty_print() methods to the WModelIndex class
+* Fix the WAbstractItemModel#createIndex method so that it works with Ruby 
+instances as the third argument
+* Add two class to support using ActiveRecord with the Wt::Ruby mvc classes
+such as Wt::WTreeView and Wt::Ext::TableView
 
 2009-04-03 Richard Dale  <richard.j.dale@gmail.com>
 * When the Ruby runtime starts it sets up signal handlers for all signals,
