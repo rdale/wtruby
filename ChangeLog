@@ -8,6 +8,8 @@ Or a hash of label and column names:
 
   model = Wt::ActiveItemModel.new(products, {'title' => 'My Title', 
                                              'price' = 'Price'})
+* When a BigDecimal is being used to create a Boost::Any value, convert it to
+a Ruby Float first
 
 2009-04-06 Richard Dale  <richard.j.dale@gmail.com>
 * Added inspect() and pretty_print() methods to the WModelIndex class

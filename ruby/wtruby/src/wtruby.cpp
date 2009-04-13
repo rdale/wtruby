@@ -66,10 +66,12 @@ value_to_type_flag(VALUE ruby_value)
         r = "u";
     } else if ( TYPE(ruby_value) == T_FIXNUM 
                 || TYPE(ruby_value) == T_BIGNUM 
-                || std::strcmp(classname, "Wt::Integer" ) == 0 ) 
+                || std::strcmp(classname, "Wt::Integer") == 0 ) 
     {
         r = "i";
-    } else if (TYPE(ruby_value) == T_FLOAT) {
+    } else if ( TYPE(ruby_value) == T_FLOAT
+                || std::strcmp(classname, "BigDecimal") == 0 ) 
+    {
         r = "n";
     } else if (TYPE(ruby_value) == T_STRING) {
         r = "s";
@@ -558,6 +560,8 @@ new_boost_any(int argc, VALUE * argv, VALUE klass)
                 || std::strcmp(rb_obj_classname(arg), "Date") == 0 ) 
         {
             arg = rb_funcall(Wt::Ruby::wt_wdate_class, rb_intern("new"), 1, arg);
+        } else if (std::strcmp(rb_obj_classname(arg), "BigDecimal") == 0) {
+            arg = rb_funcall(arg, rb_intern("to_f"), 0);
         }
 
         if (TYPE(arg) == T_STRING) {
