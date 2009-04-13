@@ -1,3 +1,14 @@
+2009-04-13 Richard Dale  <richard.j.dale@gmail.com>
+* Add an optional argument to Wt::ActiveItemModel.
+You can pass a list of just the columns you want to display:
+
+  model = Wt::ActiveItemModel.new(products, ['title', 'price'])
+
+Or a hash of label and column names:
+
+  model = Wt::ActiveItemModel.new(products, {'title' => 'My Title', 
+                                             'price' = 'Price'})
+
 2009-04-06 Richard Dale  <richard.j.dale@gmail.com>
 * Added inspect() and pretty_print() methods to the WModelIndex class
 * Fix the WAbstractItemModel#createIndex method so that it works with Ruby 

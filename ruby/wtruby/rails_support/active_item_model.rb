@@ -21,6 +21,15 @@ Wt::WRun(ARGV) do |env|
   TreeViewApplication.new(env)
 end
 
+You can pass a list of just the columns you want to display:
+
+  model = Wt::ActiveItemModel.new(products, ['title', 'price'])
+
+Or a hash of label and column names:
+
+  model = Wt::ActiveItemModel.new(products, {'title' => 'My Title', 'price' = 'Price'})
+
+
 Written by Richard Dale and Silvio Fonseca
 
 =end
@@ -93,10 +102,22 @@ module Wt
     def initialize(collection, columns = nil, parent = nil)
       super(parent)
       @collection = collection
-      @keys = build_keys([], @collection.first.attributes)
-      @keys.inject(@labels = {}) do |labels, k| 
-        labels[k] = k.humanize.gsub(/\./, ' ')
-        labels 
+      if columns
+        if columns.kind_of? Hash
+          @keys = columns.keys
+          @labels = columns.values
+        else
+          @keys = columns
+        end
+      else
+        @keys = build_keys([], @collection.first.attributes)
+      end
+
+      if @labels.nil?
+        @keys.inject(@labels = {}) do |labels, k| 
+          labels[k] = k.humanize.gsub(/\./, ' ')
+          labels 
+        end
       end
 
       @rootItem = TreeItem.new(@labels, @keys)
