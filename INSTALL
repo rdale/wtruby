@@ -9,7 +9,7 @@
      * Trying the examples (or your own Wt::Ruby application)
 
 Requirements
-   * Either Wt 2.2.3 (or higher), or Wt 2.99.0 or higher
+   * Either Wt 2.2.3 (or higher), or Wt 2.99.2 or higher
    * Ruby 1.8.x or Ruby 1.9.1 
    * cmake 2.6.x 
    * Boost 1.35 recommended (used to test Wt::Ruby), but 1.35 or greater 
@@ -41,23 +41,7 @@ Requirements
      * CMake cross-platform build system (www.cmake.org): cmake-2.4+.
      * Wt 2.2.3 or higher built with the '-DCONNECTOR_FCGI=YES' AND
        '-DMULTI_THREADED=NO'
-     * Wt 2.99.0 or higher will work too. A small fix is needed for Wt 2.99.0,
-       as the new WAbstractTableModel class is not included in the build (the
-       bug has been reported and will be fixed in a subsequent version). Change
-       wt/src/CMakeLists.txt as follows:
-
-diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt                                                                          
-index fdc683f..002ba8b 100644                                                                                                 
---- a/src/CMakeLists.txt                                                                                                      
-+++ b/src/CMakeLists.txt                                                                                                      
-@@ -62,6 +62,7 @@ Wt/WAbstractArea.C                                                                                          
- Wt/WAbstractItemModel.C                                                                                                      
- Wt/WAbstractListModel.C                                                                                                      
- Wt/WAbstractProxyModel.C                                                                                                     
-+Wt/WAbstractTableModel.C                                                                                                     
- Wt/WAbstractToggleButton.C                                                                                                   
- Wt/WAccordionLayout.C                                                                                                        
- Wt/WAnchor.C                                                                                                                 
+     * Wt 2.99.2 or higher will work too.                                                                                      
 
     1a Using FastCGI
 
